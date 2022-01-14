@@ -17,6 +17,7 @@ class CardTerlaris extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
         child: Stack(
           children: [
             Positioned(

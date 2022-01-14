@@ -50,7 +50,7 @@ class CardInfo extends StatelessWidget {
     );
   }
 
-  Center customDivider() {
+  Widget customDivider() {
     return Center(
       child: Container(
         margin: const EdgeInsets.only(bottom: padding / 2),
