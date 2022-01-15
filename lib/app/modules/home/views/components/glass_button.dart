@@ -1,18 +1,23 @@
 import 'dart:ui';
-
 import 'package:casso/app/data/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class GlassButton extends StatelessWidget {
   const GlassButton({
     Key? key,
+    required this.icon,
+    required this.tittle,
   }) : super(key: key);
+
+  final IconData icon;
+  final String tittle;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 75,
-      width: 75,
+      width: Get.width * .18,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -39,7 +44,7 @@ class GlassButton extends StatelessWidget {
               ),
               child: Container(
                 height: 75,
-                width: 75,
+                width: Get.width * .18,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [putih.withOpacity(.25), putih.withOpacity(.15)],
@@ -53,17 +58,17 @@ class GlassButton extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.print_outlined,
+                      icon,
                       color: textColor,
                       size: 43,
                     ),
                     SizedBox(height: 4),
                     Text(
-                      "KASIR",
+                      tittle,
                       style: TextStyle(
                         color: textColor,
                         fontFamily: "Montserrat",
-                        fontSize: 14,
+                        fontSize: 12,
                       ),
                     )
                   ],

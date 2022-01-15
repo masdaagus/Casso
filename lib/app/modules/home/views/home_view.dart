@@ -26,9 +26,13 @@ class HomeView extends GetView<HomeController> {
             Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GlassButton(),
-                    GlassButton(),
+                    GlassButton(tittle: "KASIR", icon: Icons.computer),
+                    GlassButton(tittle: "MENU", icon: Icons.book),
+                    GlassButton(
+                        tittle: "ORDER", icon: Icons.online_prediction_rounded),
+                    GlassButton(tittle: "PEGAWAI", icon: Icons.cast_sharp),
                   ],
                 ),
               ],
