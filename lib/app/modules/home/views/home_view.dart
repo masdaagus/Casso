@@ -23,17 +23,28 @@ class HomeView extends GetView<HomeController> {
             _textTerlaris(),
             ListTerlaris(),
             _customDivider(),
-            Column(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GlassButton(tittle: "KASIR", icon: Icons.computer),
-                    GlassButton(tittle: "MENU", icon: Icons.book),
-                    GlassButton(
-                        tittle: "ORDER", icon: Icons.online_prediction_rounded),
-                    GlassButton(tittle: "PEGAWAI", icon: Icons.cast_sharp),
-                  ],
+                GlassButton(
+                  tittle: "KASIR",
+                  svg: "assets/svg/kasir.svg",
+                  onTap: () => Get.toNamed("/cashier"),
+                ),
+                GlassButton(
+                  tittle: "MENU",
+                  svg: "assets/svg/menu_book.svg",
+                  onTap: () {},
+                ),
+                GlassButton(
+                  tittle: "ORDER",
+                  svg: "assets/svg/menu_book.svg",
+                  onTap: () {},
+                ),
+                GlassButton(
+                  tittle: "PEGAWAI",
+                  svg: "assets/svg/pegawai.svg",
+                  onTap: () {},
                 ),
               ],
             ),
