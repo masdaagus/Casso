@@ -62,11 +62,6 @@ class GlassButton extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Icon(
-                      //   icon,
-                      //   color: textColor,
-                      //   size: 34,
-                      // ),
                       SvgPicture.asset(
                         svg,
                         height: 24,
