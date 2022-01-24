@@ -115,7 +115,7 @@ class CardTerlaris extends StatelessWidget {
                       height: 65,
                       width: 60,
                       child: Image.asset(
-                        "assets/images/milkshake-coklat 1.png",
+                        "assets/images/gambar-milkshake.png",
                       ),
                     )
                   ],

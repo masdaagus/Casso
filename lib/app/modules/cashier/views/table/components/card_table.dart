@@ -1,18 +1,20 @@
 import 'package:casso/app/data/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 
 class CardTable extends StatelessWidget {
   const CardTable({
     Key? key,
+    required this.tableNumber,
+    this.guessName = 'KOSONG ',
   }) : super(key: key);
+
+  final int tableNumber;
+  final String guessName;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120,
-      width: Get.width * .25,
       decoration: BoxDecoration(
         color: putih.withOpacity(.2),
         borderRadius: BorderRadius.circular(10),
@@ -31,7 +33,7 @@ class CardTable extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                "12",
+                tableNumber.toString(),
                 style: TextStyle(
                   color: textColor,
                   fontSize: 13,
@@ -66,12 +68,17 @@ class CardTable extends StatelessWidget {
                   height: 20,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
-                    color: textColor,
+                    color: orange.withOpacity(.7),
                   ),
                   child: Center(
                     child: Text(
-                      "KOSONG",
-                      style: TextStyle(fontSize: 10),
+                      guessName,
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: primaryColor,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: .5,
+                      ),
                     ),
                   ),
                 )

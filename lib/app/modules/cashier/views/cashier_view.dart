@@ -2,7 +2,8 @@ import 'package:casso/app/data/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/cashier_controller.dart';
-import 'components/card_table.dart';
+import 'menu/menu_view.dart';
+import 'table/table_view.dart';
 
 class CashierView extends GetView<CashierController> {
   @override
@@ -61,14 +62,13 @@ class CashierView extends GetView<CashierController> {
                 ),
               ),
             ),
-
-            // tables view
             Container(
-              height: Get.height - 130,
+              height: Get.height - 129,
               child: TabBarView(
                 children: [
+                  // tables view
                   Tables(),
-                  Text("MENU"),
+                  Menus(),
                 ],
               ),
             )
@@ -85,46 +85,6 @@ class CashierView extends GetView<CashierController> {
         color: textColor,
         fontFamily: "Montserrat",
         fontWeight: FontWeight.bold,
-      ),
-    );
-  }
-}
-
-class Tables extends StatelessWidget {
-  const Tables({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-      child: Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CardTable(),
-              CardTable(),
-              CardTable(),
-            ],
-          ),
-          Container(
-            height: 300,
-            color: orange,
-          )
-          // ListView.builder(
-          //   itemCount: 6,
-          //   itemBuilder: (context, index) {
-          //     return Container(
-          //       height: 100,
-          //       width: 100,
-          //       color: Colors.red,
-          //     );
-          //   },
-          // )
-        ],
       ),
     );
   }
