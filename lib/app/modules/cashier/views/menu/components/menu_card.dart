@@ -10,14 +10,12 @@ class MenuCard extends StatelessWidget {
   }) : super(key: key);
   final String image;
   final String tittle;
-  final int harga;
+  final String harga;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-      // height: 175,
-      width: 115,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         gradient: LinearGradient(
@@ -38,7 +36,7 @@ class MenuCard extends StatelessWidget {
               child: Image.asset(
                 image,
                 fit: BoxFit.cover,
-                height: 130,
+                height: 125,
                 width: 110,
               ),
             ),
@@ -52,7 +50,7 @@ class MenuCard extends StatelessWidget {
             style: TextStyle(
               color: textColor,
               fontFamily: "Montserrat",
-              fontSize: 11,
+              fontSize: 12,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -60,8 +58,9 @@ class MenuCard extends StatelessWidget {
           Text(
             harga.toString(),
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 11,
               color: textColor.withOpacity(.7),
+              fontWeight: FontWeight.w500,
             ),
           ),
           SizedBox(height: 8)

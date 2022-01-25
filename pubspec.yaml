@@ -10,6 +10,7 @@ dependencies:
   get: 4.6.1
   flutter_svg: ^1.0.1
   lottie: ^1.2.1
+  intl: ^0.17.0
 
 
 
@@ -33,6 +34,8 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: fonts/Montserrat-Regular.ttf
+        - asset: fonts/Montserrat-Light.ttf
+          weight: 500
         - asset: fonts/Montserrat-Medium.ttf
           weight: 600
         - asset: fonts/Montserrat-SemiBold.ttf
