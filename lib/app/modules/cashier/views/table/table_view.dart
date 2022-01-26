@@ -15,7 +15,7 @@ class Tables extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: Get.height - 178,
+            height: Get.height - 144,
             width: Get.width,
             child: GridView.count(
               shrinkWrap: true,

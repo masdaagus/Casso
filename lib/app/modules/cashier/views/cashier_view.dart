@@ -46,7 +46,7 @@ class CashierView extends GetView<CashierController> {
                 color: textColor.withOpacity(.5),
                 borderRadius: BorderRadius.circular(10),
               ),
-              height: 40,
+              height: 30,
               child: Container(
                 padding: const EdgeInsets.all(2),
                 child: TabBar(
@@ -63,7 +63,7 @@ class CashierView extends GetView<CashierController> {
               ),
             ),
             Container(
-              height: Get.height - 129,
+              height: Get.height - 119,
               child: TabBarView(
                 children: [
                   // tables view

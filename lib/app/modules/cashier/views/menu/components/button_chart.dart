@@ -2,18 +2,20 @@ import 'package:casso/app/data/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'bottom_sheet.dart';
+import '../bottom_sheet/bottom_sheet.dart';
 
 class ButtonChart extends StatelessWidget {
   const ButtonChart({
     Key? key,
+    required this.onTap,
   }) : super(key: key);
+
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.bottomSheet(BotomSheet(),
-          barrierColor: Color(0XFF858585).withOpacity(.3)),
+      onTap: onTap,
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Stack(

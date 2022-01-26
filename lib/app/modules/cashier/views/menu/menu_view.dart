@@ -2,10 +2,10 @@ import 'package:casso/app/data/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'bottom_sheet/bottom_sheet.dart';
 import 'components/button_chart.dart';
 import 'components/category.dart';
 import 'components/menu_card.dart';
-import 'components/search_button.dart';
 
 class Menus extends StatelessWidget {
   const Menus({
@@ -20,29 +20,40 @@ class Menus extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Categories(),
-          SearchButton(),
+          SizedBox(height: 18),
           Expanded(
             child: Stack(
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: GridView.count(
-                    shrinkWrap: true,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
-                    crossAxisCount: 3,
-                    childAspectRatio: .518,
-                    physics: BouncingScrollPhysics(),
-                    children: List.generate(12, (index) {
-                      return MenuCard(
-                        tittle: 'Makanan',
-                        harga: nf.format(21000),
-                        image: "assets/images/milkshake-oreo.jpg",
-                      );
-                    }),
+                SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: GridView.count(
+                          shrinkWrap: true,
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 20,
+                          crossAxisCount: 3,
+                          childAspectRatio: .57,
+                          physics: BouncingScrollPhysics(),
+                          children: List.generate(12, (index) {
+                            return MenuCard(
+                              tittle: 'Makanan',
+                              harga: nf.format(21000),
+                              image: "assets/images/milkshake-oreo.jpg",
+                            );
+                          }),
+                        ),
+                      ),
+                      SizedBox(height: 80),
+                    ],
                   ),
                 ),
-                ButtonChart()
+                ButtonChart(
+                  onTap: () => Get.bottomSheet(BotomSheet(),
+                      barrierColor: Color(0XFF858585).withOpacity(.3)),
+                )
               ],
             ),
           ),

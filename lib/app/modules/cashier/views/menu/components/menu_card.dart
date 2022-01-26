@@ -36,7 +36,7 @@ class MenuCard extends StatelessWidget {
               child: Image.asset(
                 image,
                 fit: BoxFit.cover,
-                height: 125,
+                height: 110,
                 width: 110,
               ),
             ),
@@ -63,7 +63,6 @@ class MenuCard extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          SizedBox(height: 8)
         ],
       ),
     );
