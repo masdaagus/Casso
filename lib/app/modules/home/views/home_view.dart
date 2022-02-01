@@ -32,9 +32,9 @@ class HomeView extends GetView<HomeController> {
                   onTap: () => Get.toNamed("/cashier"),
                 ),
                 GlassButton(
-                  tittle: "MENU",
+                  tittle: "ORDER",
                   svg: "assets/svg/menu_book.svg",
-                  onTap: () {},
+                  onTap: () => Get.toNamed("/order"),
                 ),
                 GlassButton(
                   tittle: "ORDER",

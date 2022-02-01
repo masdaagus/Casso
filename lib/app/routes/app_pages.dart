@@ -6,6 +6,10 @@ import 'package:casso/app/modules/home/bindings/home_binding.dart';
 import 'package:casso/app/modules/home/views/home_view.dart';
 import 'package:casso/app/modules/login/bindings/login_binding.dart';
 import 'package:casso/app/modules/login/views/login_view.dart';
+import 'package:casso/app/modules/menu/bindings/menu_binding.dart';
+import 'package:casso/app/modules/menu/views/menu_view.dart';
+import 'package:casso/app/modules/order/bindings/order_binding.dart';
+import 'package:casso/app/modules/order/views/order_view.dart';
 
 part 'app_routes.dart';
 
@@ -29,6 +33,16 @@ class AppPages {
       name: _Paths.CASHIER,
       page: () => CashierView(),
       binding: CashierBinding(),
+    ),
+    GetPage(
+      name: _Paths.ORDER,
+      page: () => OrderView(),
+      binding: OrderBinding(),
+    ),
+    GetPage(
+      name: _Paths.MENU,
+      page: () => Menus(),
+      binding: MenuBinding(),
     ),
   ];
 }

@@ -1,9 +1,10 @@
 import 'package:casso/app/data/constant.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/cashier_controller.dart';
-import 'menu/menu_view.dart';
-import 'table/table_view.dart';
+
+import 'monitoring/monitoring.dart';
 
 class CashierView extends GetView<CashierController> {
   @override
@@ -41,7 +42,7 @@ class CashierView extends GetView<CashierController> {
         body: Column(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 24),
+              margin: EdgeInsets.symmetric(horizontal: 8),
               decoration: BoxDecoration(
                 color: textColor.withOpacity(.5),
                 borderRadius: BorderRadius.circular(10),
@@ -56,20 +57,21 @@ class CashierView extends GetView<CashierController> {
                     color: primaryColor,
                   ),
                   tabs: [
-                    textTab("TABLES"),
-                    textTab("MENU"),
+                    textTab("MENUNGGU"),
+                    textTab("PROSES"),
                   ],
                 ),
               ),
             ),
-            Container(
-              height: Get.height - 119,
-              child: TabBarView(
-                children: [
-                  // tables view
-                  Tables(),
-                  Menus(),
-                ],
+            Expanded(
+              child: Container(
+                child: TabBarView(
+                  children: [
+                    // tables view
+                    Monitoring(),
+                    Container(),
+                  ],
+                ),
               ),
             )
           ],
@@ -83,8 +85,9 @@ class CashierView extends GetView<CashierController> {
       text,
       style: TextStyle(
         color: textColor,
+        // fontSize: 10,
         fontFamily: "Montserrat",
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w600,
       ),
     );
   }
