@@ -9,9 +9,9 @@ class SearchBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 16, right: 8, left: 8),
+      margin: const EdgeInsets.only(top: 16, right: 16, left: 16, bottom: 16),
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      height: 45,
+      height: 50,
       decoration: BoxDecoration(
         color: primaryColor.withOpacity(.35),
         borderRadius: BorderRadius.circular(16),
@@ -19,12 +19,26 @@ class SearchBox extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            "Cari Nomor meja/Nama Pengunjung ",
-            style: TextStyle(
-              color: textColor,
-              fontFamily: "Montserrat",
-              fontSize: 13,
+          // Text(
+          //   "Cari Nomor meja/Nama Pengunjung ",
+          //   style: TextStyle(
+          //     color: textColor,
+          //     fontFamily: "Montserrat",
+          //     fontSize: 13,
+          //   ),
+          // ),
+          Expanded(
+            child: TextField(
+              style: TextStyle(color: textColor),
+              decoration: InputDecoration(
+                hintText: "Cari Nomor meja/Nama Pengunjung ",
+                hintStyle: TextStyle(
+                  color: textColor,
+                  fontFamily: "Montserrat",
+                  fontSize: 13,
+                ),
+                border: InputBorder.none,
+              ),
             ),
           ),
           SizedBox(width: 16),

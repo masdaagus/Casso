@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 class CashierController extends GetxController {
   //TODO: Implement CashierController
 
-  final List<String> prices = ["23.000", "17.000", "21.000", "16.000"];
+  final List<int> table = [1, 12, 7, 9];
+  final List<String> names = ["Masda agus", "Yanto", "Wahyu", "Sukini"];
   final List<String> items = ["Milkshake", "Jus Melon", "Dimsum", "Rabung"];
+  final List<String> prices = ["23.000", "17.000", "21.000", "16.000"];
 
   final count = 0.obs;
   @override
