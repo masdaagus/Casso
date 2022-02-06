@@ -8,6 +8,8 @@ import 'package:casso/app/modules/login/bindings/login_binding.dart';
 import 'package:casso/app/modules/login/views/login_view.dart';
 import 'package:casso/app/modules/menu/bindings/menu_binding.dart';
 import 'package:casso/app/modules/menu/views/menu_view.dart';
+import 'package:casso/app/modules/monitoring/bindings/monitoring_binding.dart';
+import 'package:casso/app/modules/monitoring/views/monitoring_view.dart';
 import 'package:casso/app/modules/order/bindings/order_binding.dart';
 import 'package:casso/app/modules/order/views/order_view.dart';
 
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.MENU,
       page: () => Menus(),
       binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.MONITORING,
+      page: () => MonitoringView(),
+      binding: MonitoringBinding(),
     ),
   ];
 }

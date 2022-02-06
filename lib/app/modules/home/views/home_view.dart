@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
-import 'components/glass_button.dart';
 import 'components/info_card.dart';
 import 'components/list_terlaris.dart';
+import 'components/neo_button.dart';
 
 class HomeView extends GetView<HomeController> {
   @override
@@ -26,25 +26,45 @@ class HomeView extends GetView<HomeController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GlassButton(
-                  tittle: "KASIR",
+                // GlassButton(
+                //   tittle: "KASIR",
+                //   svg: "assets/svg/kasir.svg",
+                //   onTap: () => Get.toNamed("/cashier"),
+                // ),
+                // GlassButton(
+                //   tittle: "ORDER",
+                //   svg: "assets/svg/menu_book.svg",
+                //   onTap: () => Get.toNamed("/order"),
+                // ),
+                // GlassButton(
+                //   tittle: "ORDER",
+                //   svg: "assets/svg/menu_book.svg",
+                //   onTap: () {},
+                // ),
+                // GlassButton(
+                //   tittle: "PEGAWAI",
+                //   svg: "assets/svg/pegawai.svg",
+                //   onTap: () {},
+                // ),
+                NeoButton(
+                  tittle: "kasir",
                   svg: "assets/svg/kasir.svg",
                   onTap: () => Get.toNamed("/cashier"),
                 ),
-                GlassButton(
-                  tittle: "ORDER",
+                NeoButton(
+                  tittle: "order",
                   svg: "assets/svg/menu_book.svg",
                   onTap: () => Get.toNamed("/order"),
                 ),
-                GlassButton(
-                  tittle: "ORDER",
-                  svg: "assets/svg/menu_book.svg",
-                  onTap: () {},
-                ),
-                GlassButton(
-                  tittle: "PEGAWAI",
+                NeoButton(
+                  tittle: "monitor",
                   svg: "assets/svg/pegawai.svg",
-                  onTap: () {},
+                  onTap: () => Get.toNamed("/monitoring"),
+                ),
+                NeoButton(
+                  tittle: "kasir",
+                  svg: "assets/svg/kasir.svg",
+                  onTap: () => Get.toNamed("/cashier"),
                 ),
               ],
             ),
@@ -56,7 +76,7 @@ class HomeView extends GetView<HomeController> {
 
   Widget _customDivider() {
     return Container(
-      margin: const EdgeInsets.only(top: 24, bottom: 14),
+      margin: const EdgeInsets.only(top: 24, bottom: 24),
       height: 2,
       decoration: BoxDecoration(
         gradient: LinearGradient(

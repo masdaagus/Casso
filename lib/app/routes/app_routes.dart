@@ -9,6 +9,7 @@ abstract class Routes {
   static const CASHIER = _Paths.CASHIER;
   static const ORDER = _Paths.ORDER;
   static const MENU = _Paths.MENU;
+  static const MONITORING = _Paths.MONITORING;
 }
 
 abstract class _Paths {
@@ -17,4 +18,5 @@ abstract class _Paths {
   static const CASHIER = '/cashier';
   static const ORDER = '/order';
   static const MENU = '/menu';
+  static const MONITORING = '/monitoring';
 }
