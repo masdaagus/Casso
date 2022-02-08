@@ -37,8 +37,8 @@ class Monitoring extends GetView<CashierController> {
               ),
               BackdropFilter(
                 filter: ImageFilter.blur(
-                  sigmaX: 25,
-                  sigmaY: 25,
+                  sigmaX: 45,
+                  sigmaY: 45,
                 ),
                 child: Container(
                   height: Get.height,
@@ -52,7 +52,6 @@ class Monitoring extends GetView<CashierController> {
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16),
                     ),
-                    // border: Border.all(color: putih.withOpacity(.2)),
                   ),
                   child: Column(
                     children: [

@@ -9,15 +9,15 @@ class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(right: 24, top: 24),
+      padding: const EdgeInsets.only(right: 16, top: 16, left: 16),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Categorie(tittle: 'Dessert'),
           Categorie(tittle: 'Drink'),
           Categorie(tittle: 'Food'),
           Categorie(tittle: 'All', pick: true),
-          Icon(Icons.search, color: textColor)
+          // Icon(Icons.search, color: textColor)
         ],
       ),
     );

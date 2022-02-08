@@ -1,11 +1,14 @@
 import 'package:casso/app/data/constant.dart';
+import 'package:casso/app/modules/menu/views/category/all.dart';
+import 'package:casso/app/modules/menu/views/category/food.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'bottom_sheet/bottom_sheet.dart';
+import 'category/dessert.dart';
+import 'category/drink.dart';
 import 'components/button_chart.dart';
-import 'components/category.dart';
-import 'components/menu_card.dart';
+import 'components/search_bar.dart';
 
 class Menus extends StatelessWidget {
   const Menus({
@@ -14,6 +17,8 @@ class Menus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final table = Get.arguments;
+    print("args dari tables = ${table + 1}");
     return Scaffold(
       backgroundColor: primaryColor,
       appBar: AppBar(
@@ -29,52 +34,73 @@ class Menus extends StatelessWidget {
           ),
         ),
         centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios, size: 20),
+          onPressed: Get.back,
+        ),
       ),
-      body: Container(
-        height: Get.height,
+      body: DefaultTabController(
+        initialIndex: 3,
+        length: 4,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Categories(),
-            SizedBox(height: 18),
+            // Categories(),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 8),
+              height: 30,
+              child: Container(
+                padding: const EdgeInsets.all(2),
+                child: TabBar(
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: putih.withOpacity(.2),
+                  ),
+                  tabs: [
+                    textTab("Dessert"),
+                    textTab("Drink"),
+                    textTab("Food"),
+                    textTab("ALL"),
+                  ],
+                ),
+              ),
+            ),
+            SearchBarMenu(),
             Expanded(
               child: Stack(
                 children: [
-                  SingleChildScrollView(
-                    physics: BouncingScrollPhysics(),
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                          child: GridView.count(
-                            shrinkWrap: true,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
-                            crossAxisCount: 3,
-                            childAspectRatio: .57,
-                            physics: BouncingScrollPhysics(),
-                            children: List.generate(12, (index) {
-                              return MenuCard(
-                                tittle: 'Makanan',
-                                harga: nf.format(21000),
-                                image: "assets/images/milkshake-oreo.jpg",
-                              );
-                            }),
-                          ),
-                        ),
-                        SizedBox(height: 80),
-                      ],
-                    ),
+                  TabBarView(
+                    physics: NeverScrollableScrollPhysics(),
+                    children: [
+                      DessertMenu(),
+                      DrinkMenu(),
+                      FoodMenu(),
+                      AllMenu(),
+                    ],
                   ),
                   ButtonChart(
-                    onTap: () => Get.bottomSheet(BotomSheet(),
-                        barrierColor: Color(0XFF858585).withOpacity(.3)),
+                    table: table,
+                    onTap: () => Get.bottomSheet(
+                      BotomSheet(),
+                      barrierColor: Color(0XFF858585).withOpacity(.3),
+                    ),
                   )
                 ],
               ),
-            ),
+            )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget textTab(String text) {
+    return Text(
+      text,
+      style: TextStyle(
+        color: textColor,
+        fontSize: 10,
+        fontFamily: "Montserrat",
+        fontWeight: FontWeight.w600,
       ),
     );
   }

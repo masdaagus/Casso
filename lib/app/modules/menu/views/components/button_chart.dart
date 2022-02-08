@@ -1,15 +1,14 @@
 import 'package:casso/app/data/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../bottom_sheet/bottom_sheet.dart';
 
 class ButtonChart extends StatelessWidget {
   const ButtonChart({
     Key? key,
+    required this.table,
     required this.onTap,
   }) : super(key: key);
 
+  final int table;
   final VoidCallback onTap;
 
   @override
@@ -24,7 +23,7 @@ class ButtonChart extends StatelessWidget {
               height: 110,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [putih.withOpacity(0), putih.withOpacity(.3)],
+                  colors: [primaryColor.withOpacity(.0), primaryColor],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
@@ -77,7 +76,7 @@ class ButtonChart extends StatelessWidget {
                       ),
                       SizedBox(height: 3),
                       Text(
-                        "Table 8 - (Masda agus)",
+                        "Table ${table} - (Masda agus)",
                         style: TextStyle(
                           color: textColor,
                           fontFamily: "Montserrat",

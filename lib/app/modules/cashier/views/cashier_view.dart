@@ -14,6 +14,10 @@ class CashierView extends GetView<CashierController> {
       child: Scaffold(
         backgroundColor: primaryColor,
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios, size: 20),
+            onPressed: Get.back,
+          ),
           backgroundColor: primaryColor,
           elevation: 0,
           title: Text(

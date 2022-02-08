@@ -7,10 +7,12 @@ class MenuCard extends StatelessWidget {
     required this.image,
     required this.tittle,
     required this.harga,
+    this.itemCount = 0,
   }) : super(key: key);
   final String image;
   final String tittle;
   final String harga;
+  final int itemCount;
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class MenuCard extends StatelessWidget {
             style: TextStyle(
               color: textColor,
               fontFamily: "Montserrat",
-              fontSize: 12,
+              fontSize: 11,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -63,6 +65,33 @@ class MenuCard extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
+          itemCount == 0
+              ? Container()
+              : Align(
+                  alignment: Alignment.bottomRight,
+                  child: Container(
+                    height: 24,
+                    width: 24,
+                    decoration: BoxDecoration(
+                      color: hitam.withOpacity(.2),
+                      borderRadius: BorderRadius.circular(24),
+                      border: Border.all(
+                        color: putih.withOpacity(.5),
+                        width: .3,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        itemCount.toString(),
+                        style: TextStyle(
+                          color: textColor,
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
         ],
       ),
     );

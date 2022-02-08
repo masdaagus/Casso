@@ -1,5 +1,6 @@
 import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/monitoring/views/pesanan/pesanan_view.dart';
+import 'package:casso/app/modules/monitoring/views/proses/proses_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -23,9 +24,9 @@ class MonitoringView extends GetView<MonitoringController> {
           ),
           centerTitle: true,
           elevation: 0,
-          leading: Icon(
-            Icons.arrow_back_ios,
-            size: 20,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios, size: 20),
+            onPressed: Get.back,
           ),
           backgroundColor: primaryColor,
         ),
@@ -60,8 +61,8 @@ class MonitoringView extends GetView<MonitoringController> {
                 child: TabBarView(
                   children: [
                     // tables view
-                    MenungguMonitoring(),
-                    Container(),
+                    OrderMonitoring(),
+                    ProsesMonitoring(),
                     Container(),
                     Container(),
                   ],

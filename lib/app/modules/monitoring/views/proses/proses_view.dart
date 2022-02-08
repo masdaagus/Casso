@@ -5,8 +5,8 @@ import 'package:casso/app/modules/monitoring/views/components/search_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class OrderMonitoring extends GetView<MonitoringController> {
-  const OrderMonitoring({Key? key}) : super(key: key);
+class ProsesMonitoring extends GetView<MonitoringController> {
+  const ProsesMonitoring({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class OrderMonitoring extends GetView<MonitoringController> {
                   guessName: data["guessName"],
                   orderTime: data["timeOrder"],
                   orders: data['orders'],
-                  isOrder: true,
+                  orderButton: "siap",
                 );
               },
             ),

@@ -119,7 +119,7 @@ class BotomSheet extends StatelessWidget {
                                         color: putih.withOpacity(.3))),
                                 child: Center(
                                   child: Text(
-                                    "BAYAR",
+                                    "ORDER",
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontFamily: "Montserrat",
