@@ -1,9 +1,43 @@
 import 'package:get/get.dart';
 
 class MenuController extends GetxController {
-  //TODO: Implement MenuController
+  final itemCount = 0.obs;
 
-  final count = 0.obs;
+  List<Map<String, dynamic>> makanan = [
+    {
+      "namaMakanan": "Milkshake Salak",
+      "hargaMakanan": 12000,
+    },
+    {
+      "namaMakanan": "Milkshake Strowberry",
+      "hargaMakanan": 17000,
+    },
+    {
+      "namaMakanan": "Milkshake Nangka",
+      "hargaMakanan": 18000,
+    },
+    {
+      "namaMakanan": "Milkshake Jambu",
+      "hargaMakanan": 22000,
+    },
+    {
+      "namaMakanan": "Milkshake Durian",
+      "hargaMakanan": 34000,
+    },
+    {
+      "namaMakanan": "Nasi Goreng",
+      "hargaMakanan": 15000,
+    },
+    {
+      "namaMakanan": "Lintah Panggang",
+      "hargaMakanan": 19000,
+    },
+    {
+      "namaMakanan": "Salak Pondo",
+      "hargaMakanan": 22000,
+    },
+  ];
+
   @override
   void onInit() {
     super.onInit();
@@ -16,5 +50,5 @@ class MenuController extends GetxController {
 
   @override
   void onClose() {}
-  void increment() => count.value++;
+  increment() => itemCount.value++;
 }

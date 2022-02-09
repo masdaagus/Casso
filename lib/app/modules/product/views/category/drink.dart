@@ -1,15 +1,12 @@
 import 'package:casso/app/data/constant.dart';
-import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/modules/menu/views/components/menu_card.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class AllMenu extends StatelessWidget {
-  const AllMenu({Key? key}) : super(key: key);
+class DrinkProduct extends StatelessWidget {
+  const DrinkProduct({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ctrl = Get.find<MenuController>();
     return Container(
       color: primaryColor,
       child: SingleChildScrollView(
@@ -25,15 +22,11 @@ class AllMenu extends StatelessWidget {
                 crossAxisCount: 3,
                 childAspectRatio: .55,
                 physics: BouncingScrollPhysics(),
-                children: List.generate(ctrl.makanan.length, (index) {
-                  return Obx(
-                    () => MenuCard(
-                      tittle: ctrl.makanan[index]["namaMakanan"],
-                      harga: nf.format(ctrl.makanan[index]["hargaMakanan"]),
-                      image: "assets/images/milkshake-oreo.jpg",
-                      itemCount: ctrl.itemCount.value,
-                      onTap: () => ctrl.increment(),
-                    ),
+                children: List.generate(12, (index) {
+                  return MenuCard(
+                    tittle: 'Nasi Goreng Kampoeng',
+                    harga: nf.format(21000),
+                    image: "assets/images/milkshake-oreo.jpg",
                   );
                 }),
               ),

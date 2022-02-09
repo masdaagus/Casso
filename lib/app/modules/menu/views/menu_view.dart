@@ -1,4 +1,6 @@
 import 'package:casso/app/data/constant.dart';
+import 'package:casso/app/modules/components/widget/search_bar.dart';
+import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/modules/menu/views/category/all.dart';
 import 'package:casso/app/modules/menu/views/category/food.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +12,7 @@ import 'category/drink.dart';
 import 'components/button_chart.dart';
 import 'components/search_bar.dart';
 
-class Menus extends StatelessWidget {
+class Menus extends GetView<MenuController> {
   const Menus({
     Key? key,
   }) : super(key: key);
@@ -64,7 +66,7 @@ class Menus extends StatelessWidget {
                 ),
               ),
             ),
-            SearchBarMenu(),
+            SearchBar(),
             Expanded(
               child: Stack(
                 children: [

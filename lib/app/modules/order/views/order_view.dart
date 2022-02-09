@@ -46,7 +46,7 @@ class OrderView extends GetView<OrderController> {
                     return CardTable(
                       tableNumber: index + 1,
                       onTap: () {
-                        controller.dialog(table: index);
+                        controller.dialog(table: index + 1);
                       },
                     );
                   }),

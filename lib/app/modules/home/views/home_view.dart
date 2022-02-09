@@ -62,9 +62,9 @@ class HomeView extends GetView<HomeController> {
                   onTap: () => Get.toNamed("/monitoring"),
                 ),
                 NeoButton(
-                  tittle: "kasir",
-                  svg: "assets/svg/kasir.svg",
-                  onTap: () => Get.toNamed("/cashier"),
+                  tittle: "product",
+                  svg: "assets/svg/burger.svg",
+                  onTap: () => Get.toNamed("/product"),
                 ),
               ],
             ),
