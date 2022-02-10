@@ -3,7 +3,6 @@ import 'package:casso/app/modules/components/tables/card_table.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/order_controller.dart';
-import 'components/tables_order.dart';
 
 class OrderView extends GetView<OrderController> {
   @override

@@ -1,7 +1,8 @@
+import 'package:casso/app/data/models/product.dart';
 import 'package:get/get.dart';
 
 class ProductController extends GetxController {
-  //TODO: Implement ProductController
+  Product product = Product();
 
   final count = 0.obs;
   @override

@@ -1,5 +1,6 @@
 import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/components/widget/search_bar.dart';
+import 'package:casso/app/modules/product/add-product/add_product.dart';
 import 'package:casso/app/modules/product/views/components/floating_button.dart';
 import 'package:flutter/material.dart';
 
@@ -71,7 +72,13 @@ class ProductView extends GetView<ProductController> {
                       Products(),
                     ],
                   ),
-                  FloatingButton()
+                  FloatingButton(
+                    onTap: () => Get.to(
+                      () => AddProductView(),
+                      transition: Transition.cupertino,
+                      duration: Duration(milliseconds: 400),
+                    ),
+                  )
                 ],
               ),
             )

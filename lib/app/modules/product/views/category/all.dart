@@ -1,8 +1,6 @@
 import 'package:casso/app/data/constant.dart';
-import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/modules/menu/views/components/menu_card.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class Products extends StatelessWidget {
   const Products({Key? key}) : super(key: key);
