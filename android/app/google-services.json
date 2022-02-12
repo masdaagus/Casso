@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1567918281",
+    "project_id": "casso-7bbb7",
+    "storage_bucket": "casso-7bbb7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1567918281:android:310415ca4227385264e518",
+        "android_client_info": {
+          "package_name": "com.casso.casso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1567918281-u4dt948r0vf108fk64rf0gt4ootp5g75.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.casso.casso",
+            "certificate_hash": "cc34830ab16f0e39d75379358c4c8a804b19792e"
+          }
+        },
+        {
+          "client_id": "1567918281-ipkvqd5h3ucvcg46t9810177ffjroet0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDn2yqSlIdhDZpQNQn5Cl_zYObS_8PltCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1567918281-ipkvqd5h3ucvcg46t9810177ffjroet0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

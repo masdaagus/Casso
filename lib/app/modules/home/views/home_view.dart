@@ -1,3 +1,4 @@
+import 'package:casso/app/controllers/auth_controller.dart';
 import 'package:casso/app/data/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,8 +9,10 @@ import 'components/list_terlaris.dart';
 import 'components/neo_button.dart';
 
 class HomeView extends GetView<HomeController> {
+  final auth = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
+    final auth = Get.put(AuthController());
     return Scaffold(
       backgroundColor: primaryColor,
       body: Container(
@@ -18,7 +21,8 @@ class HomeView extends GetView<HomeController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _textHello(),
+            // Obx(() => _textHello(auth!.user.toString())),
+            // _textHello(),
             CardInfo(),
             _textTerlaris(),
             ListTerlaris(),
@@ -26,26 +30,6 @@ class HomeView extends GetView<HomeController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // GlassButton(
-                //   tittle: "KASIR",
-                //   svg: "assets/svg/kasir.svg",
-                //   onTap: () => Get.toNamed("/cashier"),
-                // ),
-                // GlassButton(
-                //   tittle: "ORDER",
-                //   svg: "assets/svg/menu_book.svg",
-                //   onTap: () => Get.toNamed("/order"),
-                // ),
-                // GlassButton(
-                //   tittle: "ORDER",
-                //   svg: "assets/svg/menu_book.svg",
-                //   onTap: () {},
-                // ),
-                // GlassButton(
-                //   tittle: "PEGAWAI",
-                //   svg: "assets/svg/pegawai.svg",
-                //   onTap: () {},
-                // ),
                 NeoButton(
                   tittle: "kasir",
                   svg: "assets/svg/kasir.svg",
@@ -68,6 +52,11 @@ class HomeView extends GetView<HomeController> {
                 ),
               ],
             ),
+            SizedBox(height: 100),
+            ElevatedButton(
+              onPressed: () => auth.logout(),
+              child: Text("LOGOUT"),
+            )
           ],
         ),
       ),
@@ -91,12 +80,12 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget _textHello() {
+  Widget _textHello(String name) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          "Hi, Masda agus!",
+          name,
           style: TextStyle(
             fontSize: 24,
             fontFamily: "Monserrat",

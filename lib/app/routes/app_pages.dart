@@ -4,6 +4,8 @@ import 'package:casso/app/modules/cashier/bindings/cashier_binding.dart';
 import 'package:casso/app/modules/cashier/views/cashier_view.dart';
 import 'package:casso/app/modules/home/bindings/home_binding.dart';
 import 'package:casso/app/modules/home/views/home_view.dart';
+import 'package:casso/app/modules/introduction/bindings/introduction_binding.dart';
+import 'package:casso/app/modules/introduction/views/introduction_view.dart';
 import 'package:casso/app/modules/login/bindings/login_binding.dart';
 import 'package:casso/app/modules/login/views/login_view.dart';
 import 'package:casso/app/modules/menu/bindings/menu_binding.dart';
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.PRODUCT,
       page: () => ProductView(),
       binding: ProductBinding(),
+    ),
+    GetPage(
+      name: _Paths.INTRODUCTION,
+      page: () => IntroductionView(),
+      binding: IntroductionBinding(),
     ),
   ];
 }
