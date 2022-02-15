@@ -1,21 +1,23 @@
-import 'package:casso/app/data/models/product.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class ProductController extends GetxController {
-  Product product = Product();
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  late TextEditingController namaProduct;
+  late TextEditingController hargaProduct;
 
-  final count = 0.obs;
   @override
   void onInit() {
+    namaProduct = TextEditingController();
+    hargaProduct = TextEditingController();
     super.onInit();
   }
 
   @override
-  void onReady() {
-    super.onReady();
+  void onClose() {
+    namaProduct.dispose();
+    hargaProduct.dispose();
+    super.onClose();
   }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
 }

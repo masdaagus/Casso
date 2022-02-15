@@ -1,11 +1,14 @@
+import 'package:casso/app/controllers/auth_controller.dart';
+import 'package:casso/app/data/models/users.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  final auth = Get.find<AuthController>();
 
-  final count = 0.obs;
+  UsersModel user = UsersModel();
   @override
   void onInit() {
+    user = auth.user.value;
     super.onInit();
   }
 
@@ -16,5 +19,4 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {}
-  void increment() => count.value++;
 }

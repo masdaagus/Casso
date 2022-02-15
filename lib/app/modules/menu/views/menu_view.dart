@@ -10,7 +10,6 @@ import 'bottom_sheet/bottom_sheet.dart';
 import 'category/dessert.dart';
 import 'category/drink.dart';
 import 'components/button_chart.dart';
-import 'components/search_bar.dart';
 
 class Menus extends GetView<MenuController> {
   const Menus({

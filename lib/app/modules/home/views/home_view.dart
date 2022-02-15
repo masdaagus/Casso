@@ -12,52 +12,55 @@ class HomeView extends GetView<HomeController> {
   final auth = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
-    final auth = Get.put(AuthController());
     return Scaffold(
       backgroundColor: primaryColor,
       body: Container(
         margin: EdgeInsets.only(top: 35),
         padding: EdgeInsets.all(28),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Obx(() => _textHello(auth!.user.toString())),
-            // _textHello(),
-            CardInfo(),
-            _textTerlaris(),
-            ListTerlaris(),
-            _customDivider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                NeoButton(
-                  tittle: "kasir",
-                  svg: "assets/svg/kasir.svg",
-                  onTap: () => Get.toNamed("/cashier"),
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Obx(() => _textHello(controller.user.name!)),
+              CardInfo(),
+              _textTerlaris(),
+              ListTerlaris(),
+              _customDivider(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  NeoButton(
+                    tittle: "kasir",
+                    svg: "assets/svg/kasir.svg",
+                    onTap: () => Get.toNamed("/cashier"),
+                  ),
+                  NeoButton(
+                    tittle: "order",
+                    svg: "assets/svg/menu_book.svg",
+                    onTap: () => Get.toNamed("/order"),
+                  ),
+                  NeoButton(
+                    tittle: "monitor",
+                    svg: "assets/svg/pegawai.svg",
+                    onTap: () => Get.toNamed("/monitoring"),
+                  ),
+                  NeoButton(
+                    tittle: "product",
+                    svg: "assets/svg/burger.svg",
+                    onTap: () => Get.toNamed("/product"),
+                  ),
+                ],
+              ),
+              SizedBox(height: 160),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () => controller.auth.logout(),
+                  child: Text("LOGOUT"),
                 ),
-                NeoButton(
-                  tittle: "order",
-                  svg: "assets/svg/menu_book.svg",
-                  onTap: () => Get.toNamed("/order"),
-                ),
-                NeoButton(
-                  tittle: "monitor",
-                  svg: "assets/svg/pegawai.svg",
-                  onTap: () => Get.toNamed("/monitoring"),
-                ),
-                NeoButton(
-                  tittle: "product",
-                  svg: "assets/svg/burger.svg",
-                  onTap: () => Get.toNamed("/product"),
-                ),
-              ],
-            ),
-            SizedBox(height: 100),
-            ElevatedButton(
-              onPressed: () => auth.logout(),
-              child: Text("LOGOUT"),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

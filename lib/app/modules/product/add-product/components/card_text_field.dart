@@ -6,9 +6,11 @@ class CardTextField extends StatelessWidget {
     Key? key,
     this.hintText,
     this.icon,
+    this.textController,
   }) : super(key: key);
   final String? hintText;
   final IconData? icon;
+  final TextEditingController? textController;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class CardTextField extends StatelessWidget {
           SizedBox(width: 8),
           Expanded(
             child: TextField(
+              controller: textController,
               style: TextStyle(
                 fontSize: 14,
                 fontFamily: "Montserrat",

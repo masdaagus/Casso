@@ -22,7 +22,10 @@ class LoginView extends GetView<LoginController> {
                 Lottie.asset("assets/lottie/burger.json"),
 
                 // card login
-                CardLogin(loginWithGoogle: () => auth.login()),
+                CardLogin(
+                  loginWithGoogle: () => auth.login(),
+                  login: () {},
+                ),
                 SizedBox(height: 30)
               ],
             ),
