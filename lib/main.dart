@@ -20,22 +20,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Future.delayed(Duration(seconds: 6)),
+      future: Future.delayed(Duration(seconds: 0)),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return Obx(() => GetMaterialApp(
                 debugShowCheckedModeBanner: false,
-                title: "Application",
-                initialRoute: authC.isSkipIntro.isTrue
-                    ? authC.isAuth.isTrue
-                        ? Routes.HOME
-                        : Routes.LOGIN
-                    : Routes.INTRODUCTION,
+                // title: "Application",
+                // initialRoute: authC.isSkipIntro.isTrue
+                //     ? authC.isAuth.isTrue
+                //         ? Routes.HOME
+                //         : Routes.LOGIN
+                //     : Routes.INTRODUCTION,
+                title: authC.isAuth.toString(),
+                initialRoute: Routes.INTRODUCTION,
                 getPages: AppPages.routes,
               ));
         }
         return FutureBuilder(
-          future: authC.firstInitialzed(),
+          // future: authC.firstInitialzed(),
           builder: (context, snapshot) {
             return SplashScreen();
           },

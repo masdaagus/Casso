@@ -135,8 +135,8 @@ class AuthController extends GetxController {
 
   /// INITIALIZED PERTAMA APAKAH SUDAH LOGIN DI MAIN FILE
   Future<void> firstInitialzed() async {
-    await autoLogin().then((val) => val ? isAuth.value = true : null);
     await _isSkipIntro().then((val) => val ? isSkipIntro.value = true : null);
+    await autoLogin().then((val) => val ? isAuth.value = true : null);
   }
 
   /// LOGIN FUNGSI

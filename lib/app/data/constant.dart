@@ -18,3 +18,10 @@ NumberFormat nf = NumberFormat.simpleCurrency(
   locale: 'IDN',
   decimalDigits: 0,
 );
+
+const styl = TextStyle(
+  color: textColor,
+  fontFamily: "Montserrat",
+  fontSize: 18,
+  fontWeight: FontWeight.w500,
+);
