@@ -1,13 +1,10 @@
 import 'package:casso/app/data/constant.dart';
+import 'package:casso/app/modules/introduction/controllers/introduction_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-import 'confirm_screen.dart';
-
-class FormScreen extends StatelessWidget {
-  const FormScreen({Key? key}) : super(key: key);
-
+class FormScreen extends GetView<IntroductionController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,20 +37,24 @@ class FormScreen extends StatelessWidget {
                   FormField(
                     iconData: Icons.store_mall_directory_outlined,
                     hintText: "Nama Resto",
+                    controller: controller.restoName,
                   ),
                   FormField(
                     iconData: Icons.location_on_outlined,
                     hintText: "Lokasi Resto",
+                    controller: controller.restoLocation,
                   ),
                   FormField(
                     iconData: Icons.chair,
                     hintText: "Jumlah Meja",
+                    controller: controller.restoTable,
                     isNumber: true,
                   ),
                   Container(
                     width: 200,
                     child: ElevatedButton(
-                      onPressed: () => Get.to(() => ConfirmScreen()),
+                      // onPressed: () => Get.to(() => HomeView()),
+                      onPressed: () => controller.getResto(),
                       child: Text(
                         "Next",
                         style: TextStyle(
@@ -107,6 +108,7 @@ class FormField extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: TextField(
+        controller: controller,
         keyboardType: isNumber ? TextInputType.number : TextInputType.name,
         style: TextStyle(
           color: putih,

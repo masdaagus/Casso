@@ -1,0 +1,47 @@
+{
+    "ownerEmail": "",
+    "ownerName": "",
+    "restoLocation": "",
+    "restoName": "",
+    "restoTable": "",
+    "restoEmploye": {
+        "kitchen": "",
+        "barista": "",
+        "waiters1": "",
+        "waiters2": ""
+    },
+    "products": [
+        {
+            "food": [
+                {
+                    "foodName": "",
+                    "foodPrice": ""
+                },
+                {
+                    "foodName": "",
+                    "foodPrice": ""
+                }
+            ],
+            "drink": [
+                {
+                    "foodName": "",
+                    "foodPrice": ""
+                },
+                {
+                    "foodName": "",
+                    "foodPrice": ""
+                }
+            ],
+            "dessert": [
+                {
+                    "foodName": "",
+                    "foodPrice": ""
+                },
+                {
+                    "foodName": "",
+                    "foodPrice": ""
+                }
+            ]
+        }
+    ]
+}

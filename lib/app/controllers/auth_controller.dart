@@ -2,7 +2,6 @@ import 'package:casso/app/data/models/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends GetxController {
@@ -17,7 +16,7 @@ class AuthController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   /// HANDLE SIGN IN
-  Future<bool> _handleSignIn() async {
+  Future<bool> _sign() async {
     try {
       await _googleSignIn.signOut();
       await _googleSignIn.signIn().then((value) => _curentUser = value);
@@ -39,15 +38,6 @@ class AuthController extends GetxController {
         print("USER CREDENTIAL DARI LOGIN = ");
         print(userCredential);
 
-        /// MENYIMPAN DATA BAHWA PERNAH LOGIN UNTUK TIDAK MENAMPILKAN INTRODUCING SCREEN LAGI
-        final box = GetStorage();
-        if (box.read('skipIntro') != null) {
-          box.remove('skipIntro');
-        }
-        box.write('skipIntro', true);
-
-        print("value skip intro = ${box.read("skipIntro")}");
-
         /// MEMASUKKAN DATA KE FIREBASE
         CollectionReference users = firestore.collection("users");
 
@@ -56,9 +46,11 @@ class AuthController extends GetxController {
         if (checkUser.data() == null) {
           // menambahkan data baru kalau data null
           await users.doc(_curentUser!.email).set({
+            "uid": userCredential!.user!.uid,
             "name": _curentUser!.displayName,
             "email": _curentUser!.email,
-            "status": "nanti di update",
+            "status": "OWNER",
+            "restoID": null,
             "createAt":
                 userCredential!.user!.metadata.creationTime!.toIso8601String(),
           });
@@ -70,6 +62,19 @@ class AuthController extends GetxController {
         user(UsersModel.fromJson(userDocData));
         user.refresh();
 
+        // kalau semua berhasil akan ke home page
+
+        print("RESTO ID");
+        print(user.value.restoID);
+        print("email ${user.value.email}");
+
+        /// CEK USER APAKAH SUDAH PUNYA ID RESTO ATAU BELUM
+        await user.value.restoID == null
+            ? Get.offAllNamed('/introduction')
+            : Get.offAllNamed('/home');
+
+        // kalo user suah ke home otomatis user telah mengisi nama resto
+        user.refresh();
         isAuth.value = true;
       }
       return true;
@@ -113,7 +118,10 @@ class AuthController extends GetxController {
         user(UsersModel.fromJson(userDocData));
         user.refresh();
 
-        return true;
+        /// CEK USER APAKAH SUDAH PUNYA ID RESTO ATAU BELUM
+        await user.value.restoID != null ? isAuth.value = true : null;
+
+        print("resto ID = ${user.value.restoID}");
       }
 
       return false;
@@ -122,29 +130,14 @@ class AuthController extends GetxController {
     }
   }
 
-  /// SKIP INTRO
-  Future<bool> _isSkipIntro() async {
-    final box = GetStorage();
-    final read = box.read("skipIntro");
-    if (read != null || read == true) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   /// INITIALIZED PERTAMA APAKAH SUDAH LOGIN DI MAIN FILE
   Future<void> firstInitialzed() async {
-    await _isSkipIntro().then((val) => val ? isSkipIntro.value = true : null);
     await autoLogin().then((val) => val ? isAuth.value = true : null);
   }
 
   /// LOGIN FUNGSI
   void login() async {
-    await _handleSignIn();
-
-    // kalau semua berhasil akan ke home page
-    Get.offAllNamed('/home');
+    await _sign();
   }
 
   /// LOGOUT

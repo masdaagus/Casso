@@ -64,7 +64,8 @@ class WelcomeScreen extends StatelessWidget {
             Container(
               width: 200,
               child: ElevatedButton(
-                onPressed: () => Get.to(() => FormScreen()),
+                onPressed: () => Get.to(() => FormScreen(),
+                    transition: Transition.rightToLeft),
                 child: Text(
                   "Let's Goo",
                   style: TextStyle(

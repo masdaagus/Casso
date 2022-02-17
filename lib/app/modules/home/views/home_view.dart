@@ -53,7 +53,7 @@ class HomeView extends GetView<HomeController> {
               SizedBox(height: 160),
               Center(
                 child: ElevatedButton(
-                  onPressed: () => Get.toNamed('/introduction'),
+                  onPressed: () => Get.toNamed('/login'),
                   child: Text("tes"),
                 ),
               )
