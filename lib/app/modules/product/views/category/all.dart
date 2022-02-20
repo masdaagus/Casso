@@ -2,8 +2,8 @@ import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/menu/views/components/menu_card.dart';
 import 'package:flutter/material.dart';
 
-class Products extends StatelessWidget {
-  const Products({Key? key}) : super(key: key);
+class ProductsView extends StatelessWidget {
+  const ProductsView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

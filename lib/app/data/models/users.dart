@@ -10,33 +10,33 @@ class UsersModel {
     this.name,
     this.email,
     this.status,
-    this.createAt,
     this.restoID,
     this.uid,
+    this.password,
   });
 
   String? name;
   String? email;
   String? status;
-  String? createAt;
   String? restoID;
   String? uid;
+  String? password;
 
   factory UsersModel.fromJson(Map<String, dynamic> json) => UsersModel(
         name: json["name"],
         email: json["email"],
         status: json["status"],
-        createAt: json["createAt"],
         restoID: json["restoID"],
         uid: json["uid"],
+        password: json["password"],
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
         "email": email,
         "status": status,
-        "createAt": createAt,
         "restoID": restoID,
         "uid": uid,
+        "password": password,
       };
 }

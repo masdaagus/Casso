@@ -10,12 +10,14 @@ import 'app/routes/app_pages.dart';
 
 void main() async {
   await GetStorage.init();
-  await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp()
+      .then((value) => Get.put(AuthController(), permanent: true));
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final authC = Get.put(AuthController(), permanent: true);
+  final authC = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +29,8 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 title: "Application",
                 initialRoute: authC.isAuth.isTrue ? Routes.HOME : Routes.LOGIN,
-                // initialRoute: authC.isSkipIntro.isTrue
-                //     ? authC.isAuth.isTrue
-                //         ? Routes.HOME
-                //         : Routes.LOGIN
-                //     : Routes.INTRODUCTION,
 
-                ////
+                ////////////////////////////////////////////////
                 // title: authC.isAuth.toString(),
                 // initialRoute: Routes.INTRODUCTION,
                 getPages: AppPages.routes,

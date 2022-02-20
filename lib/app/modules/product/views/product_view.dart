@@ -69,7 +69,7 @@ class ProductView extends GetView<ProductController> {
                       DessertProduct(),
                       DrinkProduct(),
                       FoodProduct(),
-                      Products(),
+                      ProductsView(),
                     ],
                   ),
                   FloatingButton(

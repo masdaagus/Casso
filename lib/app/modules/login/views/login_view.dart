@@ -23,9 +23,13 @@ class LoginView extends GetView<LoginController> {
 
                 // card login
                 CardLogin(
-                  loginWithGoogle: () => auth.login(),
-                  login: () {},
-                ),
+                    loginWithGoogle: () => auth.loginWithGoogle(),
+                    login: () {
+                      auth.loginEmploye(
+                        controller.emailController.text,
+                        controller.passwordController.text,
+                      );
+                    }),
                 SizedBox(height: 30)
               ],
             ),

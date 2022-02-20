@@ -54,7 +54,7 @@ class FormScreen extends GetView<IntroductionController> {
                     width: 200,
                     child: ElevatedButton(
                       // onPressed: () => Get.to(() => HomeView()),
-                      onPressed: () => controller.getResto(),
+                      onPressed: () => controller.setResto(),
                       child: Text(
                         "Next",
                         style: TextStyle(

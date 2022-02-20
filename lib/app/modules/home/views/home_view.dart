@@ -53,10 +53,16 @@ class HomeView extends GetView<HomeController> {
               SizedBox(height: 160),
               Center(
                 child: ElevatedButton(
-                  onPressed: () => Get.toNamed('/login'),
+                  onPressed: () => controller.auth.logout(),
                   child: Text("tes"),
                 ),
-              )
+              ),
+              Text(controller.user.email ?? "kosong"),
+              Text(controller.user.name ?? "kosong"),
+              Text(controller.user.password ?? "kosong"),
+              Text(controller.user.restoID ?? "kosong"),
+              Text(controller.user.status ?? "kosong"),
+              Text(controller.user.uid ?? "kosong"),
             ],
           ),
         ),

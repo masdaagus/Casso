@@ -2,16 +2,17 @@ import 'package:casso/app/data/models/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends GetxController {
+  var user = UsersModel().obs;
   var isSkipIntro = false.obs;
   var isAuth = false.obs;
 
   GoogleSignIn _googleSignIn = GoogleSignIn();
   GoogleSignInAccount? _curentUser;
   UserCredential? userCredential;
-  var user = UsersModel().obs;
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -22,7 +23,6 @@ class AuthController extends GetxController {
       await _googleSignIn.signIn().then((value) => _curentUser = value);
 
       final isSignIn = await _googleSignIn.isSignedIn();
-      print("sudah login dengan akun google");
 
       if (isSignIn) {
         // MEMBUAT USER CREDENTIAL UNTUK CONNECT KE AUTENTIKASI
@@ -51,8 +51,6 @@ class AuthController extends GetxController {
             "email": _curentUser!.email,
             "status": "OWNER",
             "restoID": null,
-            "createAt":
-                userCredential!.user!.metadata.creationTime!.toIso8601String(),
           });
         }
 
@@ -61,8 +59,6 @@ class AuthController extends GetxController {
         final userDocData = userDoc.data() as Map<String, dynamic>;
         user(UsersModel.fromJson(userDocData));
         user.refresh();
-
-        // kalau semua berhasil akan ke home page
 
         print("RESTO ID");
         print(user.value.restoID);
@@ -73,7 +69,7 @@ class AuthController extends GetxController {
             ? Get.offAllNamed('/introduction')
             : Get.offAllNamed('/home');
 
-        // kalo user suah ke home otomatis user telah mengisi nama resto
+        // kalo user sudah ke home otomatis user telah mengisi nama resto
         user.refresh();
         isAuth.value = true;
       }
@@ -88,6 +84,25 @@ class AuthController extends GetxController {
   /// AUTO LOGIN
   Future<bool> autoLogin() async {
     try {
+      // try {
+      final box = GetStorage();
+      final email = box.read("email");
+      final password = box.read("password");
+      CollectionReference users = firestore.collection("users");
+
+      final userDoc = await users.doc(email).get();
+      final userData = userDoc.data() as Map<String, dynamic>;
+
+      if (email == userData['name'] && password == userData['password']) {
+        user(UsersModel.fromJson(userData));
+        user.refresh();
+        isAuth.value = true;
+
+        Get.offAllNamed('/home');
+
+        print("BERHASIL AUTO LOGIN DENGAN EMPLOYE");
+      }
+      // } catch (e) {}
       final isSign = await _googleSignIn.isSignedIn();
       if (isSign) {
         await _googleSignIn
@@ -120,8 +135,6 @@ class AuthController extends GetxController {
 
         /// CEK USER APAKAH SUDAH PUNYA ID RESTO ATAU BELUM
         await user.value.restoID != null ? isAuth.value = true : null;
-
-        print("resto ID = ${user.value.restoID}");
       }
 
       return false;
@@ -130,20 +143,79 @@ class AuthController extends GetxController {
     }
   }
 
-  /// INITIALIZED PERTAMA APAKAH SUDAH LOGIN DI MAIN FILE
-  Future<void> firstInitialzed() async {
-    await autoLogin().then((val) => val ? isAuth.value = true : null);
-  }
-
-  /// LOGIN FUNGSI
-  void login() async {
+  /// LOGIN LOGIN WITH GOOGLE
+  void loginWithGoogle() async {
     await _sign();
   }
 
   /// LOGOUT
   void logout() async {
+    final box = GetStorage();
+    box.remove("email");
+    box.remove("password");
     _googleSignIn.signOut();
     _googleSignIn.disconnect();
     Get.offAllNamed('/login');
   }
+
+  /// LOGIN WITH USERS EMPLOYE
+  Future<bool> loginEmploye(String email, password) async {
+    try {
+      CollectionReference users = firestore.collection("users");
+
+      final userDoc = await users.doc(email).get();
+      final userData = userDoc.data() as Map<String, dynamic>;
+
+      if (email == userData['name'] && password == userData['password']) {
+        user(UsersModel.fromJson(userData));
+        user.refresh();
+
+        // simpan status user bahwa sudah pernah login
+        final box = GetStorage();
+        if (box.read("email") != null && box.read("password") != null) {
+          box.remove("email");
+          box.remove("password");
+        }
+        box.write("email", email);
+        box.write("password", password);
+
+        isAuth.value = true;
+
+        Get.offAllNamed('/home');
+
+        print("BERHASIL LOGIN EMPLOYE");
+        return true;
+      } else {
+        print("gagal login");
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      print("LOGIN GAGAL");
+      return false;
+    }
+  }
+
+  // Future<bool> loginWithEmail(String email, password) async {
+  //   // Prompt the user to enter their email and password
+  //   // String email = 'masdacoc@gmail.com';
+  //   // String password = '123456';
+
+  //   try {
+  //     // await FirebaseAuth.instance
+  //     //     .signInWithEmailAndPassword(
+  //     //       email: "masdacoc@gmail.com",
+  //     //       password: "123456",
+  //     //     )
+  //     //     .then((value) => userCredential = value);
+
+  //     // await FirebaseAuth.instance.signInWithEmailAndPassword(
+  //     //     email: "masdacoc@gmail.com", password: "a06176258262");
+  //     // Get.offAllNamed('/home');
+  //     return true;
+  //   } catch (e) {
+  //     print(e);
+  //     return false;
+  //   }
+  // }
 }

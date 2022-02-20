@@ -4,12 +4,14 @@
     "restoLocation": "",
     "restoName": "",
     "restoTable": "",
-    "restoEmploye": {
-        "kitchen": "",
-        "barista": "",
-        "waiters1": "",
-        "waiters2": ""
-    },
+    "restoEmploye": [
+        {
+            "name":"Masda",
+            "password":"123",
+            "status":"kitchen"
+            
+        }
+    ],
     "products": [
         {
             "food": [

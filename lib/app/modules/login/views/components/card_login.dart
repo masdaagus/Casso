@@ -2,11 +2,12 @@ import 'dart:ui';
 
 import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/components/login_and_register/custom_textfield.dart';
+import 'package:casso/app/modules/login/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class CardLogin extends StatelessWidget {
+class CardLogin extends GetView<LoginController> {
   const CardLogin({
     Key? key,
     this.login,
@@ -80,12 +81,14 @@ class CardLogin extends StatelessWidget {
                   Column(
                     children: [
                       CustomTextField(
-                        hint: "Email",
+                        hint: "Nama",
                         icon: Icons.person_outlined,
+                        controller: controller.emailController,
                       ),
                       CustomTextField(
                         hint: "Password",
                         icon: Icons.lock_outlined,
+                        controller: controller.passwordController,
                         obscure: true,
                       ),
                       SizedBox(height: padding),
