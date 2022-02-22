@@ -41,17 +41,26 @@ class OrderView extends GetView<OrderController> {
                   crossAxisCount: 3,
                   childAspectRatio: .85,
                   physics: BouncingScrollPhysics(),
-                  children: List.generate(19, (index) {
-                    return CardTable(
-                      tableNumber: index + 1,
-                      onTap: () {
-                        controller.dialog(table: index + 1);
-                      },
-                    );
-                  }),
+                  children: List.generate(
+                    int.parse(controller.resto.restoTable!),
+                    (index) {
+                      return CardTable(
+                        tableNumber: index + 1,
+                        onTap: () {
+                          controller.dialog(table: index);
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
-              SizedBox(height: 20)
+              SizedBox(height: 20),
+              Text(controller.user.restoID!),
+              ElevatedButton(
+                  onPressed: () {
+                    print(controller.resto.restoTable);
+                  },
+                  child: Text("data"))
             ],
           ),
         ),

@@ -6,7 +6,7 @@ UsersModel userModelFromJson(String str) =>
 String userModelToJson(UsersModel data) => json.encode(data.toJson());
 
 class UsersModel {
-  UsersModel({
+  const UsersModel({
     this.name,
     this.email,
     this.status,
@@ -15,12 +15,12 @@ class UsersModel {
     this.password,
   });
 
-  String? name;
-  String? email;
-  String? status;
-  String? restoID;
-  String? uid;
-  String? password;
+  final String? name;
+  final String? email;
+  final String? status;
+  final String? restoID;
+  final String? uid;
+  final String? password;
 
   factory UsersModel.fromJson(Map<String, dynamic> json) => UsersModel(
         name: json["name"],
@@ -36,7 +36,7 @@ class UsersModel {
         "email": email,
         "status": status,
         "restoID": restoID,
-        "uid": uid,
         "password": password,
+        "uid": uid,
       };
 }

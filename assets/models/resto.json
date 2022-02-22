@@ -6,14 +6,18 @@
     "restoTable": "",
     "restoEmploye": [
         {
-            "name":"Masda",
-            "password":"123",
-            "status":"kitchen"
-            
+            "name": "Masda",
+            "password": "123",
+            "status": "kitchen"
+        },
+        {
+            "name": "Agus",
+            "password": "123",
+            "status": "kasir"
         }
     ],
-    "products": [
-        {
+    "products": {
+        
             "food": [
                 {
                     "foodName": "",
@@ -44,6 +48,6 @@
                     "foodPrice": ""
                 }
             ]
+        
         }
-    ]
 }

@@ -2,17 +2,16 @@
 //
 //     final products = productsFromJson(jsonString);
 
-import 'dart:convert';
+// import 'dart:convert';
 
 import 'package:casso/app/data/models/products.dart';
-import 'package:casso/app/data/models/users.dart';
 
-Resto restoFromJson(String str) => Resto.fromJson(json.decode(str));
+// RestosModel restoFromJson(String str) => RestosModel.fromJson(json.decode(str));
 
-String restoToJson(Resto data) => json.encode(data.toJson());
+// String restoToJson(RestosModel data) => json.encode(data.toJson());
 
-class Resto {
-  const Resto({
+class RestosModel {
+  const RestosModel({
     this.ownerEmail,
     this.ownerName,
     this.restoLocation,
@@ -27,18 +26,17 @@ class Resto {
   final String? restoLocation;
   final String? restoName;
   final String? restoTable;
-  final List<UsersModel>? restoEmploye;
-  final List<Products>? products;
+  final List<dynamic>? restoEmploye;
+  final Products? products;
 
-  factory Resto.fromJson(Map<String, dynamic> json) => Resto(
+  factory RestosModel.fromJson(Map<String, dynamic> json) => RestosModel(
         ownerEmail: json[RestoFields.ownerEmail],
         ownerName: json[RestoFields.ownerName],
         restoLocation: json[RestoFields.restoLocation],
         restoName: json[RestoFields.restoName],
         restoTable: json[RestoFields.restoTable],
         restoEmploye: json[RestoFields.restoEmploye],
-        products: List<Products>.from(
-            json[RestoFields.products].map((x) => Products.fromJson(x))),
+        products: Products.fromJson(json[RestoFields.products]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -47,40 +45,11 @@ class Resto {
         RestoFields.restoLocation: restoLocation,
         RestoFields.restoName: restoName,
         RestoFields.restoTable: restoTable,
-        RestoFields.restoEmploye:
-            List<dynamic>.from(restoEmploye!.map((x) => x.toJson)),
-        RestoFields.products:
-            List<dynamic>.from(products!.map((x) => x.toJson())),
+        "restoEmploye":
+            List<dynamic>.from(restoEmploye!.map((x) => x.toJson())),
+        RestoFields.products: products!.toJson(),
       };
 }
-
-// class RestoEmploye {
-//   const RestoEmploye({
-//     this.name,
-//     this.password,
-//     this.status,
-//     this.restoID,
-//   });
-
-//   final String? name;
-//   final String? password;
-//   final String? status;
-//   final String? restoID;
-
-//   factory RestoEmploye.fromJson(Map<String, dynamic> json) => RestoEmploye(
-//         name: json["name"],
-//         password: json["password"],
-//         status: json["status"],
-//         restoID: json["restoID"],
-//       );
-
-//   Map<String, dynamic> toJson() => {
-//         "name": name,
-//         "password": password,
-//         "status": status,
-//         "restoID": restoID,
-//       };
-// }
 
 /// PRODUCTS FILEDS
 

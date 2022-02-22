@@ -1,22 +1,27 @@
+import 'package:casso/app/controllers/auth_controller.dart';
 import 'package:casso/app/data/constant.dart';
+import 'package:casso/app/data/models/resto.dart';
+import 'package:casso/app/data/models/users.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OrderController extends GetxController {
-  final count = 0.obs;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final auth = Get.find<AuthController>();
+  UsersModel user = UsersModel();
+  RestosModel resto = RestosModel();
+
   @override
   void onInit() {
+    user = auth.user.value;
+    resto = auth.resto.value;
+    // getResto();
     super.onInit();
   }
 
   @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
   void onClose() {}
-  void increment() => count.value++;
 
   // dialog button
   void dialog({int? table}) {

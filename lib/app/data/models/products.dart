@@ -5,9 +5,9 @@ class Products {
     this.dessert,
   });
 
-  final List<ProductCategory>? food;
-  final List<ProductCategory>? drink;
-  final List<ProductCategory>? dessert;
+  final List<dynamic>? food;
+  final List<dynamic>? drink;
+  final List<dynamic>? dessert;
 
   factory Products.fromJson(Map<String, dynamic> json) => Products(
         food: List<ProductCategory>.from(

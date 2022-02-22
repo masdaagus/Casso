@@ -1,3 +1,4 @@
+import 'package:casso/app/controllers/auth_controller.dart';
 import 'package:casso/app/data/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,6 +9,7 @@ import 'components/list_terlaris.dart';
 import 'components/neo_button.dart';
 
 class HomeView extends GetView<HomeController> {
+  final auth = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

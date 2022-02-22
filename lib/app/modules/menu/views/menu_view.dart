@@ -70,7 +70,7 @@ class Menus extends GetView<MenuController> {
               child: Stack(
                 children: [
                   TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
+                    // physics: NeverScrollableScrollPhysics(),
                     children: [
                       DessertMenu(),
                       DrinkMenu(),
@@ -79,7 +79,7 @@ class Menus extends GetView<MenuController> {
                     ],
                   ),
                   ButtonChart(
-                    table: table,
+                    table: table + 1,
                     onTap: () => Get.bottomSheet(
                       BotomSheet(),
                       barrierColor: Color(0XFF858585).withOpacity(.3),

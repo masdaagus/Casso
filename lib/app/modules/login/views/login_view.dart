@@ -1,4 +1,5 @@
 import 'package:casso/app/controllers/auth_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -14,25 +15,29 @@ class LoginView extends GetView<LoginController> {
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         child: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                /// Lottie asset
-                Lottie.asset("assets/lottie/burger.json"),
+          child: Stack(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    /// Lottie asset
+                    Lottie.asset("assets/lottie/burger.json"),
 
-                // card login
-                CardLogin(
-                    loginWithGoogle: () => auth.loginWithGoogle(),
-                    login: () {
-                      auth.loginEmploye(
-                        controller.emailController.text,
-                        controller.passwordController.text,
-                      );
-                    }),
-                SizedBox(height: 30)
-              ],
-            ),
+                    // card login
+                    CardLogin(
+                        loginWithGoogle: () => auth.loginWithGoogle(),
+                        login: () {
+                          auth.loginEmploye(
+                            controller.emailController.text,
+                            controller.passwordController.text,
+                          );
+                        }),
+                    SizedBox(height: 30)
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),

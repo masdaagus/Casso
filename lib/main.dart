@@ -1,4 +1,3 @@
-import 'package:casso/app/utils/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 
 import 'app/controllers/auth_controller.dart';
 import 'app/routes/app_pages.dart';
+import 'app/utils/splash_screen.dart';
 
 void main() async {
   await GetStorage.init();
@@ -36,12 +36,8 @@ class MyApp extends StatelessWidget {
                 getPages: AppPages.routes,
               ));
         }
-        // return FutureBuilder(
-        //   // future: authC.firstInitialzed(),
-        //   builder: (context, snapshot) {
+
         return SplashScreen();
-        //   },
-        // );
       },
     );
   }
