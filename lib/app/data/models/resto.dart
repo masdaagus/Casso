@@ -5,6 +5,7 @@
 // import 'dart:convert';
 
 import 'package:casso/app/data/models/products.dart';
+import 'package:casso/app/data/models/users.dart';
 
 // RestosModel restoFromJson(String str) => RestosModel.fromJson(json.decode(str));
 
@@ -35,7 +36,8 @@ class RestosModel {
         restoLocation: json[RestoFields.restoLocation],
         restoName: json[RestoFields.restoName],
         restoTable: json[RestoFields.restoTable],
-        restoEmploye: json[RestoFields.restoEmploye],
+        restoEmploye: List<dynamic>.from(
+            json[RestoFields.restoEmploye].map((x) => UsersModel.fromJson(x))),
         products: Products.fromJson(json[RestoFields.products]),
       );
 
@@ -45,7 +47,7 @@ class RestosModel {
         RestoFields.restoLocation: restoLocation,
         RestoFields.restoName: restoName,
         RestoFields.restoTable: restoTable,
-        "restoEmploye":
+        RestoFields.restoEmploye:
             List<dynamic>.from(restoEmploye!.map((x) => x.toJson())),
         RestoFields.products: products!.toJson(),
       };

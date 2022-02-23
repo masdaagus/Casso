@@ -11,20 +11,26 @@ class OrderController extends GetxController {
   final auth = Get.find<AuthController>();
   UsersModel user = UsersModel();
   RestosModel resto = RestosModel();
+  late TextEditingController guessNameController;
 
   @override
   void onInit() {
     user = auth.user.value;
     resto = auth.resto.value;
-    // getResto();
+    guessNameController = TextEditingController();
     super.onInit();
   }
 
   @override
-  void onClose() {}
+  void onClose() {
+    guessNameController.dispose();
+    super.onClose();
+  }
 
   // dialog button
-  void dialog({int? table}) {
+  void dialog({
+    int? table,
+  }) {
     Get.defaultDialog(
       content: Column(
         children: [
@@ -33,6 +39,7 @@ class OrderController extends GetxController {
             decoration: BoxDecoration(
                 color: putih, borderRadius: BorderRadius.circular(20)),
             child: TextField(
+              controller: guessNameController,
               textAlign: TextAlign.center,
               decoration: InputDecoration(
                 hintStyle: TextStyle(

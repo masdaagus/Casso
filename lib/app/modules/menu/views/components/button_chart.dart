@@ -6,9 +6,15 @@ class ButtonChart extends StatelessWidget {
     Key? key,
     required this.table,
     required this.onTap,
+    this.items,
+    this.totalPrice,
+    this.guessName = 'Jojon',
   }) : super(key: key);
 
   final int table;
+  final int? items;
+  final double? totalPrice;
+  final String? guessName;
   final VoidCallback onTap;
 
   @override
@@ -66,7 +72,7 @@ class ButtonChart extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "7 items",
+                        "$items items",
                         style: TextStyle(
                           color: textColor,
                           fontFamily: "Montserrat",
@@ -76,7 +82,7 @@ class ButtonChart extends StatelessWidget {
                       ),
                       SizedBox(height: 3),
                       Text(
-                        "Table ${table} - (Masda agus)",
+                        "Table ${table} - (${guessName})",
                         style: TextStyle(
                           color: textColor,
                           fontFamily: "Montserrat",
@@ -89,7 +95,7 @@ class ButtonChart extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Rp48.000",
+                        "$totalPrice",
                         style: TextStyle(
                           color: textColor,
                           fontFamily: "Montserrat",

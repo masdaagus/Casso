@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 
 class MenuController extends GetxController {
-  final itemCount = 0.obs;
-
   List<Map<String, dynamic>> makanan = [
     {
       "namaMakanan": "Milkshake Salak",
@@ -50,5 +48,4 @@ class MenuController extends GetxController {
 
   @override
   void onClose() {}
-  increment() => itemCount.value++;
 }

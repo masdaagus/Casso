@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 class IntroductionController extends GetxController {
   final auth = Get.find<AuthController>();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  UsersModel user = UsersModel();
+  var user = UsersModel().obs;
 
   UserCredential? userCredential;
 
@@ -27,7 +27,7 @@ class IntroductionController extends GetxController {
     CollectionReference users = firestore.collection("users");
 
     Random r = Random();
-    String rndm = List.generate(6, (_) => r.nextInt(9)).join("").toString();
+    String rndm = List.generate(4, (_) => r.nextInt(9)).join("").toString();
 
     final List<ProductCategory> drink = [
       ProductCategory(foodName: "Teh Manis ", foodPrice: "5000"),
@@ -52,46 +52,32 @@ class IntroductionController extends GetxController {
     );
     final List<UsersModel> employe = [
       UsersModel(
-        name: "barista.$rndm",
-        email: "barista.$rndm@gmail.com",
-        status: "BARISTA",
-        restoID: user.uid,
-        password: '123456',
-      ),
-      UsersModel(
         name: "kitchen.$rndm",
-        email: "cashier.$rndm@gmail.com",
+        email: "kitchen.$rndm@gmail.com",
         status: "KITCHEN",
-        restoID: user.uid,
+        restoID: user.value.uid,
         password: '123456',
       ),
       UsersModel(
         name: "cashier.$rndm",
         email: "cashier.$rndm@gmail.com",
         status: "CASHIER",
-        restoID: user.uid,
+        restoID: user.value.uid,
         password: '123456',
       ),
       UsersModel(
         name: "waiters.$rndm",
-        email: "cashier.$rndm@gmail.com",
+        email: "waiters.$rndm@gmail.com",
         status: "WAITERS",
-        restoID: user.uid,
-        password: '123456',
-      ),
-      UsersModel(
-        name: "waiters2.$rndm",
-        email: "cashier.$rndm@gmail.com",
-        status: "WAITERS",
-        restoID: user.uid,
+        restoID: user.value.uid,
         password: '123456',
       ),
     ];
 
     try {
       // / update users untuk menambahkan resto id
-      await users.doc(user.email).update({
-        "restoID": user.uid,
+      await users.doc(user.value.email).update({
+        "restoID": user.value.uid,
       });
 
       try {
@@ -100,12 +86,12 @@ class IntroductionController extends GetxController {
 
         while (check.data() == null) {
           for (int i = 0; i < employe.length; i++) {
-            await users.doc(employe[i].name).set(
+            await users.doc(employe[i].email).set(
                   UsersModel(
                     name: employe[i].name,
                     email: employe[i].email,
                     status: employe[i].status,
-                    restoID: user.uid,
+                    restoID: user.value.uid,
                     password: "123456",
                   ).toJson(),
                 );
@@ -115,10 +101,10 @@ class IntroductionController extends GetxController {
         }
 
         /// set resto dengan model
-        await restos.doc(user.uid).set(
+        await restos.doc(user.value.uid).set(
               RestosModel(
-                ownerEmail: user.email,
-                ownerName: user.name,
+                ownerEmail: user.value.email,
+                ownerName: user.value.name,
                 restoName: restoName.text,
                 restoLocation: restoLocation.text,
                 restoTable: restoTable.text,
@@ -127,11 +113,21 @@ class IntroductionController extends GetxController {
               ).toJson(),
             );
 
+        // memasukkan data user ke dalam model (agar bisa ditampilkan ke widget)
+        final userDoc = await users.doc(user.value.email).get();
+        final userDocData = userDoc.data() as Map<String, dynamic>;
+        user(UsersModel.fromJson(userDocData));
+        user.refresh();
+
         // memasukkan data resto user ke dalam model (agar bisa ditampilkan ke widget)
-        final restoId = await restos.doc(user.restoID).get();
+        final restoId = await restos.doc(user.value.restoID).get();
         final restoData = restoId.data() as Map<String, dynamic>;
+
         resto(RestosModel.fromJson(restoData));
         resto.refresh();
+
+        auth.isAuth.value = true;
+
         Get.offAllNamed("/home");
       } catch (e) {
         print(e);
@@ -143,7 +139,7 @@ class IntroductionController extends GetxController {
 
   @override
   void onInit() {
-    user = auth.user.value;
+    user = auth.user;
     resto = auth.resto;
     restoName = TextEditingController();
     restoLocation = TextEditingController();

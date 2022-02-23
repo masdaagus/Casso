@@ -56,11 +56,6 @@ class OrderView extends GetView<OrderController> {
               ),
               SizedBox(height: 20),
               Text(controller.user.restoID!),
-              ElevatedButton(
-                  onPressed: () {
-                    print(controller.resto.restoTable);
-                  },
-                  child: Text("data"))
             ],
           ),
         ),

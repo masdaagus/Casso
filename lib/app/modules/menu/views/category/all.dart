@@ -31,8 +31,8 @@ class AllMenu extends StatelessWidget {
                       tittle: ctrl.makanan[index]["namaMakanan"],
                       harga: nf.format(ctrl.makanan[index]["hargaMakanan"]),
                       image: "assets/images/milkshake-oreo.jpg",
-                      itemCount: ctrl.itemCount.value,
-                      onTap: () => ctrl.increment(),
+                      // itemCount: ctrl.itemCount.value,
+                      // onTap: () => ctrl.increment(),
                     ),
                   );
                 }),

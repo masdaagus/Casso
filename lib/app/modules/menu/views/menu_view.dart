@@ -3,6 +3,7 @@ import 'package:casso/app/modules/components/widget/search_bar.dart';
 import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/modules/menu/views/category/all.dart';
 import 'package:casso/app/modules/menu/views/category/food.dart';
+import 'package:casso/app/modules/order/controllers/order_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -79,6 +80,7 @@ class Menus extends GetView<MenuController> {
                     ],
                   ),
                   ButtonChart(
+                    guessName: "Tes",
                     table: table + 1,
                     onTap: () => Get.bottomSheet(
                       BotomSheet(),

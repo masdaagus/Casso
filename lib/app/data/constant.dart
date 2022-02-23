@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-const primaryColor = Color(0XFF393543);
+const primaryColor = Color(0XFF2B333D);
 const textColor = Color(0XFFD9D9D9);
 const biru = Color(0XFF38A9E1);
 const orange = Color(0XFFFD8A09);

@@ -3,6 +3,7 @@ import 'package:casso/app/data/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../controllers/home_controller.dart';
 import 'components/info_card.dart';
 import 'components/list_terlaris.dart';
@@ -52,19 +53,35 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ],
               ),
-              SizedBox(height: 160),
+              SizedBox(height: 80),
               Center(
                 child: ElevatedButton(
                   onPressed: () => controller.auth.logout(),
                   child: Text("tes"),
                 ),
               ),
+              SizedBox(height: 24),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    final box = GetStorage();
+                    print(box.read("email"));
+                    print(box.read("password"));
+                  },
+                  child: Text("tes"),
+                ),
+              ),
+
               Text(controller.user.email ?? "kosong"),
               Text(controller.user.name ?? "kosong"),
-              Text(controller.user.password ?? "kosong"),
-              Text(controller.user.restoID ?? "kosong"),
               Text(controller.user.status ?? "kosong"),
-              Text(controller.user.uid ?? "kosong"),
+              Text(controller.user.email ?? "kosong"),
+              Text(controller.user.restoID ?? "kosong"),
+
+              Text("=" * 20),
+              Text(controller.resto.ownerEmail ?? "kosong"),
+              Text(controller.resto.ownerName ?? "kosong"),
+              Text(controller.resto.restoName ?? "kosong"),
             ],
           ),
         ),

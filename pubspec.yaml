@@ -48,6 +48,15 @@ flutter:
         - asset: fonts/Montserrat-Bold.ttf
           weight: 800
 
+    - family: balsamiq
+      fonts:
+          - asset: fonts/BalsamiqSans-Regular.ttf
+          - asset: fonts/BalsamiqSans-Bold.ttf
+            weight: 800
 
+
+    - family: mono
+      fonts:
+          - asset: fonts/UbuntuMono-Bold.ttf
 
   uses-material-design: true
