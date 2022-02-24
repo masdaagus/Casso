@@ -1,3 +1,4 @@
+import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(systemNavigationBarColor: priColor));
+        SystemUiOverlayStyle(systemNavigationBarColor: darkColor));
     return FutureBuilder(
       future: authC.autoLogin(),
       builder: (context, snapshot) {

@@ -2,6 +2,7 @@ import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/components/widget/search_bar.dart';
 import 'package:casso/app/modules/product/add-product/add_product.dart';
 import 'package:casso/app/modules/product/views/components/floating_button.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -18,9 +19,9 @@ class ProductView extends GetView<ProductController> {
     // final table = Get.arguments;
     // // print("args dari tables = ${table + 1}");
     return Scaffold(
-      backgroundColor: primaryColor,
+      backgroundColor: darkColor,
       appBar: AppBar(
-        backgroundColor: primaryColor,
+        backgroundColor: darkColor,
         elevation: 0,
         title: Text(
           'PRODUCTS',
@@ -64,7 +65,7 @@ class ProductView extends GetView<ProductController> {
               child: Stack(
                 children: [
                   TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     children: [
                       DessertProduct(),
                       DrinkProduct(),

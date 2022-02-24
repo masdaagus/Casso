@@ -30,7 +30,7 @@ class CustomTextField extends StatelessWidget {
         gradient: LinearGradient(
           colors: [
             Color(0XFF818181).withOpacity(.48),
-            priColor.withOpacity(.48),
+            darkColor.withOpacity(.48),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -48,7 +48,7 @@ class CustomTextField extends StatelessWidget {
               controller: controller,
               obscureText: isObsecure,
               style: TextStyle(
-                color: txtColor,
+                color: textColor,
                 fontFamily: "balsamiq",
                 letterSpacing: .5,
               ),

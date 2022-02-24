@@ -1,4 +1,4 @@
-import 'package:casso/app/data/constant.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -79,7 +79,7 @@ class CardTable extends StatelessWidget {
                         guessName,
                         style: TextStyle(
                           fontSize: 10,
-                          color: primaryColor,
+                          color: darkColor,
                           fontWeight: FontWeight.w500,
                           letterSpacing: .5,
                         ),

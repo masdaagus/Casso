@@ -1,5 +1,6 @@
 import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/product/controllers/product_controller.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,13 +13,13 @@ class AddProductView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ctrl = Get.find<ProductController>();
+    final ctrl = Get.put(ProductController());
     return Scaffold(
-      backgroundColor: primaryColor,
+      backgroundColor: darkColor,
 
       /// APP BAR
       appBar: AppBar(
-        backgroundColor: primaryColor,
+        backgroundColor: darkColor,
         elevation: 0,
         title: Text(
           'ADD PRODUCT',
@@ -55,7 +56,7 @@ class AddProductView extends StatelessWidget {
                 // height: 50,
                 // child: Hero(
                 //   child: Material(
-                //     color: primaryColor,
+                //     color: darkColor,
                 //     shape: RoundedRectangleBorder(
                 //         borderRadius: BorderRadius.circular(16)),
                 //     child: Container(

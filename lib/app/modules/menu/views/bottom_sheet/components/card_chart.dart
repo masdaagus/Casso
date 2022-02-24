@@ -1,4 +1,5 @@
 import 'package:casso/app/data/constant.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class CardChart extends StatelessWidget {
@@ -36,7 +37,7 @@ class CardChart extends StatelessWidget {
               Text(
                 "Nasi Goreng Seafood",
                 style: TextStyle(
-                    color: primaryColor,
+                    color: darkColor,
                     fontFamily: "Montserrat",
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -48,7 +49,7 @@ class CardChart extends StatelessWidget {
                   Text(
                     "Rp23.000",
                     style: TextStyle(
-                        color: primaryColor,
+                        color: darkColor,
                         fontFamily: "Montserrat",
                         fontWeight: FontWeight.w500,
                         letterSpacing: -1),

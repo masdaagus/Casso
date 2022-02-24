@@ -2,6 +2,7 @@ import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/monitoring/controllers/monitoring_controller.dart';
 import 'package:casso/app/modules/monitoring/views/components/monitor_card.dart';
 import 'package:casso/app/modules/monitoring/views/components/search_card.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,10 +12,9 @@ class OrderMonitoring extends GetView<MonitoringController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primaryColor,
+      backgroundColor: darkColor,
       body: Column(
         children: [
-          SearchCard(),
           Expanded(
             child: ListView.builder(
               physics: BouncingScrollPhysics(),

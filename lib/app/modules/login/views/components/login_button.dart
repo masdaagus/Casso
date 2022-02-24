@@ -23,7 +23,7 @@ class LoginButton extends StatelessWidget {
         width: width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          color: priColor,
+          color: darkColor,
           boxShadow: [
             BoxShadow(
               blurRadius: 8,
@@ -41,7 +41,7 @@ class LoginButton extends StatelessWidget {
           child: Text(
             tittle,
             style: TextStyle(
-              color: txtColor,
+              color: darkColor,
               fontFamily: "balsamiq",
               fontWeight: FontWeight.w800,
               letterSpacing: 1,

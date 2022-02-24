@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/cashier/controllers/cashier_controller.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,7 +15,7 @@ class Monitoring extends GetView<CashierController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primaryColor,
+      backgroundColor: darkColor,
       body: Padding(
         padding: const EdgeInsets.only(top: 24),
         child: ClipRRect(

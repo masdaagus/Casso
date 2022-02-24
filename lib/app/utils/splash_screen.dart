@@ -7,7 +7,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(backgroundColor: priColor, body: CustomSpinner()),
+      home: Scaffold(backgroundColor: darkColor, body: CustomSpinner()),
     );
   }
 }

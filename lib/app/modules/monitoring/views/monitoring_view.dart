@@ -1,11 +1,13 @@
 import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/monitoring/views/pesanan/pesanan_view.dart';
 import 'package:casso/app/modules/monitoring/views/proses/proses_view.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
 import '../controllers/monitoring_controller.dart';
+import 'components/search_card.dart';
 
 class MonitoringView extends GetView<MonitoringController> {
   @override
@@ -13,7 +15,7 @@ class MonitoringView extends GetView<MonitoringController> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        backgroundColor: primaryColor,
+        backgroundColor: darkColor,
         appBar: AppBar(
           title: Text(
             'MONITORING',
@@ -28,7 +30,7 @@ class MonitoringView extends GetView<MonitoringController> {
             icon: Icon(Icons.arrow_back_ios, size: 20),
             onPressed: Get.back,
           ),
-          backgroundColor: primaryColor,
+          backgroundColor: darkColor,
         ),
         body: Column(
           children: [
@@ -45,7 +47,7 @@ class MonitoringView extends GetView<MonitoringController> {
                   labelColor: textColor,
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: primaryColor,
+                    color: darkColor,
                   ),
                   tabs: [
                     textTab("PESANAN"),
@@ -56,6 +58,7 @@ class MonitoringView extends GetView<MonitoringController> {
                 ),
               ),
             ),
+            SearchCard(),
             Expanded(
               child: Container(
                 child: TabBarView(

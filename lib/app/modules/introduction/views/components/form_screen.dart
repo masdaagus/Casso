@@ -1,5 +1,6 @@
 import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/introduction/controllers/introduction_controller.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -8,7 +9,7 @@ class FormScreen extends GetView<IntroductionController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primaryColor,
+      backgroundColor: darkColor,
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(

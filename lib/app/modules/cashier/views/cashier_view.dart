@@ -1,4 +1,5 @@
 import 'package:casso/app/data/constant.dart';
+import 'package:casso/app/utils/constant.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,13 +13,13 @@ class CashierView extends GetView<CashierController> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: primaryColor,
+        backgroundColor: darkColor,
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios, size: 20),
             onPressed: Get.back,
           ),
-          backgroundColor: primaryColor,
+          backgroundColor: darkColor,
           elevation: 0,
           title: Text(
             'KASIR',
@@ -58,7 +59,7 @@ class CashierView extends GetView<CashierController> {
                   labelColor: textColor,
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: primaryColor,
+                    color: darkColor,
                   ),
                   tabs: [
                     textTab("MENUNGGU"),

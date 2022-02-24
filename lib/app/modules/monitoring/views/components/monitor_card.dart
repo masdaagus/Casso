@@ -1,5 +1,6 @@
 import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/monitoring/views/components/order_item.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 import 'button_semua.dart';
@@ -44,7 +45,7 @@ class MonitorCard extends StatelessWidget {
             height: 36,
             decoration: BoxDecoration(
               border: Border.all(color: putih.withOpacity(.5)),
-              color: primaryColor,
+              color: darkColor,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Row(

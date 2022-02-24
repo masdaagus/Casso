@@ -1,5 +1,6 @@
 import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/introduction/views/components/form_screen.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -12,7 +13,7 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primaryColor,
+      backgroundColor: darkColor,
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
@@ -69,7 +70,7 @@ class WelcomeScreen extends StatelessWidget {
                 child: Text(
                   "Let's Goo",
                   style: TextStyle(
-                    color: primaryColor,
+                    color: darkColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                     fontFamily: "Montserrat",

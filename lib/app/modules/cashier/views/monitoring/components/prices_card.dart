@@ -1,5 +1,6 @@
 import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/cashier/controllers/cashier_controller.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,7 +32,7 @@ class PricesCard extends GetView<CashierController> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             height: 40,
             decoration: BoxDecoration(
-                color: primaryColor,
+                color: darkColor,
                 borderRadius: BorderRadius.circular(18),
                 boxShadow: [
                   BoxShadow(
@@ -105,7 +106,7 @@ class PricesCard extends GetView<CashierController> {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 16),
             height: 2,
-            color: primaryColor,
+            color: darkColor,
           ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),

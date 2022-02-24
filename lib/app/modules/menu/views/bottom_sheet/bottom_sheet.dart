@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:casso/app/data/constant.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -80,7 +81,7 @@ class BotomSheet extends StatelessWidget {
                             Text(
                               "Payment Summary",
                               style: TextStyle(
-                                color: primaryColor,
+                                color: darkColor,
                                 fontFamily: "Montserrat",
                                 fontWeight: FontWeight.w600,
                                 letterSpacing: -.5,
@@ -125,7 +126,7 @@ class BotomSheet extends StatelessWidget {
                                       fontFamily: "Montserrat",
                                       fontWeight: FontWeight.bold,
                                       letterSpacing: -.5,
-                                      color: primaryColor,
+                                      color: darkColor,
                                     ),
                                   ),
                                 ),

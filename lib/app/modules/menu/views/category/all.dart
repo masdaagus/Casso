@@ -1,6 +1,7 @@
 import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/modules/menu/views/components/menu_card.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +12,7 @@ class AllMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final ctrl = Get.find<MenuController>();
     return Container(
-      color: primaryColor,
+      color: darkColor,
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(

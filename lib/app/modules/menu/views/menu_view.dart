@@ -4,6 +4,7 @@ import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/modules/menu/views/category/all.dart';
 import 'package:casso/app/modules/menu/views/category/food.dart';
 import 'package:casso/app/modules/order/controllers/order_controller.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,9 +23,9 @@ class Menus extends GetView<MenuController> {
     final table = Get.arguments;
     print("args dari tables = ${table + 1}");
     return Scaffold(
-      backgroundColor: primaryColor,
+      backgroundColor: darkColor,
       appBar: AppBar(
-        backgroundColor: primaryColor,
+        backgroundColor: darkColor,
         elevation: 0,
         title: Text(
           'MENU',

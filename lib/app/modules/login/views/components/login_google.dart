@@ -22,7 +22,7 @@ class LoginGoogleButton extends StatelessWidget {
             width: 48,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
-              color: priColor,
+              color: darkColor,
               boxShadow: [
                 BoxShadow(
                   blurRadius: 8,
@@ -39,7 +39,7 @@ class LoginGoogleButton extends StatelessWidget {
             child: Center(
               child: Container(
                 margin: const EdgeInsets.only(left: 3, top: 2),
-                color: txtColor.withOpacity(.02),
+                color: textColor.withOpacity(.02),
                 child: SvgPicture.asset(
                   "assets/svg/google.svg",
                   color: Color(0XFFE19D0A).withOpacity(.85),

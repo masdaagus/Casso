@@ -23,7 +23,7 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: priColor,
+      backgroundColor: darkColor,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         child: SafeArea(
@@ -38,13 +38,46 @@ class LoginView extends GetView<LoginController> {
                   height: size.height * .4,
                 ),
               ),
+              Positioned(
+                left: 32,
+                bottom: Get.height * .49,
+                child: Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                      color: Color(0XFF38A9E1),
+                      borderRadius: BorderRadius.circular(30)),
+                ),
+              ),
+              Positioned(
+                right: 8,
+                bottom: Get.height * .21,
+                child: Container(
+                  height: 100,
+                  width: 100,
+                  decoration: BoxDecoration(
+                      color: Color(0XFF8B8B8B).withOpacity(.8),
+                      borderRadius: BorderRadius.circular(50)),
+                ),
+              ),
+              Positioned(
+                left: Get.width * .1,
+                bottom: Get.height * .1,
+                child: Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                      color: Color(0XFFB44CC7).withOpacity(.8),
+                      borderRadius: BorderRadius.circular(30)),
+                ),
+              ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: ClipRRect(
                   child: BackdropFilter(
                     filter: ImageFilter.blur(
-                      sigmaX: 25,
-                      sigmaY: 25,
+                      sigmaX: 45,
+                      sigmaY: 45,
                     ),
                     child: Container(
                       width: Get.width,
@@ -52,8 +85,8 @@ class LoginView extends GetView<LoginController> {
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            priColor.withOpacity(.45),
-                            priColor.withOpacity(.35),
+                            darkColor.withOpacity(.45),
+                            darkColor.withOpacity(.35),
                           ],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,

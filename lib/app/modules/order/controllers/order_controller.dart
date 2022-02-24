@@ -2,6 +2,7 @@ import 'package:casso/app/controllers/auth_controller.dart';
 import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/users.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,7 +45,7 @@ class OrderController extends GetxController {
               decoration: InputDecoration(
                 hintStyle: TextStyle(
                   fontFamily: "Montserrat",
-                  color: primaryColor.withOpacity(.7),
+                  color: darkColor.withOpacity(.7),
                   fontSize: 13,
                   letterSpacing: -.5,
                 ),
@@ -74,7 +75,7 @@ class OrderController extends GetxController {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                primary: primaryColor.withOpacity(.8),
+                primary: darkColor.withOpacity(.8),
               ),
             ),
           ),
@@ -82,7 +83,7 @@ class OrderController extends GetxController {
       ),
       title: "TABLE ${table! + 1}",
       titleStyle: TextStyle(
-        color: primaryColor,
+        color: darkColor,
         fontSize: 18,
         fontFamily: "Montserrat",
         fontWeight: FontWeight.w600,

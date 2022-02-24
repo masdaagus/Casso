@@ -1,4 +1,5 @@
 import 'package:casso/app/data/constant.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class ButtonChart extends StatelessWidget {
@@ -29,7 +30,7 @@ class ButtonChart extends StatelessWidget {
               height: 110,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [primaryColor.withOpacity(.0), primaryColor],
+                  colors: [darkColor.withOpacity(.0), darkColor],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
@@ -49,7 +50,7 @@ class ButtonChart extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24),
                 gradient: LinearGradient(
-                  colors: gd,
+                  colors: [darkColor, lightColor],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),

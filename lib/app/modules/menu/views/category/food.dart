@@ -1,5 +1,6 @@
 import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/menu/views/components/menu_card.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class FoodMenu extends StatelessWidget {
@@ -8,7 +9,7 @@ class FoodMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: primaryColor,
+      color: darkColor,
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(

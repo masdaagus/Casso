@@ -1,5 +1,6 @@
 import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/components/tables/card_table.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/order_controller.dart';
@@ -8,9 +9,9 @@ class OrderView extends GetView<OrderController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primaryColor,
+      backgroundColor: darkColor,
       appBar: AppBar(
-        backgroundColor: primaryColor,
+        backgroundColor: darkColor,
         elevation: 0,
         title: Text(
           'ORDER',

@@ -1,4 +1,5 @@
 import 'package:casso/app/data/constant.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class SearchBox extends StatelessWidget {
@@ -13,7 +14,7 @@ class SearchBox extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 24),
       height: 50,
       decoration: BoxDecoration(
-        color: primaryColor.withOpacity(.35),
+        color: darkColor.withOpacity(.35),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Row(

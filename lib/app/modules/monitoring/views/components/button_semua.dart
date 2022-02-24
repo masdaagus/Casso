@@ -1,4 +1,5 @@
 import 'package:casso/app/data/constant.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,7 +36,7 @@ class ButtonAll extends StatelessWidget {
           ],
           gradient: LinearGradient(
             colors: [
-              primaryColor.withOpacity(.10),
+              darkColor.withOpacity(.10),
               biru.withOpacity(.10),
               orange.withOpacity(.10),
             ],
