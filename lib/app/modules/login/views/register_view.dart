@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:casso/app/controllers/auth_controller.dart';
-import 'package:casso/app/data/constant.dart';
+
 import 'package:casso/app/modules/login/controllers/login_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'components/custom_textfield.dart';
 import 'components/headline.dart';
 import 'components/login_button.dart';
-import 'components/login_google.dart';
+
 import 'components/resgiter_button.dart';
 import 'login_view.dart';
 
@@ -29,7 +29,7 @@ class RegisterView extends GetView<LoginController> {
             Container(
               margin: const EdgeInsets.only(top: 64),
               child: Image.asset(
-                "assets/images/Saly-36.png",
+                "assets/images/Saly-22.png",
                 fit: BoxFit.cover,
                 width: Get.width,
                 height: Get.height * .4,
@@ -143,7 +143,7 @@ class RegisterView extends GetView<LoginController> {
                           RegisterTextButton(
                             askText: "Already have an acoount?",
                             actionText: "Login!",
-                            onTap: () => Get.to(() => LoginView()),
+                            onTap: () => Get.off(LoginView()),
                           )
                         ],
                       ),

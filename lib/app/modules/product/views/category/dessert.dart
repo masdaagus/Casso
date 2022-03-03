@@ -1,9 +1,12 @@
-import 'package:casso/app/data/constant.dart';
-import 'package:casso/app/modules/menu/views/components/menu_card.dart';
+import 'package:casso/app/data/models/products.dart';
+import 'package:casso/app/modules/card/product_card/product_card.dart';
+
+import 'package:casso/app/modules/product/controllers/product_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class DessertProduct extends StatelessWidget {
+class DessertProduct extends GetView<ProductController> {
   const DessertProduct({Key? key}) : super(key: key);
 
   @override
@@ -24,10 +27,13 @@ class DessertProduct extends StatelessWidget {
                 childAspectRatio: .55,
                 physics: BouncingScrollPhysics(),
                 children: List.generate(12, (index) {
-                  return MenuCard(
-                    tittle: 'Nasi Goreng Kampoeng',
-                    harga: nf.format(21000),
-                    image: "assets/images/milkshake-oreo.jpg",
+                  ProductCategory product =
+                      controller.resto.value.products!.dessert![index];
+                  return ProductCard(
+                    productCount: 1,
+                    productName: product.foodName,
+                    productPrice: product.foodPrice,
+                    productImage: controller.image[index],
                   );
                 }),
               ),

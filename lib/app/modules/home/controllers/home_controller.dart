@@ -4,7 +4,7 @@ import 'package:casso/app/data/models/users.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  final auth = Get.find<AuthController>();
+  final auth = Get.put(AuthController());
 
   UsersModel user = UsersModel();
   RestosModel resto = RestosModel();

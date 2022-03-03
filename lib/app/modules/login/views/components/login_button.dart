@@ -41,7 +41,7 @@ class LoginButton extends StatelessWidget {
           child: Text(
             tittle,
             style: TextStyle(
-              color: darkColor,
+              color: lightColor,
               fontFamily: "balsamiq",
               fontWeight: FontWeight.w800,
               letterSpacing: 1,

@@ -16,8 +16,6 @@ import 'package:casso/app/modules/order/bindings/order_binding.dart';
 import 'package:casso/app/modules/order/views/order_view.dart';
 import 'package:casso/app/modules/product/bindings/product_binding.dart';
 import 'package:casso/app/modules/product/views/product_view.dart';
-import 'package:casso/app/modules/profile/bindings/profile_binding.dart';
-import 'package:casso/app/modules/profile/views/profile_view.dart';
 
 part 'app_routes.dart';
 
@@ -64,11 +62,6 @@ class AppPages {
       name: _Paths.INTRODUCTION,
       page: () => IntroductionView(),
       binding: IntroductionBinding(),
-    ),
-    GetPage(
-      name: _Paths.PROFILE,
-      page: () => ProfileView(),
-      binding: ProfileBinding(),
     ),
   ];
 }

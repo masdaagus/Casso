@@ -1,13 +1,14 @@
 import 'dart:ui';
 
 import 'package:casso/app/modules/home/controllers/home_controller.dart';
-import 'package:casso/app/modules/home/views/components/card_button.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'dart:math' as math;
 
 import 'package:get/get.dart';
+
+import 'components/card_button.dart';
 
 class TabHome extends GetView<HomeController> {
   const TabHome({Key? key}) : super(key: key);

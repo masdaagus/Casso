@@ -26,13 +26,17 @@ class Products {
 }
 
 class ProductCategory {
-  const ProductCategory({
+  ProductCategory({
     this.foodName,
     this.foodPrice,
+    this.foodCount = 0,
   });
 
   final String? foodName;
-  final String? foodPrice;
+  final double? foodPrice;
+  int? foodCount;
+  // final String? productImage;
+  // final int? stock;
 
   factory ProductCategory.fromJson(Map<String, dynamic> json) =>
       ProductCategory(

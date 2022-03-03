@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 const darkColor = Color(0XFF2B333D);
 const lightColor = Color(0XFFEDEDE9);

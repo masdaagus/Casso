@@ -1,14 +1,11 @@
-import 'dart:ui';
-import 'package:casso/app/controllers/auth_controller.dart';
-import 'package:casso/app/modules/home/views/components/tes.dart';
 import 'package:casso/app/modules/home/views/tabs/profile.dart';
-import 'package:casso/app/modules/profile/views/profile_view.dart';
+
 import 'package:casso/app/utils/constant.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import 'tabs/home_tab.dart';
+import 'tabs/home_tab/home_tab.dart';
+import 'tabs/profile_tab/profile_tab.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -16,9 +13,12 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final auth = Get.put(AuthController());
   int _curentIndex = 1;
-  final tabs = [TabProfile(), TabHome(), ProfileView()];
+  final tabs = [
+    TabProfile(),
+    TabHome(),
+    ProfileTab(),
+  ];
 
   @override
   Widget build(BuildContext context) {

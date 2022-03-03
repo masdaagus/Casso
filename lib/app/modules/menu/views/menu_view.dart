@@ -1,9 +1,8 @@
-import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/components/widget/search_bar.dart';
 import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/modules/menu/views/category/all.dart';
 import 'package:casso/app/modules/menu/views/category/food.dart';
-import 'package:casso/app/modules/order/controllers/order_controller.dart';
+
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -47,7 +46,6 @@ class Menus extends GetView<MenuController> {
         length: 4,
         child: Column(
           children: [
-            // Categories(),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 8),
               height: 30,
@@ -72,7 +70,7 @@ class Menus extends GetView<MenuController> {
               child: Stack(
                 children: [
                   TabBarView(
-                    // physics: NeverScrollableScrollPhysics(),
+                    physics: NeverScrollableScrollPhysics(),
                     children: [
                       DessertMenu(),
                       DrinkMenu(),
@@ -81,11 +79,11 @@ class Menus extends GetView<MenuController> {
                     ],
                   ),
                   ButtonChart(
-                    guessName: "Tes",
+                    totalPrice: 23000,
+                    items: controller.tempOrder.length,
                     table: table + 1,
                     onTap: () => Get.bottomSheet(
                       BotomSheet(),
-                      barrierColor: Color(0XFF858585).withOpacity(.3),
                     ),
                   )
                 ],
@@ -98,13 +96,18 @@ class Menus extends GetView<MenuController> {
   }
 
   Widget textTab(String text) {
-    return Text(
-      text,
-      style: TextStyle(
-        color: textColor,
-        fontSize: 10,
-        fontFamily: "Montserrat",
-        fontWeight: FontWeight.w600,
+    return Container(
+      height: 28,
+      child: Center(
+        child: Text(
+          text,
+          style: TextStyle(
+            color: textColor,
+            fontSize: 10,
+            fontFamily: "Montserrat",
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
     );
   }

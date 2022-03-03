@@ -1,4 +1,4 @@
-import 'package:casso/app/data/constant.dart';
+import 'package:casso/app/controllers/auth_controller.dart';
 import 'package:casso/app/modules/components/widget/search_bar.dart';
 import 'package:casso/app/modules/product/add-product/add_product.dart';
 import 'package:casso/app/modules/product/views/components/floating_button.dart';
@@ -16,6 +16,7 @@ import 'category/food.dart';
 class ProductView extends GetView<ProductController> {
   @override
   Widget build(BuildContext context) {
+    Get.put(() => AuthController());
     // final table = Get.arguments;
     // // print("args dari tables = ${table + 1}");
     return Scaffold(
@@ -43,10 +44,9 @@ class ProductView extends GetView<ProductController> {
         length: 4,
         child: Column(
           children: [
-            // Categories(),
             Container(
-              // margin: EdgeInsets.symmetric(horizontal: 8),
-              // height: 30,
+              margin: EdgeInsets.symmetric(horizontal: 16),
+              height: 30,
               child: TabBar(
                 indicator: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
@@ -65,7 +65,7 @@ class ProductView extends GetView<ProductController> {
               child: Stack(
                 children: [
                   TabBarView(
-                    physics: BouncingScrollPhysics(),
+                    physics: NeverScrollableScrollPhysics(),
                     children: [
                       DessertProduct(),
                       DrinkProduct(),

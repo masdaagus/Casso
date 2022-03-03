@@ -1,4 +1,3 @@
-import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/cashier/controllers/cashier_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';

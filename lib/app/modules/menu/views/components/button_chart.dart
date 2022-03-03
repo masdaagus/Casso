@@ -1,4 +1,3 @@
-import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +29,7 @@ class ButtonChart extends StatelessWidget {
               height: 110,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [darkColor.withOpacity(.0), darkColor],
+                  colors: [darkColor.withOpacity(0), darkColor],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
@@ -38,7 +37,7 @@ class ButtonChart extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(
-                top: 50,
+                top: 40,
                 left: 30,
                 right: 30,
               ),
@@ -50,21 +49,22 @@ class ButtonChart extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24),
                 gradient: LinearGradient(
-                  colors: [darkColor, lightColor],
+                  colors: [darkColor, darkColor],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    blurRadius: 24,
-                    offset: Offset(8, 8),
-                    color: hitam.withOpacity(.5),
+                    blurRadius: 8,
+                    offset: Offset(4, 4),
+                    color: hitam.withOpacity(.35),
+                  ),
+                  BoxShadow(
+                    blurRadius: 8,
+                    offset: Offset(-4, -4),
+                    color: putih.withOpacity(.10),
                   ),
                 ],
-                border: Border.all(
-                  color: putih.withOpacity(.5),
-                  width: .5,
-                ),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

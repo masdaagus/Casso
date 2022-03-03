@@ -1,4 +1,3 @@
-import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'app/controllers/auth_controller.dart';
-import 'app/modules/login/views/login_view.dart';
+
 import 'app/routes/app_pages.dart';
 import 'app/utils/splash_screen.dart';
 
@@ -38,7 +37,7 @@ class MyApp extends StatelessWidget {
 
                 ////////////////////////////////////////////////
                 // title: authC.isAuth.toString(),
-                // initialRoute: Routes.LOGIN,
+                // initialRoute: Routes.MENU,
                 getPages: AppPages.routes,
               ));
         }

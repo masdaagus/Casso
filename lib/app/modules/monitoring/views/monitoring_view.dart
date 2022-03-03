@@ -1,4 +1,3 @@
-import 'package:casso/app/data/constant.dart';
 import 'package:casso/app/modules/monitoring/views/pesanan/pesanan_view.dart';
 import 'package:casso/app/modules/monitoring/views/proses/proses_view.dart';
 import 'package:casso/app/utils/constant.dart';

@@ -13,10 +13,9 @@ class IntroductionController extends GetxController {
   final auth = Get.find<AuthController>();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   var user = UsersModel().obs;
+  var resto = RestosModel().obs;
 
   UserCredential? userCredential;
-
-  var resto = RestosModel().obs;
 
   late TextEditingController restoName;
   late TextEditingController restoLocation;
@@ -30,19 +29,19 @@ class IntroductionController extends GetxController {
     String rndm = List.generate(4, (_) => r.nextInt(9)).join("").toString();
 
     final List<ProductCategory> drink = [
-      ProductCategory(foodName: "Teh Manis ", foodPrice: "5000"),
-      ProductCategory(foodName: "Milkshake Jambu ", foodPrice: "30000"),
-      ProductCategory(foodName: "Sanger", foodPrice: "12000"),
+      ProductCategory(foodName: "Teh Manis ", foodPrice: 5000),
+      ProductCategory(foodName: "Milkshake Jambu ", foodPrice: 30000),
+      ProductCategory(foodName: "Sanger", foodPrice: 12000),
     ];
     final List<ProductCategory> food = [
-      ProductCategory(foodName: "Nasi Goreng ", foodPrice: "12000"),
-      ProductCategory(foodName: "Ikan Bakar ", foodPrice: "24000"),
-      ProductCategory(foodName: "Ayam Penyet", foodPrice: "10000"),
+      ProductCategory(foodName: "Nasi Goreng ", foodPrice: 12000),
+      ProductCategory(foodName: "Ikan Bakar ", foodPrice: 24000),
+      ProductCategory(foodName: "Ayam Penyet", foodPrice: 10000),
     ];
     final List<ProductCategory> dessert = [
-      ProductCategory(foodName: "Kentang Goreng ", foodPrice: "10000"),
-      ProductCategory(foodName: "Bakso Bakar ", foodPrice: "10000"),
-      ProductCategory(foodName: "Sate Taichan", foodPrice: "14000"),
+      ProductCategory(foodName: "Kentang Goreng ", foodPrice: 10000),
+      ProductCategory(foodName: "Bakso Bakar ", foodPrice: 10000),
+      ProductCategory(foodName: "Sate Taichan", foodPrice: 14000),
     ];
 
     final products = Products(
@@ -155,19 +154,3 @@ class IntroductionController extends GetxController {
     super.onClose();
   }
 }
-
-
-
-   // if (check.data() == null) {
-        //   for (int i = 0; i < employe.length; i++) {
-        //     await users.doc(employe[i]['name']).set(
-        //           UsersModel(
-        //             name: employe[i]['name'],
-        //             email: employe[i]['email'],
-        //             status: employe[i]['status'],
-        //             restoID: user.uid,
-        //             password: "123456",
-        //           ).toJson(),
-        //         );
-        //   }
-        // }

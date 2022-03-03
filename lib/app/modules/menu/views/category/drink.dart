@@ -1,5 +1,3 @@
-import 'package:casso/app/data/constant.dart';
-import 'package:casso/app/modules/menu/views/components/menu_card.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -24,11 +22,7 @@ class DrinkMenu extends StatelessWidget {
                 childAspectRatio: .55,
                 physics: BouncingScrollPhysics(),
                 children: List.generate(12, (index) {
-                  return MenuCard(
-                    tittle: 'Nasi Goreng Kampoeng',
-                    harga: nf.format(21000),
-                    image: "assets/images/milkshake-oreo.jpg",
-                  );
+                  return Container();
                 }),
               ),
             ),
