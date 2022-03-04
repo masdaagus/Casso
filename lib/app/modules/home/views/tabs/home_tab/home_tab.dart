@@ -73,7 +73,7 @@ class TabHome extends GetView<HomeController> {
                           ),
                         ),
                         Text(
-                          "di Noriz Caffe",
+                          "di ${controller.resto.restoName}",
                           style: TextStyle(
                               color: lightColor,
                               fontFamily: "balsamiq",
@@ -86,7 +86,7 @@ class TabHome extends GetView<HomeController> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              "Masda Agus",
+                              controller.user.name!,
                               style: TextStyle(
                                   color: orange,
                                   fontFamily: "balsamiq",
@@ -96,7 +96,7 @@ class TabHome extends GetView<HomeController> {
                             ),
                             SizedBox(width: 2),
                             Text(
-                              "(CASHIER)",
+                              "(${controller.user.status})",
                               style: TextStyle(
                                   color: iconColor,
                                   fontFamily: "balsamiq",

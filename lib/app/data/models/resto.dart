@@ -26,7 +26,7 @@ class RestosModel {
   final String? ownerName;
   final String? restoLocation;
   final String? restoName;
-  final String? restoTable;
+  final int? restoTable;
   final List<dynamic>? restoEmploye;
   final Products? products;
 

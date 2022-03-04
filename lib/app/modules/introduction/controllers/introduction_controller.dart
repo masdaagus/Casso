@@ -106,7 +106,7 @@ class IntroductionController extends GetxController {
                 ownerName: user.value.name,
                 restoName: restoName.text,
                 restoLocation: restoLocation.text,
-                restoTable: restoTable.text,
+                restoTable: int.tryParse(restoTable.text),
                 restoEmploye: employe,
                 products: products,
               ).toJson(),

@@ -83,7 +83,8 @@ class Menus extends GetView<MenuController> {
                     items: controller.tempOrder.length,
                     table: table + 1,
                     onTap: () => Get.bottomSheet(
-                      BotomSheet(),
+                      CustomBottomSheet(),
+                      isScrollControlled: true,
                     ),
                   )
                 ],

@@ -1,4 +1,4 @@
-import 'package:casso/app/modules/components/tables/card_table.dart';
+import 'package:casso/app/modules/card/table_card/table_card.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,12 +39,12 @@ class OrderView extends GetView<OrderController> {
                   crossAxisSpacing: 20,
                   mainAxisSpacing: 20,
                   crossAxisCount: 3,
-                  childAspectRatio: .85,
+                  // childAspectRatio: .85,
                   physics: BouncingScrollPhysics(),
                   children: List.generate(
-                    int.parse(controller.resto.restoTable!),
+                    controller.resto.restoTable!,
                     (index) {
-                      return CardTable(
+                      return TableCard(
                         tableNumber: index + 1,
                         onTap: () {
                           controller.dialog(table: index);
