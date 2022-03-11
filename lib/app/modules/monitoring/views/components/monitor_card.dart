@@ -27,25 +27,20 @@ class MonitorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 8, bottom: 8, right: 8),
+      margin: const EdgeInsets.only(left: 16, bottom: 8, right: 16),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        gradient: LinearGradient(
-          colors: [putih.withOpacity(.25), putih.withOpacity(.15)],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
+        borderRadius: BorderRadius.circular(8),
+        color: lightColor.withOpacity(.1),
       ),
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.all(3),
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            height: 36,
+            margin: const EdgeInsets.all(4),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            height: 40,
             decoration: BoxDecoration(
-              border: Border.all(color: putih.withOpacity(.5)),
               color: darkColor,
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,31 +48,29 @@ class MonitorCard extends StatelessWidget {
                 Text(
                   "TABLE ${table} - (${guessName})",
                   style: TextStyle(
-                    fontFamily: "Montserrat",
+                    fontFamily: "balsamiq",
                     color: textColor,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                    letterSpacing: .5,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   "${orderTime}",
                   style: TextStyle(
-                    fontFamily: "Montserrat",
+                    fontFamily: "balsamiq",
                     color: textColor,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    letterSpacing: .5,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 8, top: 8, right: 8),
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              border: Border.all(color: putih.withOpacity(.5), width: .5),
-              borderRadius: BorderRadius.circular(16),
-            ),
+            margin: const EdgeInsets.only(top: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
                 Container(

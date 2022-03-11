@@ -18,39 +18,32 @@ class ButtonAll extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.only(top: 8, bottom: 8),
-        padding: const EdgeInsets.all(12),
-        width: Get.width * .4,
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        width: 180,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            width: .3,
-            color: putih.withOpacity(.6),
-          ),
+          borderRadius: BorderRadius.circular(32),
           boxShadow: [
             BoxShadow(
-              offset: Offset(2, 2),
-              blurRadius: 4,
+              offset: Offset(4, 4),
+              blurRadius: 8,
               color: hitam.withOpacity(.3),
             ),
+            BoxShadow(
+              offset: Offset(-4, -4),
+              blurRadius: 8,
+              color: lightColor.withOpacity(.2),
+            ),
           ],
-          gradient: LinearGradient(
-            colors: [
-              darkColor.withOpacity(.10),
-              biru.withOpacity(.10),
-              orange.withOpacity(.10),
-            ],
-            stops: [.2, .4, .8],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          color: darkColor,
         ),
         child: Center(
           child: Text(
             tittleButton.toUpperCase(),
             style: TextStyle(
-              color: putih.withOpacity(.9),
-              fontFamily: "Montserrat",
-              fontWeight: FontWeight.w600,
+              color: textColor.withOpacity(.9),
+              fontFamily: "balsamiq",
+              fontWeight: FontWeight.bold,
+              letterSpacing: .5,
               fontSize: 12,
             ),
           ),

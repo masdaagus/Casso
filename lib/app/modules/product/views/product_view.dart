@@ -1,7 +1,8 @@
 import 'package:casso/app/controllers/auth_controller.dart';
-import 'package:casso/app/modules/components/widget/search_bar.dart';
+import 'package:casso/app/modules/components/floating_button/floating_button.dart';
+import 'package:casso/app/modules/components/search_bar/search_bar.dart';
 import 'package:casso/app/modules/product/add-product/add_product.dart';
-import 'package:casso/app/modules/product/views/components/floating_button.dart';
+
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -73,11 +74,14 @@ class ProductView extends GetView<ProductController> {
                       ProductsView(),
                     ],
                   ),
-                  FloatingButton(
-                    onTap: () => Get.to(
-                      () => AddProductView(),
-                      transition: Transition.cupertino,
-                      duration: Duration(milliseconds: 400),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: FloatingButton(
+                      onTap: () => Get.to(
+                        () => AddProductView(),
+                        transition: Transition.cupertino,
+                        duration: Duration(milliseconds: 400),
+                      ),
                     ),
                   )
                 ],

@@ -52,7 +52,7 @@ class CustomBottomSheet extends StatelessWidget {
                     ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: 9,
+                      itemCount: 3,
                       itemBuilder: (context, index) {
                         return Container(
                           margin: const EdgeInsets.only(

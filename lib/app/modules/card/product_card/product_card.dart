@@ -13,7 +13,7 @@ class ProductCard extends StatelessWidget {
     this.detailProduct,
     this.productName,
     this.productPrice,
-    this.productCount = 0,
+    this.textCount,
     this.productImage = "assets/images/Saly-22.png",
   }) : super(key: key);
 
@@ -25,7 +25,7 @@ class ProductCard extends StatelessWidget {
   final double? productPrice;
   final String? productImage;
 
-  final int productCount;
+  final Widget? textCount;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class ProductCard extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.only(top: 40),
                       padding: const EdgeInsets.symmetric(horizontal: 24),
-                      height: Get.height * .65,
+                      height: size.height * .65,
                       child: SingleChildScrollView(
                         physics: BouncingScrollPhysics(),
                         child: Column(
@@ -125,7 +125,10 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 6),
-              productCount == 0 ? addButton() : controllProductCount(),
+              if (textCount != null)
+                controllProductCount()
+              else
+                Icon(Icons.star, color: lightColor, size: 32),
             ],
           ),
           Container(
@@ -182,15 +185,7 @@ class ProductCard extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10),
-          Text(
-            productCount.toString(),
-            style: TextStyle(
-              color: iconColor,
-              fontFamily: "balsamiq",
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
-          ),
+          textCount ?? Container(),
           SizedBox(height: 10),
           GestureDetector(
             onTap: minProduct,

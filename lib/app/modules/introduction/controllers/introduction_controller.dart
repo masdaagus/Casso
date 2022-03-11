@@ -51,6 +51,12 @@ class IntroductionController extends GetxController {
     );
     final List<UsersModel> employe = [
       UsersModel(
+        name: user.value.name,
+        email: user.value.email,
+        status: "OWNER",
+        restoID: user.value.uid,
+      ),
+      UsersModel(
         name: "kitchen.$rndm",
         email: "kitchen.$rndm@gmail.com",
         status: "KITCHEN",
@@ -84,7 +90,7 @@ class IntroductionController extends GetxController {
         final check = await users.doc('cashier.$rndm').get();
 
         while (check.data() == null) {
-          for (int i = 0; i < employe.length; i++) {
+          for (int i = 1; i < employe.length; i++) {
             await users.doc(employe[i].email).set(
                   UsersModel(
                     name: employe[i].name,

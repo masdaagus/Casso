@@ -12,25 +12,28 @@ class OrderMonitoring extends GetView<MonitoringController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: darkColor,
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              physics: BouncingScrollPhysics(),
-              itemCount: controller.listData.length,
-              itemBuilder: (context, index) {
-                final data = controller.listData[index];
-                return MonitorCard(
-                  table: data["table"],
-                  guessName: data["guessName"],
-                  orderTime: data["timeOrder"],
-                  orders: data['orders'],
-                  isOrder: true,
-                );
-              },
+      body: Container(
+        // margin: const EdgeInsets.symmetric(horizontal: 8),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                itemCount: controller.listData.length,
+                itemBuilder: (context, index) {
+                  final data = controller.listData[index];
+                  return MonitorCard(
+                    table: data["table"],
+                    guessName: data["guessName"],
+                    orderTime: data["timeOrder"],
+                    orders: data['orders'],
+                    isOrder: true,
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

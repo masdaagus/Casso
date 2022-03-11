@@ -16,8 +16,8 @@ class OrderView extends GetView<OrderController> {
           'ORDER',
           style: TextStyle(
             color: textColor,
-            fontFamily: "Montserrat",
-            fontWeight: FontWeight.w600,
+            fontFamily: "balsamiq",
+            fontWeight: FontWeight.bold,
             letterSpacing: 1,
           ),
         ),
@@ -39,7 +39,6 @@ class OrderView extends GetView<OrderController> {
                   crossAxisSpacing: 20,
                   mainAxisSpacing: 20,
                   crossAxisCount: 3,
-                  // childAspectRatio: .85,
                   physics: BouncingScrollPhysics(),
                   children: List.generate(
                     controller.resto.restoTable!,

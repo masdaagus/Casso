@@ -1,4 +1,4 @@
-import 'package:casso/app/modules/components/widget/search_bar.dart';
+import 'package:casso/app/modules/components/search_bar/search_bar.dart';
 import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/modules/menu/views/category/all.dart';
 import 'package:casso/app/modules/menu/views/category/food.dart';
@@ -80,7 +80,6 @@ class Menus extends GetView<MenuController> {
                   ),
                   ButtonChart(
                     totalPrice: 23000,
-                    items: controller.tempOrder.length,
                     table: table + 1,
                     onTap: () => Get.bottomSheet(
                       CustomBottomSheet(),

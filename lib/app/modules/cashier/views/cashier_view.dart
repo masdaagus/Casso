@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/cashier_controller.dart';
 
-import 'monitoring/monitoring.dart';
+import 'menunggu/monitoring.dart';
 
 class CashierView extends GetView<CashierController> {
   @override
@@ -24,9 +24,9 @@ class CashierView extends GetView<CashierController> {
             'KASIR',
             style: TextStyle(
               color: textColor,
-              fontFamily: "Montserrat",
-              fontWeight: FontWeight.w600,
+              fontFamily: "balsamiq",
               letterSpacing: 1,
+              fontWeight: FontWeight.bold,
             ),
           ),
           centerTitle: true,
@@ -46,18 +46,18 @@ class CashierView extends GetView<CashierController> {
         body: Column(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 8),
+              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               decoration: BoxDecoration(
-                color: textColor.withOpacity(.5),
-                borderRadius: BorderRadius.circular(10),
+                color: lightColor.withOpacity(.1),
+                borderRadius: BorderRadius.circular(8),
               ),
-              height: 30,
+              height: 36,
               child: Container(
-                padding: const EdgeInsets.all(2),
+                padding: const EdgeInsets.all(4),
                 child: TabBar(
                   labelColor: textColor,
                   indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(6),
                     color: darkColor,
                   ),
                   tabs: [
@@ -72,7 +72,7 @@ class CashierView extends GetView<CashierController> {
                 child: TabBarView(
                   children: [
                     // tables view
-                    Monitoring(),
+                    Menunggu(),
                     Container(),
                   ],
                 ),
@@ -85,13 +85,15 @@ class CashierView extends GetView<CashierController> {
   }
 
   Widget textTab(String text) {
-    return Text(
-      text,
-      style: TextStyle(
-        color: textColor,
-        // fontSize: 10,
-        fontFamily: "Montserrat",
-        fontWeight: FontWeight.w600,
+    return Center(
+      child: Text(
+        text,
+        style: TextStyle(
+          color: textColor,
+          fontSize: 11,
+          fontFamily: "balsamiq",
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }

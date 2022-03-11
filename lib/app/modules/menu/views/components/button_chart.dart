@@ -6,13 +6,13 @@ class ButtonChart extends StatelessWidget {
     Key? key,
     required this.table,
     required this.onTap,
-    this.items,
+    this.items = 0,
     this.totalPrice,
     this.guessName = 'Jojon',
   }) : super(key: key);
 
   final int table;
-  final int? items;
+  final int items;
   final double? totalPrice;
   final String? guessName;
   final VoidCallback onTap;

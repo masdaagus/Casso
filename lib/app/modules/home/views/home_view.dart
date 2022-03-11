@@ -1,4 +1,4 @@
-import 'package:casso/app/modules/home/views/tabs/profile.dart';
+import 'package:casso/app/modules/home/views/tabs/kosong.dart';
 
 import 'package:casso/app/utils/constant.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';

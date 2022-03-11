@@ -2,7 +2,6 @@ import 'package:casso/app/data/models/products.dart';
 import 'package:casso/app/modules/card/product_card/product_card.dart';
 import 'package:casso/app/modules/product/controllers/product_controller.dart';
 import 'package:casso/app/utils/constant.dart';
-import 'package:casso/app/utils/custom_dialog/her_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,7 +29,6 @@ class ProductsView extends GetView<ProductController> {
                   ProductCategory product = controller.allProducts[index];
 
                   return ProductCard(
-                    productCount: 0,
                     productName: product.foodName,
                     productPrice: product.foodPrice,
                     productImage: controller.image[index],

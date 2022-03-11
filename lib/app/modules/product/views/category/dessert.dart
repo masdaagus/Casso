@@ -30,7 +30,6 @@ class DessertProduct extends GetView<ProductController> {
                   ProductCategory product =
                       controller.resto.value.products!.dessert![index];
                   return ProductCard(
-                    productCount: 1,
                     productName: product.foodName,
                     productPrice: product.foodPrice,
                     productImage: controller.image[index],

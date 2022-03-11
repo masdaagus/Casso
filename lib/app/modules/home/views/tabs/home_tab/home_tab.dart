@@ -181,7 +181,7 @@ class TabHome extends GetView<HomeController> {
                       color: iconColor,
                     ),
                     tittle: "Pegawai",
-                    onTap: () => Get.toNamed("/cashier"),
+                    onTap: () => Get.toNamed("/pegawai"),
                   ),
                   CardButton(
                     icon: SvgPicture.asset(

@@ -18,67 +18,74 @@ class OrderItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      padding: const EdgeInsets.only(bottom: 0),
+      child: Column(
         children: [
-          Container(
-            child: Text(
-              orderName,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: putih.withOpacity(.9),
-                fontFamily: "Montserrat",
-                fontWeight: FontWeight.w600,
-                fontSize: 13,
-              ),
-            ),
-          ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              isOrder
-                  ? Container()
-                  : Container(
-                      width: 48,
-                      height: 24,
-                      child: ElevatedButton(
-                        onPressed: onTap,
-                        child: Icon(Icons.undo, size: 16),
-                        style: ElevatedButton.styleFrom(
-                          elevation: 2,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                          primary: orange.withOpacity(.6),
-                        ),
-                      ),
-                    ),
-              SizedBox(width: 4),
               Container(
-                height: 24,
-                child: ElevatedButton(
-                  onPressed: onTap,
-                  child: Text(
-                    textButton.toUpperCase(),
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontFamily: "Montserrat",
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: .3,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    primary: putih.withOpacity(.2),
+                child: Text(
+                  orderName,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: textColor.withOpacity(.9),
+                    fontFamily: "balsamiq",
+                    fontSize: 12,
+                    letterSpacing: .5,
                   ),
                 ),
               ),
+              Row(
+                children: [
+                  isOrder
+                      ? Container()
+                      : Container(
+                          width: 48,
+                          height: 20,
+                          child: ElevatedButton(
+                            onPressed: onTap,
+                            child: Icon(Icons.undo, size: 16),
+                            style: ElevatedButton.styleFrom(
+                              elevation: 2,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              primary: orange.withOpacity(.6),
+                            ),
+                          ),
+                        ),
+                  SizedBox(width: 4),
+                  Container(
+                    height: 24,
+                    child: ElevatedButton(
+                      onPressed: onTap,
+                      child: Text(
+                        textButton.toUpperCase(),
+                        style: TextStyle(
+                          fontSize: 9,
+                          fontFamily: "Balsamiq",
+                          letterSpacing: .3,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        primary: putih.withOpacity(.2),
+                      ),
+                    ),
+                  ),
+                ],
+              )
             ],
-          )
+          ),
+          Divider(
+            thickness: .3,
+            color: textColor.withOpacity(.3),
+          ),
         ],
       ),
     );

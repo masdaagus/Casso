@@ -1,3 +1,4 @@
+import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/data/models/products.dart';
 import 'package:casso/app/modules/card/product_card/product_card.dart';
 import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
@@ -25,22 +26,34 @@ class AllMenu extends GetView<MenuController> {
                 crossAxisCount: 2,
                 childAspectRatio: .89,
                 physics: BouncingScrollPhysics(),
-                children: List.generate(controller.allProducts.length, (index) {
-                  ProductCategory product = controller.allProducts[index];
-                  int countProduct = 0;
-                  return ProductCard(
-                    productName: product.foodName,
-                    productPrice: product.foodPrice,
-                    productCount: countProduct,
-                    addProduct: () {
-                      controller.tempOrder.add(ProductCategory(
-                        foodName: product.foodName,
-                        foodPrice: product.foodPrice,
-                        foodCount: countProduct + 1,
-                      ));
+                children: List.generate(controller.products.length, (index) {
+                  ProductOrder data = controller.products[index];
 
-                      print(controller.tempOrder.length);
+                  return ProductCard(
+                    productName: data.productName,
+                    productPrice: data.productPrice,
+                    addProduct: () {
+                      data.productQty++;
+                      controller.update();
                     },
+                    minProduct: () {
+                      data.productQty--;
+                      controller.update();
+                    },
+                    detailProduct: () {},
+                    textCount: GetBuilder<MenuController>(
+                      builder: (c) {
+                        int qty = c.products[index].productQty;
+                        if (qty < 0) qty = 0;
+                        return Text(
+                          qty.toString(),
+                          style: TextStyle(
+                            color: textColor,
+                            fontFamily: 'balsamiq',
+                          ),
+                        );
+                      },
+                    ),
                   );
                 }),
               ),

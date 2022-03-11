@@ -13,6 +13,7 @@ abstract class Routes {
   static const MONITORING = _Paths.MONITORING;
   static const PRODUCT = _Paths.PRODUCT;
   static const INTRODUCTION = _Paths.INTRODUCTION;
+  static const PEGAWAI = _Paths.PEGAWAI;
 }
 
 abstract class _Paths {
@@ -24,4 +25,5 @@ abstract class _Paths {
   static const MONITORING = '/monitoring';
   static const PRODUCT = '/product';
   static const INTRODUCTION = '/introduction';
+  static const PEGAWAI = '/pegawai';
 }

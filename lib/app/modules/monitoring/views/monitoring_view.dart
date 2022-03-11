@@ -19,7 +19,7 @@ class MonitoringView extends GetView<MonitoringController> {
           title: Text(
             'MONITORING',
             style: TextStyle(
-              fontFamily: "Montserrat",
+              fontFamily: "balsamiq",
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -34,18 +34,18 @@ class MonitoringView extends GetView<MonitoringController> {
         body: Column(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 8),
+              margin: EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: textColor.withOpacity(.5),
-                borderRadius: BorderRadius.circular(10),
+                color: lightColor.withOpacity(.1),
+                borderRadius: BorderRadius.circular(8),
               ),
               height: 30,
               child: Container(
-                padding: const EdgeInsets.all(2),
+                padding: const EdgeInsets.all(4),
                 child: TabBar(
                   labelColor: textColor,
                   indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(6),
                     color: darkColor,
                   ),
                   tabs: [
