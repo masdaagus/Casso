@@ -32,12 +32,14 @@ class FoodMenu extends GetView<MenuController> {
                   return ProductCard(
                     productName: data.productName,
                     productPrice: data.productPrice,
-                    addProduct: () {
+                    addProduct: () async {
                       data.productQty++;
+                      await controller.addProduct(data);
                       controller.update();
                     },
-                    minProduct: () {
+                    minProduct: () async {
                       data.productQty--;
+                      await controller.minProduct(data);
                       controller.update();
                     },
                     detailProduct: () {},

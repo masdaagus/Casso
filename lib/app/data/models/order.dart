@@ -11,17 +11,19 @@ class Order {
   final String? waitersName;
   final int? tableNumber;
   final int? totalItems;
-  final double? totalPrices;
-  final List<ProductOrder>? productsOrder;
+  double? totalPrices;
+  List<ProductOrder>? productsOrder;
 }
 
 class ProductOrder {
   ProductOrder({
     this.productName,
     this.productPrice,
+    this.productCategory,
     required this.productQty,
   });
   String? productName;
+  String? productCategory;
   double? productPrice;
   int productQty;
 }

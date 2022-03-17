@@ -30,18 +30,15 @@ class IntroductionController extends GetxController {
 
     final List<ProductCategory> drink = [
       ProductCategory(foodName: "Teh Manis ", foodPrice: 5000),
-      ProductCategory(foodName: "Milkshake Jambu ", foodPrice: 30000),
-      ProductCategory(foodName: "Sanger", foodPrice: 12000),
+      ProductCategory(foodName: "Lemon Tea", foodPrice: 30000),
     ];
     final List<ProductCategory> food = [
       ProductCategory(foodName: "Nasi Goreng ", foodPrice: 12000),
-      ProductCategory(foodName: "Ikan Bakar ", foodPrice: 24000),
-      ProductCategory(foodName: "Ayam Penyet", foodPrice: 10000),
+      ProductCategory(foodName: "Indomie Goreng", foodPrice: 10000),
     ];
     final List<ProductCategory> dessert = [
       ProductCategory(foodName: "Kentang Goreng ", foodPrice: 10000),
-      ProductCategory(foodName: "Bakso Bakar ", foodPrice: 10000),
-      ProductCategory(foodName: "Sate Taichan", foodPrice: 14000),
+      ProductCategory(foodName: "Roti Bakar ", foodPrice: 10000),
     ];
 
     final products = Products(

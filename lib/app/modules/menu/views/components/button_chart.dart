@@ -1,19 +1,18 @@
+import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ButtonChart extends StatelessWidget {
+class ButtonChart extends GetView<MenuController> {
   const ButtonChart({
     Key? key,
     required this.table,
     required this.onTap,
-    this.items = 0,
-    this.totalPrice,
-    this.guessName = 'Jojon',
+    this.guessName = 'NO-NAME',
   }) : super(key: key);
 
   final int table;
-  final int items;
-  final double? totalPrice;
+
   final String? guessName;
   final VoidCallback onTap;
 
@@ -38,8 +37,8 @@ class ButtonChart extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(
                 top: 40,
-                left: 30,
-                right: 30,
+                left: 64,
+                right: 64,
               ),
               padding: const EdgeInsets.symmetric(
                 horizontal: 24,
@@ -49,7 +48,12 @@ class ButtonChart extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24),
                 gradient: LinearGradient(
-                  colors: [darkColor, darkColor],
+                  colors: [
+                    Color(0XFFA0B5EB),
+                    Color(0XFFC9F0E4),
+                    // Color(0XFFDFE9F3),
+                    // putih,
+                  ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -72,42 +76,46 @@ class ButtonChart extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "$items items",
-                        style: TextStyle(
-                          color: textColor,
-                          fontFamily: "Montserrat",
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
-                        ),
+                      GetBuilder<MenuController>(
+                        builder: (c) {
+                          return Text(
+                            "${c.tempOrder.length} Items",
+                            style: TextStyle(
+                              color: darkColor,
+                              fontFamily: "balsamiq",
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          );
+                        },
                       ),
                       SizedBox(height: 3),
                       Text(
                         "Table ${table} - (${guessName})",
                         style: TextStyle(
-                          color: textColor,
-                          fontFamily: "Montserrat",
+                          color: darkColor,
+                          fontFamily: "balsamiq",
                           fontSize: 10,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
                   ),
                   Row(
                     children: [
-                      Text(
-                        "$totalPrice",
-                        style: TextStyle(
-                          color: textColor,
-                          fontFamily: "Montserrat",
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
+                      Obx(() => Text(
+                            nf.format(controller.order.value.totalPrices),
+                            style: TextStyle(
+                              color: darkColor,
+                              fontFamily: "balsamiq",
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )),
                       SizedBox(width: 6),
                       // SvgPicture.asset("assetName"),
                       Icon(
                         Icons.shopping_cart_sharp,
-                        color: textColor,
+                        color: darkColor,
                         size: 20,
                       )
                     ],

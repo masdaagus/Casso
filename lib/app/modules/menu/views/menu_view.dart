@@ -79,7 +79,6 @@ class Menus extends GetView<MenuController> {
                     ],
                   ),
                   ButtonChart(
-                    totalPrice: 23000,
                     table: table + 1,
                     onTap: () => Get.bottomSheet(
                       CustomBottomSheet(),

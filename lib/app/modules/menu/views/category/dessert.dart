@@ -22,8 +22,8 @@ class DessertMenu extends GetView<MenuController> {
                 shrinkWrap: true,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
-                crossAxisCount: 3,
-                childAspectRatio: .55,
+                crossAxisCount: 2,
+                childAspectRatio: .89,
                 physics: BouncingScrollPhysics(),
                 children: List.generate(controller.dessert.length, (index) {
                   ProductOrder data = controller.dessert[index];
@@ -31,12 +31,14 @@ class DessertMenu extends GetView<MenuController> {
                   return ProductCard(
                     productName: data.productName,
                     productPrice: data.productPrice,
-                    addProduct: () {
+                    addProduct: () async {
                       data.productQty++;
+                      await controller.addProduct(data);
                       controller.update();
                     },
-                    minProduct: () {
+                    minProduct: () async {
                       data.productQty--;
+                      await controller.minProduct(data);
                       controller.update();
                     },
                     detailProduct: () {},

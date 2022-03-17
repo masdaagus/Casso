@@ -11,7 +11,6 @@ class DrinkMenu extends GetView<MenuController> {
 
   @override
   Widget build(BuildContext context) {
-    print("drink page");
     return Container(
       color: darkColor,
       child: SingleChildScrollView(
@@ -21,6 +20,7 @@ class DrinkMenu extends GetView<MenuController> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: GridView.count(
+                addSemanticIndexes: false,
                 shrinkWrap: true,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
@@ -33,12 +33,14 @@ class DrinkMenu extends GetView<MenuController> {
                   return ProductCard(
                     productName: data.productName,
                     productPrice: data.productPrice,
-                    addProduct: () {
+                    addProduct: () async {
                       data.productQty++;
+                      await controller.addProduct(data);
                       controller.update();
                     },
-                    minProduct: () {
+                    minProduct: () async {
                       data.productQty--;
+                      await controller.minProduct(data);
                       controller.update();
                     },
                     detailProduct: () {},

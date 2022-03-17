@@ -2,16 +2,20 @@
 
 import 'dart:ui';
 
+import 'package:casso/app/data/models/order.dart';
+import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'components/card_chart.dart';
 
-class CustomBottomSheet extends StatelessWidget {
+class CustomBottomSheet extends GetView<MenuController> {
   const CustomBottomSheet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final List<ProductOrder> productOrders =
+        controller.order.value.productsOrder!;
     return ClipRRect(
       child: BackdropFilter(
         filter: ImageFilter.blur(
@@ -23,8 +27,8 @@ class CustomBottomSheet extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
+                darkColor.withOpacity(.3),
                 darkColor.withOpacity(.5),
-                darkColor.withOpacity(.6),
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -40,7 +44,7 @@ class CustomBottomSheet extends StatelessWidget {
                 height: 4,
                 width: 60,
                 decoration: BoxDecoration(
-                  color: lightColor.withOpacity(.6),
+                  color: lightColor.withOpacity(.4),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -52,8 +56,11 @@ class CustomBottomSheet extends StatelessWidget {
                     ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: 3,
+                      itemCount: productOrders.toSet().toList().length,
                       itemBuilder: (context, index) {
+                        ProductOrder data =
+                            productOrders.toSet().toList()[index];
+
                         return Container(
                           margin: const EdgeInsets.only(
                             bottom: 16,
@@ -77,28 +84,36 @@ class CustomBottomSheet extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      "Nasi Goreng Seafood",
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                          color: lightColor,
-                                          fontFamily: "balsamiq",
-                                          letterSpacing: 1,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold),
+                                    GetBuilder<MenuController>(
+                                      builder: (_) {
+                                        return Text(
+                                          data.productName!,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                          style: TextStyle(
+                                              color: lightColor,
+                                              fontFamily: "balsamiq",
+                                              letterSpacing: 1,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold),
+                                        );
+                                      },
                                     ),
                                     SizedBox(height: 8),
                                     Row(
                                       children: [
-                                        Text(
-                                          "Rp23.000",
-                                          style: TextStyle(
-                                            color: iconColor,
-                                            fontFamily: "balsamiq",
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                        GetBuilder<MenuController>(
+                                          builder: (_) {
+                                            return Text(
+                                              "${data.productPrice}",
+                                              style: TextStyle(
+                                                color: iconColor,
+                                                fontFamily: "balsamiq",
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            );
+                                          },
                                         ),
                                         SizedBox(width: 13),
                                         GestureDetector(
@@ -142,41 +157,23 @@ class CustomBottomSheet extends StatelessWidget {
                               Container(
                                 child: Row(
                                   children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: iconColor, width: 2),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Center(
-                                          child: Icon(
-                                        Icons.remove,
-                                        color: iconColor,
-                                      )),
+                                    addAndRemoveButton(Icons.add, () {}),
+                                    SizedBox(width: 16),
+                                    GetBuilder<MenuController>(
+                                      builder: (_) {
+                                        return Text(
+                                          "${data.productQty}",
+                                          style: TextStyle(
+                                            color: iconColor,
+                                            fontFamily: "balsamiq",
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        );
+                                      },
                                     ),
                                     SizedBox(width: 16),
-                                    Text(
-                                      "2",
-                                      style: TextStyle(
-                                        color: iconColor,
-                                        fontFamily: "balsamiq",
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    SizedBox(width: 16),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: iconColor, width: 2),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Center(
-                                          child: Icon(
-                                        Icons.add,
-                                        color: iconColor,
-                                      )),
-                                    ),
+                                    addAndRemoveButton(Icons.remove, () {}),
                                   ],
                                 ),
                               )
@@ -258,6 +255,22 @@ class CustomBottomSheet extends StatelessWidget {
               ))
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget addAndRemoveButton(IconData icon, VoidCallback ontap) {
+    return GestureDetector(
+      onTap: ontap,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: iconColor, width: 2),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Icon(
+          icon,
+          color: iconColor,
         ),
       ),
     );
