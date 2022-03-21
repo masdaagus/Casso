@@ -19,7 +19,8 @@ class Menus extends GetView<MenuController> {
 
   @override
   Widget build(BuildContext context) {
-    final table = Get.arguments;
+    final table = Get.arguments[0];
+    final guessName = Get.arguments[1];
     print("args dari tables = ${table + 1}");
     return Scaffold(
       backgroundColor: darkColor,
@@ -79,6 +80,7 @@ class Menus extends GetView<MenuController> {
                     ],
                   ),
                   ButtonChart(
+                    guessName: guessName ?? 'NO-NAME',
                     table: table + 1,
                     onTap: () => Get.bottomSheet(
                       CustomBottomSheet(),

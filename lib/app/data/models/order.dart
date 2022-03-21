@@ -20,7 +20,7 @@ class ProductOrder {
     this.productName,
     this.productPrice,
     this.productCategory,
-    required this.productQty,
+    this.productQty = 0,
   });
   String? productName;
   String? productCategory;

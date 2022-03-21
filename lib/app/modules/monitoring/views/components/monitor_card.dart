@@ -35,11 +35,11 @@ class MonitorCard extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.all(4),
+            margin: const EdgeInsets.all(8),
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            height: 40,
+            height: 24,
             decoration: BoxDecoration(
-              color: darkColor,
+              gradient: LinearGradient(colors: grColor2),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -49,7 +49,7 @@ class MonitorCard extends StatelessWidget {
                   "TABLE ${table} - (${guessName})",
                   style: TextStyle(
                     fontFamily: "balsamiq",
-                    color: textColor,
+                    color: darkColor,
                     fontSize: 12,
                     letterSpacing: .5,
                     fontWeight: FontWeight.bold,
@@ -59,7 +59,7 @@ class MonitorCard extends StatelessWidget {
                   "${orderTime}",
                   style: TextStyle(
                     fontFamily: "balsamiq",
-                    color: textColor,
+                    color: darkColor,
                     fontSize: 12,
                     letterSpacing: .5,
                     fontWeight: FontWeight.bold,

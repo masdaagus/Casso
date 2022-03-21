@@ -1,5 +1,4 @@
 import 'package:casso/app/data/models/order.dart';
-import 'package:casso/app/data/models/products.dart';
 import 'package:casso/app/modules/card/product_card/product_card.dart';
 import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/utils/constant.dart';
@@ -11,6 +10,8 @@ class DrinkMenu extends GetView<MenuController> {
 
   @override
   Widget build(BuildContext context) {
+    List<ProductOrder> drink =
+        controller.products.where((d) => d.productCategory == 'DRINK').toList();
     return Container(
       color: darkColor,
       child: SingleChildScrollView(
@@ -27,26 +28,22 @@ class DrinkMenu extends GetView<MenuController> {
                 crossAxisCount: 2,
                 childAspectRatio: .89,
                 physics: BouncingScrollPhysics(),
-                children: List.generate(controller.drink.length, (index) {
-                  ProductOrder data = controller.drink[index];
+                children: List.generate(drink.length, (index) {
+                  ProductOrder data = drink[index];
 
                   return ProductCard(
                     productName: data.productName,
                     productPrice: data.productPrice,
                     addProduct: () async {
-                      data.productQty++;
                       await controller.addProduct(data);
-                      controller.update();
                     },
                     minProduct: () async {
-                      data.productQty--;
                       await controller.minProduct(data);
-                      controller.update();
                     },
                     detailProduct: () {},
                     textCount: GetBuilder<MenuController>(
-                      builder: (c) {
-                        int qty = c.drink[index].productQty;
+                      builder: (_) {
+                        int qty = drink[index].productQty;
                         if (qty < 0) qty = 0;
                         return Text(
                           qty.toString(),

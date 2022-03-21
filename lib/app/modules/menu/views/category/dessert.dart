@@ -10,6 +10,9 @@ class DessertMenu extends GetView<MenuController> {
 
   @override
   Widget build(BuildContext context) {
+    List<ProductOrder> dessert = controller.products
+        .where((d) => d.productCategory == 'DESSERT')
+        .toList();
     return Container(
       color: darkColor,
       child: SingleChildScrollView(
@@ -25,26 +28,22 @@ class DessertMenu extends GetView<MenuController> {
                 crossAxisCount: 2,
                 childAspectRatio: .89,
                 physics: BouncingScrollPhysics(),
-                children: List.generate(controller.dessert.length, (index) {
-                  ProductOrder data = controller.dessert[index];
+                children: List.generate(dessert.length, (index) {
+                  ProductOrder data = dessert[index];
 
                   return ProductCard(
                     productName: data.productName,
                     productPrice: data.productPrice,
                     addProduct: () async {
-                      data.productQty++;
                       await controller.addProduct(data);
-                      controller.update();
                     },
                     minProduct: () async {
-                      data.productQty--;
                       await controller.minProduct(data);
-                      controller.update();
                     },
                     detailProduct: () {},
                     textCount: GetBuilder<MenuController>(
-                      builder: (c) {
-                        int qty = c.dessert[index].productQty;
+                      builder: (_) {
+                        int qty = dessert[index].productQty;
                         if (qty < 0) qty = 0;
                         return Text(
                           qty.toString(),

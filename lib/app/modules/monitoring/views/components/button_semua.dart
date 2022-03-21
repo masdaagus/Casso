@@ -17,33 +17,32 @@ class ButtonAll extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.only(top: 8, bottom: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        width: 180,
+        margin: const EdgeInsets.only(top: 4, bottom: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        width: 164,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(32),
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(4, 4),
-              blurRadius: 8,
-              color: hitam.withOpacity(.3),
-            ),
-            BoxShadow(
-              offset: Offset(-4, -4),
-              blurRadius: 8,
-              color: lightColor.withOpacity(.2),
-            ),
-          ],
-          color: darkColor,
-        ),
+            borderRadius: BorderRadius.circular(32),
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(3, 3),
+                blurRadius: 6,
+                color: hitam.withOpacity(.35),
+              ),
+              BoxShadow(
+                offset: Offset(-3, -3),
+                blurRadius: 6,
+                color: lightColor.withOpacity(.2),
+              ),
+            ],
+            gradient: LinearGradient(colors: grColor2)),
         child: Center(
           child: Text(
             tittleButton.toUpperCase(),
             style: TextStyle(
-              color: textColor.withOpacity(.9),
+              color: darkColor,
               fontFamily: "balsamiq",
               fontWeight: FontWeight.bold,
-              letterSpacing: .5,
+              // letterSpacing: .5,
               fontSize: 12,
             ),
           ),

@@ -12,9 +12,11 @@ class MenuController extends GetxController {
   var order = Order().obs;
 
   List<ProductOrder> tempOrder = [];
-  List<ProductOrder> food = [];
-  List<ProductOrder> drink = [];
-  List<ProductOrder> dessert = [];
+  // List<ProductOrder> food = [];
+  // List<ProductOrder> drink = [];
+  // List<ProductOrder> dessert = [];
+
+  List<ProductOrder> products = [];
 
   double _totalPrice = 0;
 
@@ -24,7 +26,13 @@ class MenuController extends GetxController {
     var dessertData = resto.value.products!.dessert as List<ProductCategory>;
 
     foodData.forEach((data) {
-      food.add(ProductOrder(
+      // food.add(ProductOrder(
+      //   productName: data.foodName,
+      //   productPrice: data.foodPrice,
+      //   productQty: 0,
+      //   productCategory: 'FOOD',
+      // ));
+      products.add(ProductOrder(
         productName: data.foodName,
         productPrice: data.foodPrice,
         productQty: 0,
@@ -32,7 +40,13 @@ class MenuController extends GetxController {
       ));
     });
     drinkData.forEach((data) {
-      drink.add(ProductOrder(
+      // drink.add(ProductOrder(
+      //   productName: data.foodName,
+      //   productPrice: data.foodPrice,
+      //   productQty: 0,
+      //   productCategory: 'DRINK',
+      // ));
+      products.add(ProductOrder(
         productName: data.foodName,
         productPrice: data.foodPrice,
         productQty: 0,
@@ -40,7 +54,13 @@ class MenuController extends GetxController {
       ));
     });
     dessertData.forEach((data) {
-      dessert.add(ProductOrder(
+      // dessert.add(ProductOrder(
+      //   productName: data.foodName,
+      //   productPrice: data.foodPrice,
+      //   productQty: 0,
+      //   productCategory: 'DESSERT',
+      // ));
+      products.add(ProductOrder(
         productName: data.foodName,
         productPrice: data.foodPrice,
         productQty: 0,
@@ -50,25 +70,17 @@ class MenuController extends GetxController {
   }
 
   Future<void> addProduct(ProductOrder data) async {
+    data.productQty++;
     tempOrder.add(data);
     _sumPrices();
+    update();
   }
 
   Future<void> minProduct(ProductOrder data) async {
     tempOrder.remove(data);
+    data.productQty--;
     _sumPrices();
-  }
-
-  void printdata() {
-    // tempOrder.forEach((element) {
-    //   print("nama ${element.productName}");
-    //   print("harga ${element.productPrice}");
-    //   print("jumlah ${element.productQty}");
-    // });
-
-    print("dari variable = $_totalPrice");
-    print("dari model = ${order.value.totalPrices}");
-    print("dari model = ${order.value.productsOrder}");
+    update();
   }
 
   double _sumPrices() {

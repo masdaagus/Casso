@@ -3,6 +3,7 @@ import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/order_controller.dart';
+import 'components/dialog.dart';
 
 class OrderView extends GetView<OrderController> {
   @override
@@ -46,7 +47,12 @@ class OrderView extends GetView<OrderController> {
                       return TableCard(
                         tableNumber: index + 1,
                         onTap: () {
-                          controller.dialog(table: index);
+                          Get.defaultDialog(
+                            content: GetDialog(tableNumber: index),
+                            backgroundColor: Colors.transparent,
+                            titleStyle: TextStyle(color: Colors.transparent),
+                            barrierDismissible: false,
+                          );
                         },
                       );
                     },
@@ -54,7 +60,6 @@ class OrderView extends GetView<OrderController> {
                 ),
               ),
               SizedBox(height: 20),
-              Text(controller.user.restoID!),
             ],
           ),
         ),

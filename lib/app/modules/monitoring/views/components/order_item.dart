@@ -25,17 +25,30 @@ class OrderItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                child: Text(
-                  orderName,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: textColor.withOpacity(.9),
-                    fontFamily: "balsamiq",
-                    fontSize: 12,
-                    letterSpacing: .5,
+              Row(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(right: 6),
+                    height: 6,
+                    width: 6,
+                    decoration: BoxDecoration(
+                      color: textColor,
+                      borderRadius: BorderRadius.circular(3),
+                    ),
                   ),
-                ),
+                  Container(
+                    child: Text(
+                      orderName,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: textColor.withOpacity(.9),
+                        fontFamily: "balsamiq",
+                        fontSize: 12,
+                        letterSpacing: .5,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Row(
                 children: [
@@ -52,7 +65,7 @@ class OrderItem extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18),
                               ),
-                              primary: orange.withOpacity(.6),
+                              primary: purple.withOpacity(.5),
                             ),
                           ),
                         ),

@@ -7,6 +7,8 @@ import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'components/item_card.dart';
 // import 'components/card_chart.dart';
 
 class CustomBottomSheet extends GetView<MenuController> {
@@ -16,6 +18,7 @@ class CustomBottomSheet extends GetView<MenuController> {
   Widget build(BuildContext context) {
     final List<ProductOrder> productOrders =
         controller.order.value.productsOrder!;
+
     return ClipRRect(
       child: BackdropFilter(
         filter: ImageFilter.blur(
@@ -61,125 +64,7 @@ class CustomBottomSheet extends GetView<MenuController> {
                         ProductOrder data =
                             productOrders.toSet().toList()[index];
 
-                        return Container(
-                          margin: const EdgeInsets.only(
-                            bottom: 16,
-                            left: 24,
-                            right: 24,
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 16,
-                          ),
-                          // height: 64,
-                          decoration: BoxDecoration(
-                            color: lightColor.withOpacity(.2),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                width: Get.width * .48,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    GetBuilder<MenuController>(
-                                      builder: (_) {
-                                        return Text(
-                                          data.productName!,
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                          style: TextStyle(
-                                              color: lightColor,
-                                              fontFamily: "balsamiq",
-                                              letterSpacing: 1,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold),
-                                        );
-                                      },
-                                    ),
-                                    SizedBox(height: 8),
-                                    Row(
-                                      children: [
-                                        GetBuilder<MenuController>(
-                                          builder: (_) {
-                                            return Text(
-                                              "${data.productPrice}",
-                                              style: TextStyle(
-                                                color: iconColor,
-                                                fontFamily: "balsamiq",
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                        SizedBox(width: 13),
-                                        GestureDetector(
-                                          onTap: () {
-                                            print("tap notes");
-                                          },
-                                          child: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 6, vertical: 2),
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: hitam.withOpacity(.4),
-                                                width: .5,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                              color: lightColor.withOpacity(.5),
-                                            ),
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.notes_sharp,
-                                                  size: 12,
-                                                ),
-                                                SizedBox(width: 4),
-                                                Text(
-                                                  "Notes",
-                                                  style: TextStyle(
-                                                    fontSize: 10,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                child: Row(
-                                  children: [
-                                    addAndRemoveButton(Icons.add, () {}),
-                                    SizedBox(width: 16),
-                                    GetBuilder<MenuController>(
-                                      builder: (_) {
-                                        return Text(
-                                          "${data.productQty}",
-                                          style: TextStyle(
-                                            color: iconColor,
-                                            fontFamily: "balsamiq",
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                    SizedBox(width: 16),
-                                    addAndRemoveButton(Icons.remove, () {}),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        );
+                        return ItemCardBottomSheet(data: data);
                       },
                     ),
                     Divider(
@@ -187,31 +72,6 @@ class CustomBottomSheet extends GetView<MenuController> {
                       thickness: 1,
                       indent: 25,
                       endIndent: 25,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 25,
-                        vertical: 8,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "TOTAL",
-                            style: TextStyle(
-                              color: iconColor,
-                              fontFamily: "balsamiq",
-                            ),
-                          ),
-                          Text(
-                            "Rp23.000",
-                            style: TextStyle(
-                              color: iconColor,
-                              fontFamily: "balsamiq",
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
                     GestureDetector(
                       onTap: () {},
@@ -255,22 +115,6 @@ class CustomBottomSheet extends GetView<MenuController> {
               ))
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget addAndRemoveButton(IconData icon, VoidCallback ontap) {
-    return GestureDetector(
-      onTap: ontap,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: iconColor, width: 2),
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Icon(
-          icon,
-          color: iconColor,
         ),
       ),
     );
