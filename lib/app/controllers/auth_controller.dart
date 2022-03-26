@@ -24,6 +24,7 @@ class AuthController extends GetxController {
   Future<bool> autoLogin() async {
     try {
       try {
+        /// LOGIN DENGAN ACCOUNT
         final box = GetStorage();
         String email = box.read(emailKey);
         String password = box.read(passwordKey);
@@ -33,7 +34,6 @@ class AuthController extends GetxController {
         final userData = userDoc.data() as Map<String, dynamic>;
         user(UsersModel.fromJson(userData));
         user.refresh();
-        print(user.value.email);
 
         if (email == user.value.email && password == user.value.password) {
           CollectionReference restos = firestore.collection("restos");
@@ -51,6 +51,8 @@ class AuthController extends GetxController {
       } catch (e) {
         print(e);
       }
+
+      /// LOGINN DENGAN GOOGLE
       final isSign = await _googleSignIn.isSignedIn();
       if (isSign) {
         await _googleSignIn

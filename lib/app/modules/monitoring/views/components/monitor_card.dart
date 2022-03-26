@@ -1,27 +1,20 @@
-import 'package:casso/app/modules/monitoring/views/components/order_item.dart';
+import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 import 'button_semua.dart';
+import 'order_item.dart';
 
 class MonitorCard extends StatelessWidget {
   const MonitorCard({
     Key? key,
-    this.table,
-    this.guessName,
-    this.orderTime,
-    this.orders,
     this.orderButton = 'PROSES',
     this.isOrder = false,
+    required this.data,
   }) : super(key: key);
 
-  final int? table;
-  final String? guessName;
-  final String? orderTime;
-  final List<String>? orders;
-
+  final Order data;
   final String orderButton;
-
   final bool isOrder;
 
   @override
@@ -46,7 +39,7 @@ class MonitorCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "TABLE ${table} - (${guessName})",
+                  "TABLE ${data.tableNumber} - (${data.guessName})",
                   style: TextStyle(
                     fontFamily: "balsamiq",
                     color: darkColor,
@@ -56,7 +49,7 @@ class MonitorCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "${orderTime}",
+                  "${data.waitersName}",
                   style: TextStyle(
                     fontFamily: "balsamiq",
                     color: darkColor,
@@ -77,12 +70,16 @@ class MonitorCard extends StatelessWidget {
                   child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: 4,
+                    itemCount: data.productsOrder!.toSet().toList().length,
                     itemBuilder: (context, index) {
+                      ProductOrder dataOrder =
+                          data.productsOrder!.toSet().toList()[index];
+
                       return OrderItem(
                         isOrder: isOrder,
                         textButton: orderButton,
-                        orderName: orders![index],
+                        qty: dataOrder.productQty,
+                        orderName: dataOrder.productName!,
                         onTap: () {},
                       );
                     },

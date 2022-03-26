@@ -2,16 +2,18 @@ import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class OrderItem extends StatelessWidget {
-  const OrderItem({
-    Key? key,
-    required this.orderName,
-    required this.textButton,
-    required this.onTap,
-    required this.isOrder,
-  }) : super(key: key);
+  const OrderItem(
+      {Key? key,
+      required this.orderName,
+      required this.textButton,
+      required this.onTap,
+      required this.isOrder,
+      this.qty})
+      : super(key: key);
 
   final String orderName;
   final String textButton;
+  final int? qty;
   final VoidCallback onTap;
   final bool isOrder;
 
@@ -48,6 +50,20 @@ class OrderItem extends StatelessWidget {
                       ),
                     ),
                   ),
+                  SizedBox(width: 16),
+                  if (qty! > 1)
+                    Container(
+                      child: Text(
+                        qty.toString(),
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: orange,
+                          fontFamily: "balsamiq",
+                          fontSize: 12,
+                          letterSpacing: .5,
+                        ),
+                      ),
+                    ),
                 ],
               ),
               Row(

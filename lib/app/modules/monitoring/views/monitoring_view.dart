@@ -64,7 +64,7 @@ class MonitoringView extends GetView<MonitoringController> {
                   children: [
                     // tables view
                     OrderMonitoring(),
-                    ProsesMonitoring(),
+                    Container(),
                     Container(),
                     Container(),
                   ],

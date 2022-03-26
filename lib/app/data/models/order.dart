@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+Order orderFromJson(String str) => Order.fromJson(json.decode(str));
+
 class Order {
   Order({
     this.guessName,
@@ -21,8 +25,7 @@ class Order {
         totalItems: json["totalItems"],
         totalPrices: json["totalPrices"],
         productsOrder: List<dynamic>.from(
-          json["productsOrder"].map((x) => ProductOrder.fromJson(x)),
-        ),
+            json["productsOrder"].map((x) => ProductOrder.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -57,8 +60,8 @@ class ProductOrder {
 
   Map<String, dynamic> toJson() => {
         "productName": productName,
-        "productPrice": productCategory,
-        "productCategory": productPrice,
+        "productPrice": productPrice,
+        "productCategory": productCategory,
         "productQty": productQty,
       };
 }

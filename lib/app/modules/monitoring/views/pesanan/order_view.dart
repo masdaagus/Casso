@@ -18,56 +18,46 @@ class OrderMonitoring extends GetView<MonitoringController> {
         child: Column(
           children: [
             Expanded(
-              // child: ListView.builder(
-              //   physics: BouncingScrollPhysics(),
-              //   itemCount: controller.listData.length,
-              //   itemBuilder: (context, index) {
-              //     final data = controller.listData[index];
-              //     return MonitorCard(
-              //       table: data["table"],
-              //       guessName: data["guessName"],
-              //       orderTime: data["timeOrder"],
-              //       orders: data['orders'],
-              //       isOrder: true,
-              //     );
-              //   },
-              // ),
               child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                 stream: controller.orderStream(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.active) {
-                    var data = snapshot.data!.docs.map((DocumentSnapshot doc) {
+                    List<Order> orderData =
+                        snapshot.data!.docs.map((DocumentSnapshot doc) {
                       var data = doc.data() as Map<String, dynamic>;
-                      Order order_nih = Order(
-                        guessName: data['guessName'],
-                        waitersName: data['waitersName'],
-                        tableNumber: data['tableNumbers'],
-                        totalItems: data['totalItems'],
-                        totalPrices: data['totalPrices'],
-                        productsOrder: data['productsOrder'],
-                      );
+                      // Order order_nih = Order(
+                      //   guessName: data['guessName'],
+                      //   waitersName: data['waitersName'],
+                      //   tableNumber: data['tableNumbers'],
+                      //   totalItems: data['totalItems'],
+                      //   totalPrices: data['totalPrices'],
+                      //   productsOrder: data['productsOrder'],
+                      // );
 
-                      print("apa nih = ${order_nih.productsOrder}");
-
-                      // var a = Order.fromJson(data);
-                      // print(a.productsOrder);
-                      return data;
+                      Order a = Order.fromJson(data);
+                      print(a.productsOrder);
+                      return a;
                     }).toList();
 
-                    // data.forEach((data) {
-                    //   Order.fromJson(data);
-                    //   print(data);
-                    // });
-
-                    return Center(child: CircularProgressIndicator());
+                    return ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      itemCount: orderData.length,
+                      itemBuilder: (context, index) {
+                        Order data = orderData[index];
+                        return MonitorCard(
+                          data: data,
+                          isOrder: true,
+                        );
+                      },
+                    );
                   }
                   return Center(child: CircularProgressIndicator());
                 },
               ),
             ),
-            ElevatedButton(
-                onPressed: () => controller.getDataPesanan(),
-                child: Text("TES"))
+            // ElevatedButton(
+            //     onPressed: () => controller.getDataPesanan(),
+            //     child: Text("TES"))
           ],
         ),
       ),

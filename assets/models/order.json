@@ -1,0 +1,25 @@
+[
+    {
+        "guessName":"",
+        "waitersName":"",
+        "tableNumber":"",
+        "totalItems":"",
+        "totalPrices":"",
+        "productsOrder":[
+            {
+                "productName":"",
+                "productCategory":"",
+                "productPrice":"",
+                "productQty":""
+
+            },
+            {
+                "productName":"",
+                "productCategory":"",
+                "productPrice":"",
+                "productQty":""
+
+            }
+        ]
+    }
+]

@@ -24,33 +24,12 @@ class MonitoringController extends GetxController {
   var order = Order().obs;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Future<void> getDataPesanan() async {
-    // final pesananC = firestore
-    //     .collection("restos")
-    //     .doc(user.value.restoID)
-    //     .collection("pesanan")
-    //     .doc();
-    final data =
-        firestore.collection("restos").doc("lQi2rAuIGjYisbLK2Rr7").get();
-    print(data);
-
-    // final a = pesananC as Map<String, dynamic>;
-    // print("guss name = ${a['guessName']}");
-    // print(pesananC.);
-    // print(a.data() as Map<String, dynamic>);
-
-    // try {
-    //   pesananC.add(Order(
-    //     guessName: guessName,
-    //     tableNumber: table + 1,
-    //     waitersName: user.value.name,
-    //     totalPrices: _sumPrices(),
-    //     totalItems: _tempOrder.length,
-    //     productsOrder: _tempOrder,
-    //   ).toJson());
-    // } catch (e) {
-    //   print(e);
-    // }
+  void getDataPesanan() async {
+    final data = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection("pesanan")
+        .snapshots();
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> orderStream() {
