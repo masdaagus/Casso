@@ -1,4 +1,5 @@
 import 'package:casso/app/controllers/auth_controller.dart';
+import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/data/models/products.dart';
 
 import 'package:casso/app/data/models/resto.dart';
@@ -12,7 +13,7 @@ class ProductController extends GetxController {
   final auth = Get.find<AuthController>();
   var user = UsersModel().obs;
   var resto = RestosModel().obs;
-  List<ProductCategory> allProducts = [];
+  List<ProductOrder> products = [];
 
   late TextEditingController namaProduct;
   late TextEditingController hargaProduct;
@@ -29,41 +30,44 @@ class ProductController extends GetxController {
     "assets/products/tehmanis.jpeg",
   ];
 
-  void getAllProducts() async {
-    List<ProductCategory> food =
-        resto.value.products!.food as List<ProductCategory>;
-    List<ProductCategory> drink =
-        resto.value.products!.drink as List<ProductCategory>;
-    List<ProductCategory> dessert =
-        resto.value.products!.dessert as List<ProductCategory>;
+  Future<void> _productsInit() async {
+    var food = resto.value.products!.food as List<ProductCategory>;
+    var drink = resto.value.products!.drink as List<ProductCategory>;
+    var dessert = resto.value.products!.dessert as List<ProductCategory>;
 
-    food.forEach((element) {
-      allProducts.add(ProductCategory(
-        foodName: element.foodName,
-        foodPrice: element.foodPrice,
-      ));
-    });
-    drink.forEach((element) {
-      allProducts.add(ProductCategory(
-        foodName: element.foodName,
-        foodPrice: element.foodPrice,
-      ));
-    });
-    dessert.forEach((element) {
-      allProducts.add(ProductCategory(
-        foodName: element.foodName,
-        foodPrice: element.foodPrice,
+    food.forEach((data) {
+      products.add(ProductOrder(
+        productName: data.foodName,
+        productPrice: data.foodPrice,
+        productQty: 0,
+        productCategory: 'FOOD',
       ));
     });
 
-    print(allProducts.length);
+    drink.forEach((data) {
+      products.add(ProductOrder(
+        productName: data.foodName,
+        productPrice: data.foodPrice,
+        productQty: 0,
+        productCategory: 'DRINK',
+      ));
+    });
+
+    dessert.forEach((data) {
+      products.add(ProductOrder(
+        productName: data.foodName,
+        productPrice: data.foodPrice,
+        productQty: 0,
+        productCategory: 'DESSERT',
+      ));
+    });
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     user = auth.user;
     resto = auth.resto;
-    getAllProducts();
+    await _productsInit();
 
     namaProduct = TextEditingController();
     hargaProduct = TextEditingController();

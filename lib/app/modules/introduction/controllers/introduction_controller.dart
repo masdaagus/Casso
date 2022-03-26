@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:casso/app/controllers/auth_controller.dart';
+
 import 'package:casso/app/data/models/products.dart';
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/users.dart';
@@ -30,15 +31,15 @@ class IntroductionController extends GetxController {
 
     final List<ProductCategory> drink = [
       ProductCategory(foodName: "Teh Manis ", foodPrice: 5000),
-      ProductCategory(foodName: "Lemon Tea", foodPrice: 30000),
+      ProductCategory(foodName: "Lemon Tea", foodPrice: 10000),
     ];
     final List<ProductCategory> food = [
       ProductCategory(foodName: "Nasi Goreng ", foodPrice: 12000),
       ProductCategory(foodName: "Indomie Goreng", foodPrice: 10000),
     ];
     final List<ProductCategory> dessert = [
-      ProductCategory(foodName: "Kentang Goreng ", foodPrice: 10000),
-      ProductCategory(foodName: "Roti Bakar ", foodPrice: 10000),
+      ProductCategory(foodName: "Kentang Goreng ", foodPrice: 12000),
+      ProductCategory(foodName: "Roti Bakar ", foodPrice: 1000),
     ];
 
     final products = Products(

@@ -1,3 +1,4 @@
+import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/modules/components/search_bar/search_bar.dart';
 import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/modules/menu/views/category/all.dart';
@@ -83,7 +84,17 @@ class Menus extends GetView<MenuController> {
                     guessName: guessName ?? 'NO-NAME',
                     table: table + 1,
                     onTap: () => Get.bottomSheet(
-                      CustomBottomSheet(),
+                      CustomBottomSheet(
+                        onTap: () {
+                          // var tes = Order(
+                          //   guessName: guessName,
+                          //   waitersName: controller.user.value.name,
+                          //   tableNumber: table,
+                          //   productsOrder: controller.order.value.productsOrder,
+                          // );
+                          controller.setOrder(guessName, table);
+                        },
+                      ),
                       isScrollControlled: true,
                     ),
                   )

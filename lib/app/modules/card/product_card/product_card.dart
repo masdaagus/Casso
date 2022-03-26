@@ -1,3 +1,5 @@
+import 'package:casso/app/data/models/order.dart';
+import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,24 +10,21 @@ const lorem =
 class ProductCard extends StatelessWidget {
   const ProductCard({
     Key? key,
+    required this.data,
     this.addProduct,
+    this.isOrderWidget = true,
     this.minProduct,
     this.detailProduct,
-    this.productName,
-    this.productPrice,
-    this.textCount,
     this.productImage = "assets/images/Saly-22.png",
   }) : super(key: key);
 
   final VoidCallback? addProduct;
   final VoidCallback? minProduct;
   final VoidCallback? detailProduct;
+  final ProductOrder data;
 
-  final String? productName;
-  final double? productPrice;
+  final bool isOrderWidget;
   final String? productImage;
-
-  final Widget? textCount;
 
   @override
   Widget build(BuildContext context) {
@@ -125,16 +124,77 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 6),
-              if (textCount != null)
-                controllProductCount()
-              else
-                Icon(Icons.star, color: lightColor, size: 32),
+              isOrderWidget
+                  ? GetBuilder<MenuController>(
+                      builder: (c) {
+                        int qty = data.productQty;
+                        if (qty <= 0) {
+                          return addButton();
+                        } else {
+                          return Container(
+                            margin: const EdgeInsets.only(left: 4),
+                            child: Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: addProduct,
+                                  child: Container(
+                                    height: 28,
+                                    width: 28,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(14),
+                                      color: lightColor.withOpacity(.20),
+                                    ),
+                                    child: Icon(
+                                      Icons.add,
+                                      color: lightColor,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  qty.toString(),
+                                  style: TextStyle(
+                                    color: textColor,
+                                    fontFamily: 'balsamiq',
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                GestureDetector(
+                                  onTap: minProduct,
+                                  child: Container(
+                                    height: 28,
+                                    width: 28,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(14),
+                                      color: lightColor.withOpacity(.20),
+                                    ),
+                                    child: Icon(
+                                      Icons.remove,
+                                      color: lightColor,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      },
+                    )
+                  : Center(
+                      child: Container(
+                        child: Icon(
+                          Icons.restaurant_menu,
+                          color: lightColor,
+                          size: 32,
+                        ),
+                      ),
+                    ),
             ],
           ),
           Container(
             margin: const EdgeInsets.only(top: 8),
             child: Text(
-              productName ?? "Kosong",
+              data.productName ?? "Kosong",
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
@@ -148,7 +208,7 @@ class ProductCard extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(top: 8),
             child: Text(
-              nf.format(productPrice),
+              nf.format(data.productPrice),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
@@ -156,49 +216,6 @@ class ProductCard extends StatelessWidget {
                 fontFamily: "balsamiq", letterSpacing: .5,
                 // fontWeight: FontWeight.bold,
                 fontSize: 12,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container controllProductCount() {
-    return Container(
-      margin: const EdgeInsets.only(left: 4),
-      child: Column(
-        children: [
-          GestureDetector(
-            onTap: addProduct,
-            child: Container(
-              height: 28,
-              width: 28,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(14),
-                color: lightColor.withOpacity(.20),
-              ),
-              child: Icon(
-                Icons.add,
-                color: lightColor,
-              ),
-            ),
-          ),
-          SizedBox(height: 10),
-          textCount ?? Container(),
-          SizedBox(height: 10),
-          GestureDetector(
-            onTap: minProduct,
-            child: Container(
-              height: 28,
-              width: 28,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(14),
-                color: lightColor.withOpacity(.20),
-              ),
-              child: Icon(
-                Icons.remove,
-                color: lightColor,
               ),
             ),
           ),

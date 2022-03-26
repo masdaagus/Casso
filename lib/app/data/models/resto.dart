@@ -31,36 +31,36 @@ class RestosModel {
   final Products? products;
 
   factory RestosModel.fromJson(Map<String, dynamic> json) => RestosModel(
-        ownerEmail: json[RestoFields.ownerEmail],
-        ownerName: json[RestoFields.ownerName],
-        restoLocation: json[RestoFields.restoLocation],
-        restoName: json[RestoFields.restoName],
-        restoTable: json[RestoFields.restoTable],
+        ownerEmail: json["ownerEmail"],
+        ownerName: json["ownerName"],
+        restoLocation: json["restoLocation"],
+        restoName: json["restoName"],
+        restoTable: json["restoTable"],
         restoEmploye: List<dynamic>.from(
-            json[RestoFields.restoEmploye].map((x) => UsersModel.fromJson(x))),
-        products: Products.fromJson(json[RestoFields.products]),
+            json["restoEmploye"].map((x) => UsersModel.fromJson(x))),
+        products: Products.fromJson(json["products"]),
       );
 
   Map<String, dynamic> toJson() => {
-        RestoFields.ownerEmail: ownerEmail,
-        RestoFields.ownerName: ownerName,
-        RestoFields.restoLocation: restoLocation,
-        RestoFields.restoName: restoName,
-        RestoFields.restoTable: restoTable,
-        RestoFields.restoEmploye:
+        "ownerEmail": ownerEmail,
+        "ownerName": ownerName,
+        "restoLocation": restoLocation,
+        "restoName": restoName,
+        "restoTable": restoTable,
+        "restoEmploye":
             List<dynamic>.from(restoEmploye!.map((x) => x.toJson())),
-        RestoFields.products: products!.toJson(),
+        "products": products!.toJson(),
       };
 }
 
 /// PRODUCTS FILEDS
 
-class RestoFields {
-  static const String ownerEmail = "ownerEmail";
-  static const String ownerName = "ownerName";
-  static const String restoName = "restoName";
-  static const String restoLocation = "restoLocation";
-  static const String restoTable = "restoTable";
-  static const String restoEmploye = "restoEmploye";
-  static const String products = "products";
-}
+// class RestoFields {
+//   static const String ownerEmail = "ownerEmail";
+//   static const String ownerName = "ownerName";
+//   static const String restoName = "restoName";
+//   static const String restoLocation = "restoLocation";
+//   static const String restoTable = "restoTable";
+//   static const String restoEmploye = "restoEmploye";
+//   static const String products = "products";
+// }

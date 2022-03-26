@@ -8,16 +8,32 @@ import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'components/button_order.dart';
 import 'components/item_card.dart';
 // import 'components/card_chart.dart';
 
 class CustomBottomSheet extends GetView<MenuController> {
-  const CustomBottomSheet({Key? key}) : super(key: key);
+  const CustomBottomSheet({
+    Key? key,
+    this.waitersName,
+    this.tableNumber,
+    this.totalItems,
+    this.totalPrices,
+    this.guessName,
+    this.onTap,
+  }) : super(key: key);
+
+  final String? guessName;
+  final String? waitersName;
+  final int? tableNumber;
+  final int? totalItems;
+  final double? totalPrices;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final List<ProductOrder> productOrders =
-        controller.order.value.productsOrder!;
+        controller.order.value.productsOrder! as List<ProductOrder>;
 
     return ClipRRect(
       child: BackdropFilter(
@@ -67,48 +83,20 @@ class CustomBottomSheet extends GetView<MenuController> {
                         return ItemCardBottomSheet(data: data);
                       },
                     ),
-                    Divider(
-                      color: lightColor.withOpacity(.5),
-                      thickness: 1,
-                      indent: 25,
-                      endIndent: 25,
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        margin: const EdgeInsets.only(top: 32),
-                        height: 50,
-                        width: 184,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: darkColor,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 8,
-                              color: Colors.black.withOpacity(.35),
-                              offset: Offset(4, 4),
-                            ),
-                            BoxShadow(
-                              blurRadius: 8,
-                              color: iconColor.withOpacity(.30),
-                              offset: Offset(-4, -4),
-                            ),
-                          ],
+                    ButtonOrder(onTap: onTap
+
+                        // () {
+                        // Get.snackbar("title", "message");
+
+                        // var tes = Order();
+                        // print("nama tamu = ${tes.guessName}");
+                        // print("nama waiters = ${tes.waitersName}");
+                        // print("nomor meja = ${tes.tableNumber}");
+                        // print("total items = ${tes.totalItems}");
+                        // print("total harga = ${tes.totalPrices}");
+                        // print("total itesm = ${tes.productsOrder!.length}");
+                        // },
                         ),
-                        child: Center(
-                          child: Text(
-                            "ORDER",
-                            style: TextStyle(
-                              color: lightColor,
-                              fontFamily: "balsamiq",
-                              fontWeight: FontWeight.w800,
-                              letterSpacing: 1,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
                     SizedBox(height: 40)
                   ],
                 ),

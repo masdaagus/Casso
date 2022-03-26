@@ -1,3 +1,4 @@
+import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,9 @@ class ButtonChart extends GetView<MenuController> {
 
   @override
   Widget build(BuildContext context) {
+    List<ProductOrder>? productsOrder =
+        controller.order.value.productsOrder as List<ProductOrder>;
+
     return GestureDetector(
       onTap: onTap,
       child: Align(
@@ -78,8 +82,15 @@ class ButtonChart extends GetView<MenuController> {
                     children: [
                       GetBuilder<MenuController>(
                         builder: (c) {
+                          // var items = productsOrder!.length;
+                          var items = c.order.value.productsOrder!.length;
+
+                          if (items < 0) {
+                            items = 0;
+                          }
+
                           return Text(
-                            "${c.tempOrder.length} Items",
+                            "${items} Items",
                             style: TextStyle(
                               color: darkColor,
                               fontFamily: "balsamiq",
@@ -112,7 +123,6 @@ class ButtonChart extends GetView<MenuController> {
                             ),
                           )),
                       SizedBox(width: 6),
-                      // SvgPicture.asset("assetName"),
                       Icon(
                         Icons.shopping_cart_sharp,
                         color: darkColor,

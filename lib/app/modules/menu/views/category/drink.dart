@@ -32,8 +32,7 @@ class DrinkMenu extends GetView<MenuController> {
                   ProductOrder data = drink[index];
 
                   return ProductCard(
-                    productName: data.productName,
-                    productPrice: data.productPrice,
+                    data: data,
                     addProduct: () async {
                       await controller.addProduct(data);
                     },
@@ -41,19 +40,19 @@ class DrinkMenu extends GetView<MenuController> {
                       await controller.minProduct(data);
                     },
                     detailProduct: () {},
-                    textCount: GetBuilder<MenuController>(
-                      builder: (_) {
-                        int qty = drink[index].productQty;
-                        if (qty < 0) qty = 0;
-                        return Text(
-                          qty.toString(),
-                          style: TextStyle(
-                            color: textColor,
-                            fontFamily: 'balsamiq',
-                          ),
-                        );
-                      },
-                    ),
+                    // textCount: GetBuilder<MenuController>(
+                    //   builder: (_) {
+                    //     int qty = drink[index].productQty;
+                    //     if (qty < 0) qty = 0;
+                    //     return Text(
+                    //       qty.toString(),
+                    //       style: TextStyle(
+                    //         color: textColor,
+                    //         fontFamily: 'balsamiq',
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
                   );
                 }),
               ),

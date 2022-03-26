@@ -20,123 +20,130 @@ class ItemCardBottomSheet extends GetView<MenuController> {
         left: 24,
         right: 24,
       ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 12,
-        vertical: 16,
-      ),
       decoration: BoxDecoration(
-        color: lightColor.withOpacity(.2),
-        borderRadius: BorderRadius.circular(16),
+        color: lightColor.withOpacity(.15),
+
+        //  boxShadow: [
+        //   BoxShadow(
+        //       blurRadius: 4,
+        //       color: hitam.withOpacity(24),
+        //       offset: Offset(4, 4),
+        //       spreadRadius: 12),
+        // ]
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            width: Get.width * .48,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GetBuilder<MenuController>(
-                  builder: (_) {
-                    return Text(
-                      data.productName!,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      style: TextStyle(
-                          color: lightColor,
-                          fontFamily: "balsamiq",
-                          letterSpacing: 1,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold),
-                    );
-                  },
-                ),
-                SizedBox(height: 8),
-                Row(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                width: 4,
+                height: 72,
+                color: biru,
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 12, top: 16, bottom: 16),
+                width: Get.width * .48,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     GetBuilder<MenuController>(
                       builder: (_) {
-                        var price = data.productPrice;
-                        if (price! < 0) {
-                          price = 0;
-                        }
-
                         return Text(
-                          "${nf.format(price)}",
+                          data.productName!,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
                           style: TextStyle(
-                            color: iconColor,
-                            fontFamily: "balsamiq",
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              color: lightColor,
+                              fontFamily: "balsamiq",
+                              letterSpacing: 1,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold),
                         );
                       },
                     ),
-                    SizedBox(width: 13),
-                    GestureDetector(
-                      onTap: () {
-                        print("tap notes");
-                        print(data.productName);
-                        print(data.productPrice);
-                        print(data.productQty);
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 6, vertical: 2),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: hitam.withOpacity(.4),
-                            width: .5,
-                          ),
-                          borderRadius: BorderRadius.circular(6),
-                          color: lightColor.withOpacity(.5),
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.notes_sharp,
-                              size: 12,
-                            ),
-                            SizedBox(width: 4),
-                            Text(
-                              "Notes",
+                    SizedBox(height: 8),
+                    Row(
+                      children: [
+                        GetBuilder<MenuController>(
+                          builder: (_) {
+                            return Text(
+                              "${nf.format(data.productPrice)}",
                               style: TextStyle(
-                                fontSize: 10,
+                                color: iconColor,
+                                fontFamily: "balsamiq",
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
                               ),
-                            )
-                          ],
+                            );
+                          },
                         ),
-                      ),
-                    )
+                        SizedBox(width: 13),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 6, vertical: 2),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: hitam.withOpacity(.4),
+                                width: .5,
+                              ),
+                              borderRadius: BorderRadius.circular(6),
+                              color: lightColor.withOpacity(.5),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.notes_sharp,
+                                  size: 12,
+                                ),
+                                SizedBox(width: 4),
+                                Text(
+                                  "Notes",
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           Container(
+            margin: const EdgeInsets.only(right: 12),
             child: Row(
               children: [
-                addAndRemoveButton(Icons.add, () async {
-                  controller.addProduct(data);
+                addAndRemoveButton(Icons.remove, () {
+                  controller.minProduct(data);
                 }),
                 GetBuilder<MenuController>(
-                  builder: (_) {
+                  builder: (c) {
+                    int qty = data.productQty;
+                    if (qty < 0) qty = 0;
                     return Container(
                       margin: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
-                        "${data.productQty}",
+                        "${qty}",
                         style: TextStyle(
-                          color: iconColor,
+                          color: lightColor,
                           fontFamily: "balsamiq",
-                          fontSize: 18,
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     );
                   },
                 ),
-                addAndRemoveButton(Icons.remove, () {
-                  controller.minProduct(data);
+                addAndRemoveButton(Icons.add, () async {
+                  controller.addProduct(data);
                 }),
               ],
             ),
@@ -150,13 +157,14 @@ class ItemCardBottomSheet extends GetView<MenuController> {
     return GestureDetector(
       onTap: ontap,
       child: Container(
+        padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
-          border: Border.all(color: iconColor, width: 2),
           borderRadius: BorderRadius.circular(15),
+          color: darkColor.withOpacity(.8),
         ),
         child: Icon(
           icon,
-          color: iconColor,
+          color: lightColor,
         ),
       ),
     );

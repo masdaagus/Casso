@@ -47,6 +47,7 @@ class OrderView extends GetView<OrderController> {
                       return TableCard(
                         tableNumber: index + 1,
                         onTap: () {
+                          controller.guessNameController.clear();
                           Get.defaultDialog(
                             content: GetDialog(tableNumber: index),
                             backgroundColor: Colors.transparent,

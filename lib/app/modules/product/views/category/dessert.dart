@@ -29,11 +29,13 @@ class DessertProduct extends GetView<ProductController> {
                 children: List.generate(12, (index) {
                   ProductCategory product =
                       controller.resto.value.products!.dessert![index];
-                  return ProductCard(
-                    productName: product.foodName,
-                    productPrice: product.foodPrice,
-                    productImage: controller.image[index],
-                  );
+                  // return ProductCard(
+                  //   productName: product.foodName,
+                  //   productPrice: product.foodPrice,
+                  //   productImage: controller.image[index],
+                  // );
+
+                  return Container();
                 }),
               ),
             ),

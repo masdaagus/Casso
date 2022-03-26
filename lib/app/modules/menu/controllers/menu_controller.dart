@@ -1,8 +1,10 @@
 import 'package:casso/app/controllers/auth_controller.dart';
+
 import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/data/models/products.dart';
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/users.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class MenuController extends GetxController {
@@ -10,11 +12,9 @@ class MenuController extends GetxController {
   var user = UsersModel().obs;
   var resto = RestosModel().obs;
   var order = Order().obs;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  List<ProductOrder> tempOrder = [];
-  // List<ProductOrder> food = [];
-  // List<ProductOrder> drink = [];
-  // List<ProductOrder> dessert = [];
+  List<ProductOrder> _tempOrder = [];
 
   List<ProductOrder> products = [];
 
@@ -26,12 +26,6 @@ class MenuController extends GetxController {
     var dessertData = resto.value.products!.dessert as List<ProductCategory>;
 
     foodData.forEach((data) {
-      // food.add(ProductOrder(
-      //   productName: data.foodName,
-      //   productPrice: data.foodPrice,
-      //   productQty: 0,
-      //   productCategory: 'FOOD',
-      // ));
       products.add(ProductOrder(
         productName: data.foodName,
         productPrice: data.foodPrice,
@@ -40,12 +34,6 @@ class MenuController extends GetxController {
       ));
     });
     drinkData.forEach((data) {
-      // drink.add(ProductOrder(
-      //   productName: data.foodName,
-      //   productPrice: data.foodPrice,
-      //   productQty: 0,
-      //   productCategory: 'DRINK',
-      // ));
       products.add(ProductOrder(
         productName: data.foodName,
         productPrice: data.foodPrice,
@@ -54,12 +42,6 @@ class MenuController extends GetxController {
       ));
     });
     dessertData.forEach((data) {
-      // dessert.add(ProductOrder(
-      //   productName: data.foodName,
-      //   productPrice: data.foodPrice,
-      //   productQty: 0,
-      //   productCategory: 'DESSERT',
-      // ));
       products.add(ProductOrder(
         productName: data.foodName,
         productPrice: data.foodPrice,
@@ -67,25 +49,70 @@ class MenuController extends GetxController {
         productCategory: 'DESSERT',
       ));
     });
+
+    order.value.productsOrder = _tempOrder;
+    order.value.totalPrices = _totalPrice;
   }
 
   Future<void> addProduct(ProductOrder data) async {
+    _tempOrder.add(data);
     data.productQty++;
-    tempOrder.add(data);
-    _sumPrices();
+    await _sumPrices();
     update();
   }
 
   Future<void> minProduct(ProductOrder data) async {
-    tempOrder.remove(data);
+    _tempOrder.remove(data);
     data.productQty--;
-    _sumPrices();
+    await _sumPrices();
     update();
+  }
+
+  Future<void> setOrder(String guessName, int table) async {
+    CollectionReference pesananC = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection("pesanan");
+
+    try {
+      pesananC.add(Order(
+        guessName: guessName,
+        tableNumber: table + 1,
+        waitersName: user.value.name,
+        totalPrices: _sumPrices(),
+        totalItems: _tempOrder.length,
+        productsOrder: _tempOrder,
+      ).toJson());
+
+      // await restoDoc.update({
+      //   "monitors": Monitors(
+      //     pesanan: [
+      //       Order(
+      //         guessName: guessName,
+      //         tableNumber: table + 1,
+      //         waitersName: user.value.name,
+      //         totalPrices: _sumPrices(),
+      //         totalItems: _tempOrder.length,
+      //         productsOrder: _tempOrder,
+      //       ),
+      //     ],
+      //     proses: [],
+      //     siap: [],
+      //     tersaji: [],
+      //   ).toJson()
+
+      // });
+
+      // order(Order.fromJson(restoMonitor));
+      // order.refresh();
+    } catch (e) {
+      print(e);
+    }
   }
 
   double _sumPrices() {
     _totalPrice = 0;
-    tempOrder.forEach((order) => _totalPrice += order.productPrice!);
+    _tempOrder.forEach((order) => _totalPrice += order.productPrice!);
     order.update((val) {
       val!.totalPrices = _totalPrice;
     });
@@ -93,17 +120,11 @@ class MenuController extends GetxController {
     return _totalPrice;
   }
 
-  _orderInit() async {
-    order.value.productsOrder = tempOrder;
-    order.value.totalPrices = _totalPrice;
-  }
-
   @override
   void onInit() async {
     user = auth.user;
     resto = auth.resto;
     await _getAllProducts();
-    await _orderInit();
 
     super.onInit();
   }

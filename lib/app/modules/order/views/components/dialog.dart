@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class GetDialog extends GetView<OrderController> {
-  const GetDialog({Key? key, required this.tableNumber}) : super(key: key);
+  GetDialog({Key? key, required this.tableNumber}) : super(key: key);
 
   final int tableNumber;
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,71 +27,85 @@ class GetDialog extends GetView<OrderController> {
             color: putih.withOpacity(.35),
             borderRadius: BorderRadius.circular(20),
           ),
-          child: Column(
-            children: [
-              Text(
-                "TABLE ${tableNumber + 1}",
-                style: TextStyle(
-                  color: putih,
-                  fontFamily: "balsamiq",
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(
-                    top: 16, left: 24, right: 24, bottom: 24),
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                width: Get.width,
-                decoration: BoxDecoration(
-                  color: lightColor,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: TextField(
-                  controller: controller.guessNameController,
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                Text(
+                  "TABLE ${tableNumber + 1}",
                   style: TextStyle(
+                    color: putih,
                     fontFamily: "balsamiq",
-                    color: darkColor,
-                    fontSize: 13,
-                    letterSpacing: -.5,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
                   ),
-                  // controller: guessNameController,
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    isDense: true,
-                    hintStyle: TextStyle(
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                      top: 16, left: 24, right: 24, bottom: 24),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                      // color: lightColor,
+                      // borderRadius: BorderRadius.circular(20),
+                      ),
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) return "Nama tidak boleh kosong";
+                    },
+                    controller: controller.guessNameController,
+                    textAlign: TextAlign.center,
+                    maxLength: 20,
+                    style: TextStyle(
                       fontFamily: "balsamiq",
-                      color: darkColor.withOpacity(.7),
-                      fontSize: 13,
+                      color: lightColor,
+                      fontSize: 16,
                       letterSpacing: -.5,
                     ),
-                    border: InputBorder.none,
-                    hintText: "Masukkan nama pengunjung . . .",
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                  ),
-                ),
-              ),
-              Divider(thickness: 1, color: putih.withOpacity(.6)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  DialogButton(
-                    isConfirm: false,
-                    isConfirmText: 'CANCEL',
-                    onTap: () => Get.back(),
-                  ),
-                  DialogButton(
-                    onTap: () => Get.offNamed(
-                      "/menu",
-                      arguments: [
-                        tableNumber,
-                        controller.guessNameController.text,
-                      ],
+                    decoration: InputDecoration(
+                      errorStyle: TextStyle(
+                        color: merah,
+                        fontFamily: "balsamiq",
+                        fontSize: 14,
+                        letterSpacing: 1,
+                      ),
+                      counterText: "",
+                      hintStyle: TextStyle(
+                        fontFamily: "balsamiq",
+                        color: lightColor.withOpacity(.8),
+                        fontSize: 14,
+                        letterSpacing: 1,
+                      ),
+                      hintText: "Masukkan nama pengunjung . . .",
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 10),
                     ),
                   ),
-                ],
-              )
-            ],
+                ),
+                Divider(thickness: 1, color: putih.withOpacity(.6)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    DialogButton(
+                      isConfirm: false,
+                      isConfirmText: 'CANCEL',
+                      onTap: () => Get.back(),
+                    ),
+                    DialogButton(onTap: () {
+                      if (formKey.currentState!.validate()) {
+                        Get.offNamed(
+                          "/menu",
+                          arguments: [
+                            tableNumber,
+                            controller.guessNameController.text,
+                          ],
+                        );
+                      }
+                    }),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

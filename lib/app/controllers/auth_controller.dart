@@ -22,9 +22,6 @@ class AuthController extends GetxController {
 
   /// AUTO LOGIN
   Future<bool> autoLogin() async {
-    await Future.delayed(Duration(seconds: 0));
-    print("apa iniiiii");
-
     try {
       try {
         final box = GetStorage();
@@ -182,7 +179,7 @@ class AuthController extends GetxController {
   }
 
   /// LOGIN WITH USERS EMPLOYE
-  Future<bool> loginEmploye(String email, password) async {
+  Future<bool> loginEmploye(String email, String password) async {
     try {
       CollectionReference users = firestore.collection("users");
 

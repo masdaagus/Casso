@@ -29,27 +29,9 @@ class AllMenu extends GetView<MenuController> {
                   ProductOrder data = controller.products[index];
 
                   return ProductCard(
-                    productName: data.productName,
-                    productPrice: data.productPrice,
-                    addProduct: () async {
-                      await controller.addProduct(data);
-                    },
-                    minProduct: () async {
-                      await controller.minProduct(data);
-                    },
-                    textCount: GetBuilder<MenuController>(
-                      builder: (c) {
-                        int qty = c.products[index].productQty;
-                        if (qty < 0) qty = 0;
-                        return Text(
-                          qty.toString(),
-                          style: TextStyle(
-                            color: textColor,
-                            fontFamily: 'balsamiq',
-                          ),
-                        );
-                      },
-                    ),
+                    data: data,
+                    addProduct: () => controller.addProduct(data),
+                    minProduct: () => controller.minProduct(data),
                   );
                 }),
               ),
