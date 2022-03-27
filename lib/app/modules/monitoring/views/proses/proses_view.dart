@@ -42,7 +42,7 @@ class ProsesMonitoring extends GetView<MonitoringController> {
                           data: data,
                           isOrder: false,
                           orderButton: 'siap',
-                          buttonAll: () {},
+                          buttonAll: () => controller.delete(id),
                         );
                       },
                     );

@@ -26,10 +26,10 @@ class MonitorCard extends GetView<MonitoringController> {
 
   @override
   Widget build(BuildContext context) {
-    List<ProductOrder> productsAdd = [];
     final List<ProductOrder> productOrders = data.productsOrder!;
     final ids = Set();
     productOrders.retainWhere((x) => ids.add(x.productName));
+    final List<ProductOrder> productsAdd = [];
 
     return Container(
       margin: const EdgeInsets.only(left: 16, bottom: 8, right: 16),
@@ -92,11 +92,6 @@ class MonitorCard extends GetView<MonitoringController> {
                         data: productOrder,
                         onTap: () {
                           productsAdd.add(productOrder);
-                          productsAdd.forEach((element) {
-                            print(element.productName);
-                          });
-
-                          print("productOrder ${productOrder.productName}");
                           controller.setProses(
                               data, id, productsAdd, productOrder);
                         },

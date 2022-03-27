@@ -56,6 +56,14 @@ class MonitoringController extends GetxController {
     }
   }
 
+  Future<void> delete(String id) async {
+    CollectionReference prosesC = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection("proses");
+    prosesC.doc(id).delete();
+  }
+
   Future<void> setProses(Order data, String id, List<ProductOrder> products,
       ProductOrder product) async {
     CollectionReference prosesC = firestore
@@ -72,7 +80,7 @@ class MonitoringController extends GetxController {
 
       if (checkDoc.data() == null) {
         print("SET");
-        prosesC.doc(id).set(Order(
+        await prosesC.doc(id).set(Order(
               guessName: data.guessName,
               tableNumber: data.tableNumber,
               waitersName: data.waitersName,
@@ -80,10 +88,22 @@ class MonitoringController extends GetxController {
               totalItems: data.totalItems,
               productsOrder: products,
             ).toJson());
-
-        pesananC.doc(id).update({
-          "productsOrder": data.productsOrder,
+        data.productsOrder!.remove(product);
+        data.productsOrder!.forEach((element) {
+          print("daro controller = ${element.productName}");
         });
+
+        pesananC.doc(id).update(Order(
+              guessName: data.guessName,
+              tableNumber: data.tableNumber,
+              waitersName: data.waitersName,
+              totalPrices: data.totalPrices,
+              totalItems: data.totalItems,
+              productsOrder: data.productsOrder,
+            ).toJson());
+        // pesananC.doc(id).update({
+        //   "productsOrder": data.productsOrder,
+        // });
       } else {
         print("UPDATE");
         prosesC.doc(id).update(Order(
@@ -95,8 +115,14 @@ class MonitoringController extends GetxController {
               productsOrder: products,
             ).toJson());
 
+        data.productsOrder!.remove(product);
+
         pesananC.doc(id).update({
-          "productsOrder": data.productsOrder,
+          "productsOrder": List<dynamic>.from(
+            data.productsOrder!.map(
+              (x) => x.toJson(),
+            ),
+          ),
         });
       }
     } catch (e) {
