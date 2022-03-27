@@ -1,20 +1,22 @@
+import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 class OrderItem extends StatelessWidget {
-  const OrderItem(
-      {Key? key,
-      required this.orderName,
-      required this.textButton,
-      required this.onTap,
-      required this.isOrder,
-      this.qty})
-      : super(key: key);
+  const OrderItem({
+    Key? key,
+    required this.textButton,
+    required this.onTap,
+    required this.isOrder,
+    required this.data,
+    this.undoButton,
+  }) : super(key: key);
 
-  final String orderName;
+  final ProductOrder data;
+
   final String textButton;
-  final int? qty;
   final VoidCallback onTap;
+  final VoidCallback? undoButton;
   final bool isOrder;
 
   @override
@@ -40,7 +42,7 @@ class OrderItem extends StatelessWidget {
                   ),
                   Container(
                     child: Text(
-                      orderName,
+                      data.productName!,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: textColor.withOpacity(.9),
@@ -51,10 +53,10 @@ class OrderItem extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 16),
-                  if (qty! > 1)
+                  if (data.productQty > 1)
                     Container(
                       child: Text(
-                        qty.toString(),
+                        "x${data.productQty.toString()}",
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           color: orange,
@@ -74,14 +76,14 @@ class OrderItem extends StatelessWidget {
                           width: 48,
                           height: 20,
                           child: ElevatedButton(
-                            onPressed: onTap,
+                            onPressed: undoButton,
                             child: Icon(Icons.undo, size: 16),
                             style: ElevatedButton.styleFrom(
                               elevation: 2,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18),
                               ),
-                              primary: purple.withOpacity(.5),
+                              primary: purple.withOpacity(.1),
                             ),
                           ),
                         ),

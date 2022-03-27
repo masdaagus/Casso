@@ -5,34 +5,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class MonitoringController extends GetxController {
-  List<Map<String, dynamic>> listData = [
-    {
-      "table": 2,
-      "guessName": "Masda",
-      "timeOrder": "Baru aja",
-      "orders": [
-        "Milkshake Durian",
-        "Nasi Goreng",
-        "Kentang Goreng",
-        "Ifumie",
-      ]
-    },
-  ];
-
   final auth = Get.find<AuthController>();
   var user = UsersModel().obs;
   var order = Order().obs;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  void getDataPesanan() async {
-    final data = firestore
-        .collection("restos")
-        .doc(user.value.restoID)
-        .collection("pesanan")
-        .snapshots();
-  }
-
-  Stream<QuerySnapshot<Map<String, dynamic>>> orderStream() {
+  Stream<QuerySnapshot<Map<String, dynamic>>> pesananStream() {
     final data = firestore
         .collection("restos")
         .doc(user.value.restoID)
@@ -42,11 +20,95 @@ class MonitoringController extends GetxController {
     return data;
   }
 
+  Stream<QuerySnapshot<Map<String, dynamic>>> prosesStream() {
+    final data = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection("proses")
+        .snapshots();
+
+    return data;
+  }
+
+  Future<void> setProsesAll(Order data, String id) async {
+    CollectionReference prosesC = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection("proses");
+    CollectionReference pesananC = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection("pesanan");
+
+    try {
+      prosesC.doc(id).set(Order(
+            guessName: data.guessName,
+            tableNumber: data.tableNumber,
+            waitersName: data.waitersName,
+            totalPrices: data.totalPrices,
+            totalItems: data.totalItems,
+            productsOrder: data.productsOrder,
+          ).toJson());
+
+      pesananC.doc(id).delete();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> setProses(Order data, String id, List<ProductOrder> products,
+      ProductOrder product) async {
+    CollectionReference prosesC = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection("proses");
+    CollectionReference pesananC = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection("pesanan");
+
+    try {
+      final checkDoc = await prosesC.doc(id).get();
+
+      if (checkDoc.data() == null) {
+        print("SET");
+        prosesC.doc(id).set(Order(
+              guessName: data.guessName,
+              tableNumber: data.tableNumber,
+              waitersName: data.waitersName,
+              totalPrices: data.totalPrices,
+              totalItems: data.totalItems,
+              productsOrder: products,
+            ).toJson());
+
+        pesananC.doc(id).update({
+          "productsOrder": data.productsOrder,
+        });
+      } else {
+        print("UPDATE");
+        prosesC.doc(id).update(Order(
+              guessName: data.guessName,
+              tableNumber: data.tableNumber,
+              waitersName: data.waitersName,
+              totalPrices: data.totalPrices,
+              totalItems: data.totalItems,
+              productsOrder: products,
+            ).toJson());
+
+        pesananC.doc(id).update({
+          "productsOrder": data.productsOrder,
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   void onInit() async {
     user = auth.user;
-    await getDataPesanan;
-    await orderStream();
+    await pesananStream();
+    await prosesStream();
     super.onInit();
   }
 
@@ -56,5 +118,7 @@ class MonitoringController extends GetxController {
   }
 
   @override
-  void onClose() {}
+  void onClose() {
+    super.dispose();
+  }
 }

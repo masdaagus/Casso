@@ -20,17 +20,7 @@ class ItemCardBottomSheet extends GetView<MenuController> {
         left: 24,
         right: 24,
       ),
-      decoration: BoxDecoration(
-        color: lightColor.withOpacity(.15),
-
-        //  boxShadow: [
-        //   BoxShadow(
-        //       blurRadius: 4,
-        //       color: hitam.withOpacity(24),
-        //       offset: Offset(4, 4),
-        //       spreadRadius: 12),
-        // ]
-      ),
+      color: lightColor.withOpacity(.15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

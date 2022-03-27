@@ -1,24 +1,36 @@
 import 'package:casso/app/data/models/order.dart';
+import 'package:casso/app/modules/monitoring/controllers/monitoring_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'button_semua.dart';
 import 'order_item.dart';
 
-class MonitorCard extends StatelessWidget {
+class MonitorCard extends GetView<MonitoringController> {
   const MonitorCard({
     Key? key,
+    required this.data,
+    required this.id,
     this.orderButton = 'PROSES',
     this.isOrder = false,
-    required this.data,
+    this.buttonAll,
   }) : super(key: key);
 
   final Order data;
+  final String id;
   final String orderButton;
   final bool isOrder;
 
+  final VoidCallback? buttonAll;
+
   @override
   Widget build(BuildContext context) {
+    List<ProductOrder> productsAdd = [];
+    final List<ProductOrder> productOrders = data.productsOrder!;
+    final ids = Set();
+    productOrders.retainWhere((x) => ids.add(x.productName));
+
     return Container(
       margin: const EdgeInsets.only(left: 16, bottom: 8, right: 16),
       decoration: BoxDecoration(
@@ -70,17 +82,25 @@ class MonitorCard extends StatelessWidget {
                   child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: data.productsOrder!.toSet().toList().length,
+                    itemCount: data.productsOrder!.length,
                     itemBuilder: (context, index) {
-                      ProductOrder dataOrder =
-                          data.productsOrder!.toSet().toList()[index];
+                      ProductOrder productOrder = productOrders[index];
 
                       return OrderItem(
                         isOrder: isOrder,
                         textButton: orderButton,
-                        qty: dataOrder.productQty,
-                        orderName: dataOrder.productName!,
-                        onTap: () {},
+                        data: productOrder,
+                        onTap: () {
+                          productsAdd.add(productOrder);
+                          productsAdd.forEach((element) {
+                            print(element.productName);
+                          });
+
+                          print("productOrder ${productOrder.productName}");
+                          controller.setProses(
+                              data, id, productsAdd, productOrder);
+                        },
+                        undoButton: () {},
                       );
                     },
                   ),
@@ -92,8 +112,9 @@ class MonitorCard extends StatelessWidget {
           // Button Prosses semua
           ButtonAll(
             tittleButton: "${orderButton.toUpperCase()} SEMUA",
-            onTap: () {},
-          )
+            onTap: buttonAll!,
+          ),
+          SizedBox(height: 8)
         ],
       ),
     );

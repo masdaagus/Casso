@@ -19,34 +19,30 @@ class OrderMonitoring extends GetView<MonitoringController> {
           children: [
             Expanded(
               child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                stream: controller.orderStream(),
+                stream: controller.pesananStream(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.active) {
                     List<Order> orderData =
                         snapshot.data!.docs.map((DocumentSnapshot doc) {
-                      var data = doc.data() as Map<String, dynamic>;
-                      // Order order_nih = Order(
-                      //   guessName: data['guessName'],
-                      //   waitersName: data['waitersName'],
-                      //   tableNumber: data['tableNumbers'],
-                      //   totalItems: data['totalItems'],
-                      //   totalPrices: data['totalPrices'],
-                      //   productsOrder: data['productsOrder'],
-                      // );
-
-                      Order a = Order.fromJson(data);
-                      print(a.productsOrder);
-                      return a;
+                      var dataDoc = doc.data() as Map<String, dynamic>;
+                      Order data = Order.fromJson(dataDoc);
+                      return data;
                     }).toList();
+
+                    List idDocs = snapshot.data!.docs;
 
                     return ListView.builder(
                       physics: BouncingScrollPhysics(),
                       itemCount: orderData.length,
                       itemBuilder: (context, index) {
                         Order data = orderData[index];
+                        String id = idDocs[index].id;
+
                         return MonitorCard(
+                          id: id,
                           data: data,
                           isOrder: true,
+                          buttonAll: () => controller.setProsesAll(data, id),
                         );
                       },
                     );
@@ -55,9 +51,6 @@ class OrderMonitoring extends GetView<MonitoringController> {
                 },
               ),
             ),
-            // ElevatedButton(
-            //     onPressed: () => controller.getDataPesanan(),
-            //     child: Text("TES"))
           ],
         ),
       ),

@@ -84,27 +84,9 @@ class MenuController extends GetxController {
         productsOrder: _tempOrder,
       ).toJson());
 
-      // await restoDoc.update({
-      //   "monitors": Monitors(
-      //     pesanan: [
-      //       Order(
-      //         guessName: guessName,
-      //         tableNumber: table + 1,
-      //         waitersName: user.value.name,
-      //         totalPrices: _sumPrices(),
-      //         totalItems: _tempOrder.length,
-      //         productsOrder: _tempOrder,
-      //       ),
-      //     ],
-      //     proses: [],
-      //     siap: [],
-      //     tersaji: [],
-      //   ).toJson()
+      Get.offAllNamed('/home');
 
-      // });
-
-      // order(Order.fromJson(restoMonitor));
-      // order.refresh();
+      order.refresh();
     } catch (e) {
       print(e);
     }

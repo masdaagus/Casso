@@ -16,7 +16,7 @@ class Order {
   final int? tableNumber;
   final int? totalItems;
   double? totalPrices;
-  List<dynamic>? productsOrder;
+  List<ProductOrder>? productsOrder;
 
   factory Order.fromJson(Map<String, dynamic> json) => Order(
         guessName: json["guessName"],
@@ -24,7 +24,7 @@ class Order {
         tableNumber: json["tableNumbers"],
         totalItems: json["totalItems"],
         totalPrices: json["totalPrices"],
-        productsOrder: List<dynamic>.from(
+        productsOrder: List<ProductOrder>.from(
             json["productsOrder"].map((x) => ProductOrder.fromJson(x))),
       );
 

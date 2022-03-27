@@ -33,7 +33,7 @@ class CustomBottomSheet extends GetView<MenuController> {
   @override
   Widget build(BuildContext context) {
     final List<ProductOrder> productOrders =
-        controller.order.value.productsOrder! as List<ProductOrder>;
+        controller.order.value.productsOrder!;
 
     return ClipRRect(
       child: BackdropFilter(
@@ -80,23 +80,12 @@ class CustomBottomSheet extends GetView<MenuController> {
                         ProductOrder data =
                             productOrders.toSet().toList()[index];
 
+                        print(data);
+
                         return ItemCardBottomSheet(data: data);
                       },
                     ),
-                    ButtonOrder(onTap: onTap
-
-                        // () {
-                        // Get.snackbar("title", "message");
-
-                        // var tes = Order();
-                        // print("nama tamu = ${tes.guessName}");
-                        // print("nama waiters = ${tes.waitersName}");
-                        // print("nomor meja = ${tes.tableNumber}");
-                        // print("total items = ${tes.totalItems}");
-                        // print("total harga = ${tes.totalPrices}");
-                        // print("total itesm = ${tes.productsOrder!.length}");
-                        // },
-                        ),
+                    ButtonOrder(onTap: onTap),
                     SizedBox(height: 40)
                   ],
                 ),
