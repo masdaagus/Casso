@@ -45,11 +45,14 @@ class ProsesMonitoring extends GetView<MonitoringController> {
                         productOrders.retainWhere(
                           (x) => ids.add(x.productName),
                         );
+
+                        print(data.productsOrder!.length);
                         return MonitorCard(
                           data: data,
                           isOrder: false,
                           orderButton: 'siap',
-                          buttonAll: () => controller.delete(id),
+                          // buttonAll: () => controller.delete(id),
+                          buttonAll: () => controller.deleteCollection(id),
                           listOrder: Container(
                             child: ListView.builder(
                               physics: NeverScrollableScrollPhysics(),

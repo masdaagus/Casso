@@ -13,7 +13,7 @@ class OrderMonitoring extends GetView<MonitoringController> {
 
   @override
   Widget build(BuildContext context) {
-    final List<ProductOrder> productsAdd = [];
+    // final List<ProductOrder> productsAdd = [];
     return Scaffold(
       backgroundColor: darkColor,
       body: Container(
@@ -41,6 +41,9 @@ class OrderMonitoring extends GetView<MonitoringController> {
                         Order data = orderData[index];
                         String id = idDocs[index].id;
 
+                        // initialize atau passing data order ke controller
+                        controller.orderDataDariPesanan = data;
+
                         /// func agar data tidak duplicate
                         List<ProductOrder> productOrders = data.productsOrder!;
                         final ids = Set();
@@ -51,7 +54,11 @@ class OrderMonitoring extends GetView<MonitoringController> {
                         return MonitorCard(
                           data: data,
                           isOrder: true,
-                          buttonAll: () => controller.setProsesAll(data, id),
+                          // buttonAll: () => controller.setProsesAll(data, id),
+                          buttonAll: () async {
+                            await controller.setProsesAll(data, id);
+                            controller.tesss(id);
+                          },
                           listOrder: Container(
                             child: ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
@@ -65,9 +72,9 @@ class OrderMonitoring extends GetView<MonitoringController> {
                                   data: productOrder,
                                   onTap: () {
                                     print("proses");
-                                    productsAdd.add(productOrder);
+                                    // productsAdd.add(productOrder);
                                     controller.setProses(
-                                        data, id, productsAdd, productOrder);
+                                        data, id, productOrder);
                                   },
                                 );
                               },
