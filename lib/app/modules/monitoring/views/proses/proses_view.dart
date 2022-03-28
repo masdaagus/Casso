@@ -1,6 +1,7 @@
 import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/modules/monitoring/controllers/monitoring_controller.dart';
 import 'package:casso/app/modules/monitoring/views/components/monitor_card.dart';
+import 'package:casso/app/modules/monitoring/views/components/order_item.dart';
 
 import 'package:casso/app/utils/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -37,12 +38,41 @@ class ProsesMonitoring extends GetView<MonitoringController> {
                       itemBuilder: (context, index) {
                         Order data = orderData[index];
                         String id = idDocs[index].id;
+
+                        /// func agar data tidak duplicate
+                        List<ProductOrder> productOrders = data.productsOrder!;
+                        final ids = Set();
+                        productOrders.retainWhere(
+                          (x) => ids.add(x.productName),
+                        );
                         return MonitorCard(
-                          id: id,
                           data: data,
                           isOrder: false,
                           orderButton: 'siap',
                           buttonAll: () => controller.delete(id),
+                          listOrder: Container(
+                            child: ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: data.productsOrder!.length,
+                              itemBuilder: (context, index) {
+                                ProductOrder productOrder =
+                                    productOrders[index];
+
+                                return OrderItem(
+                                  data: productOrder,
+                                  onTap: () {
+                                    // productsAdd.add(productOrder);
+                                    // controller.setProses(
+                                    //     data, id, productsAdd, productOrder);
+                                  },
+                                  isOrder: false,
+                                  textButton: 'siap',
+                                  undoButton: () {},
+                                );
+                              },
+                            ),
+                          ),
                         );
                       },
                     );

@@ -3,7 +3,6 @@ import 'package:casso/app/modules/monitoring/controllers/monitoring_controller.d
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'button_semua.dart';
 import 'order_item.dart';
 
@@ -11,25 +10,27 @@ class MonitorCard extends GetView<MonitoringController> {
   const MonitorCard({
     Key? key,
     required this.data,
-    required this.id,
+    // required this.id,
     this.orderButton = 'PROSES',
     this.isOrder = false,
     this.buttonAll,
+    this.listOrder,
   }) : super(key: key);
 
   final Order data;
-  final String id;
+  // final String id;
   final String orderButton;
   final bool isOrder;
 
+  final Widget? listOrder;
   final VoidCallback? buttonAll;
 
   @override
   Widget build(BuildContext context) {
-    final List<ProductOrder> productOrders = data.productsOrder!;
-    final ids = Set();
-    productOrders.retainWhere((x) => ids.add(x.productName));
-    final List<ProductOrder> productsAdd = [];
+    // final List<ProductOrder> productOrders = data.productsOrder!;
+    // final ids = Set();
+    // productOrders.retainWhere((x) => ids.add(x.productName));
+    // final List<ProductOrder> productsAdd = [];
 
     return Container(
       margin: const EdgeInsets.only(left: 16, bottom: 8, right: 16),
@@ -78,28 +79,29 @@ class MonitorCard extends GetView<MonitoringController> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
-                Container(
-                  child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: data.productsOrder!.length,
-                    itemBuilder: (context, index) {
-                      ProductOrder productOrder = productOrders[index];
+                listOrder ?? Container(),
+                // Container(
+                //   child: ListView.builder(
+                //     physics: NeverScrollableScrollPhysics(),
+                //     shrinkWrap: true,
+                //     itemCount: data.productsOrder!.length,
+                //     itemBuilder: (context, index) {
+                //       ProductOrder productOrder = productOrders[index];
 
-                      return OrderItem(
-                        isOrder: isOrder,
-                        textButton: orderButton,
-                        data: productOrder,
-                        onTap: () {
-                          productsAdd.add(productOrder);
-                          controller.setProses(
-                              data, id, productsAdd, productOrder);
-                        },
-                        undoButton: () {},
-                      );
-                    },
-                  ),
-                ),
+                //       return OrderItem(
+                //         isOrder: isOrder,
+                //         textButton: orderButton,
+                //         data: productOrder,
+                //         onTap: () {
+                //           productsAdd.add(productOrder);
+                //           controller.setProses(
+                //               data, id, productsAdd, productOrder);
+                //         },
+                //         undoButton: buttonReverse,
+                //       );
+                //     },
+                //   ),
+                // ),
               ],
             ),
           ),

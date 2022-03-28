@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 class OrderItem extends StatelessWidget {
   const OrderItem({
     Key? key,
-    required this.textButton,
     required this.onTap,
-    required this.isOrder,
     required this.data,
     this.undoButton,
+    this.isOrder = true,
+    this.textButton = 'proses',
   }) : super(key: key);
 
   final ProductOrder data;

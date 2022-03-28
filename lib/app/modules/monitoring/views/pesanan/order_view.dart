@@ -1,6 +1,7 @@
 import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/modules/monitoring/controllers/monitoring_controller.dart';
 import 'package:casso/app/modules/monitoring/views/components/monitor_card.dart';
+import 'package:casso/app/modules/monitoring/views/components/order_item.dart';
 
 import 'package:casso/app/utils/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,6 +13,7 @@ class OrderMonitoring extends GetView<MonitoringController> {
 
   @override
   Widget build(BuildContext context) {
+    final List<ProductOrder> productsAdd = [];
     return Scaffold(
       backgroundColor: darkColor,
       body: Container(
@@ -29,6 +31,7 @@ class OrderMonitoring extends GetView<MonitoringController> {
                       return data;
                     }).toList();
 
+                    // GET LIST ID DOCS
                     List idDocs = snapshot.data!.docs;
 
                     return ListView.builder(
@@ -38,11 +41,38 @@ class OrderMonitoring extends GetView<MonitoringController> {
                         Order data = orderData[index];
                         String id = idDocs[index].id;
 
+                        /// func agar data tidak duplicate
+                        List<ProductOrder> productOrders = data.productsOrder!;
+                        final ids = Set();
+                        productOrders.retainWhere(
+                          (x) => ids.add(x.productName),
+                        );
+
                         return MonitorCard(
-                          id: id,
                           data: data,
                           isOrder: true,
                           buttonAll: () => controller.setProsesAll(data, id),
+                          listOrder: Container(
+                            child: ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: data.productsOrder!.length,
+                              itemBuilder: (context, index) {
+                                ProductOrder productOrder =
+                                    productOrders[index];
+
+                                return OrderItem(
+                                  data: productOrder,
+                                  onTap: () {
+                                    print("proses");
+                                    productsAdd.add(productOrder);
+                                    controller.setProses(
+                                        data, id, productsAdd, productOrder);
+                                  },
+                                );
+                              },
+                            ),
+                          ),
                         );
                       },
                     );

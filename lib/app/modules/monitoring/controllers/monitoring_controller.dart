@@ -88,10 +88,8 @@ class MonitoringController extends GetxController {
               totalItems: data.totalItems,
               productsOrder: products,
             ).toJson());
+
         data.productsOrder!.remove(product);
-        data.productsOrder!.forEach((element) {
-          print("daro controller = ${element.productName}");
-        });
 
         pesananC.doc(id).update(Order(
               guessName: data.guessName,
@@ -104,6 +102,14 @@ class MonitoringController extends GetxController {
         // pesananC.doc(id).update({
         //   "productsOrder": data.productsOrder,
         // });
+
+        pesananC.doc(id).update({
+          "productsOrder": List<dynamic>.from(
+            data.productsOrder!.map(
+              (x) => x.toJson(),
+            ),
+          ),
+        });
       } else {
         print("UPDATE");
         prosesC.doc(id).update(Order(
