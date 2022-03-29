@@ -8,8 +8,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProsesMonitoring extends GetView<MonitoringController> {
-  const ProsesMonitoring({Key? key}) : super(key: key);
+class SiapMonitoring extends GetView<MonitoringController> {
+  const SiapMonitoring({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +20,15 @@ class ProsesMonitoring extends GetView<MonitoringController> {
           children: [
             Expanded(
               child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                stream: controller.initStream('proses'),
+                stream: controller.initStream('siap'),
                 builder: (context, snapshot) {
+                  print(snapshot);
                   if (snapshot.connectionState == ConnectionState.active) {
                     List<Order> orderData =
                         snapshot.data!.docs.map((DocumentSnapshot doc) {
                       var dataDoc = doc.data() as Map<String, dynamic>;
                       Order data = Order.fromJson(dataDoc);
+                      print(data);
                       return data;
                     }).toList();
 
@@ -50,12 +52,12 @@ class ProsesMonitoring extends GetView<MonitoringController> {
                         return MonitorCard(
                           data: data,
                           isOrder: false,
-                          orderButton: 'siap',
+                          orderButton: 'tersaji',
                           buttonAll: () => controller.setProsesAll(
                             data,
                             id,
-                            'proses',
                             'siap',
+                            'tersaji',
                           ),
                           listOrder: Container(
                             child: ListView.builder(
@@ -73,18 +75,18 @@ class ProsesMonitoring extends GetView<MonitoringController> {
                                       data,
                                       id,
                                       productOrder,
-                                      'proses',
                                       'siap',
+                                      'tersaji',
                                     );
                                   },
                                   isOrder: false,
-                                  textButton: 'siap',
+                                  textButton: 'tersaji',
                                   undoButton: () => controller.reverseProses(
                                     data,
                                     id,
                                     productOrder,
-                                    'pesanan',
                                     'proses',
+                                    'siap',
                                   ),
                                 );
                               },

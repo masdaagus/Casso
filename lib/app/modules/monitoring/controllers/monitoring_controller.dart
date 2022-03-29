@@ -10,95 +10,88 @@ class MonitoringController extends GetxController {
   var order = Order().obs;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Order? orderDataDariProses;
-  late Order orderDataDariPesanan;
+  late Order orderDataDariProses;
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> pesananStream() {
+  Stream<QuerySnapshot<Map<String, dynamic>>> initStream(String collection) {
     final data = firestore
         .collection("restos")
         .doc(user.value.restoID)
-        .collection("pesanan")
+        .collection(collection)
         .snapshots();
 
     return data;
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> prosesStream() {
-    final data = firestore
+  Future<void> setProsesAll(
+    Order data,
+    String id,
+    String collectionLeft,
+    String collectionRight,
+  ) async {
+    CollectionReference collectLeft = firestore
         .collection("restos")
         .doc(user.value.restoID)
-        .collection("proses")
-        .snapshots();
+        .collection(collectionLeft);
+    CollectionReference collectRight = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection(collectionRight);
 
-    return data;
-  }
-
-  Future<void> setProsesAll(Order data, String id) async {
-    CollectionReference prosesC = firestore
-        .collection("restos")
-        .doc(user.value.restoID)
-        .collection("proses");
-    CollectionReference pesananC = firestore
-        .collection("restos")
-        .doc(user.value.restoID)
-        .collection("pesanan");
+    final docProses = await collectRight.doc(id).get();
 
     try {
-      prosesC.doc(id).set(Order(
-            guessName: data.guessName,
-            tableNumber: data.tableNumber,
-            waitersName: data.waitersName,
-            totalPrices: data.totalPrices,
-            totalItems: data.totalItems,
-            productsOrder: data.productsOrder,
-          ).toJson());
+      List<ProductOrder> products = [];
+      if (docProses.data() != null) {
+        final objectDataProses = docProses.data() as Map<String, dynamic>;
+        orderDataDariProses = Order.fromJson(objectDataProses);
 
-      pesananC.doc(id).delete();
+        final x = orderDataDariProses.productsOrder!;
+        products.addAll(x);
+        products.addAll(data.productsOrder!);
+
+        collectRight.doc(id).update({
+          "productsOrder": List<dynamic>.from(
+            products.map(
+              (x) => x.toJson(),
+            ),
+          ),
+        });
+        collectLeft.doc(id).delete();
+      } else {
+        collectRight.doc(id).set(Order(
+              guessName: data.guessName,
+              tableNumber: data.tableNumber,
+              waitersName: data.waitersName,
+              totalPrices: data.totalPrices,
+              totalItems: data.totalItems,
+              productsOrder: data.productsOrder,
+            ).toJson());
+
+        collectLeft.doc(id).delete();
+      }
     } catch (e) {
       print(e);
     }
   }
 
-  Future<void> deleteCollection(String id) async {
-    CollectionReference prosesC = firestore
+  Future<void> setProses(
+    Order data,
+    String id,
+    ProductOrder product,
+    String left,
+    String right,
+  ) async {
+    ///
+    CollectionReference collectionLeft =
+        firestore.collection("restos").doc(user.value.restoID).collection(left);
+    CollectionReference collectionRight = firestore
         .collection("restos")
         .doc(user.value.restoID)
-        .collection("proses");
-    prosesC.doc(id).delete();
-  }
-
-  Future<void> tesss(String id) async {
-    CollectionReference prosesC = firestore
-        .collection("restos")
-        .doc(user.value.restoID)
-        .collection("proses");
-
-    final checkDoc = await prosesC.doc(id).get();
-    final data = checkDoc.data() as Map<String, dynamic>;
-    Order o = Order.fromJson(data);
-
-    print(o.guessName);
-  }
-
-  Future<void> setProses(Order data, String id, ProductOrder product) async {
-    CollectionReference prosesC = firestore
-        .collection("restos")
-        .doc(user.value.restoID)
-        .collection("proses");
-    CollectionReference pesananC = firestore
-        .collection("restos")
-        .doc(user.value.restoID)
-        .collection("pesanan");
-    ////////////////////////////////////////////////
-
-    /// [List Product Order] dari collection [pesanan]
-    // List<ProductOrder> productsFromPesanan =
-    //     orderDataDariPesanan.productsOrder!;
-    // productsFromPesanan.add(product);
+        .collection(right);
     ////////////////////////////////////////////////
 
     /// Mengambil data [Order] dari collection [Prosses]
-    final docProses = await prosesC.doc(id).get();
+    final docProses = await collectionRight.doc(id).get();
 
     if (docProses.data() != null) {
       final objectDataProses = docProses.data() as Map<String, dynamic>;
@@ -106,15 +99,11 @@ class MonitoringController extends GetxController {
     }
     ////////////////////////////////////////////////
 
-    /// [List Product Order] dari collection [proses]
-    // List<ProductOrder> productsProses = [];
-    List<ProductOrder> productsProses = [];
-    // ...orderDataDariProses!.productsOrder!
-    productsProses.add(product);
-    ////////////////////////////////////////////////
-
     try {
-      final checkDoc = await prosesC.doc(id).get();
+      List<ProductOrder> productsProses = [];
+      productsProses.add(product);
+      ////////////////////////////////////////////////
+      final checkDoc = await collectionRight.doc(id).get();
 
       if (checkDoc.data() == null) {
         /// setelah di cek apakah data sudah ada di collection proses atau belum
@@ -122,7 +111,7 @@ class MonitoringController extends GetxController {
 
         /// fungsi menambahkan data baru ke collection [proses]
         print("SET");
-        await prosesC.doc(id).set(Order(
+        await collectionRight.doc(id).set(Order(
               guessName: data.guessName,
               tableNumber: data.tableNumber,
               waitersName: data.waitersName,
@@ -133,7 +122,7 @@ class MonitoringController extends GetxController {
 
         /// menghapus [list order item] dari collection [pesanan]
         data.productsOrder!.remove(product);
-        pesananC.doc(id).update({
+        collectionLeft.doc(id).update({
           "productsOrder": List<dynamic>.from(
             data.productsOrder!.map(
               (x) => x.toJson(),
@@ -142,17 +131,20 @@ class MonitoringController extends GetxController {
         });
       } else {
         print("UPDATE");
-        prosesC.doc(id).update(Order(
-              guessName: data.guessName,
-              tableNumber: data.tableNumber,
-              waitersName: data.waitersName,
-              totalPrices: data.totalPrices,
-              totalItems: data.totalItems,
-              productsOrder: productsProses,
-            ).toJson());
+        final x = orderDataDariProses.productsOrder!;
+        productsProses.addAll(x);
 
+        collectionRight.doc(id).update({
+          "productsOrder": List<dynamic>.from(
+            productsProses.map(
+              (x) => x.toJson(),
+            ),
+          ),
+        });
+
+        /// menghapus [list order item] dari collection [pesanan]
         data.productsOrder!.remove(product);
-        pesananC.doc(id).update({
+        collectionLeft.doc(id).update({
           "productsOrder": List<dynamic>.from(
             data.productsOrder!.map(
               (x) => x.toJson(),
@@ -160,22 +152,104 @@ class MonitoringController extends GetxController {
           ),
         });
       }
+      if (data.productsOrder!.length == 0) {
+        collectionLeft.doc(id).delete();
+      }
     } catch (e) {
       print(e);
     }
   }
 
-  @override
-  void onInit() async {
-    user = auth.user;
-    await pesananStream();
-    await prosesStream();
-    super.onInit();
+  Future<void> reverseProses(
+    Order data,
+    String id,
+    ProductOrder product,
+    String left,
+    String right,
+  ) async {
+    CollectionReference collectionLeft =
+        firestore.collection("restos").doc(user.value.restoID).collection(left);
+    CollectionReference collectionRight = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection(right);
+
+    final leftData = await collectionLeft.doc(id).get();
+    if (leftData.data() != null) {
+      final objectDataProses = leftData.data() as Map<String, dynamic>;
+      orderDataDariProses = Order.fromJson(objectDataProses);
+    }
+
+    try {
+      List<ProductOrder> products = [];
+      products.add(product);
+      if (leftData.data() == null) {
+        print("SET DATA BARU");
+
+        await collectionLeft.doc(id).set(Order(
+              guessName: data.guessName,
+              tableNumber: data.tableNumber,
+              waitersName: data.waitersName,
+              totalPrices: data.totalPrices,
+              totalItems: data.totalItems,
+              productsOrder: products,
+            ).toJson());
+
+        /// menghapus [list order item] dari collection [pesanan]
+        data.productsOrder!.remove(product);
+        collectionRight.doc(id).update({
+          "productsOrder": List<dynamic>.from(
+            data.productsOrder!.map(
+              (x) => x.toJson(),
+            ),
+          ),
+        });
+      } else {
+        print("UPDATE");
+        final x = orderDataDariProses.productsOrder!;
+        products.addAll(x);
+
+        collectionLeft.doc(id).update({
+          "productsOrder": List<dynamic>.from(
+            products.map(
+              (x) => x.toJson(),
+            ),
+          ),
+        });
+        data.productsOrder!.remove(product);
+        collectionRight.doc(id).update({
+          "productsOrder": List<dynamic>.from(
+            data.productsOrder!.map(
+              (x) => x.toJson(),
+            ),
+          ),
+        });
+      }
+      if (data.productsOrder!.length == 0) {
+        collectionRight.doc(id).delete();
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> delete(String id) async {
+    CollectionReference prosesC = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection("pesanan");
+    prosesC.doc(id).delete();
   }
 
   @override
-  void onReady() {
-    super.onReady();
+  void onInit() async {
+    user = auth.user;
+
+    await initStream('pesanan');
+    await initStream('proses');
+    await initStream('siap');
+    await initStream('tersaji');
+    super.onInit();
   }
 
   @override

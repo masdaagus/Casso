@@ -8,11 +8,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProsesMonitoring extends GetView<MonitoringController> {
-  const ProsesMonitoring({Key? key}) : super(key: key);
+class PesananMonitoring extends GetView<MonitoringController> {
+  const PesananMonitoring({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // final List<ProductOrder> productsAdd = [];
     return Scaffold(
       backgroundColor: darkColor,
       body: Container(
@@ -20,7 +21,7 @@ class ProsesMonitoring extends GetView<MonitoringController> {
           children: [
             Expanded(
               child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                stream: controller.initStream('proses'),
+                stream: controller.initStream('pesanan'),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.active) {
                     List<Order> orderData =
@@ -30,6 +31,7 @@ class ProsesMonitoring extends GetView<MonitoringController> {
                       return data;
                     }).toList();
 
+                    // GET LIST ID DOCS
                     List idDocs = snapshot.data!.docs;
 
                     return ListView.builder(
@@ -45,18 +47,23 @@ class ProsesMonitoring extends GetView<MonitoringController> {
                         productOrders.retainWhere(
                           (x) => ids.add(x.productName),
                         );
+                        bool _isWaiters = false;
+                        String status = controller.user.value.status!;
+                        if (status == 'WAITERS' || status == 'OWNER') {
+                          _isWaiters = true;
+                        }
 
-                        print(data.productsOrder!.length);
                         return MonitorCard(
                           data: data,
-                          isOrder: false,
-                          orderButton: 'siap',
+                          isOrder: true,
+                          isWaiters: _isWaiters,
                           buttonAll: () => controller.setProsesAll(
                             data,
                             id,
+                            'pesanan',
                             'proses',
-                            'siap',
                           ),
+                          delete: () => controller.delete(id),
                           listOrder: Container(
                             child: ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
@@ -73,19 +80,10 @@ class ProsesMonitoring extends GetView<MonitoringController> {
                                       data,
                                       id,
                                       productOrder,
+                                      'pesanan',
                                       'proses',
-                                      'siap',
                                     );
                                   },
-                                  isOrder: false,
-                                  textButton: 'siap',
-                                  undoButton: () => controller.reverseProses(
-                                    data,
-                                    id,
-                                    productOrder,
-                                    'pesanan',
-                                    'proses',
-                                  ),
                                 );
                               },
                             ),

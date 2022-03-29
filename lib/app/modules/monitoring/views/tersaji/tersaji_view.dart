@@ -8,8 +8,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class OrderMonitoring extends GetView<MonitoringController> {
-  const OrderMonitoring({Key? key}) : super(key: key);
+class TersajiMonitoring extends GetView<MonitoringController> {
+  const TersajiMonitoring({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class OrderMonitoring extends GetView<MonitoringController> {
           children: [
             Expanded(
               child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                stream: controller.pesananStream(),
+                stream: controller.initStream('tersaji'),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.active) {
                     List<Order> orderData =
@@ -41,9 +41,6 @@ class OrderMonitoring extends GetView<MonitoringController> {
                         Order data = orderData[index];
                         String id = idDocs[index].id;
 
-                        // initialize atau passing data order ke controller
-                        controller.orderDataDariPesanan = data;
-
                         /// func agar data tidak duplicate
                         List<ProductOrder> productOrders = data.productsOrder!;
                         final ids = Set();
@@ -56,8 +53,12 @@ class OrderMonitoring extends GetView<MonitoringController> {
                           isOrder: true,
                           // buttonAll: () => controller.setProsesAll(data, id),
                           buttonAll: () async {
-                            await controller.setProsesAll(data, id);
-                            controller.tesss(id);
+                            await controller.setProsesAll(
+                              data,
+                              id,
+                              'tersaji',
+                              'kosong',
+                            );
                           },
                           listOrder: Container(
                             child: ListView.builder(
@@ -71,11 +72,23 @@ class OrderMonitoring extends GetView<MonitoringController> {
                                 return OrderItem(
                                   data: productOrder,
                                   onTap: () {
-                                    print("proses");
-                                    // productsAdd.add(productOrder);
                                     controller.setProses(
-                                        data, id, productOrder);
+                                      data,
+                                      id,
+                                      productOrder,
+                                      'tersaji',
+                                      'tersaji',
+                                    );
                                   },
+                                  isOrder: false,
+                                  textButton: 'tersaji',
+                                  undoButton: () => controller.reverseProses(
+                                    data,
+                                    id,
+                                    productOrder,
+                                    'siap',
+                                    'tersaji',
+                                  ),
                                 );
                               },
                             ),
