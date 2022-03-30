@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/modules/monitoring/controllers/monitoring_controller.dart';
 import 'package:casso/app/utils/constant.dart';
@@ -115,6 +117,108 @@ class MonitorCard extends GetView<MonitoringController> {
               )
             : Container(),
       ],
+    );
+  }
+}
+
+class DialogDeleteMonitoring extends StatelessWidget {
+  DialogDeleteMonitoring({
+    Key? key,
+    required this.delete,
+  }) : super(key: key);
+
+  final VoidCallback delete;
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(
+          sigmaX: 10,
+          sigmaY: 10,
+        ),
+        child: Container(
+          padding: const EdgeInsets.only(top: 16, bottom: 8),
+          width: Get.width,
+          // height: 180,
+          decoration: BoxDecoration(
+            color: putih.withOpacity(.35),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            children: [
+              Text(
+                "HAPUS ORDER",
+                style: TextStyle(
+                  color: putih,
+                  fontFamily: "balsamiq",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 16, left: 24, right: 24),
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                width: Get.width,
+                decoration: BoxDecoration(),
+                child: Text(
+                  "Apa kamu yakin ingin menghapus order ini ?",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    letterSpacing: .5,
+                    color: lightColor,
+                    fontFamily: 'balsamiq',
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+              Divider(thickness: 1, color: putih.withOpacity(.6)),
+              Center(
+                child: ButtonDelete(onTap: delete),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ButtonDelete extends StatelessWidget {
+  const ButtonDelete({
+    Key? key,
+    this.isConfirmText = 'HAPUS',
+    this.onTap,
+  }) : super(key: key);
+
+  final String isConfirmText;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 130,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: ElevatedButton(
+        onPressed: onTap,
+        child: Text(
+          isConfirmText,
+          style: TextStyle(
+            color: lightColor,
+            fontFamily: "balsamiq",
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1,
+            fontSize: 12,
+          ),
+        ),
+        style: ElevatedButton.styleFrom(
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          primary: merah.withOpacity(.5),
+        ),
+      ),
     );
   }
 }

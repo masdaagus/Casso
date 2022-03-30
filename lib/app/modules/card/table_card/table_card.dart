@@ -5,14 +5,14 @@ import 'package:flutter_svg/svg.dart';
 class TableCard extends StatelessWidget {
   const TableCard({
     Key? key,
-    required this.tableNumber,
-    this.guessName = 'KOSONG ',
-    required this.onTap,
+    this.guessName,
     this.isEmpty = true,
+    required this.tableNumber,
+    required this.onTap,
   }) : super(key: key);
 
   final int tableNumber;
-  final String guessName;
+  final String? guessName;
   final VoidCallback onTap;
   final bool isEmpty;
 
@@ -60,13 +60,13 @@ class TableCard extends StatelessWidget {
                     height: 20,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: isEmpty
+                      color: (guessName == null)
                           ? biru.withOpacity(.5)
                           : orange.withOpacity(.5),
                     ),
                     child: Center(
                       child: Text(
-                        guessName,
+                        guessName ?? 'KOSONG',
                         style: TextStyle(
                           fontSize: 10,
                           color: lightColor,

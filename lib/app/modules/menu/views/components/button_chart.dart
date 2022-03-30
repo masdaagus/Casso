@@ -19,8 +19,8 @@ class ButtonChart extends GetView<MenuController> {
 
   @override
   Widget build(BuildContext context) {
-    List<ProductOrder>? productsOrder =
-        controller.order.value.productsOrder as List<ProductOrder>;
+    // List<ProductOrder>? productsOrder =
+    //     controller.order.value.productsOrder as List<ProductOrder>;
 
     return GestureDetector(
       onTap: onTap,

@@ -13,7 +13,6 @@ class PesananMonitoring extends GetView<MonitoringController> {
 
   @override
   Widget build(BuildContext context) {
-    // final List<ProductOrder> productsAdd = [];
     return Scaffold(
       backgroundColor: darkColor,
       body: Container(
@@ -41,7 +40,7 @@ class PesananMonitoring extends GetView<MonitoringController> {
                         Order data = orderData[index];
                         String id = idDocs[index].id;
 
-                        /// func agar data tidak duplicate
+                        /// [function] agar data tidak duplicate
                         List<ProductOrder> productOrders = data.productsOrder!;
                         final ids = Set();
                         productOrders.retainWhere(
@@ -63,7 +62,17 @@ class PesananMonitoring extends GetView<MonitoringController> {
                             'pesanan',
                             'proses',
                           ),
-                          delete: () => controller.delete(id),
+                          delete: () {
+                            Get.defaultDialog(
+                              content: DialogDeleteMonitoring(delete: () async {
+                                await controller.delete(id);
+                                Get.back();
+                              }),
+                              backgroundColor: Colors.transparent,
+                              titleStyle: TextStyle(color: Colors.transparent),
+                              barrierDismissible: true,
+                            );
+                          },
                           listOrder: Container(
                             child: ListView.builder(
                               physics: NeverScrollableScrollPhysics(),

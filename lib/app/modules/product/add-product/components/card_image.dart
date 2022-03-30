@@ -1,29 +1,32 @@
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ImageCard extends StatelessWidget {
   const ImageCard({
     Key? key,
-    this.isNoImage = true,
+    this.image,
   }) : super(key: key);
 
-  final bool isNoImage;
+  final String? image;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 8, right: 8, bottom: 56, top: 16),
-      height: 200,
-      width: 200,
+      height: Get.width - 124,
+      width: Get.width - 124,
       decoration: BoxDecoration(
-        border: Border.all(color: textColor),
+        border: Border.all(
+          color: (image == null) ? textColor : Colors.transparent,
+        ),
         color: putih.withOpacity(.2),
         borderRadius: BorderRadius.circular(24),
       ),
-      child: isNoImage
+      child: (image == null)
           ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 40),
                 Icon(
                   Icons.camera_alt_outlined,
                   color: textColor,
@@ -52,11 +55,11 @@ class ImageCard extends StatelessWidget {
               ],
             )
           : Padding(
-              padding: EdgeInsets.all(4),
+              padding: EdgeInsets.all(0),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(21),
+                borderRadius: BorderRadius.circular(24),
                 child: Image.asset(
-                  "assets/images/milkshake-oreo.jpg",
+                  image!,
                   fit: BoxFit.cover,
                 ),
               ),

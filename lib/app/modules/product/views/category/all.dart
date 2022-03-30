@@ -1,6 +1,6 @@
 import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/modules/card/product_card/product_card.dart';
-import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
+import 'package:casso/app/modules/product/add-product/add_product.dart';
 import 'package:casso/app/modules/product/controllers/product_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +11,6 @@ class ProductsView extends GetView<ProductController> {
 
   @override
   Widget build(BuildContext context) {
-    final c = Get.put(MenuController());
-    print("masda");
     return Container(
       color: darkColor,
       child: SingleChildScrollView(
@@ -30,16 +28,23 @@ class ProductsView extends GetView<ProductController> {
                 physics: BouncingScrollPhysics(),
                 children: List.generate(controller.products.length, (index) {
                   ProductOrder data = controller.products[index];
-
+                  String image = controller.image[index];
                   return ProductCard(
                     data: data,
                     isOrderWidget: false,
-                    productImage: controller.image[index],
+                    productImage: image,
+                    editProduct: () {
+                      print('edit product');
+                      Get.to(() => AddProductView(
+                            dataProduct: data,
+                            image: image,
+                          ));
+                    },
                   );
                 }),
               ),
             ),
-            SizedBox(height: 65),
+            SizedBox(height: 85),
           ],
         ),
       ),

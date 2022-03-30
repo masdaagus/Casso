@@ -39,7 +39,6 @@ class DrinkMenu extends GetView<MenuController> {
                     minProduct: () async {
                       await controller.minProduct(data);
                     },
-                    detailProduct: () {},
                     // textCount: GetBuilder<MenuController>(
                     //   builder: (_) {
                     //     int qty = drink[index].productQty;

@@ -86,12 +86,6 @@ class Menus extends GetView<MenuController> {
                     onTap: () => Get.bottomSheet(
                       CustomBottomSheet(
                         onTap: () {
-                          // var tes = Order(
-                          //   guessName: guessName,
-                          //   waitersName: controller.user.value.name,
-                          //   tableNumber: table,
-                          //   productsOrder: controller.order.value.productsOrder,
-                          // );
                           controller.setOrder(guessName, table);
                         },
                       ),

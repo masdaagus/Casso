@@ -1,23 +1,30 @@
+import 'package:casso/app/controllers/auth_controller.dart';
+import 'package:casso/app/data/models/users.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class CashierController extends GetxController {
-  final List<int> table = [1, 12, 7, 9];
-  final List<String> names = ["Masda agus", "Yanto", "Wahyu", "Sukini"];
-  final List<String> items = ["Milkshake", "Jus Melon", "Dimsum", "Rabung"];
-  final List<String> prices = ["23.000", "17.000", "21.000", "16.000"];
+  final auth = Get.find<AuthController>();
+  var user = UsersModel().obs;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  final count = 0.obs;
+  Stream<QuerySnapshot<Map<String, dynamic>>> initStream(String collection) {
+    final data = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection(collection)
+        .snapshots();
+
+    return data;
+  }
+
   @override
-  void onInit() {
+  void onInit() async {
+    user = auth.user;
+    await initStream('tersaji');
     super.onInit();
   }
 
   @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
   void onClose() {}
-  void increment() => count.value++;
 }

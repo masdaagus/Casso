@@ -1,3 +1,4 @@
+import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/modules/product/controllers/product_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +9,19 @@ import 'components/card_image.dart';
 import 'components/card_text_field.dart';
 
 class AddProductView extends StatelessWidget {
-  const AddProductView({Key? key}) : super(key: key);
+  const AddProductView({
+    Key? key,
+    this.dataProduct,
+    this.image,
+  }) : super(key: key);
+
+  final ProductOrder? dataProduct;
+  final String? image;
 
   @override
   Widget build(BuildContext context) {
     final ctrl = Get.put(ProductController());
+
     return Scaffold(
       backgroundColor: darkColor,
 
@@ -37,47 +46,33 @@ class AddProductView extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            ImageCard(),
-            CardTextField(
-              hintText: "Nama Produk",
-              icon: Icons.keyboard_alt_outlined,
-              textController: ctrl.namaProduct,
-            ),
-            CardTextField(
-              hintText: "Harga Produk",
-              icon: Icons.keyboard_alt_outlined,
-              textController: ctrl.hargaProduct,
-            ),
-            Container(
-                // margin: const EdgeInsets.only(left: 8, right: 8, bottom: 12),
-                // height: 50,
-                // child: Hero(
-                //   child: Material(
-                //     color: darkColor,
-                //     shape: RoundedRectangleBorder(
-                //         borderRadius: BorderRadius.circular(16)),
-                //     child: Container(
-                //       decoration: BoxDecoration(
-                //         borderRadius: BorderRadius.circular(16),
-                //         color: putih.withOpacity(.2),
-                //       ),
-                //     ),
-                //   ),
-                //   tag: _hero,
-                // ),
-                ),
-            CradDeskripsi(),
-            SizedBox(height: 30),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              ImageCard(image: image),
+              CardTextField(
+                // hintText: "Nama Produk",
+                hintText: dataProduct!.productName ?? 'Nama Produk',
+                icon: Icons.keyboard_alt_outlined,
+                textController: ctrl.namaProduct,
+              ),
+              CardTextField(
+                hintText: nf.format(dataProduct!.productPrice),
+                icon: Icons.keyboard_alt_outlined,
+                textController: ctrl.hargaProduct,
+              ),
+              CradDeskripsi(),
+              SizedBox(height: 30),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-const String _hero = "add-hero";
+// const String _hero = "add-hero";
 
 
 

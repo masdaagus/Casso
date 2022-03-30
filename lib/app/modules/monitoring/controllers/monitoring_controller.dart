@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 class MonitoringController extends GetxController {
   final auth = Get.find<AuthController>();
   var user = UsersModel().obs;
-  var order = Order().obs;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   late Order orderDataDariProses;
@@ -244,7 +243,6 @@ class MonitoringController extends GetxController {
   @override
   void onInit() async {
     user = auth.user;
-
     await initStream('pesanan');
     await initStream('proses');
     await initStream('siap');

@@ -14,13 +14,13 @@ class ProductCard extends StatelessWidget {
     this.addProduct,
     this.isOrderWidget = true,
     this.minProduct,
-    this.detailProduct,
+    this.editProduct,
     this.productImage = "assets/images/Saly-22.png",
   }) : super(key: key);
 
   final VoidCallback? addProduct;
   final VoidCallback? minProduct;
-  final VoidCallback? detailProduct;
+  final VoidCallback? editProduct;
   final ProductOrder data;
 
   final bool isOrderWidget;
@@ -180,12 +180,22 @@ class ProductCard extends StatelessWidget {
                         }
                       },
                     )
-                  : Center(
-                      child: Container(
-                        child: Icon(
-                          Icons.restaurant_menu,
-                          color: lightColor,
-                          size: 32,
+                  : Expanded(
+                      child: GestureDetector(
+                        onTap: editProduct,
+                        child: Center(
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(24),
+                              color: lightColor.withOpacity(.2),
+                            ),
+                            child: Icon(
+                              Icons.edit,
+                              color: lightColor,
+                              size: 24,
+                            ),
+                          ),
                         ),
                       ),
                     ),

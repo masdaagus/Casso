@@ -1,3 +1,4 @@
+import 'package:casso/app/data/models/table.dart';
 import 'package:casso/app/modules/card/table_card/table_card.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -42,10 +43,12 @@ class OrderView extends GetView<OrderController> {
                   crossAxisCount: 3,
                   physics: BouncingScrollPhysics(),
                   children: List.generate(
-                    controller.resto.restoTable!,
+                    controller.resto.tables!.length,
                     (index) {
+                      TableModel table = controller.resto.tables![index];
                       return TableCard(
-                        tableNumber: index + 1,
+                        tableNumber: table.tableNumber!,
+                        isEmpty: table.isEmpty,
                         onTap: () {
                           controller.guessNameController.clear();
                           Get.defaultDialog(

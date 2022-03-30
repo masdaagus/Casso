@@ -4,6 +4,7 @@ import 'package:casso/app/controllers/auth_controller.dart';
 
 import 'package:casso/app/data/models/products.dart';
 import 'package:casso/app/data/models/resto.dart';
+import 'package:casso/app/data/models/table.dart';
 import 'package:casso/app/data/models/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -39,7 +40,7 @@ class IntroductionController extends GetxController {
     ];
     final List<ProductCategory> dessert = [
       ProductCategory(foodName: "Kentang Goreng ", foodPrice: 12000),
-      ProductCategory(foodName: "Roti Bakar ", foodPrice: 1000),
+      ProductCategory(foodName: "Roti Bakar ", foodPrice: 10000),
     ];
 
     final products = Products(
@@ -77,6 +78,8 @@ class IntroductionController extends GetxController {
       ),
     ];
 
+    final List<TableModel> tables = [];
+
     try {
       // / update users untuk menambahkan resto id
       await users.doc(user.value.email).update({
@@ -103,6 +106,15 @@ class IntroductionController extends GetxController {
           break;
         }
 
+        /// membuat panjang table
+        int _tableLength = int.parse(restoTable.text);
+
+        for (int i = 0; i < _tableLength; i++) {
+          tables.add(TableModel(tableNumber: i + 1));
+          print(i);
+          print(_tableLength);
+        }
+
         /// set resto dengan model
         await restos.doc(user.value.uid).set(
               RestosModel(
@@ -110,9 +122,10 @@ class IntroductionController extends GetxController {
                 ownerName: user.value.name,
                 restoName: restoName.text,
                 restoLocation: restoLocation.text,
-                restoTable: int.tryParse(restoTable.text),
+                restoTable: _tableLength,
                 restoEmploye: employe,
                 products: products,
+                tables: tables,
               ).toJson(),
             );
 

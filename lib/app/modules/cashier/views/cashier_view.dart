@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/cashier_controller.dart';
 
-import 'menunggu/monitoring.dart';
+import 'menunggu/menunggu.dart';
 
 class CashierView extends GetView<CashierController> {
   @override
