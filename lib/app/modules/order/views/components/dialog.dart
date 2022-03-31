@@ -1,9 +1,10 @@
 import 'dart:ui';
-
 import 'package:casso/app/modules/order/controllers/order_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'button_dialog.dart';
 
 class GetDialog extends GetView<OrderController> {
   GetDialog({Key? key, required this.tableNumber}) : super(key: key);
@@ -32,7 +33,7 @@ class GetDialog extends GetView<OrderController> {
             child: Column(
               children: [
                 Text(
-                  "TABLE ${tableNumber + 1}",
+                  "TABLE ${tableNumber}",
                   style: TextStyle(
                     color: putih,
                     fontFamily: "balsamiq",
@@ -91,63 +92,27 @@ class GetDialog extends GetView<OrderController> {
                       isConfirmText: 'CANCEL',
                       onTap: () => Get.back(),
                     ),
-                    DialogButton(onTap: () {
+                    DialogButton(onTap: () async {
                       if (formKey.currentState!.validate()) {
                         Get.offNamed(
                           "/menu",
                           arguments: [
                             tableNumber,
-                            controller.guessNameController.text,
+                            controller.guessNameController.text.toUpperCase(),
                           ],
                         );
                       }
+                      controller.updateTable(
+                        tableNumber: tableNumber,
+                        guessName:
+                            controller.guessNameController.text.toUpperCase(),
+                      );
                     }),
                   ],
                 )
               ],
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class DialogButton extends StatelessWidget {
-  const DialogButton({
-    Key? key,
-    this.isConfirm = true,
-    this.isConfirmText = 'CONFIRM',
-    this.onTap,
-  }) : super(key: key);
-
-  final bool isConfirm;
-  final String isConfirmText;
-  final VoidCallback? onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 130,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: ElevatedButton(
-        onPressed: onTap,
-        child: Text(
-          isConfirmText,
-          style: TextStyle(
-            color: lightColor,
-            fontFamily: "balsamiq",
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1,
-            fontSize: 12,
-          ),
-        ),
-        style: ElevatedButton.styleFrom(
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          primary: isConfirm ? hijau.withOpacity(.5) : merah.withOpacity(.5),
         ),
       ),
     );

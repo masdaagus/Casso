@@ -3,6 +3,7 @@ import 'package:casso/app/controllers/auth_controller.dart';
 import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/data/models/products.dart';
 import 'package:casso/app/data/models/resto.dart';
+import 'package:casso/app/data/models/table.dart';
 import 'package:casso/app/data/models/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
@@ -77,7 +78,7 @@ class MenuController extends GetxController {
     try {
       pesananC.add(Order(
         guessName: guessName,
-        tableNumber: table + 1,
+        tableNumber: table,
         waitersName: user.value.name,
         totalPrices: _sumPrices(),
         totalItems: _tempOrder.length,
@@ -100,6 +101,29 @@ class MenuController extends GetxController {
     });
 
     return _totalPrice;
+  }
+
+  Future<void> deleteTable(int? tableNumber) async {
+    CollectionReference restos = firestore.collection("restos");
+    try {
+      final checkResto = await restos.doc(user.value.restoID).get();
+      var data = checkResto.data() as Map<String, dynamic>;
+      List<TableModel> tables = List<TableModel>.from(
+          data["tables"].map((x) => TableModel.fromJson(x)));
+
+      tables[tableNumber! - 1].guessName = null;
+      await restos.doc(user.value.restoID).update({
+        "tables": List<dynamic>.from(
+          tables.map(
+            (x) => x.toJson(),
+          ),
+        ),
+      });
+
+      Get.offAllNamed('/home');
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override

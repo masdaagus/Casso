@@ -1,18 +1,20 @@
 class TableModel {
   TableModel({
     this.tableNumber,
-    this.isEmpty = true,
+    // this.isEmpty = true,
+    this.guessName = '',
   });
   final int? tableNumber;
-  final bool isEmpty;
+  // bool isEmpty;
+  String? guessName;
 
   factory TableModel.fromJson(Map<String, dynamic> json) => TableModel(
         tableNumber: json['tableNumber'],
-        isEmpty: json['isEmpty'],
+        guessName: json['guessName'],
       );
 
   Map<String, dynamic> toJson() => {
         "tableNumber": tableNumber,
-        "isEmpty": isEmpty,
+        "guessName": guessName,
       };
 }

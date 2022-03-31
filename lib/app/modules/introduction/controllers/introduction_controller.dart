@@ -110,9 +110,7 @@ class IntroductionController extends GetxController {
         int _tableLength = int.parse(restoTable.text);
 
         for (int i = 0; i < _tableLength; i++) {
-          tables.add(TableModel(tableNumber: i + 1));
-          print(i);
-          print(_tableLength);
+          tables.add(TableModel(tableNumber: i + 1, guessName: null));
         }
 
         /// set resto dengan model

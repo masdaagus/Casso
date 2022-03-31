@@ -1,6 +1,6 @@
 import 'package:casso/app/controllers/auth_controller.dart';
-
 import 'package:casso/app/data/models/resto.dart';
+import 'package:casso/app/data/models/table.dart';
 import 'package:casso/app/data/models/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -9,16 +9,46 @@ import 'package:get/get.dart';
 class OrderController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final auth = Get.find<AuthController>();
-  UsersModel user = UsersModel();
-  RestosModel resto = RestosModel();
+  var user = UsersModel().obs;
+  var resto = RestosModel().obs;
 
   late TextEditingController guessNameController;
 
+  Stream<DocumentSnapshot<Map<String, dynamic>>> initStream() {
+    final data =
+        firestore.collection("restos").doc(user.value.restoID).snapshots();
+    print(data.runtimeType);
+
+    return data;
+  }
+
+  Future<void> updateTable({int? tableNumber, String? guessName}) async {
+    CollectionReference restos = firestore.collection("restos");
+    try {
+      final checkResto = await restos.doc(user.value.restoID).get();
+      var data = checkResto.data() as Map<String, dynamic>;
+      List<TableModel> tables = List<TableModel>.from(
+          data["tables"].map((x) => TableModel.fromJson(x)));
+
+      tables[tableNumber! - 1].guessName = guessName;
+      await restos.doc(user.value.restoID).update({
+        "tables": List<dynamic>.from(
+          tables.map(
+            (x) => x.toJson(),
+          ),
+        ),
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
-  void onInit() {
-    user = auth.user.value;
-    resto = auth.resto.value;
+  void onInit() async {
+    user = auth.user;
+    resto = auth.resto;
     guessNameController = TextEditingController();
+    await initStream();
     super.onInit();
   }
 
@@ -27,81 +57,4 @@ class OrderController extends GetxController {
     guessNameController.dispose();
     super.onClose();
   }
-
-  // dialog button
-  // void dialog({
-  //   int? table,
-  // }) {
-  //   Get.defaultDialog(
-  //     content: Column(
-  //       children: [
-  //         Container(
-  //           margin: const EdgeInsets.only(top: 16),
-  //           padding: const EdgeInsets.symmetric(vertical: 8),
-  //           width: Get.width,
-  //           decoration: BoxDecoration(
-  //               color: iconColor, borderRadius: BorderRadius.circular(20)),
-  //           child: TextField(
-  //             controller: guessNameController,
-  //             textAlign: TextAlign.center,
-  //             decoration: InputDecoration(
-  //               isDense: true,
-  //               hintStyle: TextStyle(
-  //                 fontFamily: "balsamiq",
-  //                 color: darkColor.withOpacity(.7),
-  //                 fontSize: 13,
-  //                 letterSpacing: -.5,
-  //               ),
-  //               border: InputBorder.none,
-  //               hintText: "Masukkan nama pengunjung . . .",
-  //               contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-  //             ),
-  //           ),
-  //         ),
-  //         GestureDetector(
-  //           onTap: () => Get.offNamed("/menu", arguments: table),
-  //           child: Container(
-  //             margin: const EdgeInsets.only(top: 40, bottom: 8),
-  //             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-  //             decoration: BoxDecoration(
-  //               borderRadius: BorderRadius.circular(25),
-  //               color: darkColor,
-  //               boxShadow: [
-  //                 BoxShadow(
-  //                   blurRadius: 6,
-  //                   color: Colors.black.withOpacity(.45),
-  //                   offset: Offset(3, 3),
-  //                 ),
-  //                 BoxShadow(
-  //                   blurRadius: 6,
-  //                   color: iconColor.withOpacity(.30),
-  //                   offset: Offset(-3, -3),
-  //                 ),
-  //               ],
-  //             ),
-  //             child: Text(
-  //               "PILIH MAKANAN",
-  //               style: TextStyle(
-  //                 color: textColor,
-  //                 fontFamily: "balsamiq",
-  //                 fontWeight: FontWeight.bold,
-  //                 fontSize: 12,
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //     title: "TABLE ${table! + 1}",
-  //     titleStyle: TextStyle(
-  //       color: lightColor,
-  //       fontSize: 18,
-  //       fontFamily: "balsamiq",
-  //       fontWeight: FontWeight.bold,
-  //     ),
-  //     backgroundColor: darkColor,
-  //     radius: 10,
-  //     contentPadding: EdgeInsets.symmetric(horizontal: 24),
-  //   );
-  // }
 }

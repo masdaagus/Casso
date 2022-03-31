@@ -80,8 +80,6 @@ class CustomBottomSheet extends GetView<MenuController> {
                         ProductOrder data =
                             productOrders.toSet().toList()[index];
 
-                        print(data);
-
                         return ItemCardBottomSheet(data: data);
                       },
                     ),
