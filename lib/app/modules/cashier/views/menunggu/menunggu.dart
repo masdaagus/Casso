@@ -23,7 +23,7 @@ class Menunggu extends GetView<CashierController> {
           // List items dan total
           Expanded(
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                stream: controller.initStream('tersaji'),
+                stream: controller.initStream('orders'),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.active) {
                     List<Order> orderData =
@@ -40,7 +40,7 @@ class Menunggu extends GetView<CashierController> {
                         itemBuilder: (context, index) {
                           Order data = orderData[index];
                           String id = idDocs[index].id;
-                          print(data);
+
                           return PricesCard(
                             data: data,
                           );
@@ -48,18 +48,6 @@ class Menunggu extends GetView<CashierController> {
                   }
                   return Center(child: CustomSpinner());
                 }),
-            // child: ListView.builder(
-            //   physics: BouncingScrollPhysics(),
-            //   shrinkWrap: true,
-            //   itemCount: 4,
-            //   itemBuilder: (context, index) {
-            //     return PricesCard(
-            //       guessName: controller.names[index],
-            //       table: controller.table[index],
-            //       price: controller.prices,
-            //     );
-            //   },
-            // ),
           ),
         ],
       ),

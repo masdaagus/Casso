@@ -16,6 +16,7 @@ class MonitoringController extends GetxController {
         .collection("restos")
         .doc(user.value.restoID)
         .collection(collection)
+        .orderBy('createAt')
         .snapshots();
 
     return data;
@@ -37,6 +38,7 @@ class MonitoringController extends GetxController {
         .collection(collectionRight);
 
     final docProses = await collectRight.doc(id).get();
+    DateTime now = DateTime.now();
 
     try {
       List<ProductOrder> products = [];
@@ -64,6 +66,8 @@ class MonitoringController extends GetxController {
               totalPrices: data.totalPrices,
               totalItems: data.totalItems,
               productsOrder: data.productsOrder,
+              createAt: now.toIso8601String(),
+              orderNumber: 1,
             ).toJson());
 
         collectLeft.doc(id).delete();
@@ -80,6 +84,8 @@ class MonitoringController extends GetxController {
     String left,
     String right,
   ) async {
+    DateTime now = DateTime.now();
+
     ///
     CollectionReference collectionLeft =
         firestore.collection("restos").doc(user.value.restoID).collection(left);
@@ -117,6 +123,8 @@ class MonitoringController extends GetxController {
               totalPrices: data.totalPrices,
               totalItems: data.totalItems,
               productsOrder: productsProses,
+              createAt: now.toIso8601String(),
+              orderNumber: 1,
             ).toJson());
 
         /// menghapus [list order item] dari collection [pesanan]
@@ -184,6 +192,7 @@ class MonitoringController extends GetxController {
       products.add(product);
       if (leftData.data() == null) {
         print("SET DATA BARU");
+        DateTime now = DateTime.now();
 
         await collectionLeft.doc(id).set(Order(
               guessName: data.guessName,
@@ -192,6 +201,8 @@ class MonitoringController extends GetxController {
               totalPrices: data.totalPrices,
               totalItems: data.totalItems,
               productsOrder: products,
+              createAt: now.toIso8601String(),
+              orderNumber: 1,
             ).toJson());
 
         /// menghapus [list order item] dari collection [pesanan]

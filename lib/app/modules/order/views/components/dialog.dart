@@ -1,4 +1,7 @@
 import 'dart:ui';
+import 'package:casso/app/data/models/order.dart';
+import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
+import 'package:casso/app/modules/menu/views/menu_view.dart';
 import 'package:casso/app/modules/order/controllers/order_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +17,7 @@ class GetDialog extends GetView<OrderController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(MenuController());
     return ClipRRect(
       child: BackdropFilter(
         filter: ImageFilter.blur(
@@ -94,13 +98,13 @@ class GetDialog extends GetView<OrderController> {
                     ),
                     DialogButton(onTap: () async {
                       if (formKey.currentState!.validate()) {
-                        Get.offNamed(
-                          "/menu",
-                          arguments: [
-                            tableNumber,
-                            controller.guessNameController.text.toUpperCase(),
-                          ],
-                        );
+                        Order emptyData = Order();
+                        Get.to(() => Menus(
+                              guessName: controller.guessNameController.text
+                                  .toUpperCase(),
+                              table: tableNumber,
+                              data: emptyData,
+                            ));
                       }
                       controller.updateTable(
                         tableNumber: tableNumber,

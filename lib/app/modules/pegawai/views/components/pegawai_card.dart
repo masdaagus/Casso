@@ -33,7 +33,7 @@ class PegawaiCard extends StatelessWidget {
               Text(
                 "($status)".toUpperCase(),
                 style: TextStyle(
-                  color: textColor,
+                  color: abu,
                   fontFamily: "balsamiq",
                 ),
               ),
@@ -42,7 +42,7 @@ class PegawaiCard extends StatelessWidget {
                 "$email",
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  color: textColor,
+                  color: abu,
                   fontFamily: "balsamiq",
                 ),
               ),

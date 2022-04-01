@@ -48,7 +48,7 @@ class CustomTextField extends StatelessWidget {
               controller: controller,
               obscureText: isObsecure,
               style: TextStyle(
-                color: textColor,
+                color: abu,
                 fontFamily: "balsamiq",
                 letterSpacing: .5,
               ),

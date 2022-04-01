@@ -29,7 +29,7 @@ class FormScreen extends GetView<IntroductionController> {
               // height: 400,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24),
-                color: textColor.withOpacity(.2),
+                color: abu.withOpacity(.2),
               ),
               child: Column(
                 children: [
@@ -121,7 +121,7 @@ class FormField extends StatelessWidget {
           border: InputBorder.none,
           hintText: hintText,
           hintStyle: TextStyle(
-            color: textColor.withOpacity(.8),
+            color: abu.withOpacity(.8),
             fontFamily: "Montserrat",
             fontWeight: FontWeight.w500,
             fontSize: 14,
@@ -129,7 +129,7 @@ class FormField extends StatelessWidget {
           ),
           prefixIcon: Icon(
             iconData,
-            color: textColor,
+            color: abu,
           ),
         ),
       ),

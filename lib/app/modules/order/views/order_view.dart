@@ -19,7 +19,7 @@ class OrderView extends GetView<OrderController> {
         title: Text(
           'ORDER',
           style: TextStyle(
-            color: textColor,
+            color: abu,
             fontFamily: "balsamiq",
             fontWeight: FontWeight.bold,
             letterSpacing: 1,
@@ -75,7 +75,9 @@ class OrderView extends GetView<OrderController> {
                                   );
                                 } else {
                                   Get.defaultDialog(
-                                    content: DialogMoveTable(),
+                                    content: DialogMoveTable(
+                                      tableNumber: table.tableNumber!,
+                                    ),
                                     backgroundColor: Colors.transparent,
                                     titleStyle:
                                         TextStyle(color: Colors.transparent),

@@ -32,7 +32,7 @@ class AddProductView extends StatelessWidget {
         title: Text(
           'ADD PRODUCT',
           style: TextStyle(
-            color: textColor,
+            color: abu,
             fontFamily: "Montserrat",
             fontWeight: FontWeight.bold,
             fontSize: 18,

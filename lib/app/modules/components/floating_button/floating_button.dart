@@ -20,7 +20,7 @@ class FloatingButton extends StatelessWidget {
         ),
         child: Icon(
           Icons.add,
-          color: textColor,
+          color: abu,
           size: 48,
         ),
       ),

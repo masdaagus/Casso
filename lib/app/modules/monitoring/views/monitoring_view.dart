@@ -45,7 +45,7 @@ class MonitoringView extends GetView<MonitoringController> {
               child: Container(
                 padding: const EdgeInsets.all(4),
                 child: TabBar(
-                  labelColor: textColor,
+                  labelColor: abu,
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
                     color: darkColor,
@@ -83,7 +83,7 @@ class MonitoringView extends GetView<MonitoringController> {
     return Text(
       text,
       style: TextStyle(
-        color: textColor,
+        color: abu,
         fontSize: 9,
         fontFamily: "Montserrat",
         fontWeight: FontWeight.w600,

@@ -28,13 +28,18 @@ class _PricesCardState extends State<PricesCard> {
   double _total = 0;
   double _sumPrices() {
     _total = 0;
-    widget.data!.productsOrder!
-        .forEach((e) => _total += (e.productPrice! * e.productQty));
+    widget.data!.productsOrder!.forEach((e) => _total += e.productPrice!);
     return _total;
   }
 
   @override
   Widget build(BuildContext context) {
+    /// [function] agar data tidak duplicate
+    List<ProductOrder> productOrders = widget.data!.productsOrder!;
+    final ids = Set();
+    productOrders.retainWhere(
+      (x) => ids.add(x.productName),
+    );
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       decoration: BoxDecoration(
@@ -58,7 +63,7 @@ class _PricesCardState extends State<PricesCard> {
                 Text(
                   "TABLE ${widget.data!.tableNumber} - (${widget.data!.guessName})",
                   style: TextStyle(
-                    color: textColor,
+                    color: abu,
                     fontFamily: "balsamiq",
                     fontWeight: FontWeight.bold,
                     letterSpacing: .5,
@@ -68,7 +73,7 @@ class _PricesCardState extends State<PricesCard> {
                 Text(
                   "By: ${widget.data!.waitersName}",
                   style: TextStyle(
-                    color: textColor,
+                    color: abu,
                     fontFamily: "balsamiq",
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
@@ -83,9 +88,9 @@ class _PricesCardState extends State<PricesCard> {
             child: ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: widget.data!.productsOrder!.length,
+              itemCount: productOrders.length,
               itemBuilder: (context, index) {
-                ProductOrder listOrder = widget.data!.productsOrder![index];
+                ProductOrder listOrder = productOrders[index];
                 return Container(
                   child: Column(
                     children: [
@@ -95,12 +100,11 @@ class _PricesCardState extends State<PricesCard> {
                           Row(
                             children: [
                               Container(
-                                // width: Get.width * .5,
                                 child: Text(
                                   listOrder.productName!,
                                   style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
-                                      color: textColor,
+                                      color: abu,
                                       fontFamily: "balsamiq",
                                       letterSpacing: .5),
                                 ),
@@ -124,7 +128,7 @@ class _PricesCardState extends State<PricesCard> {
                           Text(
                             nf.format(listOrder.productPrice),
                             style: TextStyle(
-                                color: textColor,
+                                color: abu,
                                 fontFamily: "balsamiq",
                                 letterSpacing: .5),
                           ),

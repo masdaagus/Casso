@@ -21,7 +21,7 @@ class CashierController extends GetxController {
   @override
   void onInit() async {
     user = auth.user;
-    await initStream('tersaji');
+    await initStream('orders');
     super.onInit();
   }
 

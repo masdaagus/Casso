@@ -17,17 +17,26 @@ import 'components/dialog_cancel.dart';
 class Menus extends GetView<MenuController> {
   const Menus({
     Key? key,
+    this.data,
+    this.guessName,
+    this.table,
   }) : super(key: key);
+
+  final Order? data;
+  final String? guessName;
+  final int? table;
 
   @override
   Widget build(BuildContext context) {
-    final int table = Get.arguments[0];
-    final guessName = Get.arguments[1];
+    print(data!.guessName);
+    print(data!.tableNumber);
+    print("data = $guessName");
+    print("data = $table");
     return WillPopScope(
       onWillPop: () async {
         Get.defaultDialog(
           content: DialogCancel(
-            onConfirm: () => controller.deleteTable(table),
+            onConfirm: () => controller.deleteTable(table ?? data!.tableNumber),
           ),
           backgroundColor: Colors.transparent,
           titleStyle: TextStyle(color: Colors.transparent),
@@ -42,8 +51,8 @@ class Menus extends GetView<MenuController> {
           title: Text(
             'MENU',
             style: TextStyle(
-              color: textColor,
-              fontFamily: "Montserrat",
+              color: abu,
+              fontFamily: "balsamiq",
               fontWeight: FontWeight.w600,
               letterSpacing: 1,
             ),
@@ -92,12 +101,17 @@ class Menus extends GetView<MenuController> {
                       ],
                     ),
                     ButtonChart(
-                      guessName: guessName ?? 'NO-NAME',
-                      table: table,
+                      guessName: guessName ?? data!.guessName,
+                      table: table ?? data!.tableNumber,
                       onTap: () => Get.bottomSheet(
                         CustomBottomSheet(
                           onTap: () {
-                            controller.setOrder(guessName, table);
+                            controller.setOrder(
+                                guessName: guessName ?? data!.guessName,
+                                table: table ?? data!.tableNumber);
+                            // controller.getData(
+                            //     guessName: guessName ?? data!.guessName,
+                            //     tableNumber: table ?? data!.tableNumber!);
                           },
                         ),
                         isScrollControlled: true,
@@ -120,7 +134,7 @@ class Menus extends GetView<MenuController> {
         child: Text(
           text,
           style: TextStyle(
-            color: textColor,
+            color: abu,
             fontSize: 10,
             fontFamily: "Montserrat",
             fontWeight: FontWeight.w600,

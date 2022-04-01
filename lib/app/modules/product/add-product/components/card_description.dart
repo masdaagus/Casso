@@ -15,7 +15,7 @@ class CradDeskripsi extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: textColor),
+        border: Border.all(color: abu),
       ),
       child: TextField(
         maxLines: 6,
@@ -23,20 +23,20 @@ class CradDeskripsi extends StatelessWidget {
           fontSize: 14,
           fontFamily: "Montserrat",
           fontWeight: FontWeight.w500,
-          color: textColor,
+          color: abu,
         ),
         decoration: InputDecoration(
           border: InputBorder.none,
           icon: Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 93),
-            child: Icon(Icons.input_outlined, color: textColor),
+            child: Icon(Icons.input_outlined, color: abu),
           ),
           hintText: "Deskripsi",
           hintStyle: TextStyle(
             fontSize: 14,
             fontFamily: "Montserrat",
             fontWeight: FontWeight.w500,
-            color: textColor.withOpacity(.7),
+            color: abu.withOpacity(.7),
             overflow: TextOverflow.ellipsis,
           ),
         ),

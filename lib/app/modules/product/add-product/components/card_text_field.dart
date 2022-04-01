@@ -26,7 +26,7 @@ class CardTextField extends StatelessWidget {
         children: [
           Icon(
             icon,
-            color: textColor,
+            color: abu,
           ),
           SizedBox(width: 8),
           Expanded(
@@ -36,7 +36,7 @@ class CardTextField extends StatelessWidget {
                 fontSize: 14,
                 fontFamily: "Montserrat",
                 fontWeight: FontWeight.w500,
-                color: textColor,
+                color: abu,
               ),
               decoration: InputDecoration(
                 hintText: hintText,
@@ -44,7 +44,7 @@ class CardTextField extends StatelessWidget {
                   fontSize: 14,
                   fontFamily: "Montserrat",
                   fontWeight: FontWeight.w500,
-                  color: textColor.withOpacity(.7),
+                  color: abu.withOpacity(.7),
                 ),
                 border: InputBorder.none,
               ),

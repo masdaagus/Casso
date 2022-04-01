@@ -154,7 +154,7 @@ class ProductCard extends StatelessWidget {
                                 Text(
                                   qty.toString(),
                                   style: TextStyle(
-                                    color: textColor,
+                                    color: abu,
                                     fontFamily: 'balsamiq',
                                   ),
                                 ),

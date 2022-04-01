@@ -36,7 +36,7 @@ class OrderItem extends StatelessWidget {
                     height: 6,
                     width: 6,
                     decoration: BoxDecoration(
-                      color: textColor,
+                      color: abu,
                       borderRadius: BorderRadius.circular(3),
                     ),
                   ),
@@ -45,7 +45,7 @@ class OrderItem extends StatelessWidget {
                       data.productName!,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        color: textColor.withOpacity(.9),
+                        color: abu.withOpacity(.9),
                         fontFamily: "balsamiq",
                         fontSize: 12,
                         letterSpacing: .5,
@@ -115,7 +115,7 @@ class OrderItem extends StatelessWidget {
           ),
           Divider(
             thickness: .3,
-            color: textColor.withOpacity(.3),
+            color: abu.withOpacity(.3),
           ),
         ],
       ),

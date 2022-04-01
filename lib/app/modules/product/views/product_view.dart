@@ -27,7 +27,7 @@ class ProductView extends GetView<ProductController> {
         title: Text(
           'PRODUCTS',
           style: TextStyle(
-            color: textColor,
+            color: abu,
             fontFamily: "Montserrat",
             fontWeight: FontWeight.w600,
             letterSpacing: 1,
@@ -104,7 +104,7 @@ class ProductView extends GetView<ProductController> {
         child: Text(
           text,
           style: TextStyle(
-            color: textColor,
+            color: abu,
             fontSize: 10,
             fontFamily: "Montserrat",
             fontWeight: FontWeight.w600,

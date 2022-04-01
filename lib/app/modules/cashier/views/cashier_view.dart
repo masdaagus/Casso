@@ -23,7 +23,7 @@ class CashierView extends GetView<CashierController> {
           title: Text(
             'KASIR',
             style: TextStyle(
-              color: textColor,
+              color: abu,
               fontFamily: "balsamiq",
               letterSpacing: 1,
               fontWeight: FontWeight.bold,
@@ -55,7 +55,7 @@ class CashierView extends GetView<CashierController> {
               child: Container(
                 padding: const EdgeInsets.all(4),
                 child: TabBar(
-                  labelColor: textColor,
+                  labelColor: abu,
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
                     color: darkColor,
@@ -89,7 +89,7 @@ class CashierView extends GetView<CashierController> {
       child: Text(
         text,
         style: TextStyle(
-          color: textColor,
+          color: abu,
           fontSize: 11,
           fontFamily: "balsamiq",
           fontWeight: FontWeight.bold,

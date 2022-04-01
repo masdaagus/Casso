@@ -21,12 +21,12 @@ class SearchCard extends StatelessWidget {
         children: [
           Expanded(
             child: TextField(
-              style: TextStyle(color: textColor),
+              style: TextStyle(color: abu),
               decoration: InputDecoration(
                 hintText: "Cari Nomor meja/Nama Pengunjung ",
                 isDense: true,
                 hintStyle: TextStyle(
-                  color: textColor,
+                  color: abu,
                   fontFamily: "Montserrat",
                   fontSize: 13,
                 ),
@@ -37,7 +37,7 @@ class SearchCard extends StatelessWidget {
           SizedBox(width: 16),
           Icon(
             Icons.search,
-            color: textColor,
+            color: abu,
           ),
         ],
       ),

@@ -7,15 +7,15 @@ import 'package:get/get.dart';
 class ButtonChart extends GetView<MenuController> {
   const ButtonChart({
     Key? key,
-    required this.table,
-    required this.onTap,
+    this.table,
+    this.onTap,
     this.guessName = 'NO-NAME',
   }) : super(key: key);
 
-  final int table;
+  final int? table;
 
   final String? guessName;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {

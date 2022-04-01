@@ -21,12 +21,12 @@ class SearchBar extends StatelessWidget {
         children: [
           Expanded(
             child: TextField(
-              style: TextStyle(color: textColor),
+              style: TextStyle(color: abu),
               decoration: InputDecoration(
                 isDense: true,
                 hintText: "Cari Nomor meja/Nama Pengunjung ",
                 hintStyle: TextStyle(
-                  color: textColor.withOpacity(.7),
+                  color: abu.withOpacity(.7),
                   fontFamily: "Montserrat",
                   fontSize: 13,
                 ),
@@ -37,7 +37,7 @@ class SearchBar extends StatelessWidget {
           SizedBox(width: 16),
           Icon(
             Icons.search,
-            color: textColor,
+            color: abu,
           ),
         ],
       ),

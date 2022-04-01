@@ -52,7 +52,7 @@ class RegisterView extends GetView<LoginController> {
                 height: 100,
                 width: 100,
                 decoration: BoxDecoration(
-                    color: textColor, borderRadius: BorderRadius.circular(50)),
+                    color: abu, borderRadius: BorderRadius.circular(50)),
               ),
             ),
             Positioned(
