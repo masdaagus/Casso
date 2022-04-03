@@ -1,26 +1,34 @@
 import 'package:casso/app/data/models/order.dart';
+import 'package:casso/app/data/models/resto.dart';
+import 'package:casso/app/modules/product/add-product/components/dropdown_kategori.dart';
 import 'package:casso/app/modules/product/controllers/product_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'components/button_add.dart';
 import 'components/card_description.dart';
 import 'components/card_image.dart';
 import 'components/card_text_field.dart';
 
 class AddProductView extends StatelessWidget {
-  const AddProductView({
+  AddProductView({
     Key? key,
     this.dataProduct,
     this.image,
   }) : super(key: key);
 
-  final ProductOrder? dataProduct;
+  final Product? dataProduct;
   final String? image;
 
   @override
   Widget build(BuildContext context) {
     final ctrl = Get.put(ProductController());
+
+    List<String> data = ['FOOD', 'DRINK', 'DESSERT'];
+    String selected = 'FOOD';
+
+    print(selected);
 
     return Scaffold(
       backgroundColor: darkColor,
@@ -33,7 +41,7 @@ class AddProductView extends StatelessWidget {
           'ADD PRODUCT',
           style: TextStyle(
             color: abu,
-            fontFamily: "Montserrat",
+            fontFamily: "balsamiq",
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
@@ -44,27 +52,45 @@ class AddProductView extends StatelessWidget {
           onPressed: Get.back,
         ),
       ),
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            children: [
-              ImageCard(image: image),
-              CardTextField(
-                // hintText: "Nama Produk",
-                hintText: dataProduct!.productName ?? 'Nama Produk',
-                icon: Icons.keyboard_alt_outlined,
-                textController: ctrl.namaProduct,
-              ),
-              CardTextField(
-                hintText: nf.format(dataProduct!.productPrice),
-                icon: Icons.keyboard_alt_outlined,
-                textController: ctrl.hargaProduct,
-              ),
-              CradDeskripsi(),
-              SizedBox(height: 30),
-            ],
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                ImageCard(image: image),
+                CardTextField(
+                  hintText: dataProduct!.productName ?? 'Nama Produk',
+                  icon: Icons.keyboard_alt_outlined,
+                  textController: ctrl.namaProduk,
+                ),
+                CardTextField(
+                  hintText: "${nf.format(dataProduct!.productPrice)}",
+                  icon: Icons.keyboard_alt_outlined,
+                  textController: ctrl.hargaProduk,
+                  isTextNumber: true,
+                ),
+                CardTextField(
+                  hintText: "${dataProduct!.productStock ?? 'Stok Produk'}",
+                  // hintText: 'Stock Produk',
+                  icon: Icons.keyboard_alt_outlined,
+                  textController: ctrl.stokProduk, isTextNumber: true,
+                ),
+                DropDownCategory(),
+                CradDeskripsi(
+                    textController: ctrl.deskripsiProduk,
+                    description:
+                        dataProduct!.productDescription ?? 'Deskripsi'),
+                ButtonAdd(
+                  onTap: () {
+                    ctrl.addProduct();
+                  },
+                ),
+                SizedBox(height: 24),
+              ],
+            ),
           ),
         ),
       ),

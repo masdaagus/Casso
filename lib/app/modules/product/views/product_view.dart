@@ -1,5 +1,6 @@
 import 'package:casso/app/controllers/auth_controller.dart';
 import 'package:casso/app/data/models/order.dart';
+import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/modules/components/floating_button/floating_button.dart';
 import 'package:casso/app/modules/components/search_bar/search_bar.dart';
 import 'package:casso/app/modules/product/add-product/add_product.dart';
@@ -77,11 +78,9 @@ class ProductView extends GetView<ProductController> {
                     alignment: Alignment.bottomRight,
                     child: FloatingButton(
                       onTap: () {
-                        ProductOrder kosong = ProductOrder(productPrice: 0);
+                        Product kosong = Product(productPrice: 0);
                         Get.to(
                           () => AddProductView(dataProduct: kosong),
-                          transition: Transition.cupertino,
-                          duration: Duration(milliseconds: 400),
                         );
                       },
                     ),

@@ -22,32 +22,16 @@ class MenuController extends GetxController {
   double _totalPrice = 0;
 
   Future<void> _getAllProducts() async {
-    var foodData = resto.value.products!.food as List<ProductCategory>;
-    var drinkData = resto.value.products!.drink as List<ProductCategory>;
-    var dessertData = resto.value.products!.dessert as List<ProductCategory>;
+    List<Product> productsData = resto.value.products! as List<Product>;
 
-    foodData.forEach((data) {
+    productsData.forEach((p) {
       products.add(ProductOrder(
-        productName: data.foodName,
-        productPrice: data.foodPrice,
+        productName: p.productName,
+        productPrice: p.productPrice,
+        productCategory: p.productCategory,
         productQty: 0,
-        productCategory: 'FOOD',
-      ));
-    });
-    drinkData.forEach((data) {
-      products.add(ProductOrder(
-        productName: data.foodName,
-        productPrice: data.foodPrice,
-        productQty: 0,
-        productCategory: 'DRINK',
-      ));
-    });
-    dessertData.forEach((data) {
-      products.add(ProductOrder(
-        productName: data.foodName,
-        productPrice: data.foodPrice,
-        productQty: 0,
-        productCategory: 'DESSERT',
+        productDescription: p.productDescription,
+        productStock: p.productStock,
       ));
     });
 

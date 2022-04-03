@@ -52,11 +52,16 @@ class ProductOrder {
     this.productName,
     this.productPrice,
     this.productCategory,
+    this.productDescription,
     this.productQty = 0,
+    this.productStock,
   });
   String? productName;
   String? productCategory;
   double? productPrice;
+  String? productDescription;
+  int? productStock;
+
   int productQty;
 
   factory ProductOrder.fromJson(Map<String, dynamic> json) => ProductOrder(
@@ -64,6 +69,8 @@ class ProductOrder {
         productPrice: json["productPrice"],
         productCategory: json["productCategory"],
         productQty: json["productQty"],
+        productDescription: json["productDescription"],
+        productStock: json["productStock"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -71,6 +78,8 @@ class ProductOrder {
         "productPrice": productPrice,
         "productCategory": productCategory,
         "productQty": productQty,
+        "productDescription": productDescription,
+        "productStock": productStock,
       };
 }
 

@@ -1,4 +1,5 @@
 import 'package:casso/app/data/models/order.dart';
+import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/modules/card/product_card/product_card.dart';
 import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/utils/constant.dart';
@@ -30,9 +31,11 @@ class DessertMenu extends GetView<MenuController> {
                 physics: BouncingScrollPhysics(),
                 children: List.generate(dessert.length, (index) {
                   ProductOrder data = dessert[index];
+                  Product kosong = Product();
 
                   return ProductCard(
                     data: data,
+                    dataProduct: kosong,
                     addProduct: () async {
                       await controller.addProduct(data);
                     },

@@ -3,8 +3,6 @@
 //     final products = productsFromJson(jsonString);
 
 // import 'dart:convert';
-
-import 'package:casso/app/data/models/products.dart';
 import 'package:casso/app/data/models/table.dart';
 import 'package:casso/app/data/models/users.dart';
 
@@ -29,10 +27,11 @@ class RestosModel {
   final String? ownerName;
   final String? restoLocation;
   final String? restoName;
-  final Products? products;
+  final List<dynamic>? products;
   final List<dynamic>? restoEmploye;
   final List<dynamic>? tables;
 
+  // final Products? products;
   factory RestosModel.fromJson(Map<String, dynamic> json) => RestosModel(
         ownerEmail: json["ownerEmail"],
         ownerName: json["ownerName"],
@@ -41,7 +40,8 @@ class RestosModel {
         restoTable: json["restoTable"],
         restoEmploye: List<dynamic>.from(
             json["restoEmploye"].map((x) => UsersModel.fromJson(x))),
-        products: Products.fromJson(json["products"]),
+        products: List<Product>.from(
+            json["products"].map((x) => Product.fromJson(x))),
         tables: List<TableModel>.from(
             json["tables"].map((x) => TableModel.fromJson(x))),
       );
@@ -54,10 +54,44 @@ class RestosModel {
         "restoTable": restoTable,
         "restoEmploye":
             List<dynamic>.from(restoEmploye!.map((x) => x.toJson())),
-        "products": products!.toJson(),
+        "products": List<dynamic>.from(products!.map((x) => x.toJson())),
         "tables": List<dynamic>.from(tables!.map((x) => x.toJson())),
       };
 }
+
+class Product {
+  const Product({
+    this.productPrice,
+    this.productCategory,
+    this.productName,
+    this.productStock,
+    this.productDescription,
+  });
+  final String? productName;
+  final double? productPrice;
+  final String? productCategory;
+  final String? productDescription;
+  final int? productStock;
+
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
+        productName: json["productName"],
+        productPrice: json["productPrice"],
+        productCategory: json["productCategory"],
+        productStock: json["productStock"],
+        productDescription: json["productDescription"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "productName": productName,
+        "productPrice": productPrice,
+        "productCategory": productCategory,
+        "productStock": productStock,
+        "productDescription": productDescription,
+      };
+}
+
+
+
 
 /// PRODUCTS FILEDS
 

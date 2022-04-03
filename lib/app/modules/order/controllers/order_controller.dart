@@ -20,7 +20,6 @@ class OrderController extends GetxController {
   Stream<DocumentSnapshot<Map<String, dynamic>>> initStream() {
     final data =
         firestore.collection("restos").doc(user.value.restoID).snapshots();
-    print(data.runtimeType);
 
     return data;
   }
@@ -112,11 +111,6 @@ class OrderController extends GetxController {
       final tes = Order.fromJson(object);
       return tes;
     }).toList();
-
-    // print(allData[0].tableNumber);
-    allData.forEach((element) {
-      print(element.tableNumber);
-    });
   }
 
   ///

@@ -1,16 +1,17 @@
 import 'package:casso/app/data/models/order.dart';
+import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-const lorem =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua";
+import 'components/bottom_sheet.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
     Key? key,
-    required this.data,
+    this.data,
+    this.dataProduct,
     this.addProduct,
     this.isOrderWidget = true,
     this.minProduct,
@@ -18,10 +19,11 @@ class ProductCard extends StatelessWidget {
     this.productImage = "assets/images/Saly-22.png",
   }) : super(key: key);
 
+  final Product? dataProduct;
+  final ProductOrder? data;
   final VoidCallback? addProduct;
   final VoidCallback? minProduct;
   final VoidCallback? editProduct;
-  final ProductOrder data;
 
   final bool isOrderWidget;
   final String? productImage;
@@ -44,56 +46,10 @@ class ProductCard extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   Get.bottomSheet(
-                    Container(
-                      margin: const EdgeInsets.only(top: 40),
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      height: size.height * .65,
-                      child: SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: Container(
-                                height: Get.height * .4,
-                                width: Get.height * .4,
-                                decoration: BoxDecoration(),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(24),
-                                  child: Image.asset(
-                                    productImage!,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 24),
-                            Text(
-                              "Milkshake Strowberry",
-                              style: TextStyle(
-                                color: lightColor,
-                                fontFamily: "balsamiq",
-                                fontSize: 18,
-                                // fontWeight: FontWeight.,
-                                letterSpacing: 1,
-                              ),
-                            ),
-                            SizedBox(height: 24),
-                            Container(
-                              child: Text(
-                                lorem,
-                                maxLines: 7,
-                                style: TextStyle(
-                                  color: lightColor,
-                                  fontFamily: "balsamiq",
-                                  fontSize: 12,
-                                  letterSpacing: 1,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    BottomSheetProduct(
+                      productImage: productImage,
+                      data: data,
+                      dataProduct: dataProduct,
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(
@@ -127,7 +83,7 @@ class ProductCard extends StatelessWidget {
               isOrderWidget
                   ? GetBuilder<MenuController>(
                       builder: (c) {
-                        int qty = data.productQty;
+                        int qty = data!.productQty;
                         if (qty <= 0) {
                           return addButton();
                         } else {
@@ -204,7 +160,7 @@ class ProductCard extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(top: 8),
             child: Text(
-              data.productName ?? "Kosong",
+              data!.productName ?? dataProduct!.productName!,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
@@ -218,7 +174,7 @@ class ProductCard extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(top: 8),
             child: Text(
-              nf.format(data.productPrice),
+              nf.format(data!.productPrice ?? dataProduct!.productPrice),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(

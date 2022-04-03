@@ -13,9 +13,9 @@ class ImageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 8, right: 8, bottom: 56, top: 16),
-      height: Get.width - 124,
-      width: Get.width - 124,
+      margin: const EdgeInsets.only(left: 8, right: 8, bottom: 36, top: 16),
+      height: Get.width - 154,
+      width: Get.width - 154,
       decoration: BoxDecoration(
         border: Border.all(
           color: (image == null) ? abu : Colors.transparent,
@@ -36,7 +36,7 @@ class ImageCard extends StatelessWidget {
                 Text(
                   "ADD IMAGE",
                   style: TextStyle(
-                    fontFamily: "Montserrat",
+                    fontFamily: "balsamiq",
                     fontSize: 16,
                     color: abu,
                     fontWeight: FontWeight.w600,
@@ -46,7 +46,7 @@ class ImageCard extends StatelessWidget {
                 Text(
                   "Max size 200 kB",
                   style: TextStyle(
-                    fontFamily: "Montserrat",
+                    fontFamily: "balsamiq",
                     fontSize: 9,
                     color: abu,
                     // fontWeight: FontWeight,

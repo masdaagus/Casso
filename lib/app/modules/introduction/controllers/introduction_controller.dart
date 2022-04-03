@@ -30,24 +30,44 @@ class IntroductionController extends GetxController {
     Random r = Random();
     String rndm = List.generate(4, (_) => r.nextInt(9)).join("").toString();
 
-    final List<ProductCategory> drink = [
-      ProductCategory(foodName: "Teh Manis ", foodPrice: 5000),
-      ProductCategory(foodName: "Lemon Tea", foodPrice: 10000),
+    final List<Product> products = [
+      Product(
+          productName: 'Nasi Goreng',
+          productPrice: 5000,
+          productCategory: 'FOOD',
+          productDescription: 'Write description here.....',
+          productStock: 100),
+      Product(
+          productName: 'Indomie Goreng',
+          productPrice: 5000,
+          productCategory: 'FOOD',
+          productDescription: 'Write description here.....',
+          productStock: 100),
+      Product(
+          productName: 'Teh Manis',
+          productPrice: 5000,
+          productCategory: 'DRINK',
+          productDescription: 'Write description here.....',
+          productStock: 100),
+      Product(
+          productName: 'Lemon Tea',
+          productPrice: 12000,
+          productCategory: 'DRINK',
+          productDescription: 'Write description here.....',
+          productStock: 100),
+      Product(
+          productName: 'Kentang Goreng',
+          productPrice: 10000,
+          productCategory: 'DESSERT',
+          productDescription: 'Write description here.....',
+          productStock: 100),
+      Product(
+          productName: 'Dimsum',
+          productPrice: 20000,
+          productCategory: 'DESSERT',
+          productDescription: 'Write description here.....',
+          productStock: 100),
     ];
-    final List<ProductCategory> food = [
-      ProductCategory(foodName: "Nasi Goreng ", foodPrice: 12000),
-      ProductCategory(foodName: "Indomie Goreng", foodPrice: 10000),
-    ];
-    final List<ProductCategory> dessert = [
-      ProductCategory(foodName: "Kentang Goreng ", foodPrice: 12000),
-      ProductCategory(foodName: "Roti Bakar ", foodPrice: 10000),
-    ];
-
-    final products = Products(
-      drink: drink,
-      food: food,
-      dessert: dessert,
-    );
     final List<UsersModel> employe = [
       UsersModel(
         name: user.value.name,

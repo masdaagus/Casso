@@ -7,10 +7,12 @@ class CardTextField extends StatelessWidget {
     this.hintText,
     this.icon,
     this.textController,
+    this.isTextNumber = false,
   }) : super(key: key);
   final String? hintText;
   final IconData? icon;
   final TextEditingController? textController;
+  final bool isTextNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +32,15 @@ class CardTextField extends StatelessWidget {
           ),
           SizedBox(width: 8),
           Expanded(
-            child: TextField(
+            child: TextFormField(
               controller: textController,
+              keyboardType:
+                  isTextNumber ? TextInputType.number : TextInputType.name,
               style: TextStyle(
                 fontSize: 14,
                 fontFamily: "Montserrat",
                 fontWeight: FontWeight.w500,
-                color: abu,
+                color: lightColor,
               ),
               decoration: InputDecoration(
                 hintText: hintText,
@@ -44,7 +48,7 @@ class CardTextField extends StatelessWidget {
                   fontSize: 14,
                   fontFamily: "Montserrat",
                   fontWeight: FontWeight.w500,
-                  color: abu.withOpacity(.7),
+                  color: lightColor.withOpacity(.7),
                 ),
                 border: InputBorder.none,
               ),

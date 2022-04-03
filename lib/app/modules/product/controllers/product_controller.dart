@@ -4,6 +4,7 @@ import 'package:casso/app/data/models/products.dart';
 
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/users.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -13,10 +14,15 @@ class ProductController extends GetxController {
   final auth = Get.find<AuthController>();
   var user = UsersModel().obs;
   var resto = RestosModel().obs;
-  List<ProductOrder> products = [];
+  List<Product> products = [];
 
-  late TextEditingController namaProduct;
-  late TextEditingController hargaProduct;
+  late TextEditingController namaProduk;
+  late TextEditingController hargaProduk;
+  late TextEditingController stokProduk;
+  late TextEditingController deskripsiProduk;
+
+  var data = ['FOOD', 'DRINK', 'DESSERT'].obs;
+  var selected = 'FOOD'.obs;
 
   List<String> image = [
     "assets/products/ayampenyet.jpg",
@@ -28,39 +34,56 @@ class ProductController extends GetxController {
     "assets/products/sanger.jpg",
     "assets/products/satetaichan.jpg",
     "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
   ];
 
   Future<void> _productsInit() async {
-    var food = resto.value.products!.food as List<ProductCategory>;
-    var drink = resto.value.products!.drink as List<ProductCategory>;
-    var dessert = resto.value.products!.dessert as List<ProductCategory>;
+    products = resto.value.products! as List<Product>;
+  }
 
-    food.forEach((data) {
-      products.add(ProductOrder(
-        productName: data.foodName,
-        productPrice: data.foodPrice,
-        productQty: 0,
-        productCategory: 'FOOD',
-      ));
+  Future<void> addProduct() async {
+    CollectionReference restos = firestore.collection('restos');
+    CollectionReference users = firestore.collection('users');
+
+    final dataObject = await restos.doc(user.value.restoID).get();
+    var data = dataObject.data() as Map<String, dynamic>;
+    List<Product> products =
+        List<Product>.from(data['products'].map((x) => Product.fromJson(x)))
+            .toList();
+
+    Product product = Product(
+      productName: namaProduk.text,
+      productPrice: double.tryParse(hargaProduk.text) ?? 0,
+      productCategory: selected.value,
+      productStock: int.tryParse(stokProduk.text) ?? 0,
+      productDescription: deskripsiProduk.text,
+    );
+
+    products.add(product);
+
+    await restos.doc(user.value.restoID).update({
+      "products": List<dynamic>.from(
+        products.map(
+          (x) => x.toJson(),
+        ),
+      ),
     });
 
-    drink.forEach((data) {
-      products.add(ProductOrder(
-        productName: data.foodName,
-        productPrice: data.foodPrice,
-        productQty: 0,
-        productCategory: 'DRINK',
-      ));
-    });
-
-    dessert.forEach((data) {
-      products.add(ProductOrder(
-        productName: data.foodName,
-        productPrice: data.foodPrice,
-        productQty: 0,
-        productCategory: 'DESSERT',
-      ));
-    });
+    /// FUNGSI UNTUK MEREFRESH DATA
+    final restoId = await restos.doc(user.value.restoID).get();
+    final restoData = restoId.data() as Map<String, dynamic>;
+    resto(RestosModel.fromJson(restoData));
+    resto.refresh();
+    final userDoc = await users.doc(user.value.email).get();
+    final userDocData = userDoc.data() as Map<String, dynamic>;
+    user(UsersModel.fromJson(userDocData));
+    user.refresh();
+    Get.offAllNamed('/product');
   }
 
   @override
@@ -69,15 +92,19 @@ class ProductController extends GetxController {
     resto = auth.resto;
     await _productsInit();
 
-    namaProduct = TextEditingController();
-    hargaProduct = TextEditingController();
+    namaProduk = TextEditingController();
+    hargaProduk = TextEditingController();
+    stokProduk = TextEditingController();
+    deskripsiProduk = TextEditingController();
     super.onInit();
   }
 
   @override
   void onClose() {
-    namaProduct.dispose();
-    hargaProduct.dispose();
+    namaProduk.dispose();
+    hargaProduk.dispose();
+    stokProduk.dispose();
+    deskripsiProduk.dispose();
     super.onClose();
   }
 }

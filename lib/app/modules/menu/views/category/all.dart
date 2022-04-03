@@ -1,4 +1,5 @@
 import 'package:casso/app/data/models/order.dart';
+import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/modules/card/product_card/product_card.dart';
 import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/utils/constant.dart';
@@ -27,9 +28,11 @@ class AllMenu extends GetView<MenuController> {
                 physics: BouncingScrollPhysics(),
                 children: List.generate(controller.products.length, (index) {
                   ProductOrder data = controller.products[index];
+                  Product kosong = Product();
 
                   return ProductCard(
                     data: data,
+                    dataProduct: kosong,
                     addProduct: () => controller.addProduct(data),
                     minProduct: () => controller.minProduct(data),
                   );
