@@ -244,11 +244,85 @@ class MonitoringController extends GetxController {
   }
 
   Future<void> delete(String id) async {
+    // CollectionReference prosesC = firestore
+    //     .collection("restos")
+    //     .doc(user.value.restoID)
+    //     .collection("pesanan");
+    // prosesC.doc(id).delete();
+  }
+
+  Future<void> getData(Order data, String id) async {
+    CollectionReference _collectionRef = firestore
+        .collection('restos')
+        .doc(user.value.restoID)
+        .collection('orders');
+
     CollectionReference prosesC = firestore
         .collection("restos")
         .doc(user.value.restoID)
         .collection("pesanan");
-    prosesC.doc(id).delete();
+
+    // Get docs from collection reference
+    QuerySnapshot querySnapshot = await _collectionRef.get();
+
+    // Get data from docs and convert map to List
+    await prosesC.doc(id).delete();
+
+    Order? orderFromList;
+    List<ProductOrder> products = []; // list untuk di update ke list orders
+
+    // List<Order> ordersCollection =
+    querySnapshot.docs.map((doc) {
+      var object = doc.data() as Map<String, dynamic>;
+      final dataOrders = Order.fromJson(object);
+
+      if (data.guessName == dataOrders.guessName &&
+          data.tableNumber == dataOrders.tableNumber) {
+        orderFromList = dataOrders;
+        products.addAll(dataOrders.productsOrder!);
+
+        data.productsOrder!.forEach((dataA) {
+          dataOrders.productsOrder!.forEach((dataB) {
+            if (dataA.productName == dataB.productName &&
+                dataA.productPrice == dataB.productPrice) {
+              if (dataB.productQty > 1) {
+                products.remove(dataB);
+                print('data lebih dari 1');
+                print('${dataB.productName}  ${dataB.productQty}');
+                dataB.productQty -= dataA.productQty;
+                if (dataB.productQty != 0) {
+                  products.add(dataB);
+                } else {
+                  products.remove(dataB);
+                }
+              } else {
+                print('${dataB.productName}  ${dataB.productQty}');
+                products.remove(dataB);
+              }
+            }
+          });
+        });
+
+        final ids = Set();
+        products.retainWhere(
+          (x) => ids.add(x.productName),
+        );
+
+        if (products.length > 0) {
+          _collectionRef.doc(doc.id).update({
+            "productsOrder": List<dynamic>.from(
+              products.map(
+                (x) => x.toJson(),
+              ),
+            ),
+          });
+        } else {
+          _collectionRef.doc(doc.id).delete();
+        }
+      }
+
+      // return data;
+    }).toList();
   }
 
   @override

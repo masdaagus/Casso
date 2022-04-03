@@ -33,28 +33,12 @@ class DessertMenu extends GetView<MenuController> {
 
                   return ProductCard(
                     data: data,
-                    // productName: data.productName,
-                    // productPrice: data.productPrice,
                     addProduct: () async {
                       await controller.addProduct(data);
                     },
                     minProduct: () async {
                       await controller.minProduct(data);
                     },
-
-                    // textCount: GetBuilder<MenuController>(
-                    //   builder: (_) {
-                    //     int qty = dessert[index].productQty;
-                    //     if (qty < 0) qty = 0;
-                    //     return Text(
-                    //       qty.toString(),
-                    //       style: TextStyle(
-                    //         color: textColor,
-                    //         fontFamily: 'balsamiq',
-                    //       ),
-                    //     );
-                    //   },
-                    // ),
                   );
                 }),
               ),

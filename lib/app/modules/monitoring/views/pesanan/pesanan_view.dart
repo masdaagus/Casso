@@ -63,15 +63,19 @@ class PesananMonitoring extends GetView<MonitoringController> {
                             'proses',
                           ),
                           delete: () {
-                            Get.defaultDialog(
-                              content: DialogDeleteMonitoring(delete: () async {
-                                await controller.delete(id);
-                                Get.back();
-                              }),
-                              backgroundColor: Colors.transparent,
-                              titleStyle: TextStyle(color: Colors.transparent),
-                              barrierDismissible: true,
-                            );
+                            controller.getData(data, id);
+                            // Get.defaultDialog(
+                            //   content: DialogDeleteMonitoring(delete: () async {
+                            //     // await controller.delete(id);
+                            //     // print(data.productsOrder);
+                            //     // data.productsOrder!.forEach((data) {
+                            //     //   print(data.productName);
+                            //     // });
+                            //   }),
+                            //   backgroundColor: Colors.transparent,
+                            //   titleStyle: TextStyle(color: Colors.transparent),
+                            //   barrierDismissible: true,
+                            // );
                           },
                           listOrder: Container(
                             child: ListView.builder(

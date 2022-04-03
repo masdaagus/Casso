@@ -10,14 +10,15 @@ class OrderItem extends StatelessWidget {
     this.undoButton,
     this.isOrder = true,
     this.textButton = 'proses',
+    this.isTersaji = false,
   }) : super(key: key);
 
   final ProductOrder data;
-
   final String textButton;
   final VoidCallback onTap;
   final VoidCallback? undoButton;
   final bool isOrder;
+  final bool isTersaji;
 
   @override
   Widget build(BuildContext context) {
@@ -68,49 +69,60 @@ class OrderItem extends StatelessWidget {
                     ),
                 ],
               ),
-              Row(
-                children: [
-                  isOrder
-                      ? Container()
-                      : Container(
-                          width: 48,
-                          height: 20,
+              isTersaji
+                  ? Text(
+                      nf.format(data.productPrice! * data.productQty),
+                      style: TextStyle(
+                          color: abu,
+                          fontSize: 12,
+                          fontFamily: "balsamiq",
+                          letterSpacing: .5),
+                    )
+                  : Row(
+                      children: [
+                        isOrder
+                            ? Container()
+
+                            /// BUTTON REVERSE
+                            : Container(
+                                width: 48,
+                                height: 20,
+                                child: ElevatedButton(
+                                  onPressed: undoButton,
+                                  child: Icon(Icons.undo, size: 16),
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 2,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18),
+                                    ),
+                                    primary: purple.withOpacity(.1),
+                                  ),
+                                ),
+                              ),
+                        SizedBox(width: 4),
+                        Container(
+                          height: 24,
                           child: ElevatedButton(
-                            onPressed: undoButton,
-                            child: Icon(Icons.undo, size: 16),
+                            onPressed: onTap,
+                            child: Text(
+                              textButton.toUpperCase(),
+                              style: TextStyle(
+                                fontSize: 9,
+                                fontFamily: "Balsamiq",
+                                letterSpacing: .3,
+                              ),
+                            ),
                             style: ElevatedButton.styleFrom(
                               elevation: 2,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18),
                               ),
-                              primary: purple.withOpacity(.1),
+                              primary: putih.withOpacity(.2),
                             ),
                           ),
                         ),
-                  SizedBox(width: 4),
-                  Container(
-                    height: 24,
-                    child: ElevatedButton(
-                      onPressed: onTap,
-                      child: Text(
-                        textButton.toUpperCase(),
-                        style: TextStyle(
-                          fontSize: 9,
-                          fontFamily: "Balsamiq",
-                          letterSpacing: .3,
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        elevation: 2,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18),
-                        ),
-                        primary: putih.withOpacity(.2),
-                      ),
-                    ),
-                  ),
-                ],
-              )
+                      ],
+                    )
             ],
           ),
           Divider(

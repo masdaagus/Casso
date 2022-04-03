@@ -1,3 +1,6 @@
+import 'package:casso/app/data/models/order.dart';
+import 'package:casso/app/modules/card/product_card/product_card.dart';
+import 'package:casso/app/modules/product/add-product/add_product.dart';
 import 'package:casso/app/modules/product/controllers/product_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +11,8 @@ class FoodProduct extends GetView<ProductController> {
 
   @override
   Widget build(BuildContext context) {
+    List<ProductOrder> food =
+        controller.products.where((d) => d.productCategory == 'FOOD').toList();
     return Container(
       color: darkColor,
       child: SingleChildScrollView(
@@ -15,23 +20,31 @@ class FoodProduct extends GetView<ProductController> {
         child: Column(
           children: [
             Container(
-                // padding: const EdgeInsets.symmetric(horizontal: 16),
-                // child: GridView.count(
-                //   shrinkWrap: true,
-                //   crossAxisSpacing: 10,
-                //   mainAxisSpacing: 10,
-                //   crossAxisCount: 3,
-                //   childAspectRatio: .55,
-                //   physics: BouncingScrollPhysics(),
-                //   children: List.generate(12, (index) {
-                //     return MenuCard(
-                //       tittle: 'Nasi Goreng Kampoeng',
-                //       harga: nf.format(21000),
-                //       image: "assets/images/milkshake-oreo.jpg",
-                //     );
-                //   }),
-                // ),
-                ),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: GridView.count(
+                shrinkWrap: true,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                crossAxisCount: 2,
+                childAspectRatio: .89,
+                physics: BouncingScrollPhysics(),
+                children: List.generate(food.length, (index) {
+                  ProductOrder data = food[index];
+                  String image = controller.image[index];
+                  return ProductCard(
+                    data: data,
+                    isOrderWidget: false,
+                    productImage: image,
+                    editProduct: () {
+                      Get.to(() => AddProductView(
+                            dataProduct: data,
+                            image: image,
+                          ));
+                    },
+                  );
+                }),
+              ),
+            ),
             SizedBox(height: 65),
           ],
         ),

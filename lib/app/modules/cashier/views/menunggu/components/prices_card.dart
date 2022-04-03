@@ -28,7 +28,8 @@ class _PricesCardState extends State<PricesCard> {
   double _total = 0;
   double _sumPrices() {
     _total = 0;
-    widget.data!.productsOrder!.forEach((e) => _total += e.productPrice!);
+    widget.data!.productsOrder!
+        .forEach((e) => _total += (e.productPrice! * e.productQty));
     return _total;
   }
 
@@ -126,7 +127,8 @@ class _PricesCardState extends State<PricesCard> {
                             ],
                           ),
                           Text(
-                            nf.format(listOrder.productPrice),
+                            nf.format(
+                                listOrder.productPrice! * listOrder.productQty),
                             style: TextStyle(
                                 color: abu,
                                 fontFamily: "balsamiq",

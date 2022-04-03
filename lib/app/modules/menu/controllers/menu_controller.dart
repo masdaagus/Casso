@@ -110,25 +110,46 @@ class MenuController extends GetxController {
         }).toList();
 
         if (id != null && order != null) {
-          print('nemu nihh');
+          print('UPDATE DATA');
 
           List<ProductOrder> products = order!.productsOrder!;
-          products.addAll(_tempOrder);
-          var a = products.any((item) => _tempOrder.contains(item));
-          print(a);
-          // products.forEach((product) {
-          //   if(){}
+          List<ProductOrder> productsEnd = [];
 
-          // });
+          products.forEach((dataA) {
+            _tempOrder.forEach((dataB) {
+              if (dataA.productName == dataB.productName &&
+                  dataA.productPrice == dataB.productPrice) {
+                print('samaaaaaa ni');
+                print("data A = ${dataA.productName}");
+                print("data B = ${dataB.productName}");
+                dataA.productQty += 1;
+                productsEnd.add(dataA);
+              } else {
+                productsEnd.addAll(products);
+                productsEnd.add(dataB);
+                print('gak sama');
+              }
+            });
+          });
+          final ids = Set();
+          productsEnd.retainWhere(
+            (x) => ids.add(x.productName),
+          );
+
           orderCollection.doc(id).update({
             "productsOrder": List<dynamic>.from(
-              products.map(
+              productsEnd.map(
                 (x) => x.toJson(),
               ),
             ),
           });
         } else {
           print('SET DATA BARU');
+          final ids = Set();
+          _tempOrder.retainWhere(
+            (x) => ids.add(x.productName),
+          );
+
           await orderCollection.doc(obj.id).set(Order(
                 guessName: guessName,
                 tableNumber: table,
@@ -140,34 +161,6 @@ class MenuController extends GetxController {
                 orderNumber: 1,
               ).toJson());
         }
-
-        // for (Order item in ordersCollection) {
-        //   if (item.guessName == guessName && item.tableNumber == table) {
-        //     print('nemu nihh');
-        //     orderCollection.doc(id).update({
-        //       "productsOrder":"",
-        //     });
-        //     break;
-        //   } else {
-        //     await orderCollection.doc(obj.id).set(Order(
-        //           guessName: guessName,
-        //           tableNumber: table,
-        //           waitersName: user.value.name,
-        //           totalPrices: _sumPrices(),
-        //           totalItems: _tempOrder.length,
-        //           productsOrder: _tempOrder,
-        //           createAt: now.toIso8601String(),
-        //           orderNumber: 1,
-        //         ).toJson());
-
-        //     Get.offAllNamed('/home');
-        //   }
-        // }
-
-        // Order order = Order(guessName: guessName, tableNumber: table);
-        // if (ordersCollection.contains(order))
-
-        /// misalnya table
       });
       Get.offAllNamed('/home');
 
@@ -175,41 +168,6 @@ class MenuController extends GetxController {
     } catch (e) {
       print(e);
     }
-  }
-
-  Future<void> getData({String? guessName, int? tableNumber}) async {
-    CollectionReference _collectionRef = firestore
-        .collection('restos')
-        .doc(user.value.restoID)
-        .collection('orders');
-    // Get docs from collection reference
-    QuerySnapshot querySnapshot = await _collectionRef.get();
-
-    // Get data from docs and convert map to List
-    // String? id;
-
-    querySnapshot.docs.map((doc) {
-      var object = doc.data() as Map<String, dynamic>;
-      final data = Order.fromJson(object);
-      // id = doc.id;
-
-      if (data.guessName == guessName && data.tableNumber == tableNumber) {
-        print(doc.id);
-        print('JUMPA NIHH DATA YG SAMA');
-      }
-      return data;
-    }).toList();
-
-    // print(id);
-
-    // for (Order item in allData) {
-    //   if (item.guessName == guessName && item.tableNumber == tableNumber) {
-    //     print('nemu nihh');
-    //     break;
-    //   }
-    // }
-
-    // print('di proses gak nihh ');
   }
 
   double _sumPrices() {
@@ -238,8 +196,6 @@ class MenuController extends GetxController {
           ),
         ),
       });
-
-      Get.offAllNamed('/home');
     } catch (e) {
       print(e);
     }

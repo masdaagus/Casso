@@ -17,12 +17,14 @@ class MonitorCard extends GetView<MonitoringController> {
     this.buttonAll,
     this.listOrder,
     this.delete,
+    this.isTersaji = false,
   }) : super(key: key);
 
   final Order data;
   final String orderButton;
   final bool isOrder;
   final bool isWaiters;
+  final bool isTersaji;
 
   final Widget? listOrder;
   final VoidCallback? buttonAll;
@@ -85,10 +87,46 @@ class MonitorCard extends GetView<MonitoringController> {
               ),
 
               // Button Prosses semua
-              ButtonAll(
-                tittleButton: "${orderButton.toUpperCase()} SEMUA",
-                onTap: buttonAll!,
-              ),
+              isTersaji
+                  ? Container(
+                      margin:
+                          const EdgeInsets.only(left: 8, right: 8, bottom: 16),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: darkColor.withOpacity(.5),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "TOTAL",
+                            style: TextStyle(
+                              color: putih,
+                              fontFamily: "balsamiq",
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                              letterSpacing: .5,
+                            ),
+                          ),
+                          Text(
+                            nf.format(data.totalPrices),
+                            style: TextStyle(
+                              color: putih,
+                              fontFamily: "balsamiq",
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                              letterSpacing: .5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : ButtonAll(
+                      tittleButton: "${orderButton.toUpperCase()} SEMUA",
+                      onTap: buttonAll!,
+                    ),
               SizedBox(height: 8)
             ],
           ),

@@ -30,13 +30,19 @@ class Menus extends GetView<MenuController> {
   Widget build(BuildContext context) {
     print(data!.guessName);
     print(data!.tableNumber);
-    print("data = $guessName");
+    print("dari text cotroller = $guessName");
     print("data = $table");
     return WillPopScope(
       onWillPop: () async {
         Get.defaultDialog(
           content: DialogCancel(
-            onConfirm: () => controller.deleteTable(table ?? data!.tableNumber),
+            onConfirm: () {
+              if (guessName != null) {
+                controller.deleteTable(table);
+              }
+
+              Get.offAllNamed('/home');
+            },
           ),
           backgroundColor: Colors.transparent,
           titleStyle: TextStyle(color: Colors.transparent),

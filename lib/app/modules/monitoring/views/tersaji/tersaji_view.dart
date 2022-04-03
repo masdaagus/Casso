@@ -51,6 +51,7 @@ class TersajiMonitoring extends GetView<MonitoringController> {
                         return MonitorCard(
                           data: data,
                           isOrder: true,
+                          isTersaji: true,
                           // buttonAll: () => controller.setProsesAll(data, id),
                           buttonAll: () async {
                             await controller.setProsesAll(
@@ -71,6 +72,8 @@ class TersajiMonitoring extends GetView<MonitoringController> {
 
                                 return OrderItem(
                                   data: productOrder,
+                                  isOrder: false,
+                                  isTersaji: true,
                                   onTap: () {
                                     controller.setProses(
                                       data,
@@ -80,7 +83,6 @@ class TersajiMonitoring extends GetView<MonitoringController> {
                                       'tersaji',
                                     );
                                   },
-                                  isOrder: false,
                                   textButton: 'tersaji',
                                   undoButton: () => controller.reverseProses(
                                     data,

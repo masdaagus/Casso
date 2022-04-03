@@ -13,6 +13,7 @@ class CashierController extends GetxController {
         .collection("restos")
         .doc(user.value.restoID)
         .collection(collection)
+        .orderBy('orderNumber', descending: true)
         .snapshots();
 
     return data;

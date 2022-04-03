@@ -37,7 +37,7 @@ class ProductsView extends GetView<ProductController> {
                       print('edit product');
                       Get.to(() => AddProductView(
                             dataProduct: data,
-                            image: image,
+                            // image: image,
                           ));
                     },
                   );

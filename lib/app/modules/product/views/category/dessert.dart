@@ -1,5 +1,7 @@
+import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/data/models/products.dart';
 import 'package:casso/app/modules/card/product_card/product_card.dart';
+import 'package:casso/app/modules/product/add-product/add_product.dart';
 
 import 'package:casso/app/modules/product/controllers/product_controller.dart';
 import 'package:casso/app/utils/constant.dart';
@@ -11,6 +13,9 @@ class DessertProduct extends GetView<ProductController> {
 
   @override
   Widget build(BuildContext context) {
+    List<ProductOrder> dessert = controller.products
+        .where((d) => d.productCategory == 'DESSERT')
+        .toList();
     return Container(
       color: darkColor,
       child: SingleChildScrollView(
@@ -21,21 +26,25 @@ class DessertProduct extends GetView<ProductController> {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: GridView.count(
                 shrinkWrap: true,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 3,
-                childAspectRatio: .55,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                crossAxisCount: 2,
+                childAspectRatio: .89,
                 physics: BouncingScrollPhysics(),
-                children: List.generate(12, (index) {
-                  ProductCategory product =
-                      controller.resto.value.products!.dessert![index];
-                  // return ProductCard(
-                  //   productName: product.foodName,
-                  //   productPrice: product.foodPrice,
-                  //   productImage: controller.image[index],
-                  // );
-
-                  return Container();
+                children: List.generate(dessert.length, (index) {
+                  ProductOrder data = dessert[index];
+                  String image = controller.image[index];
+                  return ProductCard(
+                    data: data,
+                    isOrderWidget: false,
+                    productImage: image,
+                    editProduct: () {
+                      Get.to(() => AddProductView(
+                            dataProduct: data,
+                            image: image,
+                          ));
+                    },
+                  );
                 }),
               ),
             ),
