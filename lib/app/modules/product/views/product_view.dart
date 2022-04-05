@@ -19,24 +19,27 @@ import 'category/food.dart';
 class ProductView extends GetView<ProductController> {
   @override
   Widget build(BuildContext context) {
-    Get.put(() => AuthController());
     return Scaffold(
-      backgroundColor: darkColor,
+      backgroundColor: lightColor,
       appBar: AppBar(
-        backgroundColor: darkColor,
+        backgroundColor: lightColor,
         elevation: 0,
         title: Text(
           'PRODUCTS',
           style: TextStyle(
-            color: abu,
-            fontFamily: "Montserrat",
-            fontWeight: FontWeight.w600,
+            color: darkColor,
+            fontFamily: "balsamiq",
+            fontWeight: FontWeight.bold,
             letterSpacing: 1,
           ),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, size: 20),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 20,
+            color: darkColor,
+          ),
           onPressed: Get.back,
         ),
       ),
@@ -51,7 +54,7 @@ class ProductView extends GetView<ProductController> {
               child: TabBar(
                 indicator: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: putih.withOpacity(.2),
+                  color: hitam.withOpacity(.2),
                 ),
                 tabs: [
                   textTab("Dessert"),
@@ -103,9 +106,9 @@ class ProductView extends GetView<ProductController> {
         child: Text(
           text,
           style: TextStyle(
-            color: abu,
+            color: darkColor,
             fontSize: 10,
-            fontFamily: "Montserrat",
+            fontFamily: "balsamiq",
             fontWeight: FontWeight.w600,
           ),
         ),

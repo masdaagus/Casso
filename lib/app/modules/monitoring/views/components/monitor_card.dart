@@ -38,7 +38,8 @@ class MonitorCard extends GetView<MonitoringController> {
           margin: const EdgeInsets.only(left: 16, bottom: 8, right: 16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: lightColor.withOpacity(.1),
+            // color: Color(0XFFF3EFE0),
+            color: Color(0XFFD1D1D1),
           ),
           child: Column(
             children: [
@@ -47,7 +48,7 @@ class MonitorCard extends GetView<MonitoringController> {
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 height: 24,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: grColor2),
+                  gradient: LinearGradient(colors: [putih, putih]),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(

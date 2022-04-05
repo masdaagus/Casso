@@ -34,7 +34,7 @@ class ButtonAll extends StatelessWidget {
                 color: lightColor.withOpacity(.2),
               ),
             ],
-            gradient: LinearGradient(colors: grColor2)),
+            gradient: LinearGradient(colors: [putih, putih])),
         child: Center(
           child: Text(
             tittleButton.toUpperCase(),

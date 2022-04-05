@@ -4,56 +4,55 @@ import 'package:flutter/material.dart';
 class CardTextField extends StatelessWidget {
   const CardTextField({
     Key? key,
-    this.hintText,
+    this.textFormField,
     this.icon,
-    this.textController,
-    this.isTextNumber = false,
   }) : super(key: key);
-  final String? hintText;
+
   final IconData? icon;
-  final TextEditingController? textController;
-  final bool isTextNumber;
+  final Widget? textFormField;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 8, right: 8, bottom: 12),
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      height: 48,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      // height: 48,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: putih.withOpacity(.2),
+        color: putih,
       ),
       child: Row(
         children: [
           Icon(
             icon,
-            color: abu,
+            color: darkColor,
           ),
           SizedBox(width: 8),
-          Expanded(
-            child: TextFormField(
-              controller: textController,
-              keyboardType:
-                  isTextNumber ? TextInputType.number : TextInputType.name,
-              style: TextStyle(
-                fontSize: 14,
-                fontFamily: "Montserrat",
-                fontWeight: FontWeight.w500,
-                color: lightColor,
-              ),
-              decoration: InputDecoration(
-                hintText: hintText,
-                hintStyle: TextStyle(
-                  fontSize: 14,
-                  fontFamily: "Montserrat",
-                  fontWeight: FontWeight.w500,
-                  color: lightColor.withOpacity(.7),
-                ),
-                border: InputBorder.none,
-              ),
-            ),
-          )
+          Expanded(child: textFormField ?? Container()),
+
+          // Expanded(
+          //   child: TextFormField(
+          //     controller: textController,
+          //     keyboardType:
+          //         isTextNumber ? TextInputType.number : TextInputType.name,
+          //     style: TextStyle(
+          //       fontSize: 14,
+          //       fontFamily: "Montserrat",
+          //       fontWeight: FontWeight.w500,
+          //       color: lightColor,
+          //     ),
+          //     decoration: InputDecoration(
+          //       hintText: hintText,
+          //       hintStyle: TextStyle(
+          //         fontSize: 14,
+          //         fontFamily: "Montserrat",
+          //         fontWeight: FontWeight.w500,
+          //         color: lightColor.withOpacity(.7),
+          //       ),
+          //       border: InputBorder.none,
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );

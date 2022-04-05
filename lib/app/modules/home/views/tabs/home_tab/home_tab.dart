@@ -65,7 +65,7 @@ class TabHome extends GetView<HomeController> {
                         Text(
                           "Selamat Datang",
                           style: TextStyle(
-                            color: lightColor,
+                            color: darkColor,
                             fontFamily: "balsamiq",
                             fontWeight: FontWeight.w800,
                             letterSpacing: 2,
@@ -75,7 +75,7 @@ class TabHome extends GetView<HomeController> {
                         Text(
                           "di ${controller.resto.restoName}",
                           style: TextStyle(
-                              color: lightColor,
+                              color: darkColor,
                               fontFamily: "balsamiq",
                               fontWeight: FontWeight.w800,
                               fontSize: 20,
@@ -142,7 +142,7 @@ class TabHome extends GetView<HomeController> {
                     icon: Icon(
                       Icons.desktop_mac_outlined,
                       size: 40,
-                      color: iconColor,
+                      color: darkColor,
                     ),
                     tittle: "Monitoring",
                     onTap: () => Get.toNamed("/monitoring"),
@@ -151,7 +151,7 @@ class TabHome extends GetView<HomeController> {
                     icon: Icon(
                       Icons.assignment,
                       size: 40,
-                      color: iconColor,
+                      color: darkColor,
                     ),
                     tittle: "List Order",
                     onTap: () => Get.toNamed("/cashier"),
@@ -160,7 +160,7 @@ class TabHome extends GetView<HomeController> {
                     icon: Icon(
                       Icons.add_shopping_cart,
                       size: 40,
-                      color: iconColor,
+                      color: darkColor,
                     ),
                     tittle: "Order",
                     onTap: () => Get.toNamed("/order"),
@@ -169,7 +169,7 @@ class TabHome extends GetView<HomeController> {
                     icon: Icon(
                       Icons.desktop_windows_outlined,
                       size: 40,
-                      color: iconColor,
+                      color: darkColor,
                     ),
                     tittle: "Dashboard",
                     onTap: () => Get.toNamed("/monitoring"),
@@ -178,7 +178,7 @@ class TabHome extends GetView<HomeController> {
                     icon: Icon(
                       Icons.group_rounded,
                       size: 40,
-                      color: iconColor,
+                      color: darkColor,
                     ),
                     tittle: "Pegawai",
                     onTap: () => Get.toNamed("/pegawai"),
@@ -187,7 +187,7 @@ class TabHome extends GetView<HomeController> {
                     icon: SvgPicture.asset(
                       "assets/svg/burger.svg",
                       width: 40,
-                      color: iconColor,
+                      color: darkColor,
                     ),
                     tittle: "Product",
                     onTap: () => Get.toNamed("/product"),

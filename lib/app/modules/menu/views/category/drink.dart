@@ -14,7 +14,7 @@ class DrinkMenu extends GetView<MenuController> {
     List<ProductOrder> drink =
         controller.products.where((d) => d.productCategory == 'DRINK').toList();
     return Container(
-      color: darkColor,
+      color: lightColor,
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
@@ -31,18 +31,16 @@ class DrinkMenu extends GetView<MenuController> {
                 physics: BouncingScrollPhysics(),
                 children: List.generate(drink.length, (index) {
                   ProductOrder data = drink[index];
+                  String image = controller.image[index];
 
                   Product kosong = Product();
 
                   return ProductCard(
                     data: data,
                     dataProduct: kosong,
-                    addProduct: () async {
-                      await controller.addProduct(data);
-                    },
-                    minProduct: () async {
-                      await controller.minProduct(data);
-                    },
+                    productImage: image,
+                    addProduct: () => controller.addProduct(data),
+                    minProduct: () => controller.minProduct(data),
                   );
                 }),
               ),

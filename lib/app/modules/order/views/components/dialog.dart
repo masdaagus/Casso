@@ -29,7 +29,7 @@ class GetDialog extends GetView<OrderController> {
           width: Get.width,
           // height: 180,
           decoration: BoxDecoration(
-            color: putih.withOpacity(.35),
+            color: putih.withOpacity(.50),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Form(
@@ -39,7 +39,7 @@ class GetDialog extends GetView<OrderController> {
                 Text(
                   "TABLE ${tableNumber}",
                   style: TextStyle(
-                    color: putih,
+                    color: darkColor,
                     fontFamily: "balsamiq",
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
@@ -50,10 +50,7 @@ class GetDialog extends GetView<OrderController> {
                       top: 16, left: 24, right: 24, bottom: 24),
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   width: Get.width,
-                  decoration: BoxDecoration(
-                      // color: lightColor,
-                      // borderRadius: BorderRadius.circular(20),
-                      ),
+                  decoration: BoxDecoration(),
                   child: TextFormField(
                     validator: (value) {
                       if (value!.isEmpty) return "Nama tidak boleh kosong";
@@ -63,7 +60,7 @@ class GetDialog extends GetView<OrderController> {
                     maxLength: 20,
                     style: TextStyle(
                       fontFamily: "balsamiq",
-                      color: lightColor,
+                      color: darkColor,
                       fontSize: 16,
                       letterSpacing: -.5,
                     ),
@@ -77,7 +74,7 @@ class GetDialog extends GetView<OrderController> {
                       counterText: "",
                       hintStyle: TextStyle(
                         fontFamily: "balsamiq",
-                        color: lightColor.withOpacity(.8),
+                        color: darkColor.withOpacity(.8),
                         fontSize: 14,
                         letterSpacing: 1,
                       ),
@@ -87,7 +84,7 @@ class GetDialog extends GetView<OrderController> {
                     ),
                   ),
                 ),
-                Divider(thickness: 1, color: putih.withOpacity(.6)),
+                Divider(thickness: 1, color: darkColor.withOpacity(.6)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [

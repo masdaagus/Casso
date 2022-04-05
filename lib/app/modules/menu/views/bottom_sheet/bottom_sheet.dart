@@ -46,8 +46,8 @@ class CustomBottomSheet extends GetView<MenuController> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                darkColor.withOpacity(.3),
-                darkColor.withOpacity(.5),
+                lightColor.withOpacity(.2),
+                lightColor.withOpacity(.4),
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -63,7 +63,7 @@ class CustomBottomSheet extends GetView<MenuController> {
                 height: 4,
                 width: 60,
                 decoration: BoxDecoration(
-                  color: lightColor.withOpacity(.4),
+                  color: darkColor.withOpacity(.4),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),

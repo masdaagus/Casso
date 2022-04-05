@@ -32,7 +32,7 @@ class ButtonChart extends GetView<MenuController> {
               height: 110,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [darkColor.withOpacity(0), darkColor],
+                  colors: [lightColor.withOpacity(0), lightColor],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),

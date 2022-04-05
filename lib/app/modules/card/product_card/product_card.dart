@@ -34,7 +34,7 @@ class ProductCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: lightColor.withOpacity(.10),
+        color: abu,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -57,17 +57,17 @@ class ProductCard extends StatelessWidget {
                       ),
                     ),
                     isScrollControlled: true,
-                    backgroundColor: darkColor,
+                    backgroundColor: lightColor,
                   );
                 },
                 child: Container(
                   width: size.width * .29,
                   height: size.width * .29,
                   decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 5,
-                      color: darkColor,
-                    ),
+                    // border: Border.all(
+                    //   width: 1,
+                    //   color: darkColor,
+                    // ),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: ClipRRect(
@@ -98,11 +98,11 @@ class ProductCard extends StatelessWidget {
                                     width: 28,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(14),
-                                      color: lightColor.withOpacity(.20),
+                                      color: biru,
                                     ),
                                     child: Icon(
                                       Icons.add,
-                                      color: lightColor,
+                                      color: darkColor,
                                     ),
                                   ),
                                 ),
@@ -110,7 +110,7 @@ class ProductCard extends StatelessWidget {
                                 Text(
                                   qty.toString(),
                                   style: TextStyle(
-                                    color: abu,
+                                    color: darkColor,
                                     fontFamily: 'balsamiq',
                                   ),
                                 ),
@@ -122,11 +122,11 @@ class ProductCard extends StatelessWidget {
                                     width: 28,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(14),
-                                      color: lightColor.withOpacity(.20),
+                                      color: biru,
                                     ),
                                     child: Icon(
                                       Icons.remove,
-                                      color: lightColor,
+                                      color: darkColor,
                                     ),
                                   ),
                                 ),
@@ -144,11 +144,11 @@ class ProductCard extends StatelessWidget {
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(24),
-                              color: lightColor.withOpacity(.2),
+                              color: lightColor,
                             ),
                             child: Icon(
                               Icons.edit,
-                              color: lightColor,
+                              color: darkColor,
                               size: 24,
                             ),
                           ),
@@ -164,10 +164,11 @@ class ProductCard extends StatelessWidget {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: lightColor,
+                color: darkColor,
                 fontFamily: "balsamiq",
+                fontWeight: FontWeight.bold,
                 letterSpacing: .5,
-                fontSize: 13,
+                fontSize: 14,
               ),
             ),
           ),
@@ -178,7 +179,7 @@ class ProductCard extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: iconColor,
+                color: darkColor,
                 fontFamily: "balsamiq", letterSpacing: .5,
                 // fontWeight: FontWeight.bold,
                 fontSize: 12,
@@ -191,22 +192,20 @@ class ProductCard extends StatelessWidget {
   }
 
   Widget addButton() {
-    return GestureDetector(
-      onTap: addProduct,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
-        height: 24,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: lightColor.withOpacity(.2)),
+    return Expanded(
+      child: GestureDetector(
+        onTap: addProduct,
         child: Center(
-          child: Text(
-            "Add",
-            style: TextStyle(
-              color: lightColor,
-              fontFamily: "balsamiq",
-              letterSpacing: .5,
-              fontSize: 11,
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(32),
+                color: darkColor.withOpacity(.2)),
+            child: Center(
+              child: Icon(
+                Icons.add,
+                color: darkColor,
+              ),
             ),
           ),
         ),

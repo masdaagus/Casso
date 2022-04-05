@@ -57,7 +57,7 @@ class ButtonOrderisNotEmpty extends StatelessWidget {
             Text(
               tittle!,
               style: TextStyle(
-                color: lightColor,
+                color: darkColor,
                 fontFamily: 'balsamiq',
                 fontSize: 16,
                 fontWeight: FontWeight.bold,

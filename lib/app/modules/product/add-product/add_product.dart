@@ -1,4 +1,3 @@
-import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/modules/product/add-product/components/dropdown_kategori.dart';
 import 'package:casso/app/modules/product/controllers/product_controller.dart';
@@ -21,26 +20,27 @@ class AddProductView extends StatelessWidget {
   final Product? dataProduct;
   final String? image;
 
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final ctrl = Get.put(ProductController());
 
-    List<String> data = ['FOOD', 'DRINK', 'DESSERT'];
-    String selected = 'FOOD';
-
-    print(selected);
-
+    String appBarTittle = 'ADD PRODUK';
+    if (dataProduct!.productName != null) {
+      appBarTittle = 'EDIT PRODUK';
+    }
     return Scaffold(
-      backgroundColor: darkColor,
+      backgroundColor: lightColor,
 
       /// APP BAR
       appBar: AppBar(
-        backgroundColor: darkColor,
+        backgroundColor: lightColor,
         elevation: 0,
         title: Text(
-          'ADD PRODUCT',
+          appBarTittle,
           style: TextStyle(
-            color: abu,
+            color: darkColor,
             fontFamily: "balsamiq",
             fontWeight: FontWeight.bold,
             fontSize: 18,
@@ -48,9 +48,22 @@ class AddProductView extends StatelessWidget {
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, size: 20),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 20,
+            color: darkColor,
+          ),
           onPressed: Get.back,
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: IconButton(
+              onPressed: () => ctrl.deleteProduct(dataProduct!),
+              icon: Icon(Icons.delete, color: darkColor),
+            ),
+          )
+        ],
       ),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
@@ -58,38 +71,140 @@ class AddProductView extends StatelessWidget {
           physics: BouncingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                ImageCard(image: image),
-                CardTextField(
-                  hintText: dataProduct!.productName ?? 'Nama Produk',
-                  icon: Icons.keyboard_alt_outlined,
-                  textController: ctrl.namaProduk,
-                ),
-                CardTextField(
-                  hintText: "${nf.format(dataProduct!.productPrice)}",
-                  icon: Icons.keyboard_alt_outlined,
-                  textController: ctrl.hargaProduk,
-                  isTextNumber: true,
-                ),
-                CardTextField(
-                  hintText: "${dataProduct!.productStock ?? 'Stok Produk'}",
-                  // hintText: 'Stock Produk',
-                  icon: Icons.keyboard_alt_outlined,
-                  textController: ctrl.stokProduk, isTextNumber: true,
-                ),
-                DropDownCategory(),
-                CradDeskripsi(
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  /// IMAGE PRODUK
+                  ImageCard(image: image),
+
+                  /// TEXT FIELD NAMA PRODUK
+                  CardTextField(
+                    icon: Icons.keyboard_alt_outlined,
+                    textFormField: TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty)
+                          return "Nama produk tidak boleh kosong";
+                      },
+                      maxLength: 30,
+                      controller: ctrl.namaProduk,
+                      decoration: InputDecoration(
+                        isDense: true,
+                        errorStyle: TextStyle(
+                          color: merah,
+                          fontFamily: "balsamiq",
+                          fontSize: 14,
+                          letterSpacing: 1,
+                        ),
+                        counterText: "",
+                        hintText: dataProduct!.productName ?? 'Nama Produk',
+                        hintStyle: TextStyle(
+                          fontSize: 14,
+                          fontFamily: "balsamiq",
+                          fontWeight: FontWeight.w500,
+                          color: darkColor.withOpacity(.6),
+                        ),
+                        border: InputBorder.none,
+                      ),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: "balsamiq",
+                        fontWeight: FontWeight.w500,
+                        color: darkColor,
+                      ),
+                    ),
+                  ),
+
+                  /// TEXT FIELD [HARGA] PRODUK
+                  CardTextField(
+                    icon: Icons.keyboard_alt_outlined,
+                    textFormField: TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty)
+                          return "Harga produk tidak boleh kosong";
+                      },
+                      controller: ctrl.hargaProduk,
+                      maxLength: 30,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        isDense: true,
+                        errorStyle: TextStyle(
+                          color: merah,
+                          fontFamily: "balsamiq",
+                          fontSize: 14,
+                          letterSpacing: 1,
+                        ),
+                        counterText: "",
+                        hintText: 'Harga Produk',
+                        hintStyle: TextStyle(
+                          fontSize: 14,
+                          fontFamily: "balsamiq",
+                          fontWeight: FontWeight.w500,
+                          color: darkColor.withOpacity(.6),
+                        ),
+                        border: InputBorder.none,
+                      ),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: "balsamiq",
+                        fontWeight: FontWeight.w500,
+                        color: darkColor,
+                      ),
+                    ),
+                  ),
+
+                  /// TEXT FIELD [STOK] PRODUK
+                  CardTextField(
+                    icon: Icons.keyboard_alt_outlined,
+                    textFormField: TextFormField(
+                      controller: ctrl.stokProduk,
+                      maxLength: 30,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        isDense: true,
+                        errorStyle: TextStyle(
+                          color: merah,
+                          fontFamily: "balsamiq",
+                          fontSize: 14,
+                          letterSpacing: 1,
+                        ),
+                        counterText: "",
+                        hintText: 'Stok Produk',
+                        hintStyle: TextStyle(
+                          fontSize: 14,
+                          fontFamily: "balsamiq",
+                          fontWeight: FontWeight.w500,
+                          color: darkColor.withOpacity(.6),
+                        ),
+                        border: InputBorder.none,
+                      ),
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: "balsamiq",
+                        fontWeight: FontWeight.w500,
+                        color: darkColor,
+                      ),
+                    ),
+                  ),
+                  DropDownCategory(),
+                  CradDeskripsi(
                     textController: ctrl.deskripsiProduk,
-                    description:
-                        dataProduct!.productDescription ?? 'Deskripsi'),
-                ButtonAdd(
-                  onTap: () {
-                    ctrl.addProduct();
-                  },
-                ),
-                SizedBox(height: 24),
-              ],
+                    description: dataProduct!.productDescription ?? 'Deskripsi',
+                  ),
+                  ButtonAdd(
+                    onTap: () {
+                      if (formKey.currentState!.validate()) {
+                        if (dataProduct!.productName == null) {
+                          ctrl.addProduct();
+                        } else {
+                          ctrl.editProduct(dataProduct!);
+                        }
+                      }
+                    },
+                  ),
+                  SizedBox(height: 24),
+                ],
+              ),
             ),
           ),
         ),

@@ -50,14 +50,14 @@ class Menus extends GetView<MenuController> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: darkColor,
+        backgroundColor: lightColor,
         appBar: AppBar(
-          backgroundColor: darkColor,
+          backgroundColor: lightColor,
           elevation: 0,
           title: Text(
             'MENU',
             style: TextStyle(
-              color: abu,
+              color: darkColor,
               fontFamily: "balsamiq",
               fontWeight: FontWeight.w600,
               letterSpacing: 1,
@@ -65,7 +65,11 @@ class Menus extends GetView<MenuController> {
           ),
           centerTitle: true,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios, size: 20),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              size: 20,
+              color: darkColor,
+            ),
             onPressed: Get.back,
           ),
         ),
@@ -75,14 +79,14 @@ class Menus extends GetView<MenuController> {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 8),
+                margin: EdgeInsets.symmetric(horizontal: 16),
                 height: 30,
                 child: Container(
                   padding: const EdgeInsets.all(2),
                   child: TabBar(
                     indicator: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: putih.withOpacity(.2),
+                      color: hitam.withOpacity(.2),
                     ),
                     tabs: [
                       textTab("Dessert"),
@@ -115,9 +119,6 @@ class Menus extends GetView<MenuController> {
                             controller.setOrder(
                                 guessName: guessName ?? data!.guessName,
                                 table: table ?? data!.tableNumber);
-                            // controller.getData(
-                            //     guessName: guessName ?? data!.guessName,
-                            //     tableNumber: table ?? data!.tableNumber!);
                           },
                         ),
                         isScrollControlled: true,
@@ -140,9 +141,9 @@ class Menus extends GetView<MenuController> {
         child: Text(
           text,
           style: TextStyle(
-            color: abu,
-            fontSize: 10,
-            fontFamily: "Montserrat",
+            color: darkColor,
+            fontSize: 12,
+            fontFamily: "balsamiq",
             fontWeight: FontWeight.w600,
           ),
         ),

@@ -16,9 +16,8 @@ class PegawaiCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          color: lightColor.withOpacity(.1),
-          borderRadius: BorderRadius.circular(16)),
+      decoration:
+          BoxDecoration(color: abu, borderRadius: BorderRadius.circular(16)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -33,7 +32,7 @@ class PegawaiCard extends StatelessWidget {
               Text(
                 "($status)".toUpperCase(),
                 style: TextStyle(
-                  color: abu,
+                  color: darkColor,
                   fontFamily: "balsamiq",
                 ),
               ),
@@ -42,7 +41,7 @@ class PegawaiCard extends StatelessWidget {
                 "$email",
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  color: abu,
+                  color: darkColor,
                   fontFamily: "balsamiq",
                 ),
               ),

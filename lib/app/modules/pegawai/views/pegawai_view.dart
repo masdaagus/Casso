@@ -15,7 +15,7 @@ class PegawaiView extends GetView<PegawaiController> {
       floatingActionButton: FloatingButton(
         onTap: () {},
       ),
-      backgroundColor: darkColor,
+      backgroundColor: lightColor,
       appBar: AppBar(
         title: Text(
           'PEGAWAI',
@@ -23,16 +23,16 @@ class PegawaiView extends GetView<PegawaiController> {
             fontFamily: "balsamiq",
             letterSpacing: .5,
             fontWeight: FontWeight.bold,
-            color: abu,
+            color: darkColor,
           ),
         ),
         centerTitle: true,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, size: 20, color: abu),
+          icon: Icon(Icons.arrow_back_ios, size: 20, color: darkColor),
           onPressed: Get.back,
         ),
-        backgroundColor: darkColor,
+        backgroundColor: lightColor,
       ),
       body: Container(
         margin: const EdgeInsets.only(top: 32),

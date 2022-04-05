@@ -22,7 +22,7 @@ class TableCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: lightColor.withOpacity(.1),
+          color: abu,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Stack(
@@ -31,7 +31,7 @@ class TableCard extends StatelessWidget {
               height: 30,
               width: 30,
               decoration: BoxDecoration(
-                color: darkColor.withOpacity(.7),
+                color: darkColor.withOpacity(.2),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8),
@@ -41,7 +41,7 @@ class TableCard extends StatelessWidget {
                 child: Text(
                   tableNumber.toString(),
                   style: TextStyle(
-                    color: lightColor,
+                    color: darkColor,
                     fontSize: 13,
                   ),
                 ),
@@ -55,6 +55,7 @@ class TableCard extends StatelessWidget {
                   SvgPicture.asset(
                     "assets/svg/table_bar.svg",
                     height: 50,
+                    color: darkColor,
                   ),
                   Container(
                     height: 20,
@@ -69,7 +70,7 @@ class TableCard extends StatelessWidget {
                         guessName ?? 'KOSONG',
                         style: TextStyle(
                           fontSize: 10,
-                          color: lightColor,
+                          color: darkColor,
                           fontFamily: "balsamiq",
                           letterSpacing: .5,
                         ),

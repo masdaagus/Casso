@@ -12,7 +12,7 @@ class SearchBar extends StatelessWidget {
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.symmetric(horizontal: 24),
       decoration: BoxDecoration(
-        color: lightColor.withOpacity(.10),
+        color: abu,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -21,13 +21,13 @@ class SearchBar extends StatelessWidget {
         children: [
           Expanded(
             child: TextField(
-              style: TextStyle(color: abu),
+              style: TextStyle(color: darkColor),
               decoration: InputDecoration(
                 isDense: true,
                 hintText: "Cari Nomor meja/Nama Pengunjung ",
                 hintStyle: TextStyle(
-                  color: abu.withOpacity(.7),
-                  fontFamily: "Montserrat",
+                  color: darkColor.withOpacity(.5),
+                  fontFamily: "balsamiq",
                   fontSize: 13,
                 ),
                 border: InputBorder.none,
@@ -37,7 +37,7 @@ class SearchBar extends StatelessWidget {
           SizedBox(width: 16),
           Icon(
             Icons.search,
-            color: abu,
+            color: darkColor,
           ),
         ],
       ),

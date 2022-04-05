@@ -4,6 +4,8 @@ import 'package:casso/app/data/models/products.dart';
 
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/users.dart';
+import 'package:casso/app/modules/home/views/home_view.dart';
+import 'package:casso/app/modules/product/views/product_view.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -40,6 +42,21 @@ class ProductController extends GetxController {
     "assets/products/tehmanis.jpeg",
     "assets/products/tehmanis.jpeg",
     "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
   ];
 
   Future<void> _productsInit() async {
@@ -48,7 +65,6 @@ class ProductController extends GetxController {
 
   Future<void> addProduct() async {
     CollectionReference restos = firestore.collection('restos');
-    CollectionReference users = firestore.collection('users');
 
     final dataObject = await restos.doc(user.value.restoID).get();
     var data = dataObject.data() as Map<String, dynamic>;
@@ -60,12 +76,11 @@ class ProductController extends GetxController {
       productName: namaProduk.text,
       productPrice: double.tryParse(hargaProduk.text) ?? 0,
       productCategory: selected.value,
-      productStock: int.tryParse(stokProduk.text) ?? 0,
+      productStock: int.tryParse(stokProduk.text) ?? 100,
       productDescription: deskripsiProduk.text,
     );
 
     products.add(product);
-
     await restos.doc(user.value.restoID).update({
       "products": List<dynamic>.from(
         products.map(
@@ -75,15 +90,93 @@ class ProductController extends GetxController {
     });
 
     /// FUNGSI UNTUK MEREFRESH DATA
+    update();
     final restoId = await restos.doc(user.value.restoID).get();
     final restoData = restoId.data() as Map<String, dynamic>;
     resto(RestosModel.fromJson(restoData));
     resto.refresh();
-    final userDoc = await users.doc(user.value.email).get();
-    final userDocData = userDoc.data() as Map<String, dynamic>;
-    user(UsersModel.fromJson(userDocData));
-    user.refresh();
-    Get.offAllNamed('/product');
+
+    Get.back();
+    Get.back();
+  }
+
+  Future<void> deleteProduct(Product dataProduct) async {
+    CollectionReference restos = firestore.collection('restos');
+
+    final dataObject = await restos.doc(user.value.restoID).get();
+    var data = dataObject.data() as Map<String, dynamic>;
+    Product? produk;
+    List<Product> products = List<Product>.from(data['products'].map((x) {
+      Product data = Product.fromJson(x);
+      if (data.productName == dataProduct.productName &&
+          data.productPrice == dataProduct.productPrice) {
+        produk = data;
+      }
+
+      return data;
+    })).toList();
+    if (produk != null) {
+      products.remove(produk);
+      await restos.doc(user.value.restoID).update({
+        "products": List<dynamic>.from(
+          products.map(
+            (x) => x.toJson(),
+          ),
+        ),
+      });
+
+      /// FUNGSI UNTUK MEREFRESH DATA
+      final restoId = await restos.doc(user.value.restoID).get();
+      final restoData = restoId.data() as Map<String, dynamic>;
+      resto(RestosModel.fromJson(restoData));
+      resto.refresh();
+      Get.back();
+      Get.back();
+    }
+  }
+
+  Future<void> editProduct(Product dataProduct) async {
+    CollectionReference restos = firestore.collection('restos');
+
+    final dataObject = await restos.doc(user.value.restoID).get();
+    var data = dataObject.data() as Map<String, dynamic>;
+    Product? produk;
+    List<Product> products = List<Product>.from(data['products'].map((x) {
+      Product data = Product.fromJson(x);
+      if (data.productName == dataProduct.productName &&
+          data.productPrice == dataProduct.productPrice) {
+        produk = data;
+      }
+
+      return data;
+    })).toList();
+    Product addProduct = Product(
+      productName: namaProduk.text,
+      productPrice: double.tryParse(hargaProduk.text),
+      productCategory: selected.value,
+      productStock: int.tryParse(stokProduk.text) ?? 100,
+      productDescription: deskripsiProduk.text,
+    );
+    if (produk != null) {
+      products.remove(produk);
+      products.add(addProduct);
+      await restos.doc(user.value.restoID).update({
+        "products": List<dynamic>.from(
+          products.map(
+            (x) => x.toJson(),
+          ),
+        ),
+      });
+
+      /// FUNGSI UNTUK MEREFRESH DATA
+      final restoId = await restos.doc(user.value.restoID).get();
+      final restoData = restoId.data() as Map<String, dynamic>;
+      resto(RestosModel.fromJson(restoData));
+      resto.refresh();
+      update();
+      Get.back();
+      Get.back();
+    }
   }
 
   @override

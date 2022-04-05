@@ -37,7 +37,7 @@ class OrderItem extends StatelessWidget {
                     height: 6,
                     width: 6,
                     decoration: BoxDecoration(
-                      color: abu,
+                      color: darkColor,
                       borderRadius: BorderRadius.circular(3),
                     ),
                   ),
@@ -46,7 +46,7 @@ class OrderItem extends StatelessWidget {
                       data.productName!,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        color: abu.withOpacity(.9),
+                        color: darkColor,
                         fontFamily: "balsamiq",
                         fontSize: 12,
                         letterSpacing: .5,
@@ -60,10 +60,11 @@ class OrderItem extends StatelessWidget {
                         "x${data.productQty.toString()}",
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          color: orange,
+                          color: darkColor,
                           fontFamily: "balsamiq",
-                          fontSize: 12,
+                          fontSize: 13,
                           letterSpacing: .5,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -95,11 +96,11 @@ class OrderItem extends StatelessWidget {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(18),
                                     ),
-                                    primary: purple.withOpacity(.1),
+                                    primary: orange,
                                   ),
                                 ),
                               ),
-                        SizedBox(width: 4),
+                        SizedBox(width: 6),
                         Container(
                           height: 24,
                           child: ElevatedButton(
@@ -107,17 +108,18 @@ class OrderItem extends StatelessWidget {
                             child: Text(
                               textButton.toUpperCase(),
                               style: TextStyle(
-                                fontSize: 9,
-                                fontFamily: "Balsamiq",
-                                letterSpacing: .3,
-                              ),
+                                  fontSize: 9,
+                                  fontFamily: "Balsamiq",
+                                  letterSpacing: .3,
+                                  color: darkColor,
+                                  fontWeight: FontWeight.bold),
                             ),
                             style: ElevatedButton.styleFrom(
                               elevation: 2,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18),
                               ),
-                              primary: putih.withOpacity(.2),
+                              primary: lightColor,
                             ),
                           ),
                         ),
@@ -126,8 +128,8 @@ class OrderItem extends StatelessWidget {
             ],
           ),
           Divider(
-            thickness: .3,
-            color: abu.withOpacity(.3),
+            thickness: .35,
+            color: darkColor.withOpacity(.5),
           ),
         ],
       ),

@@ -10,9 +10,9 @@ class SearchCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.only(left: 16, bottom: 2, right: 16),
       decoration: BoxDecoration(
-        color: lightColor.withOpacity(.10),
+        color: abu,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -21,13 +21,13 @@ class SearchCard extends StatelessWidget {
         children: [
           Expanded(
             child: TextField(
-              style: TextStyle(color: abu),
+              style: TextStyle(color: darkColor),
               decoration: InputDecoration(
                 hintText: "Cari Nomor meja/Nama Pengunjung ",
                 isDense: true,
                 hintStyle: TextStyle(
-                  color: abu,
-                  fontFamily: "Montserrat",
+                  color: darkColor.withOpacity(.7),
+                  fontFamily: "balsamiq",
                   fontSize: 13,
                 ),
                 border: InputBorder.none,

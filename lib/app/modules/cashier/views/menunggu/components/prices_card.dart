@@ -42,10 +42,10 @@ class _PricesCardState extends State<PricesCard> {
       (x) => ids.add(x.productName),
     );
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: lightColor.withOpacity(.1),
+        color: abu,
       ),
       child: Column(
         children: [
@@ -55,7 +55,7 @@ class _PricesCardState extends State<PricesCard> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             height: 32,
             decoration: BoxDecoration(
-              color: darkColor,
+              color: putih,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -64,7 +64,7 @@ class _PricesCardState extends State<PricesCard> {
                 Text(
                   "TABLE ${widget.data!.tableNumber} - (${widget.data!.guessName})",
                   style: TextStyle(
-                    color: abu,
+                    color: darkColor,
                     fontFamily: "balsamiq",
                     fontWeight: FontWeight.bold,
                     letterSpacing: .5,
@@ -74,7 +74,7 @@ class _PricesCardState extends State<PricesCard> {
                 Text(
                   "By: ${widget.data!.waitersName}",
                   style: TextStyle(
-                    color: abu,
+                    color: darkColor,
                     fontFamily: "balsamiq",
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
@@ -105,7 +105,7 @@ class _PricesCardState extends State<PricesCard> {
                                   listOrder.productName!,
                                   style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
-                                      color: abu,
+                                      color: darkColor,
                                       fontFamily: "balsamiq",
                                       letterSpacing: .5),
                                 ),
@@ -117,11 +117,11 @@ class _PricesCardState extends State<PricesCard> {
                                     "x${listOrder.productQty.toString()}",
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                      color: orange,
-                                      fontFamily: "balsamiq",
-                                      fontSize: 12,
-                                      letterSpacing: .5,
-                                    ),
+                                        color: darkColor,
+                                        fontFamily: "balsamiq",
+                                        fontSize: 14,
+                                        letterSpacing: .5,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                             ],
@@ -130,7 +130,7 @@ class _PricesCardState extends State<PricesCard> {
                             nf.format(
                                 listOrder.productPrice! * listOrder.productQty),
                             style: TextStyle(
-                                color: abu,
+                                color: darkColor,
                                 fontFamily: "balsamiq",
                                 letterSpacing: .5),
                           ),
@@ -138,7 +138,7 @@ class _PricesCardState extends State<PricesCard> {
                       ),
                       Divider(
                         thickness: .5,
-                        color: lightColor.withOpacity(.1),
+                        color: darkColor.withOpacity(.5),
                       )
                     ],
                   ),
@@ -150,7 +150,7 @@ class _PricesCardState extends State<PricesCard> {
             margin: const EdgeInsets.only(left: 8, right: 8, bottom: 16),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
-              color: darkColor.withOpacity(.5),
+              color: putih,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
@@ -159,7 +159,7 @@ class _PricesCardState extends State<PricesCard> {
                 Text(
                   "TOTAL",
                   style: TextStyle(
-                    color: putih,
+                    color: darkColor,
                     fontFamily: "balsamiq",
                     fontWeight: FontWeight.bold,
                     fontSize: 13,
@@ -169,7 +169,7 @@ class _PricesCardState extends State<PricesCard> {
                 Text(
                   nf.format(_total),
                   style: TextStyle(
-                    color: putih,
+                    color: darkColor,
                     fontFamily: "balsamiq",
                     fontWeight: FontWeight.bold,
                     fontSize: 13,
@@ -186,7 +186,12 @@ class _PricesCardState extends State<PricesCard> {
             width: 120,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: grColor1,
+                colors: [
+                  Color(0XFFA0B5EB),
+                  Color(0XFFC9F0E4),
+                  // Color(0XFFDFE9F3),
+                  // putih,
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),

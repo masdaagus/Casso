@@ -24,8 +24,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(systemNavigationBarColor: darkColor));
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: lightColor,
+      systemNavigationBarIconBrightness: Brightness.dark,
+    ));
     return FutureBuilder(
       future: authC.autoLogin(),
       builder: (context, snapshot) {

@@ -20,7 +20,7 @@ class ItemCardBottomSheet extends GetView<MenuController> {
         left: 24,
         right: 24,
       ),
-      color: lightColor.withOpacity(.15),
+      color: abu,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -29,7 +29,7 @@ class ItemCardBottomSheet extends GetView<MenuController> {
             children: [
               Container(
                 width: 4,
-                height: 72,
+                height: 78,
                 color: biru,
               ),
               Container(
@@ -45,7 +45,7 @@ class ItemCardBottomSheet extends GetView<MenuController> {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: TextStyle(
-                              color: lightColor,
+                              color: darkColor,
                               fontFamily: "balsamiq",
                               letterSpacing: 1,
                               fontSize: 14,
@@ -61,7 +61,7 @@ class ItemCardBottomSheet extends GetView<MenuController> {
                             return Text(
                               "${nf.format(data.productPrice)}",
                               style: TextStyle(
-                                color: iconColor,
+                                color: darkColor.withOpacity(.7),
                                 fontFamily: "balsamiq",
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
@@ -123,7 +123,7 @@ class ItemCardBottomSheet extends GetView<MenuController> {
                       child: Text(
                         "${qty}",
                         style: TextStyle(
-                          color: lightColor,
+                          color: darkColor,
                           fontFamily: "balsamiq",
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -155,6 +155,7 @@ class ItemCardBottomSheet extends GetView<MenuController> {
         child: Icon(
           icon,
           color: lightColor,
+          size: 20,
         ),
       ),
     );

@@ -19,7 +19,7 @@ class AccountInfo extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: iconColor),
+          Icon(icon, color: darkColor.withOpacity(.7)),
           SizedBox(width: 16),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,7 +27,9 @@ class AccountInfo extends StatelessWidget {
               Text(
                 tittle!,
                 style: TextStyle(
-                    color: iconColor, fontFamily: "balsamiq", fontSize: 14),
+                    color: darkColor.withOpacity(.7),
+                    fontFamily: "balsamiq",
+                    fontSize: 14),
               ),
               Container(
                 width: Get.width - 100,
@@ -37,12 +39,12 @@ class AccountInfo extends StatelessWidget {
                     Text(
                       value!,
                       style: TextStyle(
-                          color: lightColor,
+                          color: darkColor,
                           fontFamily: "balsamiq",
                           fontSize: 18),
                     ),
                     isCanHide
-                        ? Icon(Icons.remove_red_eye_outlined, color: iconColor)
+                        ? Icon(Icons.remove_red_eye_outlined, color: darkColor)
                         : Container(),
                   ],
                 ),
@@ -51,7 +53,7 @@ class AccountInfo extends StatelessWidget {
                 margin: const EdgeInsets.only(top: 8),
                 height: .5,
                 width: Get.width - 84,
-                color: iconColor.withOpacity(.5),
+                color: darkColor.withOpacity(.5),
               ),
             ],
           ),

@@ -12,7 +12,7 @@ class AllMenu extends GetView<MenuController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: darkColor,
+      color: lightColor,
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
@@ -28,11 +28,13 @@ class AllMenu extends GetView<MenuController> {
                 physics: BouncingScrollPhysics(),
                 children: List.generate(controller.products.length, (index) {
                   ProductOrder data = controller.products[index];
+                  String image = controller.image[index];
                   Product kosong = Product();
 
                   return ProductCard(
                     data: data,
                     dataProduct: kosong,
+                    productImage: image,
                     addProduct: () => controller.addProduct(data),
                     minProduct: () => controller.minProduct(data),
                   );

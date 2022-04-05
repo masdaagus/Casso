@@ -48,7 +48,7 @@ class BottomSheetProduct extends StatelessWidget {
               child: Text(
                 data!.productName ?? dataProduct!.productName!,
                 style: TextStyle(
-                  color: lightColor,
+                  color: darkColor,
                   fontFamily: "balsamiq",
                   fontSize: 24,
                   // fontWeight: FontWeight.,
@@ -65,7 +65,7 @@ class BottomSheetProduct extends StatelessWidget {
                   Text(
                     nf.format(data!.productPrice ?? dataProduct!.productPrice),
                     style: TextStyle(
-                      color: abu,
+                      color: darkColor.withOpacity(.7),
                       fontFamily: "balsamiq",
                       fontSize: 16,
                       letterSpacing: 1,
@@ -76,7 +76,7 @@ class BottomSheetProduct extends StatelessWidget {
                     "Stock = ${data!.productStock ?? dataProduct!.productStock}",
                     maxLines: 7,
                     style: TextStyle(
-                      color: abu,
+                      color: darkColor.withOpacity(.7),
                       fontFamily: "balsamiq",
                       fontSize: 16,
                       letterSpacing: 1,
@@ -91,14 +91,14 @@ class BottomSheetProduct extends StatelessWidget {
               width: size.width,
               height: 100,
               decoration: BoxDecoration(
-                border: Border.all(color: lightColor.withOpacity(.2)),
+                border: Border.all(color: darkColor.withOpacity(.2)),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Text(
                 data!.productDescription ?? dataProduct!.productDescription!,
                 maxLines: 7,
                 style: TextStyle(
-                  color: lightColor.withOpacity(.5),
+                  color: darkColor.withOpacity(.5),
                   fontFamily: "balsamiq",
                   fontSize: 12,
                   letterSpacing: 1,

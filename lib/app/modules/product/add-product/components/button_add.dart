@@ -19,16 +19,16 @@ class ButtonAdd extends StatelessWidget {
         width: 184,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          color: darkColor,
+          color: lightColor,
           boxShadow: [
             BoxShadow(
-              blurRadius: 8,
+              blurRadius: 6,
               color: Colors.black.withOpacity(.35),
               offset: Offset(4, 4),
             ),
             BoxShadow(
               blurRadius: 8,
-              color: iconColor.withOpacity(.30),
+              color: orange.withOpacity(.10),
               offset: Offset(-4, -4),
             ),
           ],
@@ -37,7 +37,7 @@ class ButtonAdd extends StatelessWidget {
           child: Text(
             "SUBMIT",
             style: TextStyle(
-              color: lightColor,
+              color: darkColor,
               fontFamily: "balsamiq",
               fontWeight: FontWeight.w800,
               letterSpacing: 1,

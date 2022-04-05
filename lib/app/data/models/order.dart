@@ -4,6 +4,7 @@ Order orderFromJson(String str) => Order.fromJson(json.decode(str));
 
 class Order {
   Order({
+    this.orderId,
     this.orderNumber,
     this.guessName,
     this.waitersName,
@@ -13,6 +14,7 @@ class Order {
     this.totalPrices,
     this.productsOrder,
   });
+  final String? orderId;
   final int? orderNumber;
   final String? guessName;
   final String? waitersName;
@@ -23,6 +25,7 @@ class Order {
   List<ProductOrder>? productsOrder;
 
   factory Order.fromJson(Map<String, dynamic> json) => Order(
+        orderId: json["orderId"],
         orderNumber: json["orderNumber"],
         guessName: json["guessName"],
         waitersName: json["waitersName"],
@@ -35,6 +38,7 @@ class Order {
       );
 
   Map<String, dynamic> toJson() => {
+        "orderId": orderId,
         "orderNumber": orderNumber,
         "guessName": guessName,
         "waitersName": waitersName,

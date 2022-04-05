@@ -18,27 +18,33 @@ class DropDownCategory extends StatelessWidget {
       // height: 48,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: putih.withOpacity(.2),
+        color: putih,
       ),
       child: Row(
         children: [
-          Icon(Icons.menu, color: lightColor.withOpacity(.7)),
+          Icon(Icons.menu, color: darkColor.withOpacity(.7)),
           SizedBox(width: 8),
           Expanded(
             child: Obx(() => DropdownButtonFormField<String>(
-                  decoration: InputDecoration(),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    iconColor: Colors.transparent,
+                  ),
                   isDense: true,
-                  dropdownColor: darkColor,
-                  items: ctrl.data.value
+                  dropdownColor: putih,
+                  items: ctrl.data
                       .map((item) => DropdownMenuItem<String>(
                           value: item,
-                          child: Text(
-                            item,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: "balsamiq",
-                              fontWeight: FontWeight.w500,
-                              color: lightColor.withOpacity(.7),
+                          child: Container(
+                            // color: abu,
+                            child: Text(
+                              item,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: "balsamiq",
+                                fontWeight: FontWeight.bold,
+                                color: darkColor,
+                              ),
                             ),
                           )))
                       .toList(),

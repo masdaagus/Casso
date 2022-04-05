@@ -1,3 +1,4 @@
+import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -176,7 +177,7 @@ class MyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint myArc = Paint()
-      ..color = Colors.white
+      ..color = darkColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = 5
       ..strokeCap = StrokeCap.round;

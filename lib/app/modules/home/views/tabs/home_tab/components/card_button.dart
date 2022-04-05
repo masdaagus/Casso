@@ -19,17 +19,17 @@ class CardButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-            color: darkColor,
+            color: lightColor,
             borderRadius: BorderRadius.circular(24),
             boxShadow: [
               BoxShadow(
-                blurRadius: 8,
-                color: hitam.withOpacity(.50),
-                offset: Offset(4, 4),
+                blurRadius: 6,
+                color: hitam.withOpacity(.40),
+                offset: Offset(3, 3),
               ),
               BoxShadow(
                 blurRadius: 6,
-                color: putih.withOpacity(.10),
+                color: orange.withOpacity(.10),
                 offset: Offset(-4, -4),
               ),
             ]),
@@ -43,14 +43,16 @@ class CardButton extends StatelessWidget {
               child: icon,
               constraints: BoxConstraints(maxHeight: 40, maxWidth: 40),
             ),
-            SizedBox(height: 6),
+            SizedBox(height: 8),
             Text(
               tittle!,
               style: TextStyle(
-                  fontSize: 12,
-                  fontFamily: "balsamiq",
-                  color: iconColor,
-                  letterSpacing: .8),
+                fontSize: 14,
+                fontFamily: "balsamiq",
+                color: darkColor,
+                letterSpacing: .5,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),

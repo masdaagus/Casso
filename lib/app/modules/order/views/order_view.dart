@@ -12,14 +12,14 @@ class OrderView extends GetView<OrderController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkColor,
+      backgroundColor: lightColor,
       appBar: AppBar(
-        backgroundColor: darkColor,
+        backgroundColor: lightColor,
         elevation: 0,
         title: Text(
           'ORDER',
           style: TextStyle(
-            color: abu,
+            color: darkColor,
             fontFamily: "balsamiq",
             fontWeight: FontWeight.bold,
             letterSpacing: 1,
@@ -27,7 +27,11 @@ class OrderView extends GetView<OrderController> {
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, size: 20),
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 20,
+            color: darkColor,
+          ),
           onPressed: Get.back,
         ),
       ),

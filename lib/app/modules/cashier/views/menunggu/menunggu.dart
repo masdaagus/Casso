@@ -14,7 +14,7 @@ class Menunggu extends GetView<CashierController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkColor,
+      backgroundColor: lightColor,
       body: Column(
         children: [
           // card seraching

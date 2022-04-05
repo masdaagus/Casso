@@ -64,8 +64,8 @@ class Product {
     this.productPrice,
     this.productCategory,
     this.productName,
-    this.productStock,
-    this.productDescription,
+    this.productStock = 100,
+    this.productDescription = 'Description',
   });
   final String? productName;
   final double? productPrice;

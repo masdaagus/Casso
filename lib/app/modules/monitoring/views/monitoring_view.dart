@@ -16,39 +16,44 @@ class MonitoringView extends GetView<MonitoringController> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        backgroundColor: darkColor,
+        backgroundColor: lightColor,
         appBar: AppBar(
           title: Text(
             'MONITORING',
             style: TextStyle(
               fontFamily: "balsamiq",
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.bold,
+              color: darkColor,
             ),
           ),
           centerTitle: true,
           elevation: 0,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios, size: 20),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              size: 20,
+              color: darkColor,
+            ),
             onPressed: Get.back,
           ),
-          backgroundColor: darkColor,
+          backgroundColor: lightColor,
         ),
         body: Column(
           children: [
             Container(
               margin: EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: lightColor.withOpacity(.1),
+                color: abu,
                 borderRadius: BorderRadius.circular(8),
               ),
-              height: 30,
+              height: 32,
               child: Container(
                 padding: const EdgeInsets.all(4),
                 child: TabBar(
-                  labelColor: abu,
+                  labelColor: putih,
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
-                    color: darkColor,
+                    color: putih,
                   ),
                   tabs: [
                     textTab("PESANAN"),
@@ -80,13 +85,16 @@ class MonitoringView extends GetView<MonitoringController> {
   }
 
   Widget textTab(String text) {
-    return Text(
-      text,
-      style: TextStyle(
-        color: abu,
-        fontSize: 9,
-        fontFamily: "Montserrat",
-        fontWeight: FontWeight.w600,
+    return Padding(
+      padding: const EdgeInsets.only(top: 4),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: darkColor,
+          fontSize: 9,
+          fontFamily: "balsamiq",
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }

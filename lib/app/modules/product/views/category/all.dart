@@ -13,7 +13,7 @@ class ProductsView extends GetView<ProductController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: darkColor,
+      color: lightColor,
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
@@ -35,10 +35,8 @@ class ProductsView extends GetView<ProductController> {
                     dataProduct: data,
                     data: kosong,
                     isOrderWidget: false,
-                    // productImage: image,
+                    productImage: image,
                     editProduct: () {
-                      print(data.productName);
-                      print('edit product');
                       Get.to(() => AddProductView(
                             dataProduct: data,
                             image: image,

@@ -80,6 +80,10 @@ class MenuController extends GetxController {
           .then((obj) async {
         QuerySnapshot querySnapshot = await orderCollection.get();
 
+        pesananC.doc(obj.id).update({
+          "orderId": obj.id,
+        });
+
         String? id;
         Order? order;
 
@@ -135,6 +139,7 @@ class MenuController extends GetxController {
           );
 
           await orderCollection.doc(obj.id).set(Order(
+                orderId: obj.id,
                 guessName: guessName,
                 tableNumber: table,
                 waitersName: user.value.name,
@@ -147,8 +152,6 @@ class MenuController extends GetxController {
         }
       });
       Get.offAllNamed('/home');
-
-      order.refresh();
     } catch (e) {
       print(e);
     }
@@ -185,6 +188,38 @@ class MenuController extends GetxController {
     }
   }
 
+  List<String> image = [
+    "assets/products/ayampenyet.jpg",
+    "assets/products/bakso_bakar.jpeg",
+    "assets/products/ikanbakar.jpg",
+    "assets/products/kentang_goreng.jpeg",
+    "assets/products/milkshakestroberi.jpg",
+    "assets/products/nasigoreng.JPG",
+    "assets/products/sanger.jpg",
+    "assets/products/satetaichan.jpg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+    "assets/products/tehmanis.jpeg",
+  ];
   @override
   void onInit() async {
     user = auth.user;

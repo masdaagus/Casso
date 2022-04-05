@@ -37,7 +37,7 @@ class ProfileTab extends GetView<HomeController> {
             width: Get.width,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
             decoration: BoxDecoration(
-              color: putih.withOpacity(.05),
+              color: abu,
               borderRadius: BorderRadius.circular(24),
             ),
             child: Column(
@@ -69,7 +69,7 @@ class ProfileTab extends GetView<HomeController> {
               width: 184,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
-                color: darkColor,
+                color: lightColor,
                 boxShadow: [
                   BoxShadow(
                     blurRadius: 8,
@@ -78,7 +78,7 @@ class ProfileTab extends GetView<HomeController> {
                   ),
                   BoxShadow(
                     blurRadius: 8,
-                    color: iconColor.withOpacity(.30),
+                    color: abu.withOpacity(.30),
                     offset: Offset(-4, -4),
                   ),
                 ],
@@ -87,7 +87,7 @@ class ProfileTab extends GetView<HomeController> {
                 child: Text(
                   "Log out",
                   style: TextStyle(
-                    color: lightColor,
+                    color: darkColor,
                     fontFamily: "balsamiq",
                     fontWeight: FontWeight.w800,
                     letterSpacing: 1,

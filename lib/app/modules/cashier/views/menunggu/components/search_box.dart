@@ -9,11 +9,11 @@ class SearchBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      height: 40,
+      height: 32,
       decoration: BoxDecoration(
-        color: lightColor.withOpacity(.1),
+        color: abu,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -22,13 +22,17 @@ class SearchBox extends StatelessWidget {
         children: [
           Expanded(
             child: TextField(
-              style: TextStyle(color: abu),
+              style: TextStyle(
+                color: darkColor,
+                fontFamily: "balsamiq",
+                fontSize: 13,
+              ),
               decoration: InputDecoration(
                 hintText: "Cari Nomor meja/Nama Pengunjung ",
                 isDense: true,
                 hintStyle: TextStyle(
-                  color: abu,
-                  fontFamily: "Montserrat",
+                  color: darkColor.withOpacity(.7),
+                  fontFamily: "balsamiq",
                   fontSize: 13,
                 ),
                 border: InputBorder.none,
@@ -38,7 +42,8 @@ class SearchBox extends StatelessWidget {
           SizedBox(width: 16),
           Icon(
             Icons.search,
-            color: abu,
+            color: darkColor,
+            size: 16,
           ),
         ],
       ),

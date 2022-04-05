@@ -1,5 +1,6 @@
 import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/modules/monitoring/controllers/monitoring_controller.dart';
+import 'package:casso/app/modules/monitoring/views/components/card_no_order.dart';
 import 'package:casso/app/modules/monitoring/views/components/monitor_card.dart';
 import 'package:casso/app/modules/monitoring/views/components/order_item.dart';
 
@@ -14,7 +15,7 @@ class ProsesMonitoring extends GetView<MonitoringController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkColor,
+      backgroundColor: lightColor,
       body: Container(
         child: Column(
           children: [
@@ -31,6 +32,9 @@ class ProsesMonitoring extends GetView<MonitoringController> {
                     }).toList();
 
                     List idDocs = snapshot.data!.docs;
+                    if (orderData.length == 0) {
+                      return NoOrderWidget();
+                    }
 
                     return ListView.builder(
                       physics: BouncingScrollPhysics(),

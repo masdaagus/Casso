@@ -19,16 +19,16 @@ class ButtonOrder extends StatelessWidget {
         width: 184,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          color: darkColor,
+          color: biru,
           boxShadow: [
             BoxShadow(
-              blurRadius: 8,
-              color: Colors.black.withOpacity(.35),
+              blurRadius: 6,
+              color: Colors.black.withOpacity(.25),
               offset: Offset(4, 4),
             ),
             BoxShadow(
-              blurRadius: 8,
-              color: iconColor.withOpacity(.30),
+              blurRadius: 6,
+              color: putih.withOpacity(.15),
               offset: Offset(-4, -4),
             ),
           ],
@@ -37,7 +37,7 @@ class ButtonOrder extends StatelessWidget {
           child: Text(
             "ORDER",
             style: TextStyle(
-              color: lightColor,
+              color: darkColor,
               fontFamily: "balsamiq",
               fontWeight: FontWeight.w800,
               letterSpacing: 1,

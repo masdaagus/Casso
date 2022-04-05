@@ -1,5 +1,6 @@
 import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/modules/monitoring/controllers/monitoring_controller.dart';
+import 'package:casso/app/modules/monitoring/views/components/card_no_order.dart';
 import 'package:casso/app/modules/monitoring/views/components/monitor_card.dart';
 import 'package:casso/app/modules/monitoring/views/components/order_item.dart';
 
@@ -14,7 +15,7 @@ class PesananMonitoring extends GetView<MonitoringController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkColor,
+      backgroundColor: lightColor,
       body: Container(
         child: Column(
           children: [
@@ -32,6 +33,10 @@ class PesananMonitoring extends GetView<MonitoringController> {
 
                     // GET LIST ID DOCS
                     List idDocs = snapshot.data!.docs;
+
+                    if (orderData.length == 0) {
+                      return NoOrderWidget();
+                    }
 
                     return ListView.builder(
                       physics: BouncingScrollPhysics(),
@@ -64,18 +69,6 @@ class PesananMonitoring extends GetView<MonitoringController> {
                           ),
                           delete: () {
                             controller.getData(data, id);
-                            // Get.defaultDialog(
-                            //   content: DialogDeleteMonitoring(delete: () async {
-                            //     // await controller.delete(id);
-                            //     // print(data.productsOrder);
-                            //     // data.productsOrder!.forEach((data) {
-                            //     //   print(data.productName);
-                            //     // });
-                            //   }),
-                            //   backgroundColor: Colors.transparent,
-                            //   titleStyle: TextStyle(color: Colors.transparent),
-                            //   barrierDismissible: true,
-                            // );
                           },
                           listOrder: Container(
                             child: ListView.builder(

@@ -23,18 +23,18 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkColor,
+      backgroundColor: lightColor,
       bottomNavigationBar: CurvedNavigationBar(
         animationDuration: const Duration(milliseconds: 300),
-        buttonBackgroundColor: putih.withOpacity(.08),
+        buttonBackgroundColor: darkColor.withOpacity(.15),
         height: 65,
         index: 1,
-        color: putih.withOpacity(.05),
-        backgroundColor: darkColor,
+        color: darkColor.withOpacity(.15),
+        backgroundColor: lightColor,
         items: <Widget>[
-          Icon(Icons.desktop_mac_outlined, size: 30, color: iconColor),
-          Icon(Icons.home, size: 30, color: iconColor),
-          Icon(Icons.person, size: 30, color: iconColor),
+          Icon(Icons.desktop_mac_outlined, size: 30, color: darkColor),
+          Icon(Icons.home, size: 30, color: darkColor),
+          Icon(Icons.person, size: 30, color: darkColor),
         ],
         onTap: (value) => setState(() => _curentIndex = value),
       ),

@@ -15,7 +15,7 @@ class FoodProduct extends GetView<ProductController> {
     List<Product> food =
         controller.products.where((d) => d.productCategory == 'FOOD').toList();
     return Container(
-      color: darkColor,
+      color: lightColor,
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
@@ -39,10 +39,10 @@ class FoodProduct extends GetView<ProductController> {
                     isOrderWidget: false,
                     productImage: image,
                     editProduct: () {
-                      // Get.to(() => AddProductView(
-                      //       dataProduct: data,
-                      //       image: image,
-                      //     ));
+                      Get.to(() => AddProductView(
+                            dataProduct: data,
+                            image: image,
+                          ));
                     },
                   );
                 }),

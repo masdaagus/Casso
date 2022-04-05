@@ -18,9 +18,9 @@ class ImageCard extends StatelessWidget {
       width: Get.width - 154,
       decoration: BoxDecoration(
         border: Border.all(
-          color: (image == null) ? abu : Colors.transparent,
+          color: (image == null) ? putih : Colors.transparent,
         ),
-        color: putih.withOpacity(.2),
+        color: putih,
         borderRadius: BorderRadius.circular(24),
       ),
       child: (image == null)
@@ -29,7 +29,7 @@ class ImageCard extends StatelessWidget {
               children: [
                 Icon(
                   Icons.camera_alt_outlined,
-                  color: abu,
+                  color: darkColor.withOpacity(.7),
                   size: 100,
                 ),
                 SizedBox(height: 4),
@@ -38,7 +38,7 @@ class ImageCard extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: "balsamiq",
                     fontSize: 16,
-                    color: abu,
+                    color: darkColor.withOpacity(.7),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -48,7 +48,7 @@ class ImageCard extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: "balsamiq",
                     fontSize: 9,
-                    color: abu,
+                    color: darkColor.withOpacity(.7),
                     // fontWeight: FontWeight,
                   ),
                 )
