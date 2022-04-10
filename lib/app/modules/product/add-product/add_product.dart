@@ -87,8 +87,10 @@ class AddProductView extends StatelessWidget {
                           return "Nama produk tidak boleh kosong";
                       },
                       maxLength: 30,
-                      controller: ctrl.namaProduk,
+                      controller: ctrl.namaProduk =
+                          TextEditingController(text: dataProduct!.productName),
                       decoration: InputDecoration(
+                        labelText: 'Nama Produk',
                         isDense: true,
                         errorStyle: TextStyle(
                           color: merah,
@@ -123,7 +125,9 @@ class AddProductView extends StatelessWidget {
                         if (value!.isEmpty)
                           return "Harga produk tidak boleh kosong";
                       },
-                      controller: ctrl.hargaProduk,
+                      controller: ctrl.hargaProduk = TextEditingController(
+                        text: dataProduct!.productPrice.toString(),
+                      ),
                       maxLength: 30,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(

@@ -11,6 +11,7 @@ import 'components/pegawai_card.dart';
 class PegawaiView extends GetView<PegawaiController> {
   @override
   Widget build(BuildContext context) {
+    // print(controller.)
     return Scaffold(
       floatingActionButton: FloatingButton(
         onTap: () {},

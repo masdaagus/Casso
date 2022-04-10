@@ -1,6 +1,14 @@
 import 'dart:ui';
 
+import 'package:casso/app/modules/dashboard/bindings/dashboard_binding.dart';
+import 'package:casso/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:casso/app/modules/home/controllers/home_controller.dart';
+import 'package:casso/app/modules/monitoring/bindings/monitoring_binding.dart';
+import 'package:casso/app/modules/monitoring/views/monitoring_view.dart';
+import 'package:casso/app/modules/order/bindings/order_binding.dart';
+import 'package:casso/app/modules/order/views/order_view.dart';
+import 'package:casso/app/modules/product/bindings/product_binding.dart';
+import 'package:casso/app/modules/product/views/product_view.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -73,7 +81,7 @@ class TabHome extends GetView<HomeController> {
                           ),
                         ),
                         Text(
-                          "di ${controller.resto.restoName}",
+                          "di ${controller.resto.value.restoName}",
                           style: TextStyle(
                               color: darkColor,
                               fontFamily: "balsamiq",
@@ -86,7 +94,7 @@ class TabHome extends GetView<HomeController> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              controller.user.name!,
+                              controller.user.value.name!,
                               style: TextStyle(
                                   color: orange,
                                   fontFamily: "balsamiq",
@@ -96,7 +104,7 @@ class TabHome extends GetView<HomeController> {
                             ),
                             SizedBox(width: 2),
                             Text(
-                              "(${controller.user.status})",
+                              "(${controller.user.value.status})",
                               style: TextStyle(
                                   color: iconColor,
                                   fontFamily: "balsamiq",
@@ -124,7 +132,7 @@ class TabHome extends GetView<HomeController> {
           Positioned(
             top: 440,
             child: Container(
-              height: 300,
+              height: 400,
               width: Get.width,
               // color: putih.withOpacity(.05),
               child: GridView.count(
@@ -145,7 +153,11 @@ class TabHome extends GetView<HomeController> {
                       color: darkColor,
                     ),
                     tittle: "Monitoring",
-                    onTap: () => Get.toNamed("/monitoring"),
+                    onTap: () => Get.to(
+                      () => MonitoringView(),
+                      duration: Duration(milliseconds: 480),
+                      binding: MonitoringBinding(),
+                    ),
                   ),
                   CardButton(
                     icon: Icon(
@@ -163,7 +175,12 @@ class TabHome extends GetView<HomeController> {
                       color: darkColor,
                     ),
                     tittle: "Order",
-                    onTap: () => Get.toNamed("/order"),
+                    // onTap: () => Get.toNamed("/order"),
+                    onTap: () => Get.to(
+                      () => OrderView(),
+                      duration: Duration(milliseconds: 480),
+                      binding: OrderBinding(),
+                    ),
                   ),
                   CardButton(
                     icon: Icon(
@@ -172,7 +189,11 @@ class TabHome extends GetView<HomeController> {
                       color: darkColor,
                     ),
                     tittle: "Dashboard",
-                    onTap: () => Get.toNamed("/monitoring"),
+                    onTap: () => Get.to(
+                      () => DashboardView(),
+                      duration: Duration(milliseconds: 480),
+                      binding: DashboardBinding(),
+                    ),
                   ),
                   CardButton(
                     icon: Icon(
@@ -190,7 +211,11 @@ class TabHome extends GetView<HomeController> {
                       color: darkColor,
                     ),
                     tittle: "Product",
-                    onTap: () => Get.toNamed("/product"),
+                    onTap: () => Get.to(
+                      () => ProductView(),
+                      duration: Duration(milliseconds: 480),
+                      binding: ProductBinding(),
+                    ),
                   ),
                 ],
               ),

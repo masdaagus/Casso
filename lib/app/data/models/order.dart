@@ -9,7 +9,6 @@ class Order {
     this.guessName,
     this.waitersName,
     this.tableNumber,
-    this.totalItems,
     this.createAt,
     this.totalPrices,
     this.productsOrder,
@@ -19,7 +18,7 @@ class Order {
   final String? guessName;
   final String? waitersName;
   final int? tableNumber;
-  final int? totalItems;
+
   final String? createAt;
   double? totalPrices;
   List<ProductOrder>? productsOrder;
@@ -30,7 +29,7 @@ class Order {
         guessName: json["guessName"],
         waitersName: json["waitersName"],
         tableNumber: json["tableNumbers"],
-        totalItems: json["totalItems"],
+        // totalItems: json["totalItems"],
         createAt: json["createAt"],
         totalPrices: json["totalPrices"],
         productsOrder: List<ProductOrder>.from(
@@ -43,7 +42,7 @@ class Order {
         "guessName": guessName,
         "waitersName": waitersName,
         "tableNumbers": tableNumber,
-        "totalItems": totalItems,
+        // "totalItems": totalItems,
         "totalPrices": totalPrices,
         "createAt": createAt,
         "productsOrder":
@@ -59,11 +58,13 @@ class ProductOrder {
     this.productDescription,
     this.productQty = 0,
     this.productStock,
+    this.productNote,
   });
   String? productName;
   String? productCategory;
   double? productPrice;
   String? productDescription;
+  String? productNote;
   int? productStock;
 
   int productQty;
@@ -75,6 +76,7 @@ class ProductOrder {
         productQty: json["productQty"],
         productDescription: json["productDescription"],
         productStock: json["productStock"],
+        productNote: json["productNote"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -84,6 +86,7 @@ class ProductOrder {
         "productQty": productQty,
         "productDescription": productDescription,
         "productStock": productStock,
+        "productNote": productNote,
       };
 }
 

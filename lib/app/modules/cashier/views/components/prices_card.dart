@@ -1,42 +1,42 @@
 import 'package:casso/app/data/models/order.dart';
-import 'package:casso/app/modules/cashier/controllers/cashier_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class PricesCard extends StatefulWidget {
+class PricesCard extends StatelessWidget {
   const PricesCard({
-    required this.data,
     Key? key,
     this.onTap,
+    this.isDone = false,
+    required this.data,
   }) : super(key: key);
 
   final Order? data;
   final VoidCallback? onTap;
+  final bool isDone;
 
-  @override
-  State<PricesCard> createState() => _PricesCardState();
-}
+  // @override
+//   State<PricesCard> createState() => _PricesCardState();
+// }
 
-class _PricesCardState extends State<PricesCard> {
-  @override
-  void initState() {
-    _sumPrices();
-    super.initState();
-  }
+// class _PricesCardState extends State<PricesCard> {
+//   @override
+//   void initState() {
+//     // _sumPrices();
+//     super.initState();
+//   }
 
-  double _total = 0;
-  double _sumPrices() {
-    _total = 0;
-    widget.data!.productsOrder!
-        .forEach((e) => _total += (e.productPrice! * e.productQty));
-    return _total;
-  }
+  // double _total = 0;
+  // double _sumPrices() {
+  //   _total = 0;
+  //   widget.data!.productsOrder!
+  //       .forEach((e) => _total += (e.productPrice! * e.productQty));
+  //   return _total;
+  // }
 
   @override
   Widget build(BuildContext context) {
     /// [function] agar data tidak duplicate
-    List<ProductOrder> productOrders = widget.data!.productsOrder!;
+    List<ProductOrder> productOrders = data!.productsOrder!;
     final ids = Set();
     productOrders.retainWhere(
       (x) => ids.add(x.productName),
@@ -62,7 +62,7 @@ class _PricesCardState extends State<PricesCard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "TABLE ${widget.data!.tableNumber} - (${widget.data!.guessName})",
+                  "TABLE ${data!.tableNumber} - (${data!.guessName})",
                   style: TextStyle(
                     color: darkColor,
                     fontFamily: "balsamiq",
@@ -72,7 +72,7 @@ class _PricesCardState extends State<PricesCard> {
                   ),
                 ),
                 Text(
-                  "By: ${widget.data!.waitersName}",
+                  "By: ${data!.waitersName}",
                   style: TextStyle(
                     color: darkColor,
                     fontFamily: "balsamiq",
@@ -167,7 +167,7 @@ class _PricesCardState extends State<PricesCard> {
                   ),
                 ),
                 Text(
-                  nf.format(_total),
+                  nf.format(data!.totalPrices),
                   style: TextStyle(
                     color: darkColor,
                     fontFamily: "balsamiq",
@@ -180,35 +180,46 @@ class _PricesCardState extends State<PricesCard> {
             ),
           ),
 
-          Container(
-            margin: const EdgeInsets.only(bottom: 16),
-            height: 32,
-            width: 120,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color(0XFFA0B5EB),
-                  Color(0XFFC9F0E4),
-                  // Color(0XFFDFE9F3),
-                  // putih,
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(25),
-            ),
-            child: Center(
-                child: Text(
-              "BAYAR",
-              style: TextStyle(
-                color: darkColor,
-                fontFamily: "balsamiq",
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                letterSpacing: .5,
-              ),
-            )),
-          ),
+          isDone
+              ? Container()
+              : GestureDetector(
+                  onTap: onTap,
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 16),
+                    height: 32,
+                    width: 120,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0XFFA0B5EB),
+                            Color(0XFFC9F0E4),
+                            // Color(0XFFDFE9F3),
+                            // putih,
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(25),
+                        boxShadow: [
+                          BoxShadow(
+                            color: hitam.withOpacity(.2),
+                            blurRadius: 4,
+                            offset: Offset(4, 4),
+                          )
+                        ]),
+                    child: Center(
+                        child: Text(
+                      "BAYAR",
+                      style: TextStyle(
+                        color: darkColor,
+                        fontFamily: "balsamiq",
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        letterSpacing: .5,
+                      ),
+                    )),
+                  ),
+                ),
         ],
       ),
     );

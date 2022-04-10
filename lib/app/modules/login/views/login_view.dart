@@ -23,7 +23,7 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: darkColor,
+      backgroundColor: lightColor,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         child: SafeArea(
@@ -85,8 +85,8 @@ class LoginView extends GetView<LoginController> {
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            darkColor.withOpacity(.45),
-                            darkColor.withOpacity(.35),
+                            lightColor.withOpacity(.45),
+                            lightColor.withOpacity(.35),
                           ],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,

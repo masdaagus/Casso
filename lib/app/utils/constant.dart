@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 const darkColor = Color(0XFF2B333D);
@@ -28,9 +29,15 @@ NumberFormat nf = NumberFormat.simpleCurrency(
   decimalDigits: 0,
 );
 
+DateFormat dateFormat = DateFormat("dd-MM-yyyy HH:mm");
+const mySystemTheme = SystemUiOverlayStyle(
+  systemNavigationBarColor: lightColor,
+  systemNavigationBarIconBrightness: Brightness.dark,
+);
+
 const styl = TextStyle(
-  color: abu,
-  fontFamily: "Montserrat",
+  color: darkColor,
+  fontFamily: "balsamiq",
   fontSize: 18,
   fontWeight: FontWeight.w500,
 );

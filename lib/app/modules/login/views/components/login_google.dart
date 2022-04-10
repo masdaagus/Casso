@@ -22,27 +22,26 @@ class LoginGoogleButton extends StatelessWidget {
             width: 48,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
-              color: darkColor,
+              color: lightColor,
               boxShadow: [
                 BoxShadow(
-                  blurRadius: 8,
-                  color: Colors.black.withOpacity(.35),
+                  blurRadius: 4,
+                  color: hitam.withOpacity(.38),
                   offset: Offset(4, 4),
                 ),
                 BoxShadow(
-                  blurRadius: 8,
-                  color: iconColor.withOpacity(.30),
+                  blurRadius: 6,
+                  color: putih.withOpacity(1),
                   offset: Offset(-4, -4),
                 ),
               ],
             ),
             child: Center(
               child: Container(
-                margin: const EdgeInsets.only(left: 3, top: 2),
-                color: abu.withOpacity(.02),
+                margin: const EdgeInsets.only(left: 4, top: 4),
                 child: SvgPicture.asset(
                   "assets/svg/google.svg",
-                  color: Color(0XFFE19D0A).withOpacity(.85),
+                  color: darkColor.withOpacity(.85),
                   height: 24,
                 ),
               ),
@@ -52,7 +51,7 @@ class LoginGoogleButton extends StatelessWidget {
         Text(
           "Login with Google",
           style: TextStyle(
-            color: iconColor,
+            color: darkColor.withOpacity(.5),
             fontFamily: "balsamiq",
             fontSize: 12,
             letterSpacing: .5,

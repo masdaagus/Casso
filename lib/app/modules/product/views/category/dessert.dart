@@ -1,5 +1,4 @@
 import 'package:casso/app/data/models/order.dart';
-import 'package:casso/app/data/models/products.dart';
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/modules/card/product_card/product_card.dart';
 import 'package:casso/app/modules/product/add-product/add_product.dart';

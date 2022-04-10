@@ -28,17 +28,15 @@ class CustomTextField extends StatelessWidget {
       // height: 48,
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            Color(0XFF818181).withOpacity(.48),
-            darkColor.withOpacity(.48),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+            colors: [
+              lightColor,
+              biru.withOpacity(.1),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            stops: [0.45, 1]),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(
-          color: Color(0XFF3E4C55),
-        ),
+        border: Border.all(color: Color(0XFF7CD2B7).withOpacity(.5), width: .5),
       ),
       child: Row(
         children: [
@@ -48,7 +46,7 @@ class CustomTextField extends StatelessWidget {
               controller: controller,
               obscureText: isObsecure,
               style: TextStyle(
-                color: abu,
+                color: darkColor,
                 fontFamily: "balsamiq",
                 letterSpacing: .5,
               ),
@@ -57,10 +55,10 @@ class CustomTextField extends StatelessWidget {
                 border: InputBorder.none,
                 icon: Padding(
                   padding: const EdgeInsets.only(left: 16),
-                  child: Icon(icon, color: iconColor),
+                  child: Icon(icon, color: darkColor.withOpacity(.7)),
                 ),
                 hintStyle: TextStyle(
-                  color: iconColor,
+                  color: darkColor.withOpacity(.7),
                   fontFamily: "balsamiq",
                   letterSpacing: .5,
                 ),
@@ -74,7 +72,7 @@ class CustomTextField extends StatelessWidget {
                     width: 48,
                     child: Icon(
                       Icons.remove_red_eye,
-                      color: iconColor,
+                      color: darkColor.withOpacity(.7),
                     ),
                   ),
                 )

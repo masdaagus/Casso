@@ -13,9 +13,9 @@ class Headline extends StatelessWidget {
       child: Text(
         "Casso",
         style: TextStyle(
-          fontFamily: 'Montserrat',
-          color: iconColor,
-          fontWeight: FontWeight.w600,
+          fontFamily: 'balsamiq',
+          color: darkColor,
+          fontWeight: FontWeight.bold,
           fontSize: 64,
         ),
       ),

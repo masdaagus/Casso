@@ -1,7 +1,6 @@
 import 'package:casso/app/controllers/auth_controller.dart';
 
 import 'package:casso/app/data/models/order.dart';
-import 'package:casso/app/data/models/products.dart';
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/table.dart';
 import 'package:casso/app/data/models/users.dart';
@@ -16,7 +15,6 @@ class MenuController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   List<ProductOrder> _tempOrder = [];
-
   List<ProductOrder> products = [];
 
   double _totalPrice = 0;
@@ -66,35 +64,39 @@ class MenuController extends GetxController {
     DateTime now = DateTime.now();
 
     try {
+      double _total = 0;
+
+      _tempOrder.forEach((data) {
+        _total += (data.productPrice! * data.productQty);
+      });
       pesananC
           .add(Order(
         guessName: guessName,
         tableNumber: table,
         waitersName: user.value.name,
-        totalPrices: _sumPrices(),
-        totalItems: _tempOrder.length,
         productsOrder: _tempOrder,
+        totalPrices: _total,
         createAt: now.toIso8601String(),
         orderNumber: 1,
       ).toJson())
           .then((obj) async {
-        QuerySnapshot querySnapshot = await orderCollection.get();
-
+        /// UPDATE ID
         pesananC.doc(obj.id).update({
           "orderId": obj.id,
         });
 
+        QuerySnapshot querySnapshot = await orderCollection.get();
+
         String? id;
         Order? order;
 
-        List<Order> ordersCollection = querySnapshot.docs.map((doc) {
+        querySnapshot.docs.map((doc) {
           var object = doc.data() as Map<String, dynamic>;
           Order data = Order.fromJson(object);
           if (data.guessName == guessName && data.tableNumber == table) {
             id = doc.id;
             order = data;
           }
-          return data;
         }).toList();
 
         if (id != null && order != null) {
@@ -107,15 +109,11 @@ class MenuController extends GetxController {
             _tempOrder.forEach((dataB) {
               if (dataA.productName == dataB.productName &&
                   dataA.productPrice == dataB.productPrice) {
-                print('samaaaaaa ni');
-                print("data A = ${dataA.productName}");
-                print("data B = ${dataB.productName}");
                 dataA.productQty += 1;
                 productsEnd.add(dataA);
               } else {
                 productsEnd.addAll(products);
                 productsEnd.add(dataB);
-                print('gak sama');
               }
             });
           });
@@ -123,6 +121,11 @@ class MenuController extends GetxController {
           productsEnd.retainWhere(
             (x) => ids.add(x.productName),
           );
+          double _total = 0;
+
+          productsEnd.forEach((data) {
+            _total += (data.productPrice! * data.productQty);
+          });
 
           orderCollection.doc(id).update({
             "productsOrder": List<dynamic>.from(
@@ -130,6 +133,7 @@ class MenuController extends GetxController {
                 (x) => x.toJson(),
               ),
             ),
+            "totalPrices": _total.toDouble(),
           });
         } else {
           print('SET DATA BARU');
@@ -138,19 +142,32 @@ class MenuController extends GetxController {
             (x) => ids.add(x.productName),
           );
 
+          double _total = 0;
+
+          _tempOrder.forEach((data) {
+            _total += (data.productPrice! * data.productQty);
+          });
+
           await orderCollection.doc(obj.id).set(Order(
                 orderId: obj.id,
                 guessName: guessName,
                 tableNumber: table,
                 waitersName: user.value.name,
-                totalPrices: _sumPrices(),
-                totalItems: _tempOrder.length,
                 productsOrder: _tempOrder,
+                totalPrices: _total,
                 createAt: now.toIso8601String(),
                 orderNumber: 1,
               ).toJson());
         }
       });
+
+      CollectionReference restos = firestore.collection("restos");
+      final restoId = await restos.doc(user.value.restoID).get();
+      final restoData = restoId.data() as Map<String, dynamic>;
+      resto(RestosModel.fromJson(restoData));
+      resto.refresh();
+      auth.refresh();
+      update();
       Get.offAllNamed('/home');
     } catch (e) {
       print(e);
@@ -183,6 +200,13 @@ class MenuController extends GetxController {
           ),
         ),
       });
+
+      final restoId = await restos.doc(user.value.restoID).get();
+      final restoData = restoId.data() as Map<String, dynamic>;
+      resto(RestosModel.fromJson(restoData));
+      resto.refresh();
+      auth.refresh();
+      update();
     } catch (e) {
       print(e);
     }

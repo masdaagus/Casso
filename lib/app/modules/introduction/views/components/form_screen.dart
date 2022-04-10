@@ -8,7 +8,7 @@ class FormScreen extends GetView<IntroductionController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkColor,
+      backgroundColor: lightColor,
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
@@ -26,10 +26,9 @@ class FormScreen extends GetView<IntroductionController> {
             Container(
               padding: const EdgeInsets.all(24),
               margin: const EdgeInsets.symmetric(horizontal: 24),
-              // height: 400,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24),
-                color: abu.withOpacity(.2),
+                color: abu,
               ),
               child: Column(
                 children: [
@@ -69,7 +68,7 @@ class FormScreen extends GetView<IntroductionController> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        primary: putih.withOpacity(.2),
+                        primary: biru.withOpacity(.8),
                       ),
                     ),
                   )
@@ -102,17 +101,18 @@ class FormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.only(top: 3),
       height: 48,
       decoration: BoxDecoration(
-        color: putih.withOpacity(.2),
+        color: putih,
         borderRadius: BorderRadius.circular(12),
       ),
       child: TextField(
         controller: controller,
         keyboardType: isNumber ? TextInputType.number : TextInputType.name,
         style: TextStyle(
-          color: putih,
-          fontFamily: "Montserrat",
+          color: darkColor,
+          fontFamily: "balsamiq",
           fontWeight: FontWeight.w500,
           fontSize: 14,
           letterSpacing: .5,
@@ -121,15 +121,15 @@ class FormField extends StatelessWidget {
           border: InputBorder.none,
           hintText: hintText,
           hintStyle: TextStyle(
-            color: abu.withOpacity(.8),
-            fontFamily: "Montserrat",
+            color: darkColor.withOpacity(.7),
+            fontFamily: "balsamiq",
             fontWeight: FontWeight.w500,
             fontSize: 14,
             letterSpacing: .5,
           ),
           prefixIcon: Icon(
             iconData,
-            color: abu,
+            color: darkColor.withOpacity(.7),
           ),
         ),
       ),

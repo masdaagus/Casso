@@ -20,6 +20,7 @@ class RestosModel {
     this.restoEmploye,
     this.products,
     this.tables,
+    this.restoTaxes,
   });
 
   final int? restoTable;
@@ -27,6 +28,7 @@ class RestosModel {
   final String? ownerName;
   final String? restoLocation;
   final String? restoName;
+  final double? restoTaxes;
   final List<dynamic>? products;
   final List<dynamic>? restoEmploye;
   final List<dynamic>? tables;
@@ -38,6 +40,7 @@ class RestosModel {
         restoLocation: json["restoLocation"],
         restoName: json["restoName"],
         restoTable: json["restoTable"],
+        restoTaxes: json["restoTaxes"],
         restoEmploye: List<dynamic>.from(
             json["restoEmploye"].map((x) => UsersModel.fromJson(x))),
         products: List<Product>.from(
@@ -52,6 +55,7 @@ class RestosModel {
         "restoLocation": restoLocation,
         "restoName": restoName,
         "restoTable": restoTable,
+        "restoTaxes": restoTaxes,
         "restoEmploye":
             List<dynamic>.from(restoEmploye!.map((x) => x.toJson())),
         "products": List<dynamic>.from(products!.map((x) => x.toJson())),

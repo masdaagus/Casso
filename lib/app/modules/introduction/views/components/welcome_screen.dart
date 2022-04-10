@@ -12,7 +12,7 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkColor,
+      backgroundColor: lightColor,
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
@@ -28,9 +28,9 @@ class WelcomeScreen extends StatelessWidget {
             Text(
               "Selamat Datang di Casso",
               style: TextStyle(
-                  color: orange.withOpacity(.8),
+                  color: darkColor.withOpacity(.8),
                   fontSize: 24,
-                  fontFamily: "Montserrat",
+                  fontFamily: "balsamiq",
                   fontWeight: FontWeight.w600,
                   letterSpacing: -.5),
             ),
@@ -45,10 +45,10 @@ class WelcomeScreen extends StatelessWidget {
                     TextSpan(
                       text: "Casso ",
                       style: TextStyle(
-                        color: orange,
+                        color: biru,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        fontFamily: "Montserrat",
+                        fontFamily: "balsamiq",
                       ),
                     ),
                     TextSpan(
@@ -80,7 +80,7 @@ class WelcomeScreen extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  primary: Color(0XFFedf2fb),
+                  primary: biru.withOpacity(.8),
                 ),
               ),
             )

@@ -1,16 +1,16 @@
+import 'package:casso/app/modules/cashier/views/paid/paid.dart';
+import 'package:casso/app/modules/cashier/views/unpaid/unpaid.dart';
 import 'package:casso/app/utils/constant.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/cashier_controller.dart';
 
-import 'menunggu/menunggu.dart';
-
 class CashierView extends GetView<CashierController> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         backgroundColor: lightColor,
         appBar: AppBar(
@@ -63,8 +63,9 @@ class CashierView extends GetView<CashierController> {
                       color: putih,
                     ),
                     tabs: [
-                      textTab("MENUNGGU"),
-                      textTab("PROSES"),
+                      textTab("UN-PAID"),
+                      textTab("PAID"),
+                      textTab("DELETED"),
                     ],
                   ),
                 ),
@@ -74,12 +75,17 @@ class CashierView extends GetView<CashierController> {
                   child: TabBarView(
                     children: [
                       // tables view
-                      Menunggu(),
+                      Unpaid(),
+                      Paid(),
                       Container(),
                     ],
                   ),
                 ),
-              )
+              ),
+              // ElevatedButton(
+              //   onPressed: () => controller.deleteDataIfInTime(),
+              //   child: Text("TES"),
+              // )
             ],
           ),
         ),

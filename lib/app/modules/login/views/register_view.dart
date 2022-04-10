@@ -21,7 +21,7 @@ class RegisterView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     final auth = Get.put(AuthController());
     return Scaffold(
-      backgroundColor: darkColor,
+      backgroundColor: lightColor,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         child: Stack(
@@ -80,8 +80,8 @@ class RegisterView extends GetView<LoginController> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          darkColor.withOpacity(.45),
-                          darkColor.withOpacity(.35),
+                          lightColor.withOpacity(.45),
+                          lightColor.withOpacity(.35),
                         ],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,

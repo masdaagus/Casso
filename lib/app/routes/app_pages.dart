@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import 'package:casso/app/modules/cashier/bindings/cashier_binding.dart';
 import 'package:casso/app/modules/cashier/views/cashier_view.dart';
+import 'package:casso/app/modules/dashboard/bindings/dashboard_binding.dart';
+import 'package:casso/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:casso/app/modules/home/bindings/home_binding.dart';
 import 'package:casso/app/modules/home/views/home_view.dart';
 import 'package:casso/app/modules/introduction/bindings/introduction_binding.dart';
@@ -69,6 +71,11 @@ class AppPages {
       name: _Paths.PEGAWAI,
       page: () => PegawaiView(),
       binding: PegawaiBinding(),
+    ),
+    GetPage(
+      name: _Paths.DASHBOARD,
+      page: () => DashboardView(),
+      binding: DashboardBinding(),
     ),
   ];
 }

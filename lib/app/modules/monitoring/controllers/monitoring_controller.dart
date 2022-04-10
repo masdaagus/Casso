@@ -64,7 +64,6 @@ class MonitoringController extends GetxController {
               tableNumber: data.tableNumber,
               waitersName: data.waitersName,
               totalPrices: data.totalPrices,
-              totalItems: data.totalItems,
               productsOrder: data.productsOrder,
               createAt: now.toIso8601String(),
               orderNumber: 1,
@@ -121,7 +120,6 @@ class MonitoringController extends GetxController {
               tableNumber: data.tableNumber,
               waitersName: data.waitersName,
               totalPrices: data.totalPrices,
-              totalItems: data.totalItems,
               productsOrder: productsProses,
               createAt: now.toIso8601String(),
               orderNumber: 1,
@@ -199,7 +197,6 @@ class MonitoringController extends GetxController {
               tableNumber: data.tableNumber,
               waitersName: data.waitersName,
               totalPrices: data.totalPrices,
-              totalItems: data.totalItems,
               productsOrder: products,
               createAt: now.toIso8601String(),
               orderNumber: 1,
@@ -243,15 +240,7 @@ class MonitoringController extends GetxController {
     }
   }
 
-  Future<void> delete(String id) async {
-    // CollectionReference prosesC = firestore
-    //     .collection("restos")
-    //     .doc(user.value.restoID)
-    //     .collection("pesanan");
-    // prosesC.doc(id).delete();
-  }
-
-  Future<void> getData(Order data, String id) async {
+  Future<void> deleteOrder(Order data, String id) async {
     CollectionReference _collectionRef = firestore
         .collection('restos')
         .doc(user.value.restoID)
@@ -268,7 +257,6 @@ class MonitoringController extends GetxController {
     // Get data from docs and convert map to List
     await prosesC.doc(id).delete();
 
-    Order? orderFromList;
     List<ProductOrder> products = []; // list untuk di update ke list orders
 
     // List<Order> ordersCollection =
@@ -278,7 +266,6 @@ class MonitoringController extends GetxController {
 
       if (data.guessName == dataOrders.guessName &&
           data.tableNumber == dataOrders.tableNumber) {
-        orderFromList = dataOrders;
         products.addAll(dataOrders.productsOrder!);
 
         data.productsOrder!.forEach((dataA) {
@@ -328,11 +315,18 @@ class MonitoringController extends GetxController {
   @override
   void onInit() async {
     user = auth.user;
+
+    super.onInit();
+  }
+
+  @override
+  void onReady() async {
     await initStream('pesanan');
     await initStream('proses');
     await initStream('siap');
     await initStream('tersaji');
-    super.onInit();
+
+    super.onReady();
   }
 
   @override

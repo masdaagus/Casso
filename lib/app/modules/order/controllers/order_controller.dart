@@ -40,6 +40,16 @@ class OrderController extends GetxController {
           ),
         ),
       });
+
+      // final restoId = await restos.doc(user.value.restoID).get();
+      // final restoData = restoId.data() as Map<String, dynamic>;
+      // resto(RestosModel.fromJson(restoData));
+      // resto.refresh();
+      // auth.resto.refresh();
+      // auth.resto.update((val) {
+      //   val = resto.value;
+      // });
+      update();
     } catch (e) {
       print(e);
     }
@@ -59,18 +69,25 @@ class OrderController extends GetxController {
         final data = Order.fromJson(object);
         return data;
       }).toList();
-      late Order dataOrder;
+      Order? dataOrder;
 
       _listOrder.forEach((order) {
         if (order.tableNumber == tableNumber) {
           dataOrder = order;
-          print(dataOrder.guessName);
-          print(dataOrder.tableNumber);
+          print(dataOrder!.guessName);
+          print(dataOrder!.tableNumber);
         }
       });
-      // dataOrder = Order();
 
-      Get.to(Menus(data: dataOrder));
+      if (dataOrder != null) {
+        Get.to(() => Menus(data: dataOrder));
+      } else {
+        Get.back();
+        Get.snackbar(
+          'Table $tableNumber',
+          'MEJA SUDAH KOSONG DI DAFTAR ORDER',
+        );
+      }
     } catch (e) {
       print(e);
     }
@@ -92,28 +109,17 @@ class OrderController extends GetxController {
           ),
         ),
       });
+
+      // final restoId = await restos.doc(user.value.restoID).get();
+      // final restoData = restoId.data() as Map<String, dynamic>;
+      // resto(RestosModel.fromJson(restoData));
+      // auth.resto.refresh();
+      update();
     } catch (e) {
       print(e);
     }
   }
 
-  Future<void> getData() async {
-    CollectionReference _collectionRef = FirebaseFirestore.instance
-        .collection('restos')
-        .doc(user.value.restoID)
-        .collection('pesanan');
-    // Get docs from collection reference
-    QuerySnapshot querySnapshot = await _collectionRef.get();
-
-    // Get data from docs and convert map to List
-    final allData = querySnapshot.docs.map((doc) {
-      var object = doc.data() as Map<String, dynamic>;
-      final tes = Order.fromJson(object);
-      return tes;
-    }).toList();
-  }
-
-  ///
   @override
   void onInit() async {
     user = auth.user;

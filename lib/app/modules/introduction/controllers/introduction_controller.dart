@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:casso/app/controllers/auth_controller.dart';
 
-import 'package:casso/app/data/models/products.dart';
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/table.dart';
 import 'package:casso/app/data/models/users.dart';
@@ -101,71 +100,68 @@ class IntroductionController extends GetxController {
     final List<TableModel> tables = [];
 
     try {
+      /// memasukkan user ke collection users
+      final check = await users.doc('cashier.$rndm').get();
+
+      while (check.data() == null) {
+        for (int i = 1; i < employe.length; i++) {
+          await users.doc(employe[i].email).set(
+                UsersModel(
+                  name: employe[i].name,
+                  email: employe[i].email,
+                  status: employe[i].status,
+                  restoID: user.value.uid,
+                  password: "123456",
+                ).toJson(),
+              );
+        }
+
+        break;
+      }
+
+      /// membuat panjang table
+      int _tableLength = int.parse(restoTable.text);
+
+      for (int i = 0; i < _tableLength; i++) {
+        tables.add(TableModel(tableNumber: i + 1, guessName: null));
+      }
+
+      /// set resto dengan model
+      await restos.doc(user.value.uid).set(
+            RestosModel(
+              ownerEmail: user.value.email,
+              ownerName: user.value.name,
+              restoName: restoName.text,
+              restoLocation: restoLocation.text,
+              restoTable: _tableLength,
+              restoEmploye: employe,
+              products: products,
+              tables: tables,
+              restoTaxes: 0,
+            ).toJson(),
+          );
+
       // / update users untuk menambahkan resto id
       await users.doc(user.value.email).update({
         "restoID": user.value.uid,
       });
 
-      try {
-        /// memasukkan user ke collection users
-        final check = await users.doc('cashier.$rndm').get();
+      // memasukkan data user ke dalam model (agar bisa ditampilkan ke widget)
+      final userDoc = await users.doc(user.value.email).get();
+      final userDocData = userDoc.data() as Map<String, dynamic>;
+      user(UsersModel.fromJson(userDocData));
+      user.refresh();
 
-        while (check.data() == null) {
-          for (int i = 1; i < employe.length; i++) {
-            await users.doc(employe[i].email).set(
-                  UsersModel(
-                    name: employe[i].name,
-                    email: employe[i].email,
-                    status: employe[i].status,
-                    restoID: user.value.uid,
-                    password: "123456",
-                  ).toJson(),
-                );
-          }
+      // memasukkan data resto user ke dalam model (agar bisa ditampilkan ke widget)
+      final restoId = await restos.doc(user.value.restoID).get();
+      final restoData = restoId.data() as Map<String, dynamic>;
 
-          break;
-        }
+      resto(RestosModel.fromJson(restoData));
+      resto.refresh();
 
-        /// membuat panjang table
-        int _tableLength = int.parse(restoTable.text);
+      auth.isAuth.value = true;
 
-        for (int i = 0; i < _tableLength; i++) {
-          tables.add(TableModel(tableNumber: i + 1, guessName: null));
-        }
-
-        /// set resto dengan model
-        await restos.doc(user.value.uid).set(
-              RestosModel(
-                ownerEmail: user.value.email,
-                ownerName: user.value.name,
-                restoName: restoName.text,
-                restoLocation: restoLocation.text,
-                restoTable: _tableLength,
-                restoEmploye: employe,
-                products: products,
-                tables: tables,
-              ).toJson(),
-            );
-
-        // memasukkan data user ke dalam model (agar bisa ditampilkan ke widget)
-        final userDoc = await users.doc(user.value.email).get();
-        final userDocData = userDoc.data() as Map<String, dynamic>;
-        user(UsersModel.fromJson(userDocData));
-        user.refresh();
-
-        // memasukkan data resto user ke dalam model (agar bisa ditampilkan ke widget)
-        final restoId = await restos.doc(user.value.restoID).get();
-        final restoData = restoId.data() as Map<String, dynamic>;
-
-        resto(RestosModel.fromJson(restoData));
-        resto.refresh();
-
-        auth.isAuth.value = true;
-
-        Get.offAllNamed("/home");
-      } catch (e) {
-        print(e);
-      }
+      Get.offAllNamed("/home");
     } catch (e) {
       print(e);
     }

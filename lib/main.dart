@@ -24,12 +24,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: lightColor,
-      systemNavigationBarIconBrightness: Brightness.dark,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(mySystemTheme);
     return FutureBuilder(
       future: authC.autoLogin(),
+      // future: Future.delayed(Duration(seconds: 1)),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return Obx(() => GetMaterialApp(
@@ -39,7 +37,7 @@ class MyApp extends StatelessWidget {
 
                 ////////////////////////////////////////////////
                 // title: authC.isAuth.toString(),
-                // initialRoute: Routes.MENU,
+                // initialRoute: Routes.DASHBOARD,
                 getPages: AppPages.routes,
               ));
         }

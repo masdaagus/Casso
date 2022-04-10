@@ -68,7 +68,7 @@ class PesananMonitoring extends GetView<MonitoringController> {
                             'proses',
                           ),
                           delete: () {
-                            controller.getData(data, id);
+                            controller.deleteOrder(data, id);
                           },
                           listOrder: Container(
                             child: ListView.builder(

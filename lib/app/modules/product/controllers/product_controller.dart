@@ -1,12 +1,7 @@
 import 'package:casso/app/controllers/auth_controller.dart';
-import 'package:casso/app/data/models/order.dart';
-import 'package:casso/app/data/models/products.dart';
 
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/users.dart';
-import 'package:casso/app/modules/home/views/home_view.dart';
-import 'package:casso/app/modules/product/views/product_view.dart';
-import 'package:casso/app/utils/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -90,11 +85,11 @@ class ProductController extends GetxController {
     });
 
     /// FUNGSI UNTUK MEREFRESH DATA
-    update();
     final restoId = await restos.doc(user.value.restoID).get();
     final restoData = restoId.data() as Map<String, dynamic>;
     resto(RestosModel.fromJson(restoData));
-    resto.refresh();
+    auth.resto.refresh();
+    update();
 
     Get.back();
     Get.back();

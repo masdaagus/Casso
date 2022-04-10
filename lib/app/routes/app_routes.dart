@@ -14,6 +14,7 @@ abstract class Routes {
   static const PRODUCT = _Paths.PRODUCT;
   static const INTRODUCTION = _Paths.INTRODUCTION;
   static const PEGAWAI = _Paths.PEGAWAI;
+  static const DASHBOARD = _Paths.DASHBOARD;
 }
 
 abstract class _Paths {
@@ -26,4 +27,5 @@ abstract class _Paths {
   static const PRODUCT = '/product';
   static const INTRODUCTION = '/introduction';
   static const PEGAWAI = '/pegawai';
+  static const DASHBOARD = '/dashboard';
 }

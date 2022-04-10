@@ -35,60 +35,65 @@ class CustomBottomSheet extends GetView<MenuController> {
     final List<ProductOrder> productOrders =
         controller.order.value.productsOrder!;
 
-    return ClipRRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(
-          sigmaX: 24,
-          sigmaY: 24,
-        ),
-        child: Container(
-          height: Get.height * .7,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                lightColor.withOpacity(.2),
-                lightColor.withOpacity(.4),
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(24),
-            ),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+      child: ClipRRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaX: 24,
+            sigmaY: 24,
           ),
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(top: 8, bottom: 38),
-                height: 4,
-                width: 60,
-                decoration: BoxDecoration(
-                  color: darkColor.withOpacity(.4),
-                  borderRadius: BorderRadius.circular(2),
-                ),
+          child: Container(
+            height: Get.height * .7,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  lightColor.withOpacity(.2),
+                  lightColor.withOpacity(.4),
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
               ),
-              Expanded(
-                  child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: productOrders.toSet().toList().length,
-                      itemBuilder: (context, index) {
-                        ProductOrder data =
-                            productOrders.toSet().toList()[index];
-
-                        return ItemCardBottomSheet(data: data);
-                      },
-                    ),
-                    ButtonOrder(onTap: onTap),
-                    SizedBox(height: 40)
-                  ],
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(24),
+              ),
+            ),
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(top: 8, bottom: 38),
+                  height: 4,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    color: darkColor.withOpacity(.4),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
                 ),
-              ))
-            ],
+                Expanded(
+                    child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: productOrders.toSet().toList().length,
+                        itemBuilder: (context, index) {
+                          ProductOrder data =
+                              productOrders.toSet().toList()[index];
+
+                          return ItemCardBottomSheet(
+                            data: data,
+                          );
+                        },
+                      ),
+                      ButtonOrder(onTap: onTap),
+                      SizedBox(height: 40)
+                    ],
+                  ),
+                ))
+              ],
+            ),
           ),
         ),
       ),

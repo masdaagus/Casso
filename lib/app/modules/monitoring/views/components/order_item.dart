@@ -1,6 +1,7 @@
 import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class OrderItem extends StatelessWidget {
   const OrderItem({
@@ -53,9 +54,9 @@ class OrderItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: 16),
                   if (data.productQty > 1)
                     Container(
+                      margin: const EdgeInsets.only(left: 8),
                       child: Text(
                         "x${data.productQty.toString()}",
                         overflow: TextOverflow.ellipsis,
@@ -68,13 +69,47 @@ class OrderItem extends StatelessWidget {
                         ),
                       ),
                     ),
+                  SizedBox(width: 8),
+                  if (data.productNote != null)
+                    GestureDetector(
+                      onTap: () {
+                        Get.defaultDialog(
+                            radius: 16,
+                            title: '${data.productName!.toUpperCase()}',
+                            titleStyle: TextStyle(
+                              color: darkColor,
+                              fontFamily: 'balsamiq',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                            middleText: data.productNote!,
+                            middleTextStyle: TextStyle(
+                              color: darkColor.withOpacity(.7),
+                              fontFamily: 'balsamiq',
+                              // fontWeight: FontWeight.bold,
+                              // fontSize: 20,
+                            ));
+                      },
+                      child: Container(
+                          padding: const EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                            color: darkColor.withOpacity(.5),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Center(
+                              child: Icon(
+                            Icons.mail_outline_outlined,
+                            size: 13,
+                            color: lightColor,
+                          ))),
+                    )
                 ],
               ),
               isTersaji
                   ? Text(
                       nf.format(data.productPrice! * data.productQty),
                       style: TextStyle(
-                          color: abu,
+                          color: darkColor,
                           fontSize: 12,
                           fontFamily: "balsamiq",
                           letterSpacing: .5),
