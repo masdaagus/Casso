@@ -41,14 +41,10 @@ class OrderController extends GetxController {
         ),
       });
 
-      // final restoId = await restos.doc(user.value.restoID).get();
-      // final restoData = restoId.data() as Map<String, dynamic>;
-      // resto(RestosModel.fromJson(restoData));
-      // resto.refresh();
-      // auth.resto.refresh();
-      // auth.resto.update((val) {
-      //   val = resto.value;
-      // });
+      final restoId = await restos.doc(user.value.restoID).get();
+      final restoData = restoId.data() as Map<String, dynamic>;
+      resto(RestosModel.fromJson(restoData));
+      auth.refresh();
       update();
     } catch (e) {
       print(e);
@@ -80,6 +76,12 @@ class OrderController extends GetxController {
       });
 
       if (dataOrder != null) {
+        CollectionReference restos = firestore.collection("restos");
+        final restoId = await restos.doc(user.value.restoID).get();
+        final restoData = restoId.data() as Map<String, dynamic>;
+        resto(RestosModel.fromJson(restoData));
+        auth.refresh();
+        update();
         Get.to(() => Menus(data: dataOrder));
       } else {
         Get.back();
@@ -88,6 +90,12 @@ class OrderController extends GetxController {
           'MEJA SUDAH KOSONG DI DAFTAR ORDER',
         );
       }
+      CollectionReference restos = firestore.collection("restos");
+      final restoId = await restos.doc(user.value.restoID).get();
+      final restoData = restoId.data() as Map<String, dynamic>;
+      resto(RestosModel.fromJson(restoData));
+      auth.refresh();
+      update();
     } catch (e) {
       print(e);
     }
@@ -110,10 +118,10 @@ class OrderController extends GetxController {
         ),
       });
 
-      // final restoId = await restos.doc(user.value.restoID).get();
-      // final restoData = restoId.data() as Map<String, dynamic>;
-      // resto(RestosModel.fromJson(restoData));
-      // auth.resto.refresh();
+      final restoId = await restos.doc(user.value.restoID).get();
+      final restoData = restoId.data() as Map<String, dynamic>;
+      resto(RestosModel.fromJson(restoData));
+      auth.refresh();
       update();
     } catch (e) {
       print(e);

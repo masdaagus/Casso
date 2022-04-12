@@ -47,10 +47,10 @@ class TersajiMonitoring extends GetView<MonitoringController> {
 
                         /// func agar data tidak duplicate
                         List<ProductOrder> productOrders = data.productsOrder!;
-                        final ids = Set();
-                        productOrders.retainWhere(
-                          (x) => ids.add(x.productName),
-                        );
+                        // final ids = Set();
+                        // productOrders.retainWhere(
+                        //   (x) => ids.add(x.productName),
+                        // );
 
                         return MonitorCard(
                           data: data,

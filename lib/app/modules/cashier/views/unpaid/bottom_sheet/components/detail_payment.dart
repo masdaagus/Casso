@@ -40,7 +40,7 @@ class CardDetailPayment extends StatelessWidget {
           SizedBox(height: 24),
           TotalItem(total: total),
           TotalItem(
-            tittle: 'PAJAK ($taxes%)',
+            tittle: 'PAJAK (${taxes.toStringAsFixed(0)}%)',
             total: total * taxes / 100,
           ),
           Divider(

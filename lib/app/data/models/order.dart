@@ -1,7 +1,3 @@
-import 'dart:convert';
-
-Order orderFromJson(String str) => Order.fromJson(json.decode(str));
-
 class Order {
   Order({
     this.orderId,
@@ -12,14 +8,16 @@ class Order {
     this.createAt,
     this.totalPrices,
     this.productsOrder,
+    this.isPaid = false,
   });
   final String? orderId;
   final int? orderNumber;
   final String? guessName;
   final String? waitersName;
   final int? tableNumber;
-
   final String? createAt;
+  final bool? isPaid;
+
   double? totalPrices;
   List<ProductOrder>? productsOrder;
 
@@ -29,6 +27,7 @@ class Order {
         guessName: json["guessName"],
         waitersName: json["waitersName"],
         tableNumber: json["tableNumbers"],
+        isPaid: json["isPaid"],
         // totalItems: json["totalItems"],
         createAt: json["createAt"],
         totalPrices: json["totalPrices"],
@@ -42,6 +41,7 @@ class Order {
         "guessName": guessName,
         "waitersName": waitersName,
         "tableNumbers": tableNumber,
+        "isPaid": isPaid,
         // "totalItems": totalItems,
         "totalPrices": totalPrices,
         "createAt": createAt,
@@ -93,7 +93,7 @@ class ProductOrder {
 // class OrderFields {
 //   static const String guessName = "guessName";
 //   static const String waitersName = "waitersName";
-//   static const String tableNumbers = "tableNumbers";
+//   static const String isPaid = "tableNumbers";
 //   static const String totalItems = "totalItems";
 //   static const String totalPrices = "totalPrices";
 //   static const String productsOrder = "productsOrder";

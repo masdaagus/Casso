@@ -45,22 +45,39 @@ class ProsesMonitoring extends GetView<MonitoringController> {
 
                         /// func agar data tidak duplicate
                         List<ProductOrder> productOrders = data.productsOrder!;
-                        final ids = Set();
-                        productOrders.retainWhere(
-                          (x) => ids.add(x.productName),
-                        );
+                        String status = controller.user.value.status!;
+                        bool getAcses;
 
-                        print(data.productsOrder!.length);
+                        switch (status) {
+                          case 'OWNER':
+                            getAcses = true;
+                            break;
+                          case 'CASHIER':
+                            getAcses = true;
+                            break;
+                          case 'KITCHEN':
+                            getAcses = true;
+                            break;
+                          default:
+                            getAcses = false;
+                            break;
+                        }
+
                         return MonitorCard(
                           data: data,
                           isOrder: false,
                           orderButton: 'siap',
-                          buttonAll: () => controller.setProsesAll(
-                            data,
-                            id,
-                            'proses',
-                            'siap',
-                          ),
+                          buttonAll: () {
+                            if (getAcses) {
+                              controller.setProsesAll(
+                                  data, id, 'proses', 'siap');
+                            } else {
+                              Get.snackbar(
+                                status,
+                                "DON'T HAVE ACCSES",
+                              );
+                            }
+                          },
                           listOrder: Container(
                             child: ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
@@ -73,23 +90,39 @@ class ProsesMonitoring extends GetView<MonitoringController> {
                                 return OrderItem(
                                   data: productOrder,
                                   onTap: () {
-                                    controller.setProses(
-                                      data,
-                                      id,
-                                      productOrder,
-                                      'proses',
-                                      'siap',
-                                    );
+                                    if (getAcses) {
+                                      controller.setProses(
+                                        data,
+                                        id,
+                                        productOrder,
+                                        'proses',
+                                        'siap',
+                                      );
+                                    } else {
+                                      Get.snackbar(
+                                        status,
+                                        "DON'T HAVE ACCSES",
+                                      );
+                                    }
                                   },
                                   isOrder: false,
                                   textButton: 'siap',
-                                  undoButton: () => controller.reverseProses(
-                                    data,
-                                    id,
-                                    productOrder,
-                                    'pesanan',
-                                    'proses',
-                                  ),
+                                  undoButton: () {
+                                    if (getAcses) {
+                                      controller.reverseProses(
+                                        data,
+                                        id,
+                                        productOrder,
+                                        'pesanan',
+                                        'proses',
+                                      );
+                                    } else {
+                                      Get.snackbar(
+                                        status,
+                                        "DON'T HAVE ACCSES",
+                                      );
+                                    }
+                                  },
                                 );
                               },
                             ),

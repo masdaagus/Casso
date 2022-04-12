@@ -47,26 +47,55 @@ class PesananMonitoring extends GetView<MonitoringController> {
 
                         /// [function] agar data tidak duplicate
                         List<ProductOrder> productOrders = data.productsOrder!;
-                        final ids = Set();
-                        productOrders.retainWhere(
-                          (x) => ids.add(x.productName),
-                        );
+                        // final ids = Set();
+                        // productOrders.retainWhere(
+                        //   (x) => ids.add(x.productName),
+                        // );
                         bool _isWaiters = false;
                         String status = controller.user.value.status!;
-                        if (status == 'WAITERS' || status == 'OWNER') {
+
+                        if (status == 'WAITERS' ||
+                            status == 'OWNER' ||
+                            status == 'CASHIER') {
                           _isWaiters = true;
+                        }
+
+                        bool getAcses;
+
+                        switch (status) {
+                          case 'OWNER':
+                            getAcses = true;
+                            break;
+                          case 'CASHIER':
+                            getAcses = true;
+                            break;
+                          case 'KITCHEN':
+                            getAcses = true;
+                            break;
+                          default:
+                            getAcses = false;
+                            break;
                         }
 
                         return MonitorCard(
                           data: data,
                           isOrder: true,
                           isWaiters: _isWaiters,
-                          buttonAll: () => controller.setProsesAll(
-                            data,
-                            id,
-                            'pesanan',
-                            'proses',
-                          ),
+                          buttonAll: () {
+                            if (getAcses) {
+                              controller.setProsesAll(
+                                data,
+                                id,
+                                'pesanan',
+                                'proses',
+                              );
+                            } else {
+                              Get.snackbar(
+                                status,
+                                "DON'T HAVE ACCSES",
+                              );
+                            }
+                          },
                           delete: () {
                             controller.deleteOrder(data, id);
                           },
@@ -82,13 +111,20 @@ class PesananMonitoring extends GetView<MonitoringController> {
                                 return OrderItem(
                                   data: productOrder,
                                   onTap: () {
-                                    controller.setProses(
-                                      data,
-                                      id,
-                                      productOrder,
-                                      'pesanan',
-                                      'proses',
-                                    );
+                                    if (getAcses) {
+                                      controller.setProses(
+                                        data,
+                                        id,
+                                        productOrder,
+                                        'pesanan',
+                                        'proses',
+                                      );
+                                    } else {
+                                      Get.snackbar(
+                                        status,
+                                        "DON'T HAVE ACCSES",
+                                      );
+                                    }
                                   },
                                 );
                               },

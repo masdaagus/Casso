@@ -24,7 +24,7 @@ class Unpaid extends GetView<CashierController> {
           // List items dan total
           Expanded(
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                stream: controller.initStream('orders'),
+                stream: controller.streamOrders(false),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.active) {
                     List<Order> orderData =
@@ -51,7 +51,9 @@ class Unpaid extends GetView<CashierController> {
                                       title: '',
                                       content: DialogConfirm(
                                         onTap: () {
-                                          controller.setHistory(data);
+                                          // controller.setHistory(data);
+                                          // controller.setPaid(data);
+                                          controller.deleteOrder(data);
                                         },
                                       ),
                                     );

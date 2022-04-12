@@ -47,22 +47,53 @@ class SiapMonitoring extends GetView<MonitoringController> {
 
                         /// func agar data tidak duplicate
                         List<ProductOrder> productOrders = data.productsOrder!;
-                        final ids = Set();
-                        productOrders.retainWhere(
-                          (x) => ids.add(x.productName),
-                        );
+                        String status = controller.user.value.status!;
+                        bool getAcses;
+                        bool accesTersaji;
+
+                        switch (status) {
+                          case 'OWNER':
+                            getAcses = true;
+                            accesTersaji = true;
+                            break;
+                          case 'CASHIER':
+                            getAcses = true;
+                            accesTersaji = true;
+                            break;
+                          case 'KITCHEN':
+                            getAcses = true;
+                            accesTersaji = false;
+                            break;
+                          case 'WAITERS':
+                            getAcses = false;
+                            accesTersaji = true;
+                            break;
+                          default:
+                            getAcses = false;
+                            accesTersaji = true;
+                            break;
+                        }
 
                         print(data.productsOrder!.length);
                         return MonitorCard(
                           data: data,
                           isOrder: false,
                           orderButton: 'tersaji',
-                          buttonAll: () => controller.setProsesAll(
-                            data,
-                            id,
-                            'siap',
-                            'tersaji',
-                          ),
+                          buttonAll: () {
+                            if (accesTersaji) {
+                              controller.setProsesAll(
+                                data,
+                                id,
+                                'siap',
+                                'tersaji',
+                              );
+                            } else {
+                              Get.snackbar(
+                                status,
+                                "DON'T HAVE ACCSES",
+                              );
+                            }
+                          },
                           listOrder: Container(
                             child: ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
@@ -73,26 +104,48 @@ class SiapMonitoring extends GetView<MonitoringController> {
                                     productOrders[index];
 
                                 return OrderItem(
-                                  data: productOrder,
-                                  onTap: () {
-                                    controller.setProses(
-                                      data,
-                                      id,
-                                      productOrder,
-                                      'siap',
-                                      'tersaji',
-                                    );
-                                  },
-                                  isOrder: false,
-                                  textButton: 'tersaji',
-                                  undoButton: () => controller.reverseProses(
-                                    data,
-                                    id,
-                                    productOrder,
-                                    'proses',
-                                    'siap',
-                                  ),
-                                );
+                                    data: productOrder,
+                                    onTap: () {
+                                      if (accesTersaji) {
+                                        controller.setProses(
+                                          data,
+                                          id,
+                                          productOrder,
+                                          'siap',
+                                          'tersaji',
+                                        );
+                                      } else {
+                                        Get.snackbar(
+                                          status,
+                                          "DON'T HAVE ACCSES",
+                                        );
+                                      }
+                                      // controller.setProses(
+                                      //   data,
+                                      //   id,
+                                      //   productOrder,
+                                      //   'siap',
+                                      //   'tersaji',
+                                      // );
+                                    },
+                                    isOrder: false,
+                                    textButton: 'tersaji',
+                                    undoButton: () {
+                                      if (getAcses) {
+                                        controller.reverseProses(
+                                          data,
+                                          id,
+                                          productOrder,
+                                          'proses',
+                                          'siap',
+                                        );
+                                      } else {
+                                        Get.snackbar(
+                                          status,
+                                          "DON'T HAVE ACCSES",
+                                        );
+                                      }
+                                    });
                               },
                             ),
                           ),

@@ -108,6 +108,10 @@ class ProfileTab extends GetView<HomeController> {
               },
               child: Text('TES'),
             ),
+            ElevatedButton(
+              onPressed: () => auth.logout(),
+              child: Text('LOG OUT'),
+            ),
             // Center(
             //   child: Container(
             //     margin: const EdgeInsets.only(top: 48),

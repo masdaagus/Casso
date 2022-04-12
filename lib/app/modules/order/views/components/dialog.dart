@@ -17,7 +17,7 @@ class GetDialog extends GetView<OrderController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(MenuController());
+    // Get.put(MenuController());
     return ClipRRect(
       child: BackdropFilter(
         filter: ImageFilter.blur(
@@ -95,6 +95,7 @@ class GetDialog extends GetView<OrderController> {
                     ),
                     DialogButton(onTap: () async {
                       if (formKey.currentState!.validate()) {
+                        Get.put(MenuController());
                         Order emptyData = Order();
                         Get.to(() => Menus(
                               guessName: controller.guessNameController.text
@@ -102,12 +103,12 @@ class GetDialog extends GetView<OrderController> {
                               table: tableNumber,
                               data: emptyData,
                             ));
+                        controller.updateTable(
+                          tableNumber: tableNumber,
+                          guessName:
+                              controller.guessNameController.text.toUpperCase(),
+                        );
                       }
-                      controller.updateTable(
-                        tableNumber: tableNumber,
-                        guessName:
-                            controller.guessNameController.text.toUpperCase(),
-                      );
                     }),
                   ],
                 )

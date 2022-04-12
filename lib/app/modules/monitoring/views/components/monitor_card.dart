@@ -155,6 +155,29 @@ class MonitorCard extends GetView<MonitoringController> {
                 ),
               )
             : Container(),
+        isTersaji
+            ? Container()
+            : Positioned(
+                bottom: 22,
+                right: 32,
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  child: Text(
+                    "#${data.orderNumber}",
+                    style: TextStyle(
+                      color: darkColor,
+                      fontFamily: 'balsamiq',
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 2,
+                      fontSize: 16,
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    color: lightColor.withOpacity(.2),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+              )
       ],
     );
   }

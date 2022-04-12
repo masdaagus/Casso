@@ -32,6 +32,7 @@ class OrderItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                     margin: const EdgeInsets.only(right: 6),
@@ -115,23 +116,25 @@ class OrderItem extends StatelessWidget {
                           letterSpacing: .5),
                     )
                   : Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         isOrder
                             ? Container()
 
                             /// BUTTON REVERSE
                             : Container(
-                                width: 48,
+                                width: 36,
                                 height: 20,
-                                child: ElevatedButton(
-                                  onPressed: undoButton,
-                                  child: Icon(Icons.undo, size: 16),
-                                  style: ElevatedButton.styleFrom(
-                                    elevation: 2,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18),
-                                    ),
-                                    primary: orange,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(18),
+                                  color: darkColor.withOpacity(.7),
+                                ),
+                                child: GestureDetector(
+                                  onTap: undoButton,
+                                  child: Icon(
+                                    Icons.undo,
+                                    size: 14,
+                                    color: lightColor,
                                   ),
                                 ),
                               ),

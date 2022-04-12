@@ -5,6 +5,7 @@ import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/cashier_controller.dart';
+import 'deleted/orders_deleted.dart';
 
 class CashierView extends GetView<CashierController> {
   @override
@@ -77,7 +78,7 @@ class CashierView extends GetView<CashierController> {
                       // tables view
                       Unpaid(),
                       Paid(),
-                      Container(),
+                      OrdersDeleted(),
                     ],
                   ),
                 ),

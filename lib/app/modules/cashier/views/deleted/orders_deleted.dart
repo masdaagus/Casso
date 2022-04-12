@@ -1,3 +1,4 @@
+import 'package:casso/app/data/models/deleted_order.dart';
 import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/modules/cashier/controllers/cashier_controller.dart';
 import 'package:casso/app/modules/cashier/views/components/search_box.dart';
@@ -8,8 +9,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Paid extends GetView<CashierController> {
-  const Paid({Key? key}) : super(key: key);
+class OrdersDeleted extends GetView<CashierController> {
+  const OrdersDeleted({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,21 +25,23 @@ class Paid extends GetView<CashierController> {
               // List items dan total
               Expanded(
                 child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                    stream: controller.streamOrders(true),
+                    stream: controller.streamOrdersDeleted(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.active) {
-                        List<Order> orderData =
+                        List<DeletedOrder> deletedOrdersData =
                             snapshot.data!.docs.map((DocumentSnapshot doc) {
                           var dataDoc = doc.data() as Map<String, dynamic>;
-                          Order data = Order.fromJson(dataDoc);
+                          DeletedOrder data = DeletedOrder.fromJson(dataDoc);
                           return data;
                         }).toList();
 
                         return ListView.builder(
                             physics: BouncingScrollPhysics(),
-                            itemCount: orderData.length,
+                            itemCount: deletedOrdersData.length,
                             itemBuilder: (context, index) {
-                              Order data = orderData[index];
+                              DeletedOrder delDataOrder =
+                                  deletedOrdersData[index];
+                              Order data = delDataOrder.order!;
 
                               return PricesCard(
                                 data: data,

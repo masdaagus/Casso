@@ -17,8 +17,9 @@ class DashboardController extends GetxController {
     CollectionReference orderHistoryCollection = firestore
         .collection("restos")
         .doc(user.value.restoID)
-        .collection("ordersDone");
-    QuerySnapshot querySnapshot = await orderHistoryCollection.get();
+        .collection("orders");
+    QuerySnapshot querySnapshot =
+        await orderHistoryCollection.where('isPaid', isEqualTo: true).get();
     List<Order> listOrder = querySnapshot.docs.map((doc) {
       var object = doc.data() as Map<String, dynamic>;
       Order data = Order.fromJson(object);

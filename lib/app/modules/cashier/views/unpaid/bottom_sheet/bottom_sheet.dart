@@ -69,7 +69,7 @@ class BottomSheetCashier extends GetView<CashierController> {
                             top: Get.height * .2,
                             child: CardDetailPayment(
                               total: data.totalPrices!,
-                              taxes: 10,
+                              taxes: controller.resto.value.restoTaxes ?? 0,
                             ),
                           ),
                           Container(

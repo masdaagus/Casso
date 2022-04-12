@@ -60,13 +60,14 @@ class MonitoringController extends GetxController {
         collectLeft.doc(id).delete();
       } else {
         collectRight.doc(id).set(Order(
+              orderId: data.orderId,
               guessName: data.guessName,
               tableNumber: data.tableNumber,
               waitersName: data.waitersName,
               totalPrices: data.totalPrices,
               productsOrder: data.productsOrder,
               createAt: now.toIso8601String(),
-              orderNumber: 1,
+              orderNumber: data.orderNumber,
             ).toJson());
 
         collectLeft.doc(id).delete();
@@ -116,13 +117,14 @@ class MonitoringController extends GetxController {
         /// fungsi menambahkan data baru ke collection [proses]
         print("SET");
         await collectionRight.doc(id).set(Order(
+              orderId: data.orderId,
               guessName: data.guessName,
               tableNumber: data.tableNumber,
               waitersName: data.waitersName,
               totalPrices: data.totalPrices,
               productsOrder: productsProses,
               createAt: now.toIso8601String(),
-              orderNumber: 1,
+              orderNumber: data.orderNumber,
             ).toJson());
 
         /// menghapus [list order item] dari collection [pesanan]
@@ -193,13 +195,14 @@ class MonitoringController extends GetxController {
         DateTime now = DateTime.now();
 
         await collectionLeft.doc(id).set(Order(
+              orderId: data.orderId,
               guessName: data.guessName,
               tableNumber: data.tableNumber,
               waitersName: data.waitersName,
               totalPrices: data.totalPrices,
               productsOrder: products,
               createAt: now.toIso8601String(),
-              orderNumber: 1,
+              orderNumber: data.orderNumber,
             ).toJson());
 
         /// menghapus [list order item] dari collection [pesanan]
@@ -274,8 +277,7 @@ class MonitoringController extends GetxController {
                 dataA.productPrice == dataB.productPrice) {
               if (dataB.productQty > 1) {
                 products.remove(dataB);
-                print('data lebih dari 1');
-                print('${dataB.productName}  ${dataB.productQty}');
+
                 dataB.productQty -= dataA.productQty;
                 if (dataB.productQty != 0) {
                   products.add(dataB);

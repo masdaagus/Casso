@@ -81,7 +81,7 @@ class HomeController extends GetxController {
     }
 
     /// UPDATE TAXES RESTO
-    if (taxes != resto.value.restoTaxes && taxes != 0.0) {
+    if (taxes != resto.value.restoTaxes) {
       await restos.doc(user.value.restoID).update({
         "restoTaxes": taxes,
       });
