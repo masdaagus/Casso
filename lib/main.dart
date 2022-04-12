@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(mySystemTheme);
     return FutureBuilder(
       future: authC.autoLogin(),
-      // future: Future.delayed(Duration(seconds: 1)),
+      // future: Future.delayed(Duration(seconds: 1)), // tes widget
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return Obx(() => GetMaterialApp(
@@ -36,8 +36,8 @@ class MyApp extends StatelessWidget {
                 initialRoute: authC.isAuth.isTrue ? Routes.HOME : Routes.LOGIN,
 
                 ////////////////////////////////////////////////
-                // title: authC.isAuth.toString(),
-                // initialRoute: Routes.DASHBOARD,
+                // title: authC.isAuth.toString(), // tes widget
+                // initialRoute: Routes.DASHBOARD, // tes widget
                 getPages: AppPages.routes,
               ));
         }

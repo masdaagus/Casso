@@ -8,13 +8,20 @@ class PricesCard extends GetView<CashierController> {
   const PricesCard({
     Key? key,
     this.onTap,
+    this.delete,
+    this.textField,
     this.isPaid = false,
+    this.isPayment = false,
     required this.data,
   }) : super(key: key);
 
   final Order? data;
   final VoidCallback? onTap;
+  final VoidCallback? delete;
   final bool isPaid;
+  final bool? isPayment;
+
+  final Widget? textField;
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +139,9 @@ class PricesCard extends GetView<CashierController> {
                   },
                 ),
               ),
-              if (controller.resto.value.restoTaxes != 0 && isPaid)
+              if (controller.resto.value.restoTaxes != 0 &&
+                  isPaid &&
+                  isPayment != true)
                 Container(
                   margin: const EdgeInsets.only(left: 22, right: 24, bottom: 8),
                   child: Row(
@@ -238,6 +247,7 @@ class PricesCard extends GetView<CashierController> {
                         ),
                       ),
                     ),
+              textField ?? Container(),
             ],
           ),
           isPaid
@@ -246,9 +256,7 @@ class PricesCard extends GetView<CashierController> {
                   bottom: 8,
                   left: 8,
                   child: IconButton(
-                    onPressed: () {
-                      print('deleted order');
-                    },
+                    onPressed: delete,
                     icon: Icon(
                       Icons.delete_rounded,
                     ),

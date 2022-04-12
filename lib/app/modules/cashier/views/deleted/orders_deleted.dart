@@ -1,8 +1,8 @@
 import 'package:casso/app/data/models/deleted_order.dart';
 import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/modules/cashier/controllers/cashier_controller.dart';
+import 'package:casso/app/modules/cashier/views/components/deleted_order_view.dart';
 import 'package:casso/app/modules/cashier/views/components/search_box.dart';
-import 'package:casso/app/modules/cashier/views/components/prices_card.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:casso/app/utils/spinner_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -43,29 +43,10 @@ class OrdersDeleted extends GetView<CashierController> {
                                   deletedOrdersData[index];
                               Order data = delDataOrder.order!;
 
-                              return PricesCard(
+                              return DeletedOrderWidget(
                                 data: data,
-                                isPaid: true,
-                                onTap: () {
-                                  // Get.bottomSheet(
-                                  //   BottomSheetCashier(
-                                  //     data: data,
-                                  //     onTap: () {
-                                  //       Get.defaultDialog(
-                                  //         backgroundColor: Colors.transparent,
-                                  //         title: '',
-                                  //         content: DialogConfirm(
-                                  //           onTap: () {
-                                  //             controller.setHistory(data);
-                                  //           },
-                                  //         ),
-                                  //       );
-                                  //     },
-                                  //   ),
-                                  //   backgroundColor: Colors.transparent,
-                                  //   isScrollControlled: true,
-                                  // );
-                                },
+                                dataOrderDeleted: delDataOrder,
+                                isView: true,
                               );
                             });
                       }

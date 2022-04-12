@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:casso/app/modules/cashier/bindings/cashier_binding.dart';
+import 'package:casso/app/modules/cashier/views/cashier_view.dart';
 import 'package:casso/app/modules/dashboard/bindings/dashboard_binding.dart';
 import 'package:casso/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:casso/app/modules/home/controllers/home_controller.dart';
@@ -166,7 +168,12 @@ class TabHome extends GetView<HomeController> {
                       color: darkColor,
                     ),
                     tittle: "List Order",
-                    onTap: () => Get.toNamed("/cashier"),
+                    // onTap: () => Get.toNamed("/cashier"),
+                    onTap: () => Get.to(
+                      () => CashierView(),
+                      duration: Duration(milliseconds: 500),
+                      binding: CashierBinding(),
+                    ),
                   ),
                   CardButton(
                     icon: Icon(
@@ -178,7 +185,7 @@ class TabHome extends GetView<HomeController> {
                     // onTap: () => Get.toNamed("/order"),
                     onTap: () => Get.to(
                       () => OrderView(),
-                      duration: Duration(milliseconds: 480),
+                      duration: Duration(milliseconds: 500),
                       binding: OrderBinding(),
                     ),
                   ),
