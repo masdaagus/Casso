@@ -19,16 +19,16 @@ class ButtonOrder extends StatelessWidget {
         width: 184,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          color: biru,
+          color: lightColor,
           boxShadow: [
             BoxShadow(
-              blurRadius: 6,
+              blurRadius: 4,
               color: Colors.black.withOpacity(.25),
               offset: Offset(4, 4),
             ),
             BoxShadow(
-              blurRadius: 6,
-              color: putih.withOpacity(.15),
+              blurRadius: 4,
+              color: putih.withOpacity(.65),
               offset: Offset(-4, -4),
             ),
           ],

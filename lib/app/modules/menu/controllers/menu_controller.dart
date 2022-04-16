@@ -1,5 +1,5 @@
 import 'package:casso/app/controllers/auth_controller.dart';
-
+import 'package:casso/app/data/models/product.dart';
 import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/table.dart';
@@ -14,11 +14,14 @@ class MenuController extends GetxController {
   var order = Order().obs;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  List<ProductOrder> _tempOrder = [];
-  List<ProductOrder> products = [];
+  // List<ProductOrder> tempOrder = [];
+  List<ProductOrder> productsOrder = [];
+  List<Product> products = [];
   List<Order> listOrdersCollection = [];
 
   double _totalPrice = 0;
+
+  final ids = Set();
 
   Future<List<Order>> _initQueryOrders() async {
     CollectionReference orderCollection = firestore
@@ -42,37 +45,67 @@ class MenuController extends GetxController {
     return listOrdersCollection;
   }
 
+  Future<QuerySnapshot<Map<String, dynamic>>> _collection(
+      String collection) async {
+    var data = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection("collection")
+        .get();
+
+    return data;
+  }
+
+  Future<void> _getAllMonitoringCollection() async {
+    var a = await _collection('pesanan');
+    a.docs.map((e) => null);
+  }
+
   Future<void> _getAllProducts() async {
     List<Product> productsData = resto.value.products! as List<Product>;
+    products = productsData;
 
     productsData.forEach((p) {
-      products.add(ProductOrder(
+      productsOrder.add(ProductOrder(
+        productQty: 0,
         productName: p.productName,
         productPrice: p.productPrice,
         productCategory: p.productCategory,
-        productQty: 0,
-        productDescription: p.productDescription,
-        productStock: p.productStock,
+        productNote: null,
       ));
     });
 
-    order.value.productsOrder = _tempOrder;
+    // order.value.productsOrder = tempOrder;
+    order.value.productsOrder = productsOrder;
     order.value.totalPrices = _totalPrice;
   }
 
   Future<void> addProduct(ProductOrder data) async {
-    _tempOrder.add(data);
     data.productQty++;
-    await _sumPrices();
+    _totalCounter();
+
+    productsOrder.forEach((d) {
+      print("add = ${d.productName} ${d.productQty}");
+    });
+
     update();
+    // tempOrder.add(data);
+    // await _sumPrices();
   }
 
   Future<void> minProduct(ProductOrder data) async {
-    _tempOrder.remove(data);
     data.productQty--;
-    await _sumPrices();
+    _totalCounter();
+    productsOrder.forEach((d) {
+      print("min = ${d.productName} ${d.productQty}");
+    });
     update();
+
+    // tempOrder.remove(data);
+    // await _sumPrices();
   }
+
+  /// [FUNGSI SET ORDER]
 
   Future<void> setOrder({String? guessName, int? table}) async {
     CollectionReference pesananC = firestore
@@ -87,33 +120,13 @@ class MenuController extends GetxController {
     DateTime now = DateTime.now();
 
     try {
-      // QuerySnapshot queryOrders = await orderCollection.get();
-
-      // List<Order> listOrdersCollection = queryOrders.docs.map((doc) {
-      //   var object = doc.data() as Map<String, dynamic>;
-      //   final data = Order.fromJson(object);
-      //   return data;
-      // }).toList();
-
       int orderNumber = listOrdersCollection.length;
-
-      // QuerySnapshot queryPesanan = await pesananC.get();
-
-      // List<Order> _listOrder = queryPesanan.docs.map((doc) {
-      //   var object = doc.data() as Map<String, dynamic>;
-      //   final data = Order.fromJson(object);
-      //   return data;
-      // }).toList();
 
       double _total = 0;
 
-      final ids = Set();
-      _tempOrder.retainWhere(
-        (x) => ids.add(x.productName),
-      );
-
-      _tempOrder.forEach((data) {
-        _total += (data.productPrice! * data.productQty);
+      final finalOrder = productsOrder.where((d) => d.productQty != 0).toList();
+      finalOrder.forEach((d) {
+        _total += (d.productPrice! * d.productQty);
       });
 
       /// MENAMBAHKAN DATA KE COLLECTION PESANAN
@@ -122,41 +135,23 @@ class MenuController extends GetxController {
         guessName: guessName,
         tableNumber: table,
         waitersName: user.value.name,
-        productsOrder: _tempOrder,
+        // productsOrder: tempOrder,
+        productsOrder: finalOrder,
         totalPrices: _total,
         createAt: now.toIso8601String(),
         orderNumber: orderNumber,
       ).toJson())
           .then((obj) async {
-        /// TAKE ALL DATA [ORDERS] COLLECTION
-        // QuerySnapshot querySnapshot = await orderCollection.get();
-
         // VARIABLE YG NANTI AKAN DI ISI
         String? id;
         Order? order;
 
-        listOrdersCollection.forEach((orderData) {
-          if (orderData.guessName == guessName &&
-              orderData.tableNumber == table) {
-            id = orderData.orderId;
-            order = orderData;
+        listOrdersCollection.forEach((orderC) {
+          if (orderC.guessName == guessName && orderC.tableNumber == table) {
+            id = orderC.orderId;
+            order = orderC;
           }
         });
-
-        /// GENERATE COLLECTIOSN [ORDERS] KE LIST ORDER
-        // List<Order> _listOrdersCollection = querySnapshot.docs.map((doc) {
-        //   var object = doc.data() as Map<String, dynamic>;
-        //   Order data = Order.fromJson(object);
-
-        //   // APAKAH NAMA TAMU DAN NO MEJA ADA YG SAMA DI LIST ORDER
-        //   // KALO SAMA VARIABLE YG DI ATAS DI INIT [JADINYA KAN GAK KOSONG]
-        //   if (data.guessName == guessName && data.tableNumber == table) {
-        //     id = doc.id;
-        //     order = data;
-        //   }
-
-        //   return data;
-        // }).toList();
 
         /// CEK APAKAH DATA ORDER ADA DI COLLECTION [ORDERS]
         if (id != null && order != null && order!.isPaid == false) {
@@ -167,10 +162,10 @@ class MenuController extends GetxController {
           List<ProductOrder> productsEnd = [];
 
           products.forEach((dataA) {
-            _tempOrder.forEach((dataB) {
+            finalOrder.forEach((dataB) {
               if (dataA.productName == dataB.productName &&
                   dataA.productPrice == dataB.productPrice) {
-                dataA.productQty += 1;
+                dataA.productQty += dataB.productQty;
                 productsEnd.add(dataA);
               } else {
                 productsEnd.addAll(products);
@@ -178,7 +173,7 @@ class MenuController extends GetxController {
               }
             });
           });
-          final ids = Set();
+
           productsEnd.retainWhere(
             (x) => ids.add(x.productName),
           );
@@ -210,7 +205,7 @@ class MenuController extends GetxController {
                 guessName: guessName,
                 tableNumber: table,
                 waitersName: user.value.name,
-                productsOrder: _tempOrder,
+                productsOrder: finalOrder,
                 totalPrices: _total,
                 createAt: now.toIso8601String(),
                 orderNumber: null,
@@ -238,13 +233,17 @@ class MenuController extends GetxController {
     }
   }
 
-  double _sumPrices() {
+  double _totalCounter() {
     _totalPrice = 0;
-    _tempOrder.forEach((order) => _totalPrice += order.productPrice!);
+    productsOrder.forEach((d) {
+      if (d.productQty != 0) {
+        _totalPrice += (d.productQty * d.productPrice!);
+      }
+    });
     order.update((val) {
       val!.totalPrices = _totalPrice;
     });
-
+    update();
     return _totalPrice;
   }
 
@@ -276,38 +275,6 @@ class MenuController extends GetxController {
     }
   }
 
-  List<String> image = [
-    "assets/products/ayampenyet.jpg",
-    "assets/products/bakso_bakar.jpeg",
-    "assets/products/ikanbakar.jpg",
-    "assets/products/kentang_goreng.jpeg",
-    "assets/products/milkshakestroberi.jpg",
-    "assets/products/nasigoreng.JPG",
-    "assets/products/sanger.jpg",
-    "assets/products/satetaichan.jpg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-  ];
   @override
   void onInit() async {
     user = auth.user;
@@ -320,7 +287,6 @@ class MenuController extends GetxController {
   @override
   void onReady() async {
     await _initQueryOrders();
-    // TODO: implement onReady
     super.onReady();
   }
 

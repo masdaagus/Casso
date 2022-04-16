@@ -1,5 +1,5 @@
 import 'package:casso/app/data/models/order.dart';
-import 'package:casso/app/data/models/resto.dart';
+import 'package:casso/app/data/models/product.dart';
 import 'package:casso/app/modules/card/product_card/product_card.dart';
 import 'package:casso/app/modules/product/add-product/add_product.dart';
 import 'package:casso/app/modules/product/controllers/product_controller.dart';
@@ -31,17 +31,16 @@ class FoodProduct extends GetView<ProductController> {
                 physics: BouncingScrollPhysics(),
                 children: List.generate(food.length, (index) {
                   Product data = food[index];
-                  String image = controller.image[index];
+
                   ProductOrder kosong = ProductOrder();
                   return ProductCard(
                     dataProduct: data,
                     data: kosong,
                     isOrderWidget: false,
-                    productImage: image,
                     editProduct: () {
                       Get.to(() => AddProductView(
                             dataProduct: data,
-                            image: image,
+                            // image: image,
                           ));
                     },
                   );

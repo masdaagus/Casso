@@ -1,5 +1,6 @@
 import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/modules/monitoring/controllers/monitoring_controller.dart';
+import 'package:casso/app/modules/monitoring/views/components/alert.dart';
 import 'package:casso/app/modules/monitoring/views/components/card_no_order.dart';
 import 'package:casso/app/modules/monitoring/views/components/monitor_card.dart';
 import 'package:casso/app/modules/monitoring/views/components/order_item.dart';
@@ -81,11 +82,26 @@ class SiapMonitoring extends GetView<MonitoringController> {
                           orderButton: 'tersaji',
                           buttonAll: () {
                             if (accesTersaji) {
-                              controller.setProsesAll(
-                                data,
-                                id,
-                                'siap',
-                                'tersaji',
+                              // controller.setProsesAll(
+                              //   data,
+                              //   id,
+                              //   'siap',
+                              //   'tersaji',
+                              // );
+
+                              Get.defaultDialog(
+                                content: CustomAlertDialog(onTap: () {
+                                  controller
+                                      .setProsesAll(
+                                        data,
+                                        id,
+                                        'siap',
+                                        'tersaji',
+                                      )
+                                      .then((value) => Get.back());
+                                }),
+                                backgroundColor: lightColor,
+                                title: '',
                               );
                             } else {
                               Get.snackbar(

@@ -5,11 +5,9 @@ class CradDeskripsi extends StatelessWidget {
   const CradDeskripsi({
     Key? key,
     this.textController,
-    this.description,
   }) : super(key: key);
 
   final TextEditingController? textController;
-  final String? description;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +35,7 @@ class CradDeskripsi extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 41),
             child: Icon(Icons.input_outlined, color: darkColor),
           ),
-          hintText: description,
+          hintText: 'Deskripsi produk',
           hintStyle: TextStyle(
             fontSize: 14,
             fontFamily: "balsamiq",

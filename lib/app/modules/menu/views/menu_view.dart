@@ -12,6 +12,7 @@ import 'bottom_sheet/bottom_sheet.dart';
 import 'category/dessert.dart';
 import 'category/drink.dart';
 import 'components/button_chart.dart';
+import 'components/confirm_order_view.dart';
 import 'components/dialog_cancel.dart';
 
 class Menus extends GetView<MenuController> {
@@ -28,10 +29,6 @@ class Menus extends GetView<MenuController> {
 
   @override
   Widget build(BuildContext context) {
-    print(data!.guessName);
-    print(data!.tableNumber);
-    print("dari text cotroller = $guessName");
-    print("data = $table");
     return WillPopScope(
       onWillPop: () async {
         Get.defaultDialog(
@@ -111,19 +108,27 @@ class Menus extends GetView<MenuController> {
                       ],
                     ),
                     ButtonChart(
-                      guessName: guessName ?? data!.guessName,
-                      table: table ?? data!.tableNumber,
-                      onTap: () => Get.bottomSheet(
-                        CustomBottomSheet(
-                          onTap: () {
-                            controller.setOrder(
-                                guessName: guessName ?? data!.guessName,
-                                table: table ?? data!.tableNumber);
-                          },
-                        ),
-                        isScrollControlled: true,
-                      ),
-                    )
+                        guessName: guessName ?? data!.guessName,
+                        table: table ?? data!.tableNumber,
+                        onTap: () {
+                          final dur = Duration(milliseconds: 420);
+                          Get.bottomSheet(
+                            CustomBottomSheet(
+                              guessName: guessName ?? data!.guessName,
+                              tableNumber: table ?? data!.tableNumber,
+                              onTap: () {
+                                controller.setOrder(
+                                  guessName: guessName ?? data!.guessName,
+                                  table: table ?? data!.tableNumber,
+                                );
+                              },
+                            ),
+                            isScrollControlled: true,
+                            enterBottomSheetDuration: dur,
+                            exitBottomSheetDuration: dur,
+                          );
+                          // Get.to(ConfirmOrderView());
+                        })
                   ],
                 ),
               )

@@ -15,7 +15,8 @@ class ButtonAdd extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.only(top: 32),
-        height: 50,
+        padding: const EdgeInsets.only(top: 2),
+        height: 40,
         width: 184,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),

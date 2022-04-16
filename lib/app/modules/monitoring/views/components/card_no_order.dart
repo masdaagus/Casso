@@ -44,7 +44,7 @@ class NoOrderWidget extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            "Pesanan akan tampil di sini\njika ada",
+            "Jika pesanan tidak kososng akan \ntampil di sini",
             textAlign: TextAlign.center,
             style: TextStyle(
               color: darkColor.withOpacity(.7),

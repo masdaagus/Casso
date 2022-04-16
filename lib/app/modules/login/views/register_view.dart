@@ -20,6 +20,7 @@ class RegisterView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     final auth = Get.put(AuthController());
+    Get.put(() => LoginController());
     return Scaffold(
       backgroundColor: lightColor,
       body: GestureDetector(

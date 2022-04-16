@@ -17,7 +17,7 @@ class DropDownCategory extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       // height: 48,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(8),
         color: putih,
       ),
       child: Row(

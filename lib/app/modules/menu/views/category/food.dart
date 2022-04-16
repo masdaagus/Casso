@@ -1,5 +1,5 @@
 import 'package:casso/app/data/models/order.dart';
-import 'package:casso/app/data/models/resto.dart';
+import 'package:casso/app/data/models/product.dart';
 import 'package:casso/app/modules/card/product_card/product_card.dart';
 import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/utils/constant.dart';
@@ -11,7 +11,10 @@ class FoodMenu extends GetView<MenuController> {
 
   @override
   Widget build(BuildContext context) {
-    List<ProductOrder> food =
+    List<ProductOrder> foodOrder = controller.productsOrder
+        .where((d) => d.productCategory == 'FOOD')
+        .toList();
+    List<Product> foodProduct =
         controller.products.where((d) => d.productCategory == 'FOOD').toList();
 
     return Container(
@@ -29,18 +32,19 @@ class FoodMenu extends GetView<MenuController> {
                 crossAxisCount: 2,
                 childAspectRatio: .89,
                 physics: BouncingScrollPhysics(),
-                children: List.generate(food.length, (index) {
-                  ProductOrder data = food[index];
-                  String image = controller.image[index];
-
-                  Product kosong = Product();
+                children: List.generate(foodOrder.length, (index) {
+                  ProductOrder data = foodOrder[index];
+                  Product product = foodProduct[index];
 
                   return ProductCard(
                     data: data,
-                    dataProduct: kosong,
-                    productImage: image,
-                    addProduct: () => controller.addProduct(data),
-                    minProduct: () => controller.minProduct(data),
+                    dataProduct: product,
+                    addProduct: () async {
+                      controller.addProduct(data);
+                    },
+                    minProduct: () async {
+                      controller.minProduct(data);
+                    },
                   );
                 }),
               ),

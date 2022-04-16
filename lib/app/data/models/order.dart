@@ -55,17 +55,16 @@ class ProductOrder {
     this.productName,
     this.productPrice,
     this.productCategory,
-    this.productDescription,
+    // this.productDescription,
     this.productQty = 0,
-    this.productStock,
+    // this.productStock,
     this.productNote,
   });
   String? productName;
   String? productCategory;
   double? productPrice;
-  String? productDescription;
+
   String? productNote;
-  int? productStock;
 
   int productQty;
 
@@ -74,8 +73,8 @@ class ProductOrder {
         productPrice: json["productPrice"],
         productCategory: json["productCategory"],
         productQty: json["productQty"],
-        productDescription: json["productDescription"],
-        productStock: json["productStock"],
+        // productDescription: json["productDescription"],
+        // productStock: json["productStock"],
         productNote: json["productNote"],
       );
 
@@ -84,24 +83,8 @@ class ProductOrder {
         "productPrice": productPrice,
         "productCategory": productCategory,
         "productQty": productQty,
-        "productDescription": productDescription,
-        "productStock": productStock,
+        // "productDescription": productDescription,
+        // "productStock": productStock,
         "productNote": productNote,
       };
 }
-
-// class OrderFields {
-//   static const String guessName = "guessName";
-//   static const String waitersName = "waitersName";
-//   static const String isPaid = "tableNumbers";
-//   static const String totalItems = "totalItems";
-//   static const String totalPrices = "totalPrices";
-//   static const String productsOrder = "productsOrder";
-// }
-
-// class POFields {
-//   static const String productName = "productName";
-//   static const String productPrice = "productPrice";
-//   static const String productCategory = "productCategory";
-//   static const String productQty = "productQty";
-// }

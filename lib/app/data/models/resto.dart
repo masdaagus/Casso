@@ -3,6 +3,7 @@
 //     final products = productsFromJson(jsonString);
 
 // import 'dart:convert';
+import 'package:casso/app/data/models/product.dart';
 import 'package:casso/app/data/models/table.dart';
 import 'package:casso/app/data/models/users.dart';
 
@@ -63,36 +64,6 @@ class RestosModel {
       };
 }
 
-class Product {
-  const Product({
-    this.productPrice,
-    this.productCategory,
-    this.productName,
-    this.productStock = 100,
-    this.productDescription = 'Description',
-  });
-  final String? productName;
-  final double? productPrice;
-  final String? productCategory;
-  final String? productDescription;
-  final int? productStock;
-
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
-        productName: json["productName"],
-        productPrice: json["productPrice"],
-        productCategory: json["productCategory"],
-        productStock: json["productStock"],
-        productDescription: json["productDescription"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "productName": productName,
-        "productPrice": productPrice,
-        "productCategory": productCategory,
-        "productStock": productStock,
-        "productDescription": productDescription,
-      };
-}
 
 
 

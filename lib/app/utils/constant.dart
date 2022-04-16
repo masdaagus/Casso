@@ -16,7 +16,7 @@ const abu = Color(0XFFD1D1D1);
 const putih = Colors.white;
 const hitam = Colors.black;
 
-const grColor1 = [Color(0XFFEDAEF9), Color(0XFF81B1FA)];
+const grColor1 = [Color(0XFFF8E9FB), Color(0XFFE4EFFF)];
 const grColor2 = [Color(0XFFA0B5EB), Color(0XFFC9F0E4)];
 
 const emailKey = 'email';

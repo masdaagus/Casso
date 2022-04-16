@@ -17,6 +17,10 @@ dependencies:
   get_storage: ^2.0.3
   cloud_firestore: ^3.1.8
   curved_navigation_bar: ^1.0.3
+  image_picker: ^0.8.5
+  firebase_storage: 10.2.8
+  flutter_image_compress: ^1.1.0
+  flutter_slidable: ^1.2.0
 
 
 
@@ -29,17 +33,16 @@ dev_dependencies:
     sdk: flutter
 
 flutter: 
-
-  assets:
+  assets: 
     - assets/icons/
     - assets/images/
     - assets/svg/
     - assets/lottie/
     - assets/products/
-
-  fonts:
+    
+  fonts: 
     - family: Montserrat
-      fonts:
+      fonts: 
         - asset: fonts/Montserrat-Regular.ttf
         - asset: fonts/Montserrat-Light.ttf
           weight: 500
@@ -51,14 +54,12 @@ flutter:
           weight: 800
 
     - family: balsamiq
-      fonts:
-          - asset: fonts/BalsamiqSans-Regular.ttf
-          - asset: fonts/BalsamiqSans-Bold.ttf
-            weight: 800
-
-
+      fonts: 
+        - asset: fonts/BalsamiqSans-Regular.ttf
+        - asset: fonts/BalsamiqSans-Bold.ttf
+          weight: 800
     - family: mono
-      fonts:
-          - asset: fonts/UbuntuMono-Bold.ttf
-
+      fonts: 
+        - asset: fonts/UbuntuMono-Bold.ttf
   uses-material-design: true
+

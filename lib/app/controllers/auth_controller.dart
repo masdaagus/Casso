@@ -1,5 +1,8 @@
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/users.dart';
+import 'package:casso/app/modules/login/bindings/login_binding.dart';
+import 'package:casso/app/modules/login/controllers/login_controller.dart';
+import 'package:casso/app/modules/login/views/login_view.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:casso/app/utils/splash_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -96,7 +99,11 @@ class AuthController extends GetxController {
   Future<bool> loginWithGoogle() async {
     try {
       await _googleSignIn.signOut();
-      await _googleSignIn.signIn().then((value) => _curentUser = value);
+      await _googleSignIn.signIn().then((value) {
+        Get.to(() => SplashScreen());
+        print('LOGIN NIH LOGIN NIH LOGIN NIH LOGIN NIH ');
+        _curentUser = value;
+      });
 
       final isSignIn = await _googleSignIn.isSignedIn();
 
@@ -176,8 +183,9 @@ class AuthController extends GetxController {
     _googleSignIn.signOut();
     _googleSignIn.disconnect();
     isAuth.value = false;
-    await Future.delayed(Duration(seconds: 2));
-    Get.offAllNamed('/login');
+    // await Future.delayed(Duration(seconds: 2));
+    Get.put(LoginController());
+    Get.off(() => LoginView());
   }
 
   /// LOGIN WITH USERS EMPLOYE

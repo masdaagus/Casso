@@ -1,4 +1,4 @@
-import 'package:casso/app/data/models/resto.dart';
+import 'package:casso/app/data/models/product.dart';
 import 'package:casso/app/modules/product/add-product/components/dropdown_kategori.dart';
 import 'package:casso/app/modules/product/controllers/product_controller.dart';
 import 'package:casso/app/utils/constant.dart';
@@ -14,11 +14,11 @@ class AddProductView extends StatelessWidget {
   AddProductView({
     Key? key,
     this.dataProduct,
-    this.image,
+    // this.image,
   }) : super(key: key);
 
   final Product? dataProduct;
-  final String? image;
+  // final String? image;
 
   final formKey = GlobalKey<FormState>();
 
@@ -65,150 +65,72 @@ class AddProductView extends StatelessWidget {
           )
         ],
       ),
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  /// IMAGE PRODUK
-                  ImageCard(image: image),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                /// IMAGE PRODUK
+                ImageCard(
+                  image: dataProduct!.productImage,
+                  onTap: () => ctrl.selectImage(),
+                  onCancel: () => ctrl.removeImage(),
+                ),
 
-                  /// TEXT FIELD NAMA PRODUK
-                  CardTextField(
-                    icon: Icons.keyboard_alt_outlined,
-                    textFormField: TextFormField(
-                      validator: (value) {
-                        if (value!.isEmpty)
-                          return "Nama produk tidak boleh kosong";
-                      },
-                      maxLength: 30,
-                      controller: ctrl.namaProduk =
-                          TextEditingController(text: dataProduct!.productName),
-                      decoration: InputDecoration(
-                        labelText: 'Nama Produk',
-                        isDense: true,
-                        errorStyle: TextStyle(
-                          color: merah,
-                          fontFamily: "balsamiq",
-                          fontSize: 14,
-                          letterSpacing: 1,
-                        ),
-                        counterText: "",
-                        hintText: dataProduct!.productName ?? 'Nama Produk',
-                        hintStyle: TextStyle(
-                          fontSize: 14,
-                          fontFamily: "balsamiq",
-                          fontWeight: FontWeight.w500,
-                          color: darkColor.withOpacity(.6),
-                        ),
-                        border: InputBorder.none,
-                      ),
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: "balsamiq",
-                        fontWeight: FontWeight.w500,
-                        color: darkColor,
-                      ),
-                    ),
+                CardTextField(
+                  isNumtype: false,
+                  label: 'Nama Produk',
+                  controller: ctrl.namaProduk =
+                      TextEditingController(text: dataProduct!.productName),
+                  hintText: 'Nama Produk',
+                  validator: (value) {
+                    if (value!.isEmpty) return "Nama produk tidak boleh kosong";
+                  },
+                ),
+                CardTextField(
+                  label: 'Harga Produk',
+                  controller: ctrl.hargaProduk = TextEditingController(
+                    text: dataProduct!.productPrice!.toStringAsFixed(0),
                   ),
+                  hintText: 'Harga Produk',
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Harga produk tidak boleh kosong';
+                    }
+                  },
+                ),
+                CardTextField(
+                  label: 'Stok Produk',
+                  controller: ctrl.stokProduk = TextEditingController(
+                    text: dataProduct!.productStock.toString(),
+                  ),
+                  hintText: 'Stok Produk',
+                  validator: (value) {
+                    if (value!.isEmpty) return "Stok produk tidak boleh kosong";
+                  },
+                ),
+                DropDownCategory(),
+                CradDeskripsi(
+                  textController: ctrl.deskripsiProduk = TextEditingController(
+                      text: dataProduct!.productDescription),
+                ),
+                ButtonAdd(
+                  onTap: () {
+                    if (formKey.currentState!.validate()) {
+                      print('VALIDATED');
 
-                  /// TEXT FIELD [HARGA] PRODUK
-                  CardTextField(
-                    icon: Icons.keyboard_alt_outlined,
-                    textFormField: TextFormField(
-                      validator: (value) {
-                        if (value!.isEmpty)
-                          return "Harga produk tidak boleh kosong";
-                      },
-                      controller: ctrl.hargaProduk = TextEditingController(
-                        text: dataProduct!.productPrice.toString(),
-                      ),
-                      maxLength: 30,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        isDense: true,
-                        errorStyle: TextStyle(
-                          color: merah,
-                          fontFamily: "balsamiq",
-                          fontSize: 14,
-                          letterSpacing: 1,
-                        ),
-                        counterText: "",
-                        hintText: 'Harga Produk',
-                        hintStyle: TextStyle(
-                          fontSize: 14,
-                          fontFamily: "balsamiq",
-                          fontWeight: FontWeight.w500,
-                          color: darkColor.withOpacity(.6),
-                        ),
-                        border: InputBorder.none,
-                      ),
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: "balsamiq",
-                        fontWeight: FontWeight.w500,
-                        color: darkColor,
-                      ),
-                    ),
-                  ),
-
-                  /// TEXT FIELD [STOK] PRODUK
-                  CardTextField(
-                    icon: Icons.keyboard_alt_outlined,
-                    textFormField: TextFormField(
-                      controller: ctrl.stokProduk,
-                      maxLength: 30,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        isDense: true,
-                        errorStyle: TextStyle(
-                          color: merah,
-                          fontFamily: "balsamiq",
-                          fontSize: 14,
-                          letterSpacing: 1,
-                        ),
-                        counterText: "",
-                        hintText: 'Stok Produk',
-                        hintStyle: TextStyle(
-                          fontSize: 14,
-                          fontFamily: "balsamiq",
-                          fontWeight: FontWeight.w500,
-                          color: darkColor.withOpacity(.6),
-                        ),
-                        border: InputBorder.none,
-                      ),
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: "balsamiq",
-                        fontWeight: FontWeight.w500,
-                        color: darkColor,
-                      ),
-                    ),
-                  ),
-                  DropDownCategory(),
-                  CradDeskripsi(
-                    textController: ctrl.deskripsiProduk,
-                    description: dataProduct!.productDescription ?? 'Deskripsi',
-                  ),
-                  ButtonAdd(
-                    onTap: () {
-                      if (formKey.currentState!.validate()) {
-                        if (dataProduct!.productName == null) {
-                          ctrl.addProduct();
-                        } else {
-                          ctrl.editProduct(dataProduct!);
-                        }
+                      if (dataProduct!.productName == null) {
+                        ctrl.addProduct();
+                      } else {
+                        ctrl.editProduct(dataProduct!);
                       }
-                    },
-                  ),
-                  SizedBox(height: 24),
-                ],
-              ),
+                    }
+                  },
+                ),
+              ],
             ),
           ),
         ),

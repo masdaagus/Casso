@@ -1,4 +1,4 @@
-import 'package:casso/app/data/models/resto.dart';
+import 'package:casso/app/data/models/product.dart';
 import 'package:casso/app/modules/components/floating_button/floating_button.dart';
 import 'package:casso/app/modules/components/search_bar/search_bar.dart';
 import 'package:casso/app/modules/product/add-product/add_product.dart';
@@ -17,6 +17,7 @@ import 'category/food.dart';
 class ProductView extends GetView<ProductController> {
   @override
   Widget build(BuildContext context) {
+    Get.put(() => ProductController());
     return Scaffold(
       backgroundColor: lightColor,
       appBar: AppBar(
@@ -82,6 +83,8 @@ class ProductView extends GetView<ProductController> {
                         Product kosong = Product(productPrice: 0);
                         Get.to(
                           () => AddProductView(dataProduct: kosong),
+                          transition: Transition.cupertinoDialog,
+                          duration: Duration(milliseconds: 500),
                         );
                       },
                     ),

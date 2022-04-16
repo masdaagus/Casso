@@ -1,19 +1,21 @@
 import 'package:casso/app/data/models/order.dart';
-import 'package:casso/app/data/models/resto.dart';
+import 'package:casso/app/data/models/product.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'no_image.dart';
+
 class BottomSheetProduct extends StatelessWidget {
   const BottomSheetProduct({
     Key? key,
-    required this.productImage,
-    required this.data,
+    // this.productImage,
+    // required this.data,
     required this.dataProduct,
   }) : super(key: key);
 
-  final String? productImage;
-  final ProductOrder? data;
+  // final String? productImage;
+  // final ProductOrder? data;
   final Product? dataProduct;
 
   @override
@@ -35,10 +37,12 @@ class BottomSheetProduct extends StatelessWidget {
                 decoration: BoxDecoration(),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(24),
-                  child: Image.asset(
-                    productImage!,
-                    fit: BoxFit.cover,
-                  ),
+                  child: dataProduct!.productImage != null
+                      ? Image.network(
+                          dataProduct!.productImage!,
+                          fit: BoxFit.cover,
+                        )
+                      : NoImageWidget(),
                 ),
               ),
             ),
@@ -46,7 +50,7 @@ class BottomSheetProduct extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               child: Text(
-                data!.productName ?? dataProduct!.productName!,
+                dataProduct!.productName!,
                 style: TextStyle(
                   color: darkColor,
                   fontFamily: "balsamiq",
@@ -63,7 +67,7 @@ class BottomSheetProduct extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    nf.format(data!.productPrice ?? dataProduct!.productPrice),
+                    nf.format(dataProduct!.productPrice),
                     style: TextStyle(
                       color: darkColor.withOpacity(.7),
                       fontFamily: "balsamiq",
@@ -73,7 +77,7 @@ class BottomSheetProduct extends StatelessWidget {
                   ),
                   Text(
                     // nf.format(data!.productPrice ?? dataProduct!.productStock),
-                    "Stock = ${data!.productStock ?? dataProduct!.productStock}",
+                    "Stock = ${dataProduct!.productStock}",
                     maxLines: 7,
                     style: TextStyle(
                       color: darkColor.withOpacity(.7),
@@ -95,7 +99,7 @@ class BottomSheetProduct extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Text(
-                data!.productDescription ?? dataProduct!.productDescription!,
+                dataProduct!.productDescription!,
                 maxLines: 7,
                 style: TextStyle(
                   color: darkColor.withOpacity(.5),

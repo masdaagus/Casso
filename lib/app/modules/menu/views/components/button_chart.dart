@@ -8,7 +8,7 @@ class ButtonChart extends GetView<MenuController> {
     Key? key,
     this.table,
     this.onTap,
-    this.guessName = 'NO-NAME',
+    this.guessName = 'TAKE AWAY',
   }) : super(key: key);
 
   final int? table;
@@ -81,8 +81,16 @@ class ButtonChart extends GetView<MenuController> {
                     children: [
                       GetBuilder<MenuController>(
                         builder: (c) {
-                          // var items = productsOrder!.length;
-                          var items = c.order.value.productsOrder!.length;
+                          var a = c.productsOrder
+                              .where((e) => e.productQty != 0)
+                              .toList();
+                          int items = 0;
+
+                          a.forEach((data) {
+                            items += data.productQty;
+                          });
+
+                          // var items = c.order.value.productsOrder!.length;
 
                           if (items < 0) {
                             items = 0;

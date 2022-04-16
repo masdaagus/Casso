@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:casso/app/controllers/auth_controller.dart';
+import 'package:casso/app/data/models/product.dart';
 
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/table.dart';
@@ -31,41 +32,28 @@ class IntroductionController extends GetxController {
 
     final List<Product> products = [
       Product(
-          productName: 'Nasi Goreng',
-          productPrice: 5000,
-          productCategory: 'FOOD',
-          productDescription: 'Write description here.....',
-          productStock: 100),
+        productName: 'Nasi Goreng',
+        productPrice: 5000,
+        productCategory: 'FOOD',
+        productDescription: 'Write description here.....',
+        productStock: 100,
+      ),
       Product(
-          productName: 'Indomie Goreng',
-          productPrice: 5000,
-          productCategory: 'FOOD',
-          productDescription: 'Write description here.....',
-          productStock: 100),
+        productName: 'Teh Manis',
+        productPrice: 5000,
+        productCategory: 'DRINK',
+        productDescription: 'Write description here.....',
+        productStock: 100,
+        productImage:
+            "https://firebasestorage.googleapis.com/v0/b/casso-7bbb7.appspot.com/o/teh_manis-min.jpg?alt=media&token=62ab5add-347a-4e1f-ba2c-2c195074270a",
+      ),
       Product(
-          productName: 'Teh Manis',
-          productPrice: 5000,
-          productCategory: 'DRINK',
-          productDescription: 'Write description here.....',
-          productStock: 100),
-      Product(
-          productName: 'Lemon Tea',
-          productPrice: 12000,
-          productCategory: 'DRINK',
-          productDescription: 'Write description here.....',
-          productStock: 100),
-      Product(
-          productName: 'Kentang Goreng',
-          productPrice: 10000,
-          productCategory: 'DESSERT',
-          productDescription: 'Write description here.....',
-          productStock: 100),
-      Product(
-          productName: 'Dimsum',
-          productPrice: 20000,
-          productCategory: 'DESSERT',
-          productDescription: 'Write description here.....',
-          productStock: 100),
+        productName: 'Kentang Goreng',
+        productPrice: 10000,
+        productCategory: 'DESSERT',
+        productDescription: 'Write description here.....',
+        productStock: 100,
+      ),
     ];
     final List<UsersModel> employe = [
       UsersModel(

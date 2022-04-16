@@ -19,8 +19,10 @@ import 'components/resgiter_button.dart';
 
 class LoginView extends GetView<LoginController> {
   final auth = Get.put(AuthController());
+
   @override
   Widget build(BuildContext context) {
+    Get.put(() => LoginController());
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: lightColor,

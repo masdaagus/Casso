@@ -1,16 +1,27 @@
-import 'package:casso/app/controllers/auth_controller.dart';
+import 'dart:io';
 
+import 'package:casso/app/data/models/product.dart';
+import 'package:casso/app/controllers/auth_controller.dart';
+import 'package:casso/app/modules/home/views/home_view.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class ProductController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  FirebaseStorage storage = FirebaseStorage.instance;
   final auth = Get.find<AuthController>();
   var user = UsersModel().obs;
   var resto = RestosModel().obs;
+
+  var data = ['FOOD', 'DRINK', 'DESSERT'].obs;
+  var selected = 'FOOD'.obs;
+
   List<Product> products = [];
 
   late TextEditingController namaProduk;
@@ -18,98 +29,135 @@ class ProductController extends GetxController {
   late TextEditingController stokProduk;
   late TextEditingController deskripsiProduk;
 
-  var data = ['FOOD', 'DRINK', 'DESSERT'].obs;
-  var selected = 'FOOD'.obs;
+  XFile? pickedImage = null;
+  String? imageUrl = null;
+  File? compressedImage = null;
 
-  List<String> image = [
-    "assets/products/ayampenyet.jpg",
-    "assets/products/bakso_bakar.jpeg",
-    "assets/products/ikanbakar.jpg",
-    "assets/products/kentang_goreng.jpeg",
-    "assets/products/milkshakestroberi.jpg",
-    "assets/products/nasigoreng.JPG",
-    "assets/products/sanger.jpg",
-    "assets/products/satetaichan.jpg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-    "assets/products/tehmanis.jpeg",
-  ];
+  void removeImage() async {
+    pickedImage = null;
+    update();
+  }
+
+  Future<void> _uploadImage() async {
+    final storageRef = await storage.ref("${pickedImage!.name}");
+
+    try {
+      if (compressedImage != null) {
+        File file = File(compressedImage!.absolute.path);
+        await storageRef.putFile(file);
+        final _imageUrl = await storageRef.getDownloadURL();
+        imageUrl = _imageUrl;
+        update();
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<File> _compressImage(String filePath) async {
+    final lastIndex = filePath.lastIndexOf(new RegExp(r'.jp'));
+    final splitted = filePath.substring(0, (lastIndex));
+    final outPath = "${splitted}_out${filePath.substring(lastIndex)}";
+
+    var result = await FlutterImageCompress.compressAndGetFile(
+      pickedImage!.path,
+      outPath,
+      format: CompressFormat.jpeg,
+      quality: 10,
+      minHeight: 1000,
+      minWidth: 1000,
+    );
+
+    compressedImage = result;
+    update();
+
+    return compressedImage!;
+  }
+
+  void selectImage() async {
+    final ImagePicker _picker = ImagePicker();
+
+    try {
+      final _image = await _picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 35,
+      );
+
+      if (_image != null) {
+        pickedImage = _image;
+        await _compressImage(pickedImage!.path);
+
+        update();
+      }
+    } catch (e) {
+      print(e);
+      pickedImage = null;
+    }
+  }
 
   Future<void> _productsInit() async {
     products = resto.value.products! as List<Product>;
   }
 
+  /// ADD PRIDUCT
   Future<void> addProduct() async {
     CollectionReference restos = firestore.collection('restos');
 
-    final dataObject = await restos.doc(user.value.restoID).get();
-    var data = dataObject.data() as Map<String, dynamic>;
-    List<Product> products =
-        List<Product>.from(data['products'].map((x) => Product.fromJson(x)))
-            .toList();
+    List<Product> products = resto.value.products as List<Product>;
 
-    Product product = Product(
-      productName: namaProduk.text,
-      productPrice: double.tryParse(hargaProduk.text) ?? 0,
-      productCategory: selected.value,
-      productStock: int.tryParse(stokProduk.text) ?? 100,
-      productDescription: deskripsiProduk.text,
-    );
+    try {
+      if (compressedImage != null) {
+        await _uploadImage();
+      }
 
-    products.add(product);
-    await restos.doc(user.value.restoID).update({
-      "products": List<dynamic>.from(
-        products.map(
-          (x) => x.toJson(),
+      Product product = Product(
+        productName: namaProduk.text,
+        productPrice: double.tryParse(hargaProduk.text),
+        productCategory: selected.value,
+        productStock: int.tryParse(stokProduk.text) ?? 100,
+        productDescription: deskripsiProduk.text,
+        productImage: imageUrl ?? null,
+      );
+
+      products.add(product);
+      await restos.doc(user.value.restoID).update({
+        "products": List<dynamic>.from(
+          products.map(
+            (x) => x.toJson(),
+          ),
         ),
-      ),
-    });
+      });
 
-    /// FUNGSI UNTUK MEREFRESH DATA
-    final restoId = await restos.doc(user.value.restoID).get();
-    final restoData = restoId.data() as Map<String, dynamic>;
-    resto(RestosModel.fromJson(restoData));
-    auth.resto.refresh();
-    update();
+      pickedImage = null;
 
-    Get.back();
-    Get.back();
+      /// FUNGSI UNTUK MEREFRESH DATA
+
+      final restoDoc = await restos.doc(user.value.restoID).get();
+      final restoData = restoDoc.data() as Map<String, dynamic>;
+      resto(RestosModel.fromJson(restoData));
+      resto.refresh();
+      auth.refresh();
+      update();
+
+      Get.offAll(() => HomeView());
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> deleteProduct(Product dataProduct) async {
     CollectionReference restos = firestore.collection('restos');
 
-    final dataObject = await restos.doc(user.value.restoID).get();
-    var data = dataObject.data() as Map<String, dynamic>;
+    List<Product> products = resto.value.products as List<Product>;
     Product? produk;
-    List<Product> products = List<Product>.from(data['products'].map((x) {
-      Product data = Product.fromJson(x);
+
+    products.forEach((data) {
       if (data.productName == dataProduct.productName &&
           data.productPrice == dataProduct.productPrice) {
         produk = data;
       }
+    });
 
-      return data;
-    })).toList();
     if (produk != null) {
       products.remove(produk);
       await restos.doc(user.value.restoID).update({
@@ -121,56 +169,66 @@ class ProductController extends GetxController {
       });
 
       /// FUNGSI UNTUK MEREFRESH DATA
-      final restoId = await restos.doc(user.value.restoID).get();
-      final restoData = restoId.data() as Map<String, dynamic>;
+      final restoDoc = await restos.doc(user.value.restoID).get();
+      final restoData = restoDoc.data() as Map<String, dynamic>;
       resto(RestosModel.fromJson(restoData));
       resto.refresh();
-      Get.back();
-      Get.back();
+      auth.refresh();
+      update();
+
+      Get.offAll(() => HomeView());
     }
   }
 
   Future<void> editProduct(Product dataProduct) async {
     CollectionReference restos = firestore.collection('restos');
 
-    final dataObject = await restos.doc(user.value.restoID).get();
-    var data = dataObject.data() as Map<String, dynamic>;
+    List<Product> products = resto.value.products as List<Product>;
     Product? produk;
-    List<Product> products = List<Product>.from(data['products'].map((x) {
-      Product data = Product.fromJson(x);
+
+    products.forEach((data) {
       if (data.productName == dataProduct.productName &&
           data.productPrice == dataProduct.productPrice) {
         produk = data;
       }
-
-      return data;
-    })).toList();
-    Product addProduct = Product(
-      productName: namaProduk.text,
-      productPrice: double.tryParse(hargaProduk.text),
-      productCategory: selected.value,
-      productStock: int.tryParse(stokProduk.text) ?? 100,
-      productDescription: deskripsiProduk.text,
-    );
+    });
     if (produk != null) {
-      products.remove(produk);
-      products.add(addProduct);
-      await restos.doc(user.value.restoID).update({
-        "products": List<dynamic>.from(
-          products.map(
-            (x) => x.toJson(),
-          ),
-        ),
-      });
+      try {
+        if (compressedImage != null) {
+          await _uploadImage();
+        }
 
-      /// FUNGSI UNTUK MEREFRESH DATA
-      final restoId = await restos.doc(user.value.restoID).get();
-      final restoData = restoId.data() as Map<String, dynamic>;
-      resto(RestosModel.fromJson(restoData));
-      resto.refresh();
-      update();
-      Get.back();
-      Get.back();
+        Product addProduct = Product(
+          productName: namaProduk.text,
+          productPrice: double.tryParse(hargaProduk.text) ?? 0,
+          productCategory: selected.value,
+          productStock: int.tryParse(stokProduk.text) ?? 100,
+          productDescription: deskripsiProduk.text,
+          productImage: imageUrl ?? null,
+        );
+
+        products.remove(produk);
+        products.add(addProduct);
+        await restos.doc(user.value.restoID).update({
+          "products": List<dynamic>.from(
+            products.map(
+              (x) => x.toJson(),
+            ),
+          ),
+        });
+        pickedImage = null;
+
+        /// FUNGSI UNTUK MEREFRESH DATA
+        final restoDoc = await restos.doc(user.value.restoID).get();
+        final restoData = restoDoc.data() as Map<String, dynamic>;
+        resto(RestosModel.fromJson(restoData));
+        resto.refresh();
+        auth.refresh();
+        update();
+        Get.offAll(() => HomeView());
+      } catch (e) {
+        print(e);
+      }
     }
   }
 
@@ -180,10 +238,10 @@ class ProductController extends GetxController {
     resto = auth.resto;
     await _productsInit();
 
-    namaProduk = TextEditingController();
-    hargaProduk = TextEditingController();
-    stokProduk = TextEditingController();
-    deskripsiProduk = TextEditingController();
+    // namaProduk = TextEditingController();
+    // hargaProduk = TextEditingController();
+    // stokProduk = TextEditingController();
+    // deskripsiProduk = TextEditingController();
     super.onInit();
   }
 
@@ -193,6 +251,7 @@ class ProductController extends GetxController {
     hargaProduk.dispose();
     stokProduk.dispose();
     deskripsiProduk.dispose();
+    pickedImage == null;
     super.onClose();
   }
 }

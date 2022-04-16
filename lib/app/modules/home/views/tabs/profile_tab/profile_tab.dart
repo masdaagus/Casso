@@ -3,8 +3,6 @@ import 'package:casso/app/modules/home/controllers/home_controller.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'components/account_info.dart';
 import 'components/custom_textfield.dart';
 
 class ProfileTab extends GetView<HomeController> {

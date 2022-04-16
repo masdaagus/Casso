@@ -78,6 +78,7 @@ class TersajiMonitoring extends GetView<MonitoringController> {
                                   data: productOrder,
                                   isOrder: false,
                                   isTersaji: true,
+                                  textButton: 'tersaji',
                                   onTap: () {
                                     controller.setProses(
                                       data,
@@ -87,7 +88,6 @@ class TersajiMonitoring extends GetView<MonitoringController> {
                                       'tersaji',
                                     );
                                   },
-                                  textButton: 'tersaji',
                                   undoButton: () => controller.reverseProses(
                                     data,
                                     id,

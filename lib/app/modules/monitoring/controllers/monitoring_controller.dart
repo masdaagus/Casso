@@ -38,7 +38,6 @@ class MonitoringController extends GetxController {
         .collection(collectionRight);
 
     final docProses = await collectRight.doc(id).get();
-    DateTime now = DateTime.now();
 
     try {
       List<ProductOrder> products = [];
@@ -50,12 +49,18 @@ class MonitoringController extends GetxController {
         products.addAll(x);
         products.addAll(data.productsOrder!);
 
+        double _totalRight = 0;
+        products.forEach((e) {
+          _totalRight += (e.productQty * e.productPrice!);
+        });
+
         collectRight.doc(id).update({
           "productsOrder": List<dynamic>.from(
             products.map(
               (x) => x.toJson(),
             ),
           ),
+          "totalPrices": _totalRight,
         });
         collectLeft.doc(id).delete();
       } else {
@@ -66,7 +71,7 @@ class MonitoringController extends GetxController {
               waitersName: data.waitersName,
               totalPrices: data.totalPrices,
               productsOrder: data.productsOrder,
-              createAt: now.toIso8601String(),
+              createAt: data.createAt,
               orderNumber: data.orderNumber,
             ).toJson());
 
@@ -84,9 +89,6 @@ class MonitoringController extends GetxController {
     String left,
     String right,
   ) async {
-    DateTime now = DateTime.now();
-
-    ///
     CollectionReference collectionLeft =
         firestore.collection("restos").doc(user.value.restoID).collection(left);
     CollectionReference collectionRight = firestore
@@ -96,12 +98,12 @@ class MonitoringController extends GetxController {
     ////////////////////////////////////////////////
 
     /// Mengambil data [Order] dari collection [Prosses]
-    final docProses = await collectionRight.doc(id).get();
+    // final docProses = await collectionRight.doc(id).get();
 
-    if (docProses.data() != null) {
-      final objectDataProses = docProses.data() as Map<String, dynamic>;
-      orderDataDariProses = Order.fromJson(objectDataProses);
-    }
+    // if (docProses.data() != null) {
+    //   final objectDataProses = docProses.data() as Map<String, dynamic>;
+    //   orderDataDariProses = Order.fromJson(objectDataProses);
+    // }
     ////////////////////////////////////////////////
 
     try {
@@ -110,9 +112,19 @@ class MonitoringController extends GetxController {
       ////////////////////////////////////////////////
       final checkDoc = await collectionRight.doc(id).get();
 
+      /// INITIALIZE [orderDataDariProses] KALO DATA NYA ADA
+      if (checkDoc.data() != null) {
+        final objectDataProses = checkDoc.data() as Map<String, dynamic>;
+        orderDataDariProses = Order.fromJson(objectDataProses);
+      }
+
       if (checkDoc.data() == null) {
         /// setelah di cek apakah data sudah ada di collection proses atau belum
         /// jika belum berarti menambahkan [list order item] dari collection [pesanan] ke colection [proses]
+
+        /// total prices harus di-update juga nihh
+        double _totalRight = 0;
+        _totalRight += (product.productPrice! * product.productQty);
 
         /// fungsi menambahkan data baru ke collection [proses]
         print("SET");
@@ -121,25 +133,35 @@ class MonitoringController extends GetxController {
               guessName: data.guessName,
               tableNumber: data.tableNumber,
               waitersName: data.waitersName,
-              totalPrices: data.totalPrices,
+              totalPrices: _totalRight,
               productsOrder: productsProses,
-              createAt: now.toIso8601String(),
+              createAt: data.createAt,
               orderNumber: data.orderNumber,
             ).toJson());
 
         /// menghapus [list order item] dari collection [pesanan]
         data.productsOrder!.remove(product);
+
+        double _totalLeft = 0;
+        data.productsOrder!.forEach((e) {
+          _totalLeft += (e.productQty * e.productPrice!);
+        });
         collectionLeft.doc(id).update({
           "productsOrder": List<dynamic>.from(
             data.productsOrder!.map(
               (x) => x.toJson(),
             ),
           ),
+          "totalPrices": _totalLeft,
         });
       } else {
         print("UPDATE");
         final x = orderDataDariProses.productsOrder!;
         productsProses.addAll(x);
+        double _totalRight = 0;
+        productsProses.forEach((e) {
+          _totalRight += (e.productQty * e.productPrice!);
+        });
 
         collectionRight.doc(id).update({
           "productsOrder": List<dynamic>.from(
@@ -147,16 +169,22 @@ class MonitoringController extends GetxController {
               (x) => x.toJson(),
             ),
           ),
+          "totalPrices": _totalRight,
         });
 
-        /// menghapus [list order item] dari collection [pesanan]
+        /// menghapus [list order item] dari collection [left]
         data.productsOrder!.remove(product);
+        double _totalLeft = 0;
+        productsProses.forEach((e) {
+          _totalLeft += (e.productQty * e.productPrice!);
+        });
         collectionLeft.doc(id).update({
           "productsOrder": List<dynamic>.from(
             data.productsOrder!.map(
               (x) => x.toJson(),
             ),
           ),
+          "totalPrices": _totalLeft,
         });
       }
       if (data.productsOrder!.length == 0) {
@@ -192,32 +220,46 @@ class MonitoringController extends GetxController {
       products.add(product);
       if (leftData.data() == null) {
         print("SET DATA BARU");
-        DateTime now = DateTime.now();
+        double _totalLeft = 0;
+        products.forEach((e) {
+          _totalLeft += (e.productQty * e.productPrice!);
+        });
 
         await collectionLeft.doc(id).set(Order(
               orderId: data.orderId,
               guessName: data.guessName,
               tableNumber: data.tableNumber,
               waitersName: data.waitersName,
-              totalPrices: data.totalPrices,
+              totalPrices: _totalLeft,
               productsOrder: products,
-              createAt: now.toIso8601String(),
+              createAt: data.createAt,
               orderNumber: data.orderNumber,
             ).toJson());
 
         /// menghapus [list order item] dari collection [pesanan]
         data.productsOrder!.remove(product);
+
+        double _totalRight = 0;
+        data.productsOrder!.forEach((e) {
+          _totalRight += (e.productQty * e.productPrice!);
+        });
         collectionRight.doc(id).update({
           "productsOrder": List<dynamic>.from(
             data.productsOrder!.map(
               (x) => x.toJson(),
             ),
           ),
+          "totalPrices": _totalRight,
         });
       } else {
         print("UPDATE");
         final x = orderDataDariProses.productsOrder!;
         products.addAll(x);
+
+        double _totalLeft = 0;
+        products.forEach((e) {
+          _totalLeft += (e.productQty * e.productPrice!);
+        });
 
         collectionLeft.doc(id).update({
           "productsOrder": List<dynamic>.from(
@@ -225,14 +267,22 @@ class MonitoringController extends GetxController {
               (x) => x.toJson(),
             ),
           ),
+          "totalPrices": _totalLeft,
         });
+
         data.productsOrder!.remove(product);
+
+        double _totalRight = 0;
+        data.productsOrder!.forEach((e) {
+          _totalRight += (e.productQty * e.productPrice!);
+        });
         collectionRight.doc(id).update({
           "productsOrder": List<dynamic>.from(
             data.productsOrder!.map(
               (x) => x.toJson(),
             ),
           ),
+          "totalPrices": _totalRight,
         });
       }
       if (data.productsOrder!.length == 0) {
@@ -244,7 +294,7 @@ class MonitoringController extends GetxController {
   }
 
   Future<void> deleteOrder(Order data, String id) async {
-    CollectionReference _collectionRef = firestore
+    CollectionReference ordersCollection = firestore
         .collection('restos')
         .doc(user.value.restoID)
         .collection('orders');
@@ -255,10 +305,10 @@ class MonitoringController extends GetxController {
         .collection("pesanan");
 
     // Get docs from collection reference
-    QuerySnapshot querySnapshot = await _collectionRef.get();
+    QuerySnapshot querySnapshot = await ordersCollection.get();
 
     // Get data from docs and convert map to List
-    await prosesC.doc(id).delete();
+    await prosesC.doc(data.orderId).delete();
 
     List<ProductOrder> products = []; // list untuk di update ke list orders
 
@@ -297,16 +347,22 @@ class MonitoringController extends GetxController {
           (x) => ids.add(x.productName),
         );
 
+        double _totalPriceOrders = 0;
+        products.forEach((e) {
+          _totalPriceOrders += (e.productQty * e.productPrice!);
+        });
+
         if (products.length > 0) {
-          _collectionRef.doc(doc.id).update({
+          ordersCollection.doc(doc.id).update({
             "productsOrder": List<dynamic>.from(
               products.map(
                 (x) => x.toJson(),
               ),
             ),
+            "totalPrices": _totalPriceOrders,
           });
         } else {
-          _collectionRef.doc(doc.id).delete();
+          ordersCollection.doc(doc.id).delete();
         }
       }
 

@@ -1,5 +1,5 @@
 import 'package:casso/app/data/models/order.dart';
-import 'package:casso/app/data/models/resto.dart';
+import 'package:casso/app/data/models/product.dart';
 import 'package:casso/app/modules/card/product_card/product_card.dart';
 import 'package:casso/app/modules/product/add-product/add_product.dart';
 
@@ -16,6 +16,8 @@ class DessertProduct extends GetView<ProductController> {
     List<Product> dessert = controller.products
         .where((d) => d.productCategory == 'DESSERT')
         .toList();
+
+    Get.put(ProductController());
     return Container(
       color: lightColor,
       child: SingleChildScrollView(
@@ -33,18 +35,16 @@ class DessertProduct extends GetView<ProductController> {
                 physics: BouncingScrollPhysics(),
                 children: List.generate(dessert.length, (index) {
                   Product data = dessert[index];
-                  String image = controller.image[index];
-
                   ProductOrder kosong = ProductOrder();
+
                   return ProductCard(
                     dataProduct: data,
                     data: kosong,
                     isOrderWidget: false,
-                    productImage: image,
                     editProduct: () {
                       Get.to(() => AddProductView(
                             dataProduct: data,
-                            image: image,
+                            // image: image,
                           ));
                     },
                   );
