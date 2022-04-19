@@ -4,14 +4,13 @@ import 'dart:ui';
 
 import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
+import 'package:casso/app/modules/menu/views/bottom_sheet/components/notes_dialog.dart';
 import 'package:casso/app/modules/monitoring/views/components/card_no_order.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../components/confirm_order_view.dart';
 import 'components/button_order.dart';
-import 'components/item_card.dart';
 import 'components/item_widget.dart';
 // import 'components/card_chart.dart';
 
@@ -104,7 +103,7 @@ class CustomBottomSheet extends GetView<MenuController> {
                                       "TABLE ${tableNumber} = ($guessName)",
                                       style: TextStyle(
                                         color: darkColor,
-                                        fontFamily: 'balsamiq',
+                                        fontFamily: 'Ubuntu',
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -113,7 +112,7 @@ class CustomBottomSheet extends GetView<MenuController> {
                                       "By ${controller.user.value.name}",
                                       style: TextStyle(
                                         color: darkColor,
-                                        fontFamily: 'balsamiq',
+                                        fontFamily: 'Ubuntu',
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -140,11 +139,9 @@ class CustomBottomSheet extends GetView<MenuController> {
                                       children: [
                                         GetBuilder<MenuController>(
                                           builder: (c) {
-                                            var orders = c.productsOrder
-                                                .where((e) => e.productQty != 0)
-                                                .toList();
                                             int total = 0;
-                                            orders.forEach((d) {
+
+                                            productOrders.forEach((d) {
                                               total += d.productQty;
                                             });
 
@@ -155,7 +152,7 @@ class CustomBottomSheet extends GetView<MenuController> {
                                               "Items = ${total}",
                                               style: TextStyle(
                                                 color: darkColor,
-                                                fontFamily: 'balsamiq',
+                                                fontFamily: 'Ubuntu',
                                                 fontSize: 14,
                                               ),
                                             );
@@ -166,7 +163,7 @@ class CustomBottomSheet extends GetView<MenuController> {
                                               "Total harga = ${nf.format(controller.order.value.totalPrices)}",
                                               style: TextStyle(
                                                 color: darkColor,
-                                                fontFamily: 'balsamiq',
+                                                fontFamily: 'Ubuntu',
                                                 fontSize: 14,
                                               ),
                                             )),
@@ -189,24 +186,45 @@ class CustomBottomSheet extends GetView<MenuController> {
                                     physics: BouncingScrollPhysics(),
                                     child: Column(
                                       children: [
-                                        ListView.builder(
-                                            physics:
-                                                NeverScrollableScrollPhysics(),
-                                            shrinkWrap: true,
-                                            itemCount: productOrders.length,
-                                            itemBuilder: (context, index) {
-                                              ProductOrder data =
-                                                  productOrders[index];
+                                        GetBuilder<MenuController>(
+                                            builder: (c) {
+                                          return ListView.builder(
+                                              physics:
+                                                  NeverScrollableScrollPhysics(),
+                                              shrinkWrap: true,
+                                              itemCount: productOrders.length,
+                                              itemBuilder: (context, index) {
+                                                ProductOrder data =
+                                                    productOrders[index];
 
-                                              return ListItemOrder(data: data);
-                                            })
+                                                if (data.productQty != 0) {
+                                                  return ListItemOrder(
+                                                    data: data,
+                                                    onTap: () {
+                                                      Get.defaultDialog(
+                                                        content: NotesDialog(
+                                                            data: data),
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        titleStyle: TextStyle(
+                                                          color: Colors
+                                                              .transparent,
+                                                        ),
+                                                      );
+                                                      print('add notes');
+                                                    },
+                                                  );
+                                                }
+                                                return Container();
+                                              });
+                                        }),
                                       ],
                                     ),
                                   )),
                             ],
                           ),
                         ),
-                        (controller.productsOrder.length == 0)
+                        (productOrders.length == 0)
                             ? Padding(
                                 padding: const EdgeInsets.only(top: 60),
                                 child: NoOrderWidget(),
@@ -221,7 +239,7 @@ class CustomBottomSheet extends GetView<MenuController> {
                 alignment: Alignment.bottomCenter,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 24),
-                  child: controller.productsOrder.length != 0
+                  child: productOrders.length != 0
                       ? ButtonOrder(onTap: onTap)
                       : Container(),
                 ),

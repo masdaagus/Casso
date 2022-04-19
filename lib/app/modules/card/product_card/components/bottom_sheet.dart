@@ -53,7 +53,7 @@ class BottomSheetProduct extends StatelessWidget {
                 dataProduct!.productName!,
                 style: TextStyle(
                   color: darkColor,
-                  fontFamily: "balsamiq",
+                  fontFamily: "Ubuntu",
                   fontSize: 24,
                   // fontWeight: FontWeight.,
                   letterSpacing: 1,
@@ -70,7 +70,7 @@ class BottomSheetProduct extends StatelessWidget {
                     nf.format(dataProduct!.productPrice),
                     style: TextStyle(
                       color: darkColor.withOpacity(.7),
-                      fontFamily: "balsamiq",
+                      fontFamily: "Ubuntu",
                       fontSize: 16,
                       letterSpacing: 1,
                     ),
@@ -81,7 +81,7 @@ class BottomSheetProduct extends StatelessWidget {
                     maxLines: 7,
                     style: TextStyle(
                       color: darkColor.withOpacity(.7),
-                      fontFamily: "balsamiq",
+                      fontFamily: "Ubuntu",
                       fontSize: 16,
                       letterSpacing: 1,
                     ),
@@ -99,11 +99,11 @@ class BottomSheetProduct extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Text(
-                dataProduct!.productDescription!,
+                dataProduct!.productDescription ?? 'Description...',
                 maxLines: 7,
                 style: TextStyle(
                   color: darkColor.withOpacity(.5),
-                  fontFamily: "balsamiq",
+                  fontFamily: "Ubuntu",
                   fontSize: 12,
                   letterSpacing: 1,
                 ),

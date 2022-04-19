@@ -29,7 +29,7 @@ class NoImageWidget extends StatelessWidget {
             "NO IMAGE",
             style: TextStyle(
               color: darkColor,
-              fontFamily: 'balsamiq',
+              fontFamily: 'Ubuntu',
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),

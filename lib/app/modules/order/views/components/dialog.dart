@@ -17,7 +17,6 @@ class GetDialog extends GetView<OrderController> {
 
   @override
   Widget build(BuildContext context) {
-    // Get.put(MenuController());
     return ClipRRect(
       child: BackdropFilter(
         filter: ImageFilter.blur(
@@ -40,7 +39,7 @@ class GetDialog extends GetView<OrderController> {
                   "TABLE ${tableNumber}",
                   style: TextStyle(
                     color: darkColor,
-                    fontFamily: "balsamiq",
+                    fontFamily: "Ubuntu",
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   ),
@@ -57,9 +56,9 @@ class GetDialog extends GetView<OrderController> {
                     },
                     controller: controller.guessNameController,
                     textAlign: TextAlign.center,
-                    maxLength: 20,
+                    maxLength: 10,
                     style: TextStyle(
-                      fontFamily: "balsamiq",
+                      fontFamily: "Ubuntu",
                       color: darkColor,
                       fontSize: 16,
                       letterSpacing: -.5,
@@ -67,13 +66,13 @@ class GetDialog extends GetView<OrderController> {
                     decoration: InputDecoration(
                       errorStyle: TextStyle(
                         color: merah,
-                        fontFamily: "balsamiq",
+                        fontFamily: "Ubuntu",
                         fontSize: 14,
                         letterSpacing: 1,
                       ),
                       counterText: "",
                       hintStyle: TextStyle(
-                        fontFamily: "balsamiq",
+                        fontFamily: "Ubuntu",
                         color: darkColor.withOpacity(.8),
                         fontSize: 14,
                         letterSpacing: 1,

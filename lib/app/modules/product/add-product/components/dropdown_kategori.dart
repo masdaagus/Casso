@@ -41,7 +41,7 @@ class DropDownCategory extends StatelessWidget {
                               item,
                               style: TextStyle(
                                 fontSize: 14,
-                                fontFamily: "balsamiq",
+                                fontFamily: "Ubuntu",
                                 fontWeight: FontWeight.bold,
                                 color: darkColor,
                               ),

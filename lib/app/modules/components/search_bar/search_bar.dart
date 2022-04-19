@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 class SearchBar extends StatelessWidget {
   const SearchBar({
     Key? key,
+    this.onChange,
+    this.hint,
   }) : super(key: key);
+
+  final ValueChanged<String>? onChange;
+  final String? hint;
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +26,14 @@ class SearchBar extends StatelessWidget {
         children: [
           Expanded(
             child: TextField(
+              onChanged: onChange,
               style: TextStyle(color: darkColor),
               decoration: InputDecoration(
                 isDense: true,
-                hintText: "Cari Nomor meja/Nama Pengunjung ",
+                hintText: hint ?? "Cari Nomor meja/Nama Pengunjung",
                 hintStyle: TextStyle(
                   color: darkColor.withOpacity(.5),
-                  fontFamily: "balsamiq",
+                  fontFamily: "Ubuntu",
                   fontSize: 13,
                 ),
                 border: InputBorder.none,

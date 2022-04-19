@@ -17,7 +17,7 @@
 //           'KONFIRMASI ORDER',
 //           style: TextStyle(
 //             color: darkColor,
-//             fontFamily: "balsamiq",
+//             fontFamily: "Ubuntu",
 //             fontWeight: FontWeight.w600,
 //             letterSpacing: .5,
 //           ),
@@ -61,7 +61,7 @@
 //                               "TABLE 12 = (MASDA)",
 //                               style: TextStyle(
 //                                 color: darkColor,
-//                                 fontFamily: 'balsamiq',
+//                                 fontFamily: 'Ubuntu',
 //                                 fontSize: 14,
 //                                 fontWeight: FontWeight.bold,
 //                               ),
@@ -70,7 +70,7 @@
 //                               "Boy candra",
 //                               style: TextStyle(
 //                                 color: darkColor,
-//                                 fontFamily: 'balsamiq',
+//                                 fontFamily: 'Ubuntu',
 //                                 fontSize: 14,
 //                               ),
 //                             ),
@@ -89,7 +89,7 @@
 //                                 "Items = 4",
 //                                 style: TextStyle(
 //                                   color: darkColor,
-//                                   fontFamily: 'balsamiq',
+//                                   fontFamily: 'Ubuntu',
 //                                   fontSize: 14,
 //                                 ),
 //                               ),
@@ -98,7 +98,7 @@
 //                                 "Total harga = Rp23.000",
 //                                 style: TextStyle(
 //                                   color: darkColor,
-//                                   fontFamily: 'balsamiq',
+//                                   fontFamily: 'Ubuntu',
 //                                   fontSize: 14,
 //                                 ),
 //                               ),
@@ -214,7 +214,7 @@
 //                         "Kentang Goreng",
 //                         style: TextStyle(
 //                           color: darkColor,
-//                           fontFamily: 'balsamiq',
+//                           fontFamily: 'Ubuntu',
 //                           fontSize: 14,
 //                         ),
 //                       ),
@@ -223,7 +223,7 @@
 //                         "Rp13.000",
 //                         style: TextStyle(
 //                           color: darkColor.withOpacity(.8),
-//                           fontFamily: 'balsamiq',
+//                           fontFamily: 'Ubuntu',
 //                           fontSize: 13,
 //                         ),
 //                       ),
@@ -239,7 +239,7 @@
 //                           "2",
 //                           style: TextStyle(
 //                             color: darkColor,
-//                             fontFamily: 'balsamiq',
+//                             fontFamily: 'Ubuntu',
 //                             fontWeight: FontWeight.bold,
 //                             fontSize: 16,
 //                           ),

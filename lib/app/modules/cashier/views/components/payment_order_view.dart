@@ -45,7 +45,7 @@ class PaymentOrderWidget extends StatelessWidget {
                   "DETAIL PEMBAYARAN",
                   style: TextStyle(
                     color: darkColor,
-                    fontFamily: "balsamiq",
+                    fontFamily: "Ubuntu",
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                     letterSpacing: .2,
@@ -92,7 +92,7 @@ class PaymentOrderWidget extends StatelessWidget {
                         "BAYAR",
                         style: TextStyle(
                           color: darkColor,
-                          fontFamily: "balsamiq",
+                          fontFamily: "Ubuntu",
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
                           letterSpacing: .5,
@@ -135,7 +135,7 @@ class PaymentOrderWidget extends StatelessWidget {
             tittle,
             style: TextStyle(
               color: darkColor,
-              fontFamily: "balsamiq",
+              fontFamily: "Ubuntu",
               fontWeight: FontWeight.bold,
               fontSize: 14,
               letterSpacing: .5,
@@ -145,7 +145,7 @@ class PaymentOrderWidget extends StatelessWidget {
             nf.format(amount),
             style: TextStyle(
               color: darkColor,
-              fontFamily: "balsamiq",
+              fontFamily: "Ubuntu",
               fontWeight: FontWeight.bold,
               fontSize: 14,
               letterSpacing: .5,

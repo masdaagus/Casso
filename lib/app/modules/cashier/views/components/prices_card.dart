@@ -32,7 +32,7 @@ class PricesCard extends GetView<CashierController> {
     //   (x) => ids.add(x.productName),
     // );
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         color: abu,
@@ -57,9 +57,9 @@ class PricesCard extends GetView<CashierController> {
                       "TABLE ${data!.tableNumber} - (${data!.guessName})",
                       style: TextStyle(
                         color: darkColor,
-                        fontFamily: "balsamiq",
+                        fontFamily: "Ubuntu",
                         fontWeight: FontWeight.bold,
-                        letterSpacing: .5,
+                        // letterSpacing: .5,
                         fontSize: 13,
                       ),
                     ),
@@ -67,10 +67,10 @@ class PricesCard extends GetView<CashierController> {
                       "By: ${data!.waitersName}",
                       style: TextStyle(
                         color: darkColor,
-                        fontFamily: "balsamiq",
+                        fontFamily: "Ubuntu",
                         fontWeight: FontWeight.bold,
                         fontSize: 12,
-                        letterSpacing: .5,
+                        // letterSpacing: .5,
                       ),
                     ),
                   ],
@@ -99,8 +99,8 @@ class PricesCard extends GetView<CashierController> {
                                       style: TextStyle(
                                           overflow: TextOverflow.ellipsis,
                                           color: darkColor,
-                                          fontFamily: "balsamiq",
-                                          letterSpacing: .5),
+                                          fontFamily: "Ubuntu",
+                                          fontWeight: FontWeight.w600),
                                     ),
                                   ),
                                   SizedBox(width: 16),
@@ -110,11 +110,11 @@ class PricesCard extends GetView<CashierController> {
                                         "x${listOrder.productQty.toString()}",
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                            color: darkColor,
-                                            fontFamily: "balsamiq",
-                                            fontSize: 14,
-                                            letterSpacing: .5,
-                                            fontWeight: FontWeight.bold),
+                                          color: darkColor,
+                                          fontFamily: "Ubuntu",
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                 ],
@@ -123,9 +123,10 @@ class PricesCard extends GetView<CashierController> {
                                 nf.format(listOrder.productPrice! *
                                     listOrder.productQty),
                                 style: TextStyle(
-                                    color: darkColor,
-                                    fontFamily: "balsamiq",
-                                    letterSpacing: .5),
+                                  color: darkColor,
+                                  fontFamily: "Ubuntu",
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ],
                           ),
@@ -151,7 +152,7 @@ class PricesCard extends GetView<CashierController> {
                         "PAJAK ${controller.resto.value.restoTaxes!.toStringAsFixed(0)}%",
                         style: TextStyle(
                           color: darkColor,
-                          fontFamily: "balsamiq",
+                          fontFamily: "Ubuntu",
                           fontWeight: FontWeight.bold,
                           fontSize: 13,
                           letterSpacing: .5,
@@ -161,7 +162,7 @@ class PricesCard extends GetView<CashierController> {
                         "${nf.format((data!.totalPrices! * controller.resto.value.restoTaxes!) / 100)}",
                         style: TextStyle(
                           color: darkColor,
-                          fontFamily: "balsamiq",
+                          fontFamily: "Ubuntu",
                           fontWeight: FontWeight.bold,
                           fontSize: 13,
                           letterSpacing: .5,
@@ -186,7 +187,7 @@ class PricesCard extends GetView<CashierController> {
                       "TOTAL",
                       style: TextStyle(
                         color: darkColor,
-                        fontFamily: "balsamiq",
+                        fontFamily: "Ubuntu",
                         fontWeight: FontWeight.bold,
                         fontSize: 13,
                         letterSpacing: .5,
@@ -196,7 +197,7 @@ class PricesCard extends GetView<CashierController> {
                       nf.format(data!.totalPrices),
                       style: TextStyle(
                         color: darkColor,
-                        fontFamily: "balsamiq",
+                        fontFamily: "Ubuntu",
                         fontWeight: FontWeight.bold,
                         fontSize: 13,
                         letterSpacing: .5,
@@ -219,8 +220,6 @@ class PricesCard extends GetView<CashierController> {
                               colors: [
                                 Color(0XFFA0B5EB),
                                 Color(0XFFC9F0E4),
-                                // Color(0XFFDFE9F3),
-                                // putih,
                               ],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
@@ -238,7 +237,7 @@ class PricesCard extends GetView<CashierController> {
                             "BAYAR",
                             style: TextStyle(
                               color: darkColor,
-                              fontFamily: "balsamiq",
+                              fontFamily: "Ubuntu",
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                               letterSpacing: .5,

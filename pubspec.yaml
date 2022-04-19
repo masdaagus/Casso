@@ -24,13 +24,17 @@ dependencies:
 
 
 
+
   flutter: 
     sdk: flutter
+
+
 
 dev_dependencies: 
   flutter_lints: ^1.0.0
   flutter_test: 
     sdk: flutter
+
 
 flutter: 
   assets: 
@@ -41,17 +45,15 @@ flutter:
     - assets/products/
     
   fonts: 
-    - family: Montserrat
+    - family: Ubuntu
       fonts: 
-        - asset: fonts/Montserrat-Regular.ttf
-        - asset: fonts/Montserrat-Light.ttf
+        - asset: fonts/Ubuntu-Regular.ttf
+        - asset: fonts/Ubuntu-Light.ttf
           weight: 500
-        - asset: fonts/Montserrat-Medium.ttf
+        - asset: fonts/Ubuntu-Medium.ttf
           weight: 600
-        - asset: fonts/Montserrat-SemiBold.ttf
+        - asset: fonts/Ubuntu-Bold.ttf
           weight: 700
-        - asset: fonts/Montserrat-Bold.ttf
-          weight: 800
 
     - family: balsamiq
       fonts: 

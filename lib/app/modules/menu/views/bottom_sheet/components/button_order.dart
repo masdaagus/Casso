@@ -38,7 +38,7 @@ class ButtonOrder extends StatelessWidget {
             "ORDER",
             style: TextStyle(
               color: darkColor,
-              fontFamily: "balsamiq",
+              fontFamily: "Ubuntu",
               fontWeight: FontWeight.w800,
               letterSpacing: 1,
               fontSize: 18,

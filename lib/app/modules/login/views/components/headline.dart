@@ -13,7 +13,7 @@ class Headline extends StatelessWidget {
       child: Text(
         "Casso",
         style: TextStyle(
-          fontFamily: 'balsamiq',
+          fontFamily: 'Ubuntu',
           color: darkColor,
           fontWeight: FontWeight.bold,
           fontSize: 64,

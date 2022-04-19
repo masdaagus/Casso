@@ -33,6 +33,11 @@ class ProductController extends GetxController {
   String? imageUrl = null;
   File? compressedImage = null;
 
+  Rx<List<Product>> foundAllProducts = Rx<List<Product>>([]);
+  Rx<List<Product>> foundFoodProducts = Rx<List<Product>>([]);
+  Rx<List<Product>> foundDrinkProducts = Rx<List<Product>>([]);
+  Rx<List<Product>> foundDessertProducts = Rx<List<Product>>([]);
+
   void removeImage() async {
     pickedImage = null;
     update();
@@ -97,6 +102,13 @@ class ProductController extends GetxController {
 
   Future<void> _productsInit() async {
     products = resto.value.products! as List<Product>;
+    foundAllProducts.value = products;
+    foundDessertProducts.value =
+        products.where((d) => d.productCategory == 'DESSERT').toList();
+    foundFoodProducts.value =
+        products.where((d) => d.productCategory == 'FOOD').toList();
+    foundDrinkProducts.value =
+        products.where((d) => d.productCategory == 'DRINK').toList();
   }
 
   /// ADD PRIDUCT
@@ -232,16 +244,33 @@ class ProductController extends GetxController {
     }
   }
 
+  void filterAllProducts(String data) {
+    List<Product> result = [];
+
+    if (data.isEmpty) {
+      result = products;
+      update();
+    } else {
+      result = products
+          .where((product) =>
+              product.productName!.toLowerCase().contains(data.toLowerCase()))
+          .toList();
+    }
+
+    foundAllProducts.value = result;
+    update();
+  }
+
   @override
   void onInit() async {
     user = auth.user;
     resto = auth.resto;
     await _productsInit();
 
-    // namaProduk = TextEditingController();
-    // hargaProduk = TextEditingController();
-    // stokProduk = TextEditingController();
-    // deskripsiProduk = TextEditingController();
+    namaProduk = TextEditingController();
+    hargaProduk = TextEditingController();
+    stokProduk = TextEditingController();
+    deskripsiProduk = TextEditingController();
     super.onInit();
   }
 

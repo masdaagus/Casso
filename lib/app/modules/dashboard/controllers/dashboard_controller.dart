@@ -10,8 +10,14 @@ class DashboardController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   var user = UsersModel().obs;
   var resto = RestosModel().obs;
+
   List<Order> orderHistories = [];
-  double totalPenjualan = 0;
+  RxDouble totalPenjualan = 0.0.obs;
+  String bestProductName = '';
+  ProductOrder nullData = ProductOrder();
+  ProductOrder? bestNo1;
+  ProductOrder? bestNo2;
+  ProductOrder? bestNo3;
 
   Future<void> initData() async {
     CollectionReference orderHistoryCollection = firestore
@@ -28,18 +34,62 @@ class DashboardController extends GetxController {
 
     orderHistories = listOrder;
     totalSales();
-
-    print(totalPenjualan);
   }
 
-  double totalSales() {
-    totalPenjualan = 0;
+  RxDouble totalSales() {
+    totalPenjualan = 0.0.obs;
     orderHistories.forEach((data) {
-      totalPenjualan += data.totalPrices!;
+      totalPenjualan.value += data.totalPrices!;
     });
 
     update();
     return totalPenjualan;
+  }
+
+  Future<void> getBestProduct() async {
+    final ids = Set();
+
+    List<ProductOrder> soldProducts = [];
+    List<ProductOrder> filterBestProduct = [];
+
+    orderHistories.forEach((data) {
+      soldProducts.addAll(data.productsOrder!);
+    });
+
+    soldProducts.forEach((data) {
+      ProductOrder productOrder = ProductOrder(
+        productName: data.productName,
+        productPrice: data.productPrice,
+        productQty: 0,
+        productCategory: data.productCategory,
+      );
+      filterBestProduct.add(productOrder);
+    });
+
+    filterBestProduct.retainWhere(
+      (x) => ids.add(x.productName),
+    );
+    filterBestProduct.forEach((dataA) {
+      soldProducts.forEach((dataB) {
+        if (dataA.productName == dataB.productName &&
+            dataA.productPrice == dataB.productPrice) {
+          dataA.productQty += dataB.productQty;
+        }
+      });
+    });
+
+    List<ProductOrder> bestProducts = filterBestProduct.toList()
+      ..sort((a, b) => b.productQty.compareTo(a.productQty));
+
+    bestProducts.forEach((data) {
+      print("${data.productName} ${data.productQty}");
+    });
+
+    bestNo1 = bestProducts[0];
+    bestNo2 = bestProducts[1];
+    bestNo3 = bestProducts[2];
+
+    bestProductName = bestProducts[0].productName!;
   }
 
   @override
@@ -47,6 +97,7 @@ class DashboardController extends GetxController {
     user = auth.user;
     resto = auth.resto;
     await initData();
+    await getBestProduct();
 
     super.onInit();
   }

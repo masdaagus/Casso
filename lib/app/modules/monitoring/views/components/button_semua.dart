@@ -39,7 +39,7 @@ class ButtonAll extends StatelessWidget {
             tittleButton.toUpperCase(),
             style: TextStyle(
               color: darkColor,
-              fontFamily: "balsamiq",
+              fontFamily: "Ubuntu",
               fontWeight: FontWeight.bold,
               // letterSpacing: .5,
               fontSize: 12,

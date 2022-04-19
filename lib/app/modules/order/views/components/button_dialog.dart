@@ -24,7 +24,7 @@ class DialogButton extends StatelessWidget {
           isConfirmText,
           style: TextStyle(
             color: darkColor,
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             fontWeight: FontWeight.bold,
             letterSpacing: 1,
             fontSize: 12,

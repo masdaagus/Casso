@@ -4,6 +4,7 @@ import 'package:casso/app/utils/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../menu/controllers/menu_controller.dart';
 import '../controllers/order_controller.dart';
 import 'components/dialog.dart';
 import 'components/dialog_move_table.dart';
@@ -11,6 +12,7 @@ import 'components/dialog_move_table.dart';
 class OrderView extends GetView<OrderController> {
   @override
   Widget build(BuildContext context) {
+    Get.put(() => MenuController());
     return Scaffold(
       backgroundColor: lightColor,
       appBar: AppBar(
@@ -20,7 +22,7 @@ class OrderView extends GetView<OrderController> {
           'ORDER',
           style: TextStyle(
             color: darkColor,
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             fontWeight: FontWeight.bold,
             letterSpacing: 1,
           ),
@@ -99,6 +101,23 @@ class OrderView extends GetView<OrderController> {
               ),
               SizedBox(height: 20),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget textTab(String text) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 3),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: darkColor,
+            fontSize: 11,
+            fontFamily: "Ubuntu",
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

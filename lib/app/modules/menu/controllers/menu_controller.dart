@@ -14,12 +14,14 @@ class MenuController extends GetxController {
   var order = Order().obs;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  // List<ProductOrder> tempOrder = [];
   List<ProductOrder> productsOrder = [];
   List<Product> products = [];
   List<Order> listOrdersCollection = [];
 
+  List<Product> filteredProducts = [];
+
   double _totalPrice = 0;
+  int _orderNumber = 0;
 
   final ids = Set();
 
@@ -45,20 +47,37 @@ class MenuController extends GetxController {
     return listOrdersCollection;
   }
 
-  Future<QuerySnapshot<Map<String, dynamic>>> _collection(
-      String collection) async {
-    var data = firestore
+  Future<int> _collection() async {
+    var psc = await firestore
         .collection("restos")
         .doc(user.value.restoID)
-        .collection("collection")
+        .collection("pesanan")
+        .get();
+    var prc = await firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection("proses")
+        .get();
+    var spc = await firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection("siap")
+        .get();
+    var trc = await firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection("tersaji")
         .get();
 
-    return data;
-  }
+    int _pesanan = psc.docs.length;
+    int _proses = prc.docs.length;
+    int _siap = spc.docs.length;
+    int _tersaji = trc.docs.length;
 
-  Future<void> _getAllMonitoringCollection() async {
-    var a = await _collection('pesanan');
-    a.docs.map((e) => null);
+    _orderNumber = 1 + (_pesanan + _proses + _siap + _tersaji);
+
+    print(_orderNumber);
+    return _orderNumber;
   }
 
   Future<void> _getAllProducts() async {
@@ -75,7 +94,8 @@ class MenuController extends GetxController {
       ));
     });
 
-    // order.value.productsOrder = tempOrder;
+    filteredProducts = products;
+
     order.value.productsOrder = productsOrder;
     order.value.totalPrices = _totalPrice;
   }
@@ -120,8 +140,6 @@ class MenuController extends GetxController {
     DateTime now = DateTime.now();
 
     try {
-      int orderNumber = listOrdersCollection.length;
-
       double _total = 0;
 
       final finalOrder = productsOrder.where((d) => d.productQty != 0).toList();
@@ -139,7 +157,7 @@ class MenuController extends GetxController {
         productsOrder: finalOrder,
         totalPrices: _total,
         createAt: now.toIso8601String(),
-        orderNumber: orderNumber,
+        orderNumber: _orderNumber,
       ).toJson())
           .then((obj) async {
         // VARIABLE YG NANTI AKAN DI ISI
@@ -195,7 +213,6 @@ class MenuController extends GetxController {
           /// UPDATE ID
           await pesananC.doc(obj.id).update({
             "orderId": obj.id,
-            "orderNumber": listOrdersCollection.length + 1,
           });
         } else {
           print('SET DATA BARU');
@@ -215,7 +232,6 @@ class MenuController extends GetxController {
           /// UPDATE ID
           await pesananC.doc(obj.id).update({
             "orderId": obj.id,
-            "orderNumber": listOrdersCollection.length + 1,
           });
         }
       });
@@ -275,6 +291,21 @@ class MenuController extends GetxController {
     }
   }
 
+  void filterProducts(String data) {
+    List<Product> result = [];
+    update();
+    if (data.isEmpty) {
+      result = products;
+    } else {
+      var byName = products
+          .where((d) => d.productName!.toLowerCase().contains(data))
+          .toList();
+      result = byName;
+    }
+
+    filteredProducts = result;
+  }
+
   @override
   void onInit() async {
     user = auth.user;
@@ -286,7 +317,9 @@ class MenuController extends GetxController {
 
   @override
   void onReady() async {
+    await _collection();
     await _initQueryOrders();
+
     super.onReady();
   }
 

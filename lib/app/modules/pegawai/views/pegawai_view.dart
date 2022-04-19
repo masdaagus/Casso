@@ -21,7 +21,7 @@ class PegawaiView extends GetView<PegawaiController> {
         title: Text(
           'PEGAWAI',
           style: TextStyle(
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             letterSpacing: .5,
             fontWeight: FontWeight.bold,
             color: darkColor,

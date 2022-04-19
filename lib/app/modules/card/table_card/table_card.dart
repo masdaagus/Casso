@@ -71,7 +71,8 @@ class TableCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 10,
                           color: darkColor,
-                          fontFamily: "balsamiq",
+                          fontWeight: FontWeight.w600,
+                          fontFamily: "Ubuntu",
                           letterSpacing: .5,
                         ),
                       ),

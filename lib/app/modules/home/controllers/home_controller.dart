@@ -1,7 +1,9 @@
 import 'package:casso/app/controllers/auth_controller.dart';
+import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/table.dart';
 import 'package:casso/app/data/models/users.dart';
+import 'package:casso/app/utils/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -95,18 +97,71 @@ class HomeController extends GetxController {
     update();
   }
 
+  Future<void> _deleteData() async {
+    final collectionOrdersPaid = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection('orders')
+        .where('isPaid', isEqualTo: true);
+    final collectionOrderHistories = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection('orders-histories');
+    final collectionOrders = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection('orders');
+
+    final now = DateTime.now();
+
+    QuerySnapshot queryOrders = await collectionOrdersPaid.get();
+
+    await queryOrders.docs.map((doc) async {
+      var object = doc.data() as Map<String, dynamic>;
+      final data = Order.fromJson(object);
+
+      DateTime dateData = DateTime.parse(data.createAt!);
+
+      if (now.day != dateData.day) {
+        await collectionOrderHistories.doc(data.orderId).set(data.toJson());
+        await collectionOrders.doc(data.orderId).delete();
+        print('data berhasil dihapus');
+      } else {
+        print('data belum bisa dihapus');
+      }
+    }).toList();
+
+    // orderDatas.forEach((data) {
+    //   var date = DateTime.tryParse(data.createAt!);
+    //   print("data date time = ${df.format(date!)}");
+    // });
+  }
+
+  // Future<void> tesss() async {
+  //   final now = DateTime.now();
+
+  //   String a = '2022-04-19T23:56:40.972353';
+  //   DateTime yesterday = DateTime.parse(a);
+
+  //   var b = now.hour;
+  //   var c = yesterday.day;
+
+  //   if (now.day != yesterday.day && now.hour == 2) {
+  //     print('HAPUS SEKARANG');
+  //   }
+  // }
+
   @override
-  void onInit() {
+  void onInit() async {
     user = auth.user;
     resto = auth.resto;
-    // restoName = TextEditingController();
-    // restoLocation = TextEditingController();
-    // restoTable = TextEditingController();
     super.onInit();
   }
 
   @override
-  void onReady() {
+  void onReady() async {
+    Future.delayed(Duration(seconds: 2));
+    await _deleteData();
     super.onReady();
   }
 
@@ -115,6 +170,7 @@ class HomeController extends GetxController {
     restoName.dispose();
     restoLocation.dispose();
     restoTable.dispose();
+    restoTaxes.dispose();
 
     super.onClose();
   }

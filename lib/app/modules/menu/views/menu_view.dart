@@ -12,7 +12,6 @@ import 'bottom_sheet/bottom_sheet.dart';
 import 'category/dessert.dart';
 import 'category/drink.dart';
 import 'components/button_chart.dart';
-import 'components/confirm_order_view.dart';
 import 'components/dialog_cancel.dart';
 
 class Menus extends GetView<MenuController> {
@@ -55,7 +54,7 @@ class Menus extends GetView<MenuController> {
             'MENU',
             style: TextStyle(
               color: darkColor,
-              fontFamily: "balsamiq",
+              fontFamily: "Ubuntu",
               fontWeight: FontWeight.w600,
               letterSpacing: 1,
             ),
@@ -94,7 +93,16 @@ class Menus extends GetView<MenuController> {
                   ),
                 ),
               ),
-              SearchBar(),
+              GetBuilder<MenuController>(
+                builder: (c) {
+                  return SearchBar(
+                    hint: 'Cari nama produk',
+                    onChange: (val) {
+                      c.filterProducts(val);
+                    },
+                  );
+                },
+              ),
               Expanded(
                 child: Stack(
                   children: [
@@ -148,7 +156,7 @@ class Menus extends GetView<MenuController> {
           style: TextStyle(
             color: darkColor,
             fontSize: 12,
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             fontWeight: FontWeight.w600,
           ),
         ),

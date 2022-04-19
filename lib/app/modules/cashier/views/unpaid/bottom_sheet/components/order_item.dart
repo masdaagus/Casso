@@ -28,7 +28,7 @@ class OrderItem extends StatelessWidget {
                     "$pn",
                     style: TextStyle(
                       color: darkColor,
-                      fontFamily: 'balsamiq',
+                      fontFamily: 'Ubuntu',
                     ),
                   ),
                   SizedBox(width: 16),
@@ -36,7 +36,7 @@ class OrderItem extends StatelessWidget {
                     Text("x$qty",
                         style: TextStyle(
                           color: darkColor,
-                          fontFamily: 'balsamiq',
+                          fontFamily: 'Ubuntu',
                           fontWeight: FontWeight.bold,
                         ))
                 ],
@@ -45,7 +45,7 @@ class OrderItem extends StatelessWidget {
                 "${nf.format(prc! * qty!)}",
                 style: TextStyle(
                   color: darkColor,
-                  fontFamily: 'balsamiq',
+                  fontFamily: 'Ubuntu',
                 ),
               )
             ],

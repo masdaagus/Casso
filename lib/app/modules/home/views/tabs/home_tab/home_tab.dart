@@ -35,7 +35,7 @@ class TabHome extends GetView<HomeController> {
               "Casso",
               style: TextStyle(
                 color: orange,
-                fontFamily: "balsamiq",
+                fontFamily: "Ubuntu",
                 fontSize: 36,
                 fontWeight: FontWeight.w800,
               ),
@@ -66,7 +66,7 @@ class TabHome extends GetView<HomeController> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [
                         darkColor.withOpacity(.15),
-                        iconColor.withOpacity(.15),
+                        abu.withOpacity(.15),
                       ], begin: Alignment.topLeft, end: Alignment.bottomRight),
                     ),
                     child: Column(
@@ -76,7 +76,7 @@ class TabHome extends GetView<HomeController> {
                           "Selamat Datang",
                           style: TextStyle(
                             color: darkColor,
-                            fontFamily: "balsamiq",
+                            fontFamily: "Ubuntu",
                             fontWeight: FontWeight.w800,
                             letterSpacing: 2,
                             fontSize: 32,
@@ -86,7 +86,7 @@ class TabHome extends GetView<HomeController> {
                           "di ${controller.resto.value.restoName}",
                           style: TextStyle(
                               color: darkColor,
-                              fontFamily: "balsamiq",
+                              fontFamily: "Ubuntu",
                               fontWeight: FontWeight.w800,
                               fontSize: 20,
                               letterSpacing: 1),
@@ -99,7 +99,7 @@ class TabHome extends GetView<HomeController> {
                               controller.user.value.name!,
                               style: TextStyle(
                                   color: orange,
-                                  fontFamily: "balsamiq",
+                                  fontFamily: "Ubuntu",
                                   fontWeight: FontWeight.w800,
                                   fontSize: 20,
                                   letterSpacing: 1),
@@ -108,8 +108,8 @@ class TabHome extends GetView<HomeController> {
                             Text(
                               "(${controller.user.value.status})",
                               style: TextStyle(
-                                  color: iconColor,
-                                  fontFamily: "balsamiq",
+                                  color: abu,
+                                  fontFamily: "Ubuntu",
                                   fontWeight: FontWeight.w800,
                                   fontSize: 16,
                                   letterSpacing: 1),

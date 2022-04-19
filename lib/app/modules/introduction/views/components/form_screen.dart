@@ -112,7 +112,7 @@ class FormField extends StatelessWidget {
         keyboardType: isNumber ? TextInputType.number : TextInputType.name,
         style: TextStyle(
           color: darkColor,
-          fontFamily: "balsamiq",
+          fontFamily: "Ubuntu",
           fontWeight: FontWeight.w500,
           fontSize: 14,
           letterSpacing: .5,
@@ -122,7 +122,7 @@ class FormField extends StatelessWidget {
           hintText: hintText,
           hintStyle: TextStyle(
             color: darkColor.withOpacity(.7),
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             fontWeight: FontWeight.w500,
             fontSize: 14,
             letterSpacing: .5,

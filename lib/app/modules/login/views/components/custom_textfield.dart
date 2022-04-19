@@ -47,7 +47,7 @@ class CustomTextField extends StatelessWidget {
               obscureText: isObsecure,
               style: TextStyle(
                 color: darkColor,
-                fontFamily: "balsamiq",
+                fontFamily: "Ubuntu",
                 letterSpacing: .5,
               ),
               decoration: InputDecoration(
@@ -59,7 +59,7 @@ class CustomTextField extends StatelessWidget {
                 ),
                 hintStyle: TextStyle(
                   color: darkColor.withOpacity(.7),
-                  fontFamily: "balsamiq",
+                  fontFamily: "Ubuntu",
                   letterSpacing: .5,
                 ),
               ),

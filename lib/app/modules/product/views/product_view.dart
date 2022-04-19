@@ -27,7 +27,7 @@ class ProductView extends GetView<ProductController> {
           'PRODUCTS',
           style: TextStyle(
             color: darkColor,
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             fontWeight: FontWeight.bold,
             letterSpacing: 1,
           ),
@@ -63,7 +63,15 @@ class ProductView extends GetView<ProductController> {
                 ],
               ),
             ),
-            SearchBar(),
+            GetBuilder<ProductController>(
+              builder: (c) {
+                return SearchBar(
+                  onChange: (val) {
+                    c.filterAllProducts(val);
+                  },
+                );
+              },
+            ),
             Expanded(
               child: Stack(
                 children: [
@@ -109,7 +117,7 @@ class ProductView extends GetView<ProductController> {
           style: TextStyle(
             color: darkColor,
             fontSize: 10,
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             fontWeight: FontWeight.w600,
           ),
         ),

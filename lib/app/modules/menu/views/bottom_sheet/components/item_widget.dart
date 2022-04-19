@@ -8,9 +8,13 @@ import 'package:get/get.dart';
 class ListItemOrder extends GetView<MenuController> {
   const ListItemOrder({
     Key? key,
+    this.onTap,
     required this.data,
   }) : super(key: key);
+
   final ProductOrder data;
+  final VoidCallback? onTap;
+
   @override
   Widget build(BuildContext context) {
     return Slidable(
@@ -18,28 +22,31 @@ class ListItemOrder extends GetView<MenuController> {
         extentRatio: .22,
         motion: const ScrollMotion(),
         children: [
-          Container(
-            margin: const EdgeInsets.only(left: 16),
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: lightColor,
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 3,
-                  offset: Offset(3, 3),
-                  color: hitam.withOpacity(.25),
-                ),
-                BoxShadow(
-                  blurRadius: 3,
-                  offset: Offset(-3, -3),
-                  color: putih.withOpacity(.75),
-                ),
-              ],
-              borderRadius: BorderRadius.circular(100),
-            ),
-            child: Icon(
-              Icons.edit,
-              size: 32,
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+              margin: const EdgeInsets.only(left: 16),
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: lightColor,
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 3,
+                    offset: Offset(3, 3),
+                    color: hitam.withOpacity(.25),
+                  ),
+                  BoxShadow(
+                    blurRadius: 3,
+                    offset: Offset(-3, -3),
+                    color: putih.withOpacity(.75),
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Icon(
+                Icons.edit,
+                size: 32,
+              ),
             ),
           )
         ],
@@ -86,7 +93,7 @@ class ListItemOrder extends GetView<MenuController> {
                             data.productName!,
                             style: TextStyle(
                               color: darkColor,
-                              fontFamily: 'balsamiq',
+                              fontFamily: 'Ubuntu',
                               fontSize: 14,
                             ),
                           );
@@ -99,7 +106,7 @@ class ListItemOrder extends GetView<MenuController> {
                             nf.format(data.productPrice),
                             style: TextStyle(
                               color: darkColor.withOpacity(.8),
-                              fontFamily: 'balsamiq',
+                              fontFamily: 'Ubuntu',
                               fontSize: 13,
                             ),
                           );
@@ -126,7 +133,7 @@ class ListItemOrder extends GetView<MenuController> {
                               '$qty',
                               style: TextStyle(
                                 color: darkColor,
-                                fontFamily: 'balsamiq',
+                                fontFamily: 'Ubuntu',
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                               ),

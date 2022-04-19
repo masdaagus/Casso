@@ -1,140 +1,136 @@
+import 'package:casso/app/modules/dashboard/views/components/top_card.dart.dart';
 import 'package:casso/app/utils/constant.dart';
-import 'package:casso/app/utils/spinner_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../controllers/dashboard_controller.dart';
-import 'components/button_choice_history.dart';
-import 'components/header.dart';
-import 'components/product_best_seller.dart';
+import 'components/best_product.dart';
 
 class DashboardView extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: lightColor,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarColor: darkColor,
+    ));
     controller.user.value.name;
     return Scaffold(
       backgroundColor: lightColor,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, size: 20, color: darkColor),
+          icon: Icon(Icons.arrow_back_ios, size: 20, color: lightColor),
           onPressed: Get.back,
         ),
-        backgroundColor: lightColor,
+        backgroundColor: darkColor,
         elevation: 0,
         title: Padding(
-          padding: const EdgeInsets.only(top: 4),
+          padding: const EdgeInsets.only(top: 0),
           child: Text(
             'DASHBOARD',
             style: TextStyle(
-              color: darkColor,
-              fontFamily: "balsamiq",
-              letterSpacing: .5,
-              fontWeight: FontWeight.bold,
-              fontSize: 24,
+              color: lightColor,
+              fontFamily: "Ubuntu",
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
             ),
           ),
         ),
         centerTitle: true,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+      body: Stack(
         children: [
-          HeaderDashboard(),
+          DateFilter(),
           Container(
-            height: Get.height - 348,
+            padding: const EdgeInsets.only(left: 16, top: 78),
+            height: 160,
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-            decoration: BoxDecoration(
-              color: abu,
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(32),
+            color: darkColor,
+            child: Text(
+              "Ringkasan 19 April 2022",
+              style: TextStyle(
+                fontFamily: 'Ubuntu',
+                color: lightColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
               ),
             ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 115),
             child: Column(
               children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: 16),
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: putih,
-                    borderRadius: BorderRadius.circular(28),
-                  ),
-                  child: Column(
-                    children: [
-                      Container(
-                        // height: 100,
-                        width: double.infinity,
-                        margin: const EdgeInsets.only(bottom: 8),
-                        padding: const EdgeInsets.only(
-                            left: 8, top: 8, right: 8, bottom: 16),
-                        decoration: BoxDecoration(
-                          color: abu,
-                          borderRadius: BorderRadius.circular(22),
-                        ),
-                        child: Column(
-                          children: [
-                            Text(
-                              "PENJUALAN",
-                              style: TextStyle(
-                                color: darkColor.withOpacity(.7),
-                                fontFamily: 'balsamiq',
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            GetBuilder<DashboardController>(
-                              builder: (c) {
-                                return Text(
-                                  nf.format(c.totalPenjualan),
-                                  style: TextStyle(
-                                    color: darkColor,
-                                    fontFamily: 'balsamiq',
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        // height: 164,
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: abu,
-                          borderRadius: BorderRadius.circular(22),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ProductBestSeller(),
-                            ProductBestSeller(),
-                            ProductBestSeller(),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: [
-                //     ButtonHistory(),
-                //     ButtonHistory(tittle: 'WEEKLY'),
-                //     ButtonHistory(tittle: 'MONTLY'),
-                //   ],
-                // ),
-                // ElevatedButton(
-                //     onPressed: () {
-                //       print(controller.totalPenjualan);
-                //     },
-                //     child: Text("TES")),
+                TopCard(),
+                BestProduct(),
               ],
             ),
-          )
+          ),
         ],
+      ),
+    );
+  }
+}
+
+class DateFilter extends StatelessWidget {
+  const DateFilter({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: 0,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        height: 50,
+        width: Get.width,
+        color: bgColor,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ButtonFilter(tittle: 'Bulan ini'),
+            ButtonFilter(tittle: 'Minggu ini'),
+            ButtonFilter(tittle: 'Hari ini', isPressed: true),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ButtonFilter extends StatelessWidget {
+  const ButtonFilter({
+    Key? key,
+    this.tittle,
+    this.onTap,
+    this.isPressed = false,
+  }) : super(key: key);
+  final String? tittle;
+  final VoidCallback? onTap;
+  final bool isPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        margin: const EdgeInsets.only(left: 16),
+        decoration: BoxDecoration(
+          color: isPressed ? darkColor : darkColor.withOpacity(.4),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Center(
+          child: Text(
+            "$tittle",
+            style: TextStyle(
+              fontFamily: 'Ubuntu',
+              color: lightColor,
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+            ),
+          ),
+        ),
       ),
     );
   }

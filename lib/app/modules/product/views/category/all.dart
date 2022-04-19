@@ -1,6 +1,7 @@
 import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/data/models/product.dart';
 import 'package:casso/app/modules/card/product_card/product_card.dart';
+import 'package:casso/app/modules/components/search_bar/search_bar.dart';
 import 'package:casso/app/modules/product/add-product/add_product.dart';
 import 'package:casso/app/modules/product/controllers/product_controller.dart';
 import 'package:casso/app/utils/constant.dart';
@@ -30,8 +31,9 @@ class ProductsView extends StatelessWidget {
                     crossAxisCount: 2,
                     childAspectRatio: .89,
                     physics: BouncingScrollPhysics(),
-                    children: List.generate(c.products.length, (index) {
-                      Product data = c.products[index];
+                    children:
+                        List.generate(c.foundAllProducts.value.length, (index) {
+                      Product data = c.foundAllProducts.value[index];
                       ProductOrder kosong = ProductOrder();
 
                       return ProductCard(

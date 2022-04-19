@@ -30,7 +30,7 @@ class DeleteOrderView extends StatelessWidget {
           'HAPUS ORDER',
           style: TextStyle(
             color: darkColor,
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             letterSpacing: 1,
             fontWeight: FontWeight.bold,
           ),

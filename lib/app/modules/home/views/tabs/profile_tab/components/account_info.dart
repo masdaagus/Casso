@@ -28,7 +28,7 @@ class AccountInfo extends StatelessWidget {
                 tittle!,
                 style: TextStyle(
                     color: darkColor.withOpacity(.7),
-                    fontFamily: "balsamiq",
+                    fontFamily: "Ubuntu",
                     fontSize: 14),
               ),
               Container(
@@ -39,9 +39,7 @@ class AccountInfo extends StatelessWidget {
                     Text(
                       value!,
                       style: TextStyle(
-                          color: darkColor,
-                          fontFamily: "balsamiq",
-                          fontSize: 18),
+                          color: darkColor, fontFamily: "Ubuntu", fontSize: 18),
                     ),
                     isCanHide
                         ? Icon(Icons.remove_red_eye_outlined, color: darkColor)

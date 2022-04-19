@@ -30,7 +30,7 @@ class WelcomeScreen extends StatelessWidget {
               style: TextStyle(
                   color: darkColor.withOpacity(.8),
                   fontSize: 24,
-                  fontFamily: "balsamiq",
+                  fontFamily: "Ubuntu",
                   fontWeight: FontWeight.w600,
                   letterSpacing: -.5),
             ),
@@ -48,7 +48,7 @@ class WelcomeScreen extends StatelessWidget {
                         color: biru,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        fontFamily: "balsamiq",
+                        fontFamily: "Ubuntu",
                       ),
                     ),
                     TextSpan(

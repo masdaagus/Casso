@@ -54,7 +54,7 @@ class CardTextField extends StatelessWidget {
               isDense: true,
               errorStyle: TextStyle(
                 color: merah,
-                fontFamily: "balsamiq",
+                fontFamily: "Ubuntu",
                 fontSize: 14,
                 letterSpacing: .5,
               ),
@@ -62,7 +62,7 @@ class CardTextField extends StatelessWidget {
               hintText: hintText,
               hintStyle: TextStyle(
                 fontSize: 14,
-                fontFamily: "balsamiq",
+                fontFamily: "Ubuntu",
                 fontWeight: FontWeight.w500,
                 color: darkColor.withOpacity(.6),
               ),
@@ -71,7 +71,7 @@ class CardTextField extends StatelessWidget {
             ),
             style: TextStyle(
               fontSize: 14,
-              fontFamily: "balsamiq",
+              fontFamily: "Ubuntu",
               fontWeight: FontWeight.w500,
               color: darkColor,
             ),

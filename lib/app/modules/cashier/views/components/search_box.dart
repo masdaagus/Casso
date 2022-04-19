@@ -4,16 +4,23 @@ import 'package:flutter/material.dart';
 class SearchBox extends StatelessWidget {
   const SearchBox({
     Key? key,
+    this.onChange,
+    this.controller,
+    this.update,
   }) : super(key: key);
+
+  final ValueChanged<String>? onChange;
+  final VoidCallback? update;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+      margin: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       height: 32,
       decoration: BoxDecoration(
-        color: abu,
+        color: putih,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -22,9 +29,12 @@ class SearchBox extends StatelessWidget {
         children: [
           Expanded(
             child: TextField(
+              onEditingComplete: update,
+              controller: controller,
+              onChanged: onChange,
               style: TextStyle(
                 color: darkColor,
-                fontFamily: "balsamiq",
+                fontFamily: "Ubuntu",
                 fontSize: 13,
               ),
               decoration: InputDecoration(
@@ -32,7 +42,7 @@ class SearchBox extends StatelessWidget {
                 isDense: true,
                 hintStyle: TextStyle(
                   color: darkColor.withOpacity(.7),
-                  fontFamily: "balsamiq",
+                  fontFamily: "Ubuntu",
                   fontSize: 13,
                 ),
                 border: InputBorder.none,

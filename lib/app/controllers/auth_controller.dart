@@ -1,6 +1,6 @@
+import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/users.dart';
-import 'package:casso/app/modules/login/bindings/login_binding.dart';
 import 'package:casso/app/modules/login/controllers/login_controller.dart';
 import 'package:casso/app/modules/login/views/login_view.dart';
 import 'package:casso/app/utils/constant.dart';
@@ -22,6 +22,8 @@ class AuthController extends GetxController {
   UserCredential? userCredential;
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  /// DELETE DATA JIKA SUDAH BEDA HARI
 
   /// AUTO LOGIN
   Future<bool> autoLogin() async {

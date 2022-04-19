@@ -40,7 +40,7 @@ class ProfileTab extends GetView<HomeController> {
                         "Hujrina Coffie",
                         style: TextStyle(
                           color: darkColor,
-                          fontFamily: 'balsamiq',
+                          fontFamily: 'Ubuntu',
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
@@ -50,7 +50,7 @@ class ProfileTab extends GetView<HomeController> {
                         "Yanto Arisan (OWNER)",
                         style: TextStyle(
                           color: darkColor,
-                          fontFamily: 'balsamiq',
+                          fontFamily: 'Ubuntu',
                           fontSize: 12,
                         ),
                       ),
@@ -59,7 +59,7 @@ class ProfileTab extends GetView<HomeController> {
                         "JL.Pancing 1 Medan",
                         style: TextStyle(
                           color: darkColor,
-                          fontFamily: 'balsamiq',
+                          fontFamily: 'Ubuntu',
                           fontSize: 12,
                         ),
                       ),
@@ -184,7 +184,7 @@ class ProfileTab extends GetView<HomeController> {
             //         "Log out",
             //         style: TextStyle(
             //           color: darkColor,
-            //           fontFamily: "balsamiq",
+            //           fontFamily: "Ubuntu",
             //           fontWeight: FontWeight.w800,
             //           letterSpacing: 1,
             //           fontSize: 18,

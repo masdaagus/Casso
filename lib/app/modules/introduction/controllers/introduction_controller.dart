@@ -35,23 +35,21 @@ class IntroductionController extends GetxController {
         productName: 'Nasi Goreng',
         productPrice: 5000,
         productCategory: 'FOOD',
-        productDescription: 'Write description here.....',
+        productDescription: null,
         productStock: 100,
       ),
       Product(
         productName: 'Teh Manis',
         productPrice: 5000,
         productCategory: 'DRINK',
-        productDescription: 'Write description here.....',
+        productDescription: null,
         productStock: 100,
-        productImage:
-            "https://firebasestorage.googleapis.com/v0/b/casso-7bbb7.appspot.com/o/teh_manis-min.jpg?alt=media&token=62ab5add-347a-4e1f-ba2c-2c195074270a",
       ),
       Product(
         productName: 'Kentang Goreng',
         productPrice: 10000,
         productCategory: 'DESSERT',
-        productDescription: 'Write description here.....',
+        productDescription: null,
         productStock: 100,
       ),
     ];

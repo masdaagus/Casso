@@ -58,7 +58,7 @@ class DeletedOrderWidget extends StatelessWidget {
                   maxLines: 6,
                   style: TextStyle(
                     fontSize: 14,
-                    fontFamily: "balsamiq",
+                    fontFamily: "Ubuntu",
                     fontWeight: FontWeight.w500,
                     color: darkColor,
                   ),
@@ -71,7 +71,7 @@ class DeletedOrderWidget extends StatelessWidget {
                     hintText: 'Alasan menghapus order',
                     hintStyle: TextStyle(
                       fontSize: 14,
-                      fontFamily: "balsamiq",
+                      fontFamily: "Ubuntu",
                       fontWeight: FontWeight.w500,
                       color: darkColor.withOpacity(.6),
                       overflow: TextOverflow.ellipsis,
@@ -121,7 +121,7 @@ class DeletedOrderWidget extends StatelessWidget {
                         "HAPUS ORDER",
                         style: TextStyle(
                           color: darkColor,
-                          fontFamily: "balsamiq",
+                          fontFamily: "Ubuntu",
                           fontWeight: FontWeight.bold,
                           fontSize: 13,
                           letterSpacing: .5,

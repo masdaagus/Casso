@@ -41,7 +41,7 @@ class CustomAlertDialog extends StatelessWidget {
             "CONFIRMATION",
             style: TextStyle(
               color: hitam,
-              fontFamily: 'balsamiq',
+              fontFamily: 'Ubuntu',
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -52,7 +52,7 @@ class CustomAlertDialog extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               color: darkColor.withOpacity(.7),
-              fontFamily: 'balsamiq',
+              fontFamily: 'Ubuntu',
               fontSize: 14,
             ),
           ),
@@ -72,7 +72,7 @@ class CustomAlertDialog extends StatelessWidget {
                   "Yess",
                   style: TextStyle(
                     color: putih,
-                    fontFamily: 'balsamiq',
+                    fontFamily: 'Ubuntu',
                     fontSize: 14,
                   ),
                 ),

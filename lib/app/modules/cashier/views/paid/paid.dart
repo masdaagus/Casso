@@ -74,7 +74,6 @@ class Paid extends GetView<CashierController> {
           Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 16),
                 height: 32,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(

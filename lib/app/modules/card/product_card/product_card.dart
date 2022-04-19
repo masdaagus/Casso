@@ -92,7 +92,7 @@ class ProductCard extends StatelessWidget {
                               "NO IMAGE",
                               style: TextStyle(
                                 color: darkColor,
-                                fontFamily: 'balsamiq',
+                                fontFamily: 'Ubuntu',
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -133,7 +133,7 @@ class ProductCard extends StatelessWidget {
                                   qty.toString(),
                                   style: TextStyle(
                                     color: darkColor,
-                                    fontFamily: 'balsamiq',
+                                    fontFamily: 'Ubuntu',
                                   ),
                                 ),
                                 SizedBox(height: 10),
@@ -187,7 +187,7 @@ class ProductCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: darkColor,
-                fontFamily: "balsamiq",
+                fontFamily: "Ubuntu",
                 fontWeight: FontWeight.bold,
                 letterSpacing: .5,
                 fontSize: 14,
@@ -202,7 +202,7 @@ class ProductCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: darkColor,
-                fontFamily: "balsamiq",
+                fontFamily: "Ubuntu",
                 letterSpacing: .5,
                 fontSize: 12,
               ),

@@ -31,7 +31,7 @@ class CardDetailPayment extends StatelessWidget {
             "DETAIL PEMBAYARAN",
             style: TextStyle(
               color: darkColor,
-              fontFamily: 'balsamiq',
+              fontFamily: 'Ubuntu',
               fontSize: 20,
               fontWeight: FontWeight.bold,
               letterSpacing: .5,

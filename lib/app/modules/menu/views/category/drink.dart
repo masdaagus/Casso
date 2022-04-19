@@ -11,45 +11,74 @@ class DrinkMenu extends GetView<MenuController> {
 
   @override
   Widget build(BuildContext context) {
-    List<ProductOrder> drink = controller.productsOrder
-        .where((d) => d.productCategory == 'DRINK')
-        .toList();
-    List<Product> drinkProduct =
-        controller.products.where((d) => d.productCategory == 'DRINK').toList();
-
     return Container(
       color: lightColor,
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GridView.count(
-                addSemanticIndexes: false,
-                shrinkWrap: true,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 2,
-                childAspectRatio: .89,
-                physics: BouncingScrollPhysics(),
-                children: List.generate(drink.length, (index) {
-                  ProductOrder data = drink[index];
-                  Product product = drinkProduct[index];
+            GetBuilder<MenuController>(builder: (c) {
+              List<ProductOrder> drink = c.productsOrder
+                  .where((d) => d.productCategory == 'DRINK')
+                  .toList();
+              List<Product> drinkProduct = c.filteredProducts
+                  .where((d) => d.productCategory == 'DRINK')
+                  .toList();
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: GridView.count(
+                  addSemanticIndexes: false,
+                  shrinkWrap: true,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  crossAxisCount: 2,
+                  childAspectRatio: .89,
+                  physics: BouncingScrollPhysics(),
+                  children: List.generate(drinkProduct.length, (index) {
+                    ProductOrder data = drink[index];
+                    Product product = drinkProduct[index];
 
-                  return ProductCard(
-                    data: data,
-                    dataProduct: product,
-                    addProduct: () async {
-                      controller.addProduct(data);
-                    },
-                    minProduct: () async {
-                      controller.minProduct(data);
-                    },
-                  );
-                }),
-              ),
-            ),
+                    return ProductCard(
+                      data: data,
+                      dataProduct: product,
+                      addProduct: () async {
+                        controller.addProduct(data);
+                      },
+                      minProduct: () async {
+                        controller.minProduct(data);
+                      },
+                    );
+                  }),
+                ),
+              );
+            }),
+            // Container(
+            //   padding: const EdgeInsets.symmetric(horizontal: 16),
+            //   child: GridView.count(
+            //     addSemanticIndexes: false,
+            //     shrinkWrap: true,
+            //     crossAxisSpacing: 10,
+            //     mainAxisSpacing: 10,
+            //     crossAxisCount: 2,
+            //     childAspectRatio: .89,
+            //     physics: BouncingScrollPhysics(),
+            //     children: List.generate(drink.length, (index) {
+            //       ProductOrder data = drink[index];
+            //       Product product = drinkProduct[index];
+
+            //       return ProductCard(
+            //         data: data,
+            //         dataProduct: product,
+            //         addProduct: () async {
+            //           controller.addProduct(data);
+            //         },
+            //         minProduct: () async {
+            //           controller.minProduct(data);
+            //         },
+            //       );
+            //     }),
+            //   ),
+            // ),
             SizedBox(height: 65),
           ],
         ),

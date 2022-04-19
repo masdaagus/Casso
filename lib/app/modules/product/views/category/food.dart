@@ -12,41 +12,44 @@ class FoodProduct extends GetView<ProductController> {
 
   @override
   Widget build(BuildContext context) {
-    List<Product> food =
-        controller.products.where((d) => d.productCategory == 'FOOD').toList();
     return Container(
       color: lightColor,
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GridView.count(
-                shrinkWrap: true,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                crossAxisCount: 2,
-                childAspectRatio: .89,
-                physics: BouncingScrollPhysics(),
-                children: List.generate(food.length, (index) {
-                  Product data = food[index];
+            GetBuilder<ProductController>(builder: (c) {
+              List<Product> foodProduct = c.foundAllProducts.value
+                  .where((d) => d.productCategory == 'FOOD')
+                  .toList();
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: GridView.count(
+                  shrinkWrap: true,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  crossAxisCount: 2,
+                  childAspectRatio: .89,
+                  physics: BouncingScrollPhysics(),
+                  children: List.generate(foodProduct.length, (index) {
+                    Product data = foodProduct[index];
 
-                  ProductOrder kosong = ProductOrder();
-                  return ProductCard(
-                    dataProduct: data,
-                    data: kosong,
-                    isOrderWidget: false,
-                    editProduct: () {
-                      Get.to(() => AddProductView(
-                            dataProduct: data,
-                            // image: image,
-                          ));
-                    },
-                  );
-                }),
-              ),
-            ),
+                    ProductOrder kosong = ProductOrder();
+                    return ProductCard(
+                      dataProduct: data,
+                      data: kosong,
+                      isOrderWidget: false,
+                      editProduct: () {
+                        Get.to(() => AddProductView(
+                              dataProduct: data,
+                              // image: image,
+                            ));
+                      },
+                    );
+                  }),
+                ),
+              );
+            }),
             SizedBox(height: 65),
           ],
         ),

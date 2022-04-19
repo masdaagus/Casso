@@ -36,7 +36,7 @@ class DialogMoveTable extends GetView<OrderController> {
                 "TABLE $tableNumber",
                 style: TextStyle(
                   color: darkColor,
-                  fontFamily: "balsamiq",
+                  fontFamily: "Ubuntu",
                   fontWeight: FontWeight.bold,
                   fontSize: 24,
                 ),

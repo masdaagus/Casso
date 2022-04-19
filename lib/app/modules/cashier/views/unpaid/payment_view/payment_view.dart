@@ -26,7 +26,7 @@ class PaymentOrderView extends StatelessWidget {
           'PEMBAYARAN',
           style: TextStyle(
             color: darkColor,
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             letterSpacing: 1,
             fontWeight: FontWeight.bold,
           ),

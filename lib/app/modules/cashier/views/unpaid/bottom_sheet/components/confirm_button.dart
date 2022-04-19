@@ -44,7 +44,7 @@ class ConfirmButton extends StatelessWidget {
           "KONFIRMASI",
           style: TextStyle(
             color: darkColor,
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             fontWeight: FontWeight.bold,
             fontSize: 16,
             letterSpacing: .5,

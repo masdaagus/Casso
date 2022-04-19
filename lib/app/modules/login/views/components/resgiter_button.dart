@@ -23,8 +23,8 @@ class RegisterTextButton extends StatelessWidget {
           Text(
             askText,
             style: TextStyle(
-              color: iconColor,
-              fontFamily: "balsamiq",
+              color: abu,
+              fontFamily: "Ubuntu",
               fontSize: 12,
               letterSpacing: .5,
             ),
@@ -36,7 +36,7 @@ class RegisterTextButton extends StatelessWidget {
               actionText,
               style: TextStyle(
                 color: Color(0XFFE19D0A),
-                fontFamily: "balsamiq",
+                fontFamily: "Ubuntu",
                 fontSize: 12,
                 letterSpacing: .5,
               ),

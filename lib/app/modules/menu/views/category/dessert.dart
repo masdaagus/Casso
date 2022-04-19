@@ -11,44 +11,73 @@ class DessertMenu extends GetView<MenuController> {
 
   @override
   Widget build(BuildContext context) {
-    List<ProductOrder> dessert = controller.productsOrder
-        .where((d) => d.productCategory == 'DESSERT')
-        .toList();
-    List<Product> dessertProduct = controller.products
-        .where((d) => d.productCategory == 'DESSERT')
-        .toList();
     return Container(
       color: lightColor,
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GridView.count(
-                shrinkWrap: true,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 2,
-                childAspectRatio: .89,
-                physics: BouncingScrollPhysics(),
-                children: List.generate(dessert.length, (index) {
-                  ProductOrder data = dessert[index];
-                  Product product = dessertProduct[index];
+            GetBuilder<MenuController>(builder: (c) {
+              List<ProductOrder> dessert = c.productsOrder
+                  .where((d) => d.productCategory == 'DESSERT')
+                  .toList();
+              List<Product> dessertProduct = c.filteredProducts
+                  .where((d) => d.productCategory == 'DESSERT')
+                  .toList();
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: GridView.count(
+                  shrinkWrap: true,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  crossAxisCount: 2,
+                  childAspectRatio: .89,
+                  physics: BouncingScrollPhysics(),
+                  children: List.generate(dessertProduct.length, (index) {
+                    ProductOrder data = dessert[index];
+                    Product product = dessertProduct[index];
 
-                  return ProductCard(
-                    data: data,
-                    dataProduct: product,
-                    addProduct: () async {
-                      controller.addProduct(data);
-                    },
-                    minProduct: () async {
-                      controller.minProduct(data);
-                    },
-                  );
-                }),
-              ),
-            ),
+                    return ProductCard(
+                      data: data,
+                      dataProduct: product,
+                      addProduct: () async {
+                        controller.addProduct(data);
+                      },
+                      minProduct: () async {
+                        controller.minProduct(data);
+                      },
+                    );
+                  }),
+                ),
+              );
+            }),
+
+            // Container(
+            //   padding: const EdgeInsets.symmetric(horizontal: 16),
+            //   child: GridView.count(
+            //     shrinkWrap: true,
+            //     crossAxisSpacing: 10,
+            //     mainAxisSpacing: 10,
+            //     crossAxisCount: 2,
+            //     childAspectRatio: .89,
+            //     physics: BouncingScrollPhysics(),
+            //     children: List.generate(dessert.length, (index) {
+            //       ProductOrder data = dessert[index];
+            //       Product product = dessertProduct[index];
+
+            //       return ProductCard(
+            //         data: data,
+            //         dataProduct: product,
+            //         addProduct: () async {
+            //           controller.addProduct(data);
+            //         },
+            //         minProduct: () async {
+            //           controller.minProduct(data);
+            //         },
+            //       );
+            //     }),
+            //   ),
+            // ),
             SizedBox(height: 65),
           ],
         ),

@@ -49,7 +49,8 @@ class OrderItem extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: darkColor,
-                        fontFamily: "balsamiq",
+                        fontFamily: "Ubuntu",
+                        fontWeight: FontWeight.w600,
                         fontSize: 12,
                         letterSpacing: .5,
                       ),
@@ -63,7 +64,7 @@ class OrderItem extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           color: darkColor,
-                          fontFamily: "balsamiq",
+                          fontFamily: "Ubuntu",
                           fontSize: 13,
                           letterSpacing: .5,
                           fontWeight: FontWeight.bold,
@@ -79,14 +80,14 @@ class OrderItem extends StatelessWidget {
                             title: '${data.productName!.toUpperCase()}',
                             titleStyle: TextStyle(
                               color: darkColor,
-                              fontFamily: 'balsamiq',
+                              fontFamily: 'Ubuntu',
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
                             middleText: data.productNote!,
                             middleTextStyle: TextStyle(
                               color: darkColor.withOpacity(.7),
-                              fontFamily: 'balsamiq',
+                              fontFamily: 'Ubuntu',
                               // fontWeight: FontWeight.bold,
                               // fontSize: 20,
                             ));
@@ -112,7 +113,7 @@ class OrderItem extends StatelessWidget {
                       style: TextStyle(
                           color: darkColor,
                           fontSize: 12,
-                          fontFamily: "balsamiq",
+                          fontFamily: "Ubuntu",
                           letterSpacing: .5),
                     )
                   : Row(
@@ -147,7 +148,7 @@ class OrderItem extends StatelessWidget {
                               textButton.toUpperCase(),
                               style: TextStyle(
                                   fontSize: 9,
-                                  fontFamily: "Balsamiq",
+                                  fontFamily: "Ubuntu",
                                   letterSpacing: .3,
                                   color: darkColor,
                                   fontWeight: FontWeight.bold),

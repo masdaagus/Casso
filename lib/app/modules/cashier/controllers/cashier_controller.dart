@@ -16,36 +16,57 @@ class CashierController extends GetxController {
   DateTime now = DateTime.now();
 
   TextEditingController? deleteReason;
+  late TextEditingController search;
 
-  // Stream<QuerySnapshot<Map<String, dynamic>>> streamOrdersPaid() {
-  //   final data = firestore
-  //       .collection("restos")
-  //       .doc(user.value.restoID)
-  //       .collection('orders')
-  //       // .orderBy('isPaid' == true, descending: true)
-  //       .where('isPaid', isEqualTo: true)
-  //       .snapshots();
+  // void filter({String? data}) async {
+  //   List<Order> result = [];
 
-  //   return data;
+  // if (data!.isEmpty) {
+  //   result = tessss;
+  // } else {
+  //   var filter = tessss
+  //       .where((d) => d.guessName!.toLowerCase().contains(data))
+  //       .toList();
+
+  //   result = filter;
   // }
 
-  // Stream<QuerySnapshot<Map<String, dynamic>>> streamOrdersUnPaid() {
-  //   final data = firestore
-  //       .collection("restos")
-  //       .doc(user.value.restoID)
-  //       .collection('orders')
-  //       .where('isPaid', isEqualTo: false)
-  //       .snapshots();
-
-  //   return data;
+  // update();
   // }
+
+  // Future<void> _initDataOrder() async {
+  //   CollectionReference ordersCollection = firestore
+  //       .collection('restos')
+  //       .doc(user.value.restoID)
+  //       .collection('orders');
+
+  //   QuerySnapshot queryOrders = await ordersCollection.get();
+
+  //   List<Order> listOrders = queryOrders.docs.map((doc) {
+  //     var object = doc.data() as Map<String, dynamic>;
+  //     final data = Order.fromJson(object);
+  //     return data;
+  //   }).toList();
+
+  // }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> filteredStream(bool paid) {
+    final data = firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection('orders')
+        .where('isPaid', isEqualTo: paid)
+        .where('guessName', isEqualTo: search.text.toUpperCase())
+        .snapshots();
+
+    return data;
+  }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> streamOrders(bool paid) {
     final data = firestore
         .collection("restos")
         .doc(user.value.restoID)
         .collection('orders')
-        // .orderBy('isPaid' == true, descending: true)
         .where('isPaid', isEqualTo: paid)
         .snapshots();
 
@@ -97,6 +118,7 @@ class CashierController extends GetxController {
     } catch (e) {
       print(e);
     }
+    update();
   }
 
   Future<void> deleteOrder(Order data) async {
@@ -110,14 +132,6 @@ class CashierController extends GetxController {
         .collection('orders-deleted');
 
     CollectionReference restos = firestore.collection("restos");
-
-    // double tax = resto.value.restoTaxes!;
-
-    // double? updateTotalPrices;
-
-    // if (tax != 0) {
-    //   updateTotalPrices = (data.totalPrices! * tax / 100) + data.totalPrices!;
-    // }
 
     try {
       await deletedOrdersCollection
@@ -155,22 +169,21 @@ class CashierController extends GetxController {
   void onInit() async {
     user = auth.user;
     resto = auth.resto;
-
-    print('masda');
-    // await streamOrdersPaid();
-    // await streamOrdersUnPaid();
-
+    search = TextEditingController();
     super.onInit();
   }
 
   @override
   void onReady() async {
+    deleteReason = TextEditingController();
+
     super.onReady();
   }
 
   @override
   void onClose() {
     deleteReason!.dispose();
+    search.dispose();
     super.dispose();
   }
 }

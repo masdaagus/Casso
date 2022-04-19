@@ -100,7 +100,7 @@ class ButtonChart extends GetView<MenuController> {
                             "${items} Items",
                             style: TextStyle(
                               color: darkColor,
-                              fontFamily: "balsamiq",
+                              fontFamily: "Ubuntu",
                               fontSize: 13,
                               fontWeight: FontWeight.bold,
                             ),
@@ -112,7 +112,7 @@ class ButtonChart extends GetView<MenuController> {
                         "Table ${table} - (${guessName})",
                         style: TextStyle(
                           color: darkColor,
-                          fontFamily: "balsamiq",
+                          fontFamily: "Ubuntu",
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
                         ),
@@ -125,7 +125,7 @@ class ButtonChart extends GetView<MenuController> {
                             nf.format(controller.order.value.totalPrices),
                             style: TextStyle(
                               color: darkColor,
-                              fontFamily: "balsamiq",
+                              fontFamily: "Ubuntu",
                               fontWeight: FontWeight.bold,
                             ),
                           )),

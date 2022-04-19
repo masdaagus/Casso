@@ -21,7 +21,7 @@ class MonitoringView extends GetView<MonitoringController> {
           title: Text(
             'MONITORING',
             style: TextStyle(
-              fontFamily: "balsamiq",
+              fontFamily: "Ubuntu",
               fontWeight: FontWeight.bold,
               color: darkColor,
             ),
@@ -91,9 +91,9 @@ class MonitoringView extends GetView<MonitoringController> {
         text,
         style: TextStyle(
           color: darkColor,
-          fontSize: 9,
-          fontFamily: "balsamiq",
-          fontWeight: FontWeight.w600,
+          fontSize: 11,
+          fontFamily: "Ubuntu",
+          fontWeight: FontWeight.bold,
         ),
       ),
     );

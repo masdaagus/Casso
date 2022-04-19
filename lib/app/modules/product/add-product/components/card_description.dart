@@ -25,7 +25,7 @@ class CradDeskripsi extends StatelessWidget {
         maxLines: 6,
         style: TextStyle(
           fontSize: 14,
-          fontFamily: "balsamiq",
+          fontFamily: "Ubuntu",
           fontWeight: FontWeight.w500,
           color: darkColor,
         ),
@@ -38,7 +38,7 @@ class CradDeskripsi extends StatelessWidget {
           hintText: 'Deskripsi produk',
           hintStyle: TextStyle(
             fontSize: 14,
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             fontWeight: FontWeight.w500,
             color: darkColor.withOpacity(.6),
             overflow: TextOverflow.ellipsis,

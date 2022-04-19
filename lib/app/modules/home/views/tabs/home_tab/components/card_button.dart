@@ -48,7 +48,7 @@ class CardButton extends StatelessWidget {
               tittle!,
               style: TextStyle(
                 fontSize: 14,
-                fontFamily: "balsamiq",
+                fontFamily: "Ubuntu",
                 color: darkColor,
                 letterSpacing: .5,
                 fontWeight: FontWeight.bold,

@@ -308,66 +308,66 @@ class MonitoringController extends GetxController {
     QuerySnapshot querySnapshot = await ordersCollection.get();
 
     // Get data from docs and convert map to List
-    await prosesC.doc(data.orderId).delete();
+    await prosesC.doc(data.orderId).delete().then((value) {
+      List<ProductOrder> products = []; // list untuk di update ke list orders
 
-    List<ProductOrder> products = []; // list untuk di update ke list orders
+      querySnapshot.docs.map((doc) {
+        var object = doc.data() as Map<String, dynamic>;
+        final dataOrders = Order.fromJson(object);
 
-    // List<Order> ordersCollection =
-    querySnapshot.docs.map((doc) {
-      var object = doc.data() as Map<String, dynamic>;
-      final dataOrders = Order.fromJson(object);
+        if (data.guessName == dataOrders.guessName &&
+            data.tableNumber == dataOrders.tableNumber &&
+            dataOrders.isPaid == false) {
+          products.addAll(dataOrders.productsOrder!);
 
-      if (data.guessName == dataOrders.guessName &&
-          data.tableNumber == dataOrders.tableNumber) {
-        products.addAll(dataOrders.productsOrder!);
+          data.productsOrder!.forEach((dataA) {
+            dataOrders.productsOrder!.forEach((dataB) {
+              if (dataA.productName == dataB.productName &&
+                  dataA.productPrice == dataB.productPrice) {
+                if (dataB.productQty > 1) {
+                  products.remove(dataB);
 
-        data.productsOrder!.forEach((dataA) {
-          dataOrders.productsOrder!.forEach((dataB) {
-            if (dataA.productName == dataB.productName &&
-                dataA.productPrice == dataB.productPrice) {
-              if (dataB.productQty > 1) {
-                products.remove(dataB);
-
-                dataB.productQty -= dataA.productQty;
-                if (dataB.productQty != 0) {
-                  products.add(dataB);
+                  dataB.productQty -= dataA.productQty;
+                  if (dataB.productQty != 0) {
+                    products.add(dataB);
+                  } else {
+                    products.remove(dataB);
+                  }
                 } else {
+                  print('${dataB.productName}  ${dataB.productQty}');
                   products.remove(dataB);
                 }
-              } else {
-                print('${dataB.productName}  ${dataB.productQty}');
-                products.remove(dataB);
               }
-            }
+            });
           });
-        });
 
-        final ids = Set();
-        products.retainWhere(
-          (x) => ids.add(x.productName),
-        );
+          final ids = Set();
+          products.retainWhere(
+            (x) => ids.add(x.productName),
+          );
 
-        double _totalPriceOrders = 0;
-        products.forEach((e) {
-          _totalPriceOrders += (e.productQty * e.productPrice!);
-        });
+          double _totalPriceOrders = 0;
+          products.forEach((e) {
+            _totalPriceOrders += (e.productQty * e.productPrice!);
+          });
 
-        if (products.length > 0) {
-          ordersCollection.doc(doc.id).update({
-            "productsOrder": List<dynamic>.from(
-              products.map(
-                (x) => x.toJson(),
+          if (products.length > 0) {
+            ordersCollection.doc(doc.id).update({
+              "productsOrder": List<dynamic>.from(
+                products.map(
+                  (x) => x.toJson(),
+                ),
               ),
-            ),
-            "totalPrices": _totalPriceOrders,
-          });
-        } else {
-          ordersCollection.doc(doc.id).delete();
+              "totalPrices": _totalPriceOrders,
+            });
+          } else {
+            ordersCollection.doc(doc.id).delete();
+          }
         }
-      }
 
-      // return data;
-    }).toList();
+        // return data;
+      }).toList();
+    });
   }
 
   @override

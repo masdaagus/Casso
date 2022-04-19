@@ -38,7 +38,7 @@ class NoOrderWidget extends StatelessWidget {
             "PESANAN KOSONG",
             style: TextStyle(
                 color: hitam,
-                fontFamily: 'balsamiq',
+                fontFamily: 'Ubuntu',
                 fontSize: 20,
                 fontWeight: FontWeight.bold),
           ),
@@ -48,7 +48,7 @@ class NoOrderWidget extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               color: darkColor.withOpacity(.7),
-              fontFamily: 'balsamiq',
+              fontFamily: 'Ubuntu',
               fontSize: 14,
             ),
           ),

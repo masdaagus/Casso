@@ -128,7 +128,7 @@ class NoImage extends StatelessWidget {
         Text(
           "ADD IMAGE",
           style: TextStyle(
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             fontSize: 16,
             color: darkColor.withOpacity(.7),
             fontWeight: FontWeight.w600,
@@ -138,7 +138,7 @@ class NoImage extends StatelessWidget {
         Text(
           "Max size 200 kB",
           style: TextStyle(
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             fontSize: 9,
             color: darkColor.withOpacity(.7),
             // fontWeight: FontWeight,

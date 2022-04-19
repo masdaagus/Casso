@@ -35,7 +35,7 @@ class DialogCancel extends GetView<OrderController> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: lightColor,
-                  fontFamily: 'balsamiq',
+                  fontFamily: 'Ubuntu',
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -83,7 +83,7 @@ class DialogButton extends StatelessWidget {
           isConfirmText,
           style: TextStyle(
             color: lightColor,
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             fontWeight: FontWeight.bold,
             letterSpacing: 1,
             fontSize: 12,

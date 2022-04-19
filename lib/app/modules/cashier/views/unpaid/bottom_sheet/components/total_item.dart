@@ -24,7 +24,7 @@ class TotalItem extends StatelessWidget {
             tittle,
             style: TextStyle(
               color: darkColor,
-              fontFamily: 'balsamiq',
+              fontFamily: 'Ubuntu',
               fontWeight: isGrand ? FontWeight.bold : null,
               fontSize: 20,
               letterSpacing: .5,
@@ -34,7 +34,7 @@ class TotalItem extends StatelessWidget {
             "${nf.format(total)}",
             style: TextStyle(
               color: darkColor,
-              fontFamily: 'balsamiq',
+              fontFamily: 'Ubuntu',
               fontWeight: isGrand ? FontWeight.bold : null,
               fontSize: 20,
               letterSpacing: .2,

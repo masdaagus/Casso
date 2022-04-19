@@ -1,13 +1,11 @@
 import 'package:casso/app/modules/cashier/views/paid/paid.dart';
 import 'package:casso/app/modules/cashier/views/unpaid/unpaid.dart';
 import 'package:casso/app/utils/constant.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/cashier_controller.dart';
 import 'deleted/orders_deleted.dart';
 
-class CashierView extends GetView<CashierController> {
+class CashierView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -25,7 +23,7 @@ class CashierView extends GetView<CashierController> {
             'KASIR',
             style: TextStyle(
               color: darkColor,
-              fontFamily: "balsamiq",
+              fontFamily: "Ubuntu",
               letterSpacing: 1,
               fontWeight: FontWeight.bold,
             ),
@@ -34,11 +32,14 @@ class CashierView extends GetView<CashierController> {
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 8),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Icon(
-                  Icons.assignment_outlined,
-                  color: darkColor,
+              child: GestureDetector(
+                onTap: () {},
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Icon(
+                    Icons.assignment_outlined,
+                    color: darkColor,
+                  ),
                 ),
               ),
             ),
@@ -49,9 +50,9 @@ class CashierView extends GetView<CashierController> {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: abu,
+                  color: putih,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 height: 36,
@@ -61,7 +62,7 @@ class CashierView extends GetView<CashierController> {
                     labelColor: darkColor,
                     indicator: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
-                      color: putih,
+                      color: abu,
                     ),
                     tabs: [
                       textTab("UN-PAID"),
@@ -103,7 +104,7 @@ class CashierView extends GetView<CashierController> {
           style: TextStyle(
             color: darkColor,
             fontSize: 11,
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             fontWeight: FontWeight.bold,
           ),
         ),

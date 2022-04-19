@@ -27,7 +27,7 @@ class SearchCard extends StatelessWidget {
                 isDense: true,
                 hintStyle: TextStyle(
                   color: darkColor.withOpacity(.7),
-                  fontFamily: "balsamiq",
+                  fontFamily: "Ubuntu",
                   fontSize: 13,
                 ),
                 border: InputBorder.none,

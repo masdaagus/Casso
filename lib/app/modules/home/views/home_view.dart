@@ -3,6 +3,7 @@ import 'package:casso/app/modules/home/views/tabs/empty/kosong.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'tabs/home_tab/home_tab.dart';
 import 'tabs/profile_tab/profile_tab.dart';
@@ -22,6 +23,8 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: lightColor));
     return WillPopScope(
       onWillPop: () async {
         return false;

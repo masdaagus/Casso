@@ -11,11 +11,12 @@ class FoodMenu extends GetView<MenuController> {
 
   @override
   Widget build(BuildContext context) {
-    List<ProductOrder> foodOrder = controller.productsOrder
-        .where((d) => d.productCategory == 'FOOD')
-        .toList();
-    List<Product> foodProduct =
-        controller.products.where((d) => d.productCategory == 'FOOD').toList();
+    // List<ProductOrder> foodOrder = controller.productsOrder
+    //     .where((d) => d.productCategory == 'FOOD')
+    //     .toList();
+    // List<Product> foodProduct = controller.filteredProducts
+    //     .where((d) => d.productCategory == 'FOOD')
+    //     .toList();
 
     return Container(
       color: lightColor,
@@ -23,32 +24,68 @@ class FoodMenu extends GetView<MenuController> {
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: GridView.count(
-                shrinkWrap: true,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 2,
-                childAspectRatio: .89,
-                physics: BouncingScrollPhysics(),
-                children: List.generate(foodOrder.length, (index) {
-                  ProductOrder data = foodOrder[index];
-                  Product product = foodProduct[index];
+            GetBuilder<MenuController>(
+              builder: (c) {
+                List<ProductOrder> foodOrder = c.productsOrder
+                    .where((d) => d.productCategory == 'FOOD')
+                    .toList();
+                List<Product> foodProduct = c.filteredProducts
+                    .where((d) => d.productCategory == 'FOOD')
+                    .toList();
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: GridView.count(
+                    shrinkWrap: true,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    crossAxisCount: 2,
+                    childAspectRatio: .89,
+                    physics: BouncingScrollPhysics(),
+                    children: List.generate(foodProduct.length, (index) {
+                      ProductOrder data = foodOrder[index];
+                      Product product = foodProduct[index];
 
-                  return ProductCard(
-                    data: data,
-                    dataProduct: product,
-                    addProduct: () async {
-                      controller.addProduct(data);
-                    },
-                    minProduct: () async {
-                      controller.minProduct(data);
-                    },
-                  );
-                }),
-              ),
+                      return ProductCard(
+                        data: data,
+                        dataProduct: product,
+                        addProduct: () async {
+                          controller.addProduct(data);
+                        },
+                        minProduct: () async {
+                          controller.minProduct(data);
+                        },
+                      );
+                    }),
+                  ),
+                );
+              },
             ),
+            // Container(
+            //   padding: const EdgeInsets.symmetric(horizontal: 16),
+            //   child: GridView.count(
+            //     shrinkWrap: true,
+            //     crossAxisSpacing: 10,
+            //     mainAxisSpacing: 10,
+            //     crossAxisCount: 2,
+            //     childAspectRatio: .89,
+            //     physics: BouncingScrollPhysics(),
+            //     children: List.generate(foodProduct.length, (index) {
+            //       ProductOrder data = foodOrder[index];
+            //       Product product = foodProduct[index];
+
+            //       return ProductCard(
+            //         data: data,
+            //         dataProduct: product,
+            //         addProduct: () async {
+            //           controller.addProduct(data);
+            //         },
+            //         minProduct: () async {
+            //           controller.minProduct(data);
+            //         },
+            //       );
+            //     }),
+            //   ),
+            // ),
             SizedBox(height: 65),
           ],
         ),

@@ -26,7 +26,7 @@ class HaderInfo extends StatelessWidget {
                 guessName ?? 'NO-NAME',
                 style: TextStyle(
                   color: darkColor,
-                  fontFamily: 'balsamiq',
+                  fontFamily: 'Ubuntu',
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
@@ -36,7 +36,7 @@ class HaderInfo extends StatelessWidget {
                 "(TABLE - $tableNumber)",
                 style: TextStyle(
                   color: darkColor,
-                  fontFamily: 'balsamiq',
+                  fontFamily: 'Ubuntu',
                   fontSize: 16,
                 ),
               ),
@@ -46,7 +46,7 @@ class HaderInfo extends StatelessWidget {
             waitersName ?? 'NO-WAITERS',
             style: TextStyle(
               color: darkColor,
-              fontFamily: 'balsamiq',
+              fontFamily: 'Ubuntu',
               fontSize: 16,
             ),
           ),

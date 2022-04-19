@@ -41,7 +41,7 @@ class AddProductView extends StatelessWidget {
           appBarTittle,
           style: TextStyle(
             color: darkColor,
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),

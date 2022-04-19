@@ -57,7 +57,7 @@ class MonitorCard extends GetView<MonitoringController> {
                     Text(
                       "TABLE ${data.tableNumber} - (${data.guessName})",
                       style: TextStyle(
-                        fontFamily: "balsamiq",
+                        fontFamily: "Ubuntu",
                         color: darkColor,
                         fontSize: 12,
                         letterSpacing: .5,
@@ -65,9 +65,9 @@ class MonitorCard extends GetView<MonitoringController> {
                       ),
                     ),
                     Text(
-                      "${data.waitersName}",
+                      "By:${data.waitersName}",
                       style: TextStyle(
-                        fontFamily: "balsamiq",
+                        fontFamily: "Ubuntu",
                         color: darkColor,
                         fontSize: 12,
                         letterSpacing: .5,
@@ -105,7 +105,7 @@ class MonitorCard extends GetView<MonitoringController> {
                             "TOTAL",
                             style: TextStyle(
                               color: putih,
-                              fontFamily: "balsamiq",
+                              fontFamily: "Ubuntu",
                               fontWeight: FontWeight.bold,
                               fontSize: 13,
                               letterSpacing: .5,
@@ -115,7 +115,7 @@ class MonitorCard extends GetView<MonitoringController> {
                             nf.format(data.totalPrices),
                             style: TextStyle(
                               color: putih,
-                              fontFamily: "balsamiq",
+                              fontFamily: "Ubuntu",
                               fontWeight: FontWeight.bold,
                               fontSize: 13,
                               letterSpacing: .5,
@@ -166,9 +166,8 @@ class MonitorCard extends GetView<MonitoringController> {
                     "#${data.orderNumber}",
                     style: TextStyle(
                       color: darkColor,
-                      fontFamily: 'balsamiq',
+                      fontFamily: 'Ubuntu',
                       fontWeight: FontWeight.bold,
-                      letterSpacing: 2,
                       fontSize: 16,
                     ),
                   ),
@@ -213,7 +212,7 @@ class DialogDeleteMonitoring extends StatelessWidget {
                 "HAPUS ORDER",
                 style: TextStyle(
                   color: putih,
-                  fontFamily: "balsamiq",
+                  fontFamily: "Ubuntu",
                   fontWeight: FontWeight.bold,
                   fontSize: 24,
                 ),
@@ -229,7 +228,7 @@ class DialogDeleteMonitoring extends StatelessWidget {
                   style: TextStyle(
                     letterSpacing: .5,
                     color: lightColor,
-                    fontFamily: 'balsamiq',
+                    fontFamily: 'Ubuntu',
                     fontSize: 16,
                   ),
                 ),
@@ -267,7 +266,7 @@ class ButtonDelete extends StatelessWidget {
           isConfirmText,
           style: TextStyle(
             color: lightColor,
-            fontFamily: "balsamiq",
+            fontFamily: "Ubuntu",
             fontWeight: FontWeight.bold,
             letterSpacing: 1,
             fontSize: 12,

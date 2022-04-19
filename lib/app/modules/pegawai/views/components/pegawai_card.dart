@@ -33,7 +33,7 @@ class PegawaiCard extends StatelessWidget {
                 "($status)".toUpperCase(),
                 style: TextStyle(
                   color: darkColor,
-                  fontFamily: "balsamiq",
+                  fontFamily: "Ubuntu",
                 ),
               ),
               SizedBox(height: 8),
@@ -42,7 +42,7 @@ class PegawaiCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   color: darkColor,
-                  fontFamily: "balsamiq",
+                  fontFamily: "Ubuntu",
                 ),
               ),
               SizedBox(height: 16),

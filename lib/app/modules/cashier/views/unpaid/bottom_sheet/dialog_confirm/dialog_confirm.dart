@@ -42,7 +42,7 @@ class DialogConfirm extends StatelessWidget {
                 "Confirmation",
                 style: TextStyle(
                   color: lightColor,
-                  fontFamily: 'balsamiq',
+                  fontFamily: 'Ubuntu',
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                   letterSpacing: .5,
@@ -54,7 +54,7 @@ class DialogConfirm extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: darkColor,
-                  fontFamily: 'balsamiq',
+                  fontFamily: 'Ubuntu',
                   fontSize: 16,
                   letterSpacing: .5,
                 ),
