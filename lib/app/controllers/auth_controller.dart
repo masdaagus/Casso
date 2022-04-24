@@ -1,4 +1,3 @@
-import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/users.dart';
 import 'package:casso/app/modules/login/controllers/login_controller.dart';
@@ -177,7 +176,7 @@ class AuthController extends GetxController {
   }
 
   /// LOGOUT
-  void logout() async {
+  Future<void> logout() async {
     Get.to(SplashScreen());
     final box = GetStorage();
     box.remove("email");

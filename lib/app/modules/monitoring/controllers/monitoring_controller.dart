@@ -379,11 +379,10 @@ class MonitoringController extends GetxController {
 
   @override
   void onReady() async {
-    await initStream('pesanan');
-    await initStream('proses');
-    await initStream('siap');
-    await initStream('tersaji');
-
+    // await initStream('pesanan');
+    // await initStream('proses');
+    // await initStream('siap');
+    // await initStream('tersaji');
     super.onReady();
   }
 

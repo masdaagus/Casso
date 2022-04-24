@@ -12,6 +12,7 @@ const merah = Color(0XFFEF233C);
 const abu = Color(0XFFD1D1D1);
 const bgColor = Color(0XFFF2F2F2);
 const textDark = Color(0XFFF7B7882);
+const transparant = Colors.transparent;
 
 const putih = Colors.white;
 const hitam = Colors.black;

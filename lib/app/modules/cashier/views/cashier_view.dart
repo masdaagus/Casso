@@ -1,28 +1,38 @@
 import 'package:casso/app/modules/cashier/views/paid/paid.dart';
 import 'package:casso/app/modules/cashier/views/unpaid/unpaid.dart';
+import 'package:casso/app/modules/monitoring/bindings/monitoring_binding.dart';
+import 'package:casso/app/modules/monitoring/views/monitoring_view.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'deleted/orders_deleted.dart';
 
 class CashierView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: lightColor,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarColor: darkColor,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.light,
+    ));
     return DefaultTabController(
       length: 3,
       child: Scaffold(
         backgroundColor: lightColor,
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios, size: 20, color: darkColor),
+            icon: Icon(Icons.arrow_back_ios, size: 20, color: lightColor),
             onPressed: Get.back,
           ),
-          backgroundColor: lightColor,
+          backgroundColor: darkColor,
           elevation: 0,
           title: Text(
             'KASIR',
             style: TextStyle(
-              color: darkColor,
+              color: lightColor,
               fontFamily: "Ubuntu",
               letterSpacing: 1,
               fontWeight: FontWeight.bold,
@@ -33,12 +43,17 @@ class CashierView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 8),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Get.off(
+                    () => MonitoringView(),
+                    binding: MonitoringBinding(),
+                  );
+                },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Icon(
                     Icons.assignment_outlined,
-                    color: darkColor,
+                    color: lightColor,
                   ),
                 ),
               ),
@@ -50,19 +65,15 @@ class CashierView extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: putih,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                height: 36,
+                padding: const EdgeInsets.all(8),
+                color: darkColor,
                 child: Container(
                   padding: const EdgeInsets.all(4),
                   child: TabBar(
                     labelColor: darkColor,
                     indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      color: abu,
+                      borderRadius: BorderRadius.circular(8),
+                      color: putih.withOpacity(.2),
                     ),
                     tabs: [
                       textTab("UN-PAID"),
@@ -96,13 +107,14 @@ class CashierView extends StatelessWidget {
   }
 
   Widget textTab(String text) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 3),
+    return Container(
+      height: 24,
+      padding: const EdgeInsets.only(top: 2),
+      child: Center(
         child: Text(
           text,
           style: TextStyle(
-            color: darkColor,
+            color: lightColor,
             fontSize: 11,
             fontFamily: "Ubuntu",
             fontWeight: FontWeight.bold,

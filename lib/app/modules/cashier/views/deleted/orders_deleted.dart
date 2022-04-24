@@ -20,6 +20,7 @@ class OrdersDeleted extends GetView<CashierController> {
         children: [
           Column(
             children: [
+              SizedBox(height: 8),
               // card seraching
               SearchBox(),
               // List items dan total

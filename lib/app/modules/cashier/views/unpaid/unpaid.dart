@@ -19,6 +19,7 @@ class Unpaid extends StatelessWidget {
       backgroundColor: lightColor,
       body: Column(
         children: [
+          SizedBox(height: 8),
           // card seraching
           GetBuilder<CashierController>(
             builder: (c) {

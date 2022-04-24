@@ -14,6 +14,8 @@ class MenuController extends GetxController {
   var order = Order().obs;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  bool isLoading = false;
+
   List<ProductOrder> productsOrder = [];
   List<Product> products = [];
   List<Order> listOrdersCollection = [];
@@ -138,6 +140,8 @@ class MenuController extends GetxController {
         .collection("orders");
 
     DateTime now = DateTime.now();
+    isLoading = true;
+    update();
 
     try {
       double _total = 0;
@@ -152,8 +156,8 @@ class MenuController extends GetxController {
           .add(Order(
         guessName: guessName,
         tableNumber: table,
+        orderMonth: now.month,
         waitersName: user.value.name,
-        // productsOrder: tempOrder,
         productsOrder: finalOrder,
         totalPrices: _total,
         createAt: now.toIso8601String(),
@@ -220,6 +224,7 @@ class MenuController extends GetxController {
           await orderCollection.doc(obj.id).set(Order(
                 orderId: obj.id,
                 guessName: guessName,
+                orderMonth: now.month,
                 tableNumber: table,
                 waitersName: user.value.name,
                 productsOrder: finalOrder,
@@ -242,6 +247,7 @@ class MenuController extends GetxController {
       resto(RestosModel.fromJson(restoData));
       resto.refresh();
       auth.refresh();
+      isLoading = false;
       update();
       Get.offAllNamed('/home');
     } catch (e) {

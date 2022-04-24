@@ -15,6 +15,8 @@ abstract class Routes {
   static const INTRODUCTION = _Paths.INTRODUCTION;
   static const PEGAWAI = _Paths.PEGAWAI;
   static const DASHBOARD = _Paths.DASHBOARD;
+  static const PRINTER = _Paths.PRINTER;
+  static const RESTO = _Paths.RESTO;
 }
 
 abstract class _Paths {
@@ -28,4 +30,6 @@ abstract class _Paths {
   static const INTRODUCTION = '/introduction';
   static const PEGAWAI = '/pegawai';
   static const DASHBOARD = '/dashboard';
+  static const PRINTER = '/printer';
+  static const RESTO = '/resto';
 }

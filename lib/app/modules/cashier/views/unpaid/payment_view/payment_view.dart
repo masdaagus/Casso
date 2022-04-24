@@ -45,6 +45,7 @@ class PaymentOrderView extends StatelessWidget {
                 onTap: () {
                   controller.setPaid(data);
                   Get.back();
+                  Get.back();
 
                   // Get.defaultDialog(
                   // radius: 16,

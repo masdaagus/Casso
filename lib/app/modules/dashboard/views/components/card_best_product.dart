@@ -33,7 +33,7 @@ class CardBestProduct extends StatelessWidget {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+        // mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             margin: const EdgeInsets.all(8),
@@ -50,19 +50,21 @@ class CardBestProduct extends StatelessWidget {
               size: 48,
             )),
           ),
-          Padding(
+          Container(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  productName,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: darkColor,
-                    fontFamily: 'Ubuntu',
-                    fontWeight: FontWeight.w600,
+                Container(
+                  width: size.width * .3,
+                  child: Text(
+                    productName,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: darkColor,
+                      fontFamily: 'Ubuntu',
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
                 SizedBox(height: 6),

@@ -7,6 +7,7 @@ import 'package:casso/app/modules/menu/controllers/menu_controller.dart';
 import 'package:casso/app/modules/menu/views/bottom_sheet/components/notes_dialog.dart';
 import 'package:casso/app/modules/monitoring/views/components/card_no_order.dart';
 import 'package:casso/app/utils/constant.dart';
+import 'package:casso/app/utils/spinner_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -243,7 +244,29 @@ class CustomBottomSheet extends GetView<MenuController> {
                       ? ButtonOrder(onTap: onTap)
                       : Container(),
                 ),
-              )
+              ),
+              GetBuilder<MenuController>(builder: (c) {
+                return c.isLoading
+                    ? Center(
+                        child: Container(
+                          height: Get.height,
+                          width: Get.width,
+                          color: hitam.withOpacity(.54),
+                          child: Center(
+                            child: Container(
+                              height: 72,
+                              width: 72,
+                              decoration: BoxDecoration(
+                                color: lightColor,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: CustomSpinner(),
+                            ),
+                          ),
+                        ),
+                      )
+                    : Container();
+              })
             ],
           ),
         ),

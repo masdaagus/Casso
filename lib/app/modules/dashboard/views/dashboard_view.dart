@@ -1,10 +1,12 @@
 import 'package:casso/app/modules/dashboard/views/components/top_card.dart.dart';
 import 'package:casso/app/utils/constant.dart';
+import 'package:casso/app/utils/spinner_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../controllers/dashboard_controller.dart';
 import 'components/best_product.dart';
+import 'components/filter_by_date.dart';
 
 class DashboardView extends GetView<DashboardController> {
   @override
@@ -40,98 +42,74 @@ class DashboardView extends GetView<DashboardController> {
       ),
       body: Stack(
         children: [
-          DateFilter(),
-          Container(
-            padding: const EdgeInsets.only(left: 16, top: 78),
-            height: 160,
-            width: double.infinity,
-            color: darkColor,
-            child: Text(
-              "Ringkasan 19 April 2022",
-              style: TextStyle(
-                fontFamily: 'Ubuntu',
-                color: lightColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
+          Stack(
+            children: [
+              DateFilter(),
+              RingkasanWidget(),
+              Container(
+                margin: const EdgeInsets.only(top: 115),
+                child: Column(
+                  children: [
+                    TopCard(),
+                    BestProduct(),
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 115),
-            child: Column(
-              children: [
-                TopCard(),
-                BestProduct(),
-              ],
-            ),
-          ),
+          GetBuilder<DashboardController>(builder: (c) {
+            return c.isLoading
+                ? Center(
+                    child: Container(
+                      height: Get.height,
+                      width: Get.width,
+                      color: hitam.withOpacity(.54),
+                      child: Center(
+                        child: Container(
+                          height: 72,
+                          width: 72,
+                          decoration: BoxDecoration(
+                            color: lightColor,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: CustomSpinner(),
+                        ),
+                      ),
+                    ),
+                  )
+                : Container();
+          })
         ],
       ),
     );
   }
 }
 
-class DateFilter extends StatelessWidget {
-  const DateFilter({
+class RingkasanWidget extends StatelessWidget {
+  const RingkasanWidget({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      bottom: 0,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        height: 50,
-        width: Get.width,
-        color: bgColor,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            ButtonFilter(tittle: 'Bulan ini'),
-            ButtonFilter(tittle: 'Minggu ini'),
-            ButtonFilter(tittle: 'Hari ini', isPressed: true),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class ButtonFilter extends StatelessWidget {
-  const ButtonFilter({
-    Key? key,
-    this.tittle,
-    this.onTap,
-    this.isPressed = false,
-  }) : super(key: key);
-  final String? tittle;
-  final VoidCallback? onTap;
-  final bool isPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        margin: const EdgeInsets.only(left: 16),
-        decoration: BoxDecoration(
-          color: isPressed ? darkColor : darkColor.withOpacity(.4),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Center(
+    return GetBuilder<DashboardController>(
+      builder: (c) {
+        return Container(
+          padding: const EdgeInsets.only(left: 16, top: 78),
+          height: 160,
+          width: double.infinity,
+          color: darkColor,
           child: Text(
-            "$tittle",
+            "Ringkasan ${c.ringkasan ?? ''}",
             style: TextStyle(
               fontFamily: 'Ubuntu',
               color: lightColor,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.bold,
               fontSize: 16,
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

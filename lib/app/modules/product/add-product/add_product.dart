@@ -2,6 +2,7 @@ import 'package:casso/app/data/models/product.dart';
 import 'package:casso/app/modules/product/add-product/components/dropdown_kategori.dart';
 import 'package:casso/app/modules/product/controllers/product_controller.dart';
 import 'package:casso/app/utils/constant.dart';
+import 'package:casso/app/utils/spinner_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -65,75 +66,106 @@ class AddProductView extends StatelessWidget {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Form(
-            key: formKey,
-            child: Column(
-              children: [
-                /// IMAGE PRODUK
-                ImageCard(
-                  image: dataProduct!.productImage,
-                  onTap: () => ctrl.selectImage(),
-                  onCancel: () => ctrl.removeImage(),
-                ),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    /// IMAGE PRODUK
+                    ImageCard(
+                      image: dataProduct!.productImage,
+                      onTap: () {
+                        ctrl.selectImage();
+                      },
+                      onCancel: () => ctrl.removeImage(),
+                    ),
 
-                CardTextField(
-                  isNumtype: false,
-                  label: 'Nama Produk',
-                  controller: ctrl.namaProduk =
-                      TextEditingController(text: dataProduct!.productName),
-                  hintText: 'Nama Produk',
-                  validator: (value) {
-                    if (value!.isEmpty) return "Nama produk tidak boleh kosong";
-                  },
-                ),
-                CardTextField(
-                  label: 'Harga Produk',
-                  controller: ctrl.hargaProduk = TextEditingController(
-                    text: dataProduct!.productPrice!.toStringAsFixed(0),
-                  ),
-                  hintText: 'Harga Produk',
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Harga produk tidak boleh kosong';
-                    }
-                  },
-                ),
-                CardTextField(
-                  label: 'Stok Produk',
-                  controller: ctrl.stokProduk = TextEditingController(
-                    text: dataProduct!.productStock.toString(),
-                  ),
-                  hintText: 'Stok Produk',
-                  validator: (value) {
-                    if (value!.isEmpty) return "Stok produk tidak boleh kosong";
-                  },
-                ),
-                DropDownCategory(),
-                CradDeskripsi(
-                  textController: ctrl.deskripsiProduk = TextEditingController(
-                      text: dataProduct!.productDescription),
-                ),
-                ButtonAdd(
-                  onTap: () {
-                    if (formKey.currentState!.validate()) {
-                      print('VALIDATED');
+                    CardTextField(
+                      isNumtype: false,
+                      label: 'Nama Produk',
+                      controller: ctrl.namaProduk =
+                          TextEditingController(text: dataProduct!.productName),
+                      hintText: 'Nama Produk',
+                      validator: (value) {
+                        if (value!.isEmpty)
+                          return "Nama produk tidak boleh kosong";
+                      },
+                    ),
+                    CardTextField(
+                      label: 'Harga Produk',
+                      controller: ctrl.hargaProduk = TextEditingController(
+                        text: dataProduct!.productPrice!.toStringAsFixed(0),
+                      ),
+                      hintText: 'Harga Produk',
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Harga produk tidak boleh kosong';
+                        }
+                      },
+                    ),
+                    CardTextField(
+                      label: 'Stok Produk',
+                      controller: ctrl.stokProduk = TextEditingController(
+                        text: dataProduct!.productStock.toString(),
+                      ),
+                      hintText: 'Stok Produk',
+                      validator: (value) {
+                        if (value!.isEmpty)
+                          return "Stok produk tidak boleh kosong";
+                      },
+                    ),
+                    DropDownCategory(),
+                    CradDeskripsi(
+                      textController: ctrl.deskripsiProduk =
+                          TextEditingController(
+                              text: dataProduct!.productDescription),
+                    ),
+                    ButtonAdd(
+                      onTap: () {
+                        if (formKey.currentState!.validate()) {
+                          print('VALIDATED');
 
-                      if (dataProduct!.productName == null) {
-                        ctrl.addProduct();
-                      } else {
-                        ctrl.editProduct(dataProduct!);
-                      }
-                    }
-                  },
+                          if (dataProduct!.productName == null) {
+                            ctrl.addProduct();
+                          } else {
+                            ctrl.editProduct(dataProduct!);
+                          }
+                        }
+                      },
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
+          GetBuilder<ProductController>(builder: (c) {
+            return c.isLoading
+                ? Center(
+                    child: Container(
+                      height: Get.height,
+                      width: Get.width,
+                      color: hitam.withOpacity(.54),
+                      child: Center(
+                        child: Container(
+                          height: 72,
+                          width: 72,
+                          decoration: BoxDecoration(
+                            color: lightColor,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: CustomSpinner(),
+                        ),
+                      ),
+                    ),
+                  )
+                : Container();
+          })
+        ],
       ),
     );
   }

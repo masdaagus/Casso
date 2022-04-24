@@ -1,103 +1,51 @@
 import 'package:casso/app/controllers/auth_controller.dart';
 import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/data/models/resto.dart';
-import 'package:casso/app/data/models/table.dart';
 import 'package:casso/app/data/models/users.dart';
-import 'package:casso/app/utils/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  final auth = Get.put(AuthController());
+  final auth = Get.find<AuthController>();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   var user = UsersModel().obs;
   var resto = RestosModel().obs;
+
+  bool isLoading = false;
+
+  List<UsersModel> employes = [];
+  List<UsersModel> kitchen = [];
+  List<UsersModel> waiters = [];
+  List<UsersModel> cashier = [];
 
   late TextEditingController restoName;
   late TextEditingController restoTable;
   late TextEditingController restoLocation;
   late TextEditingController restoTaxes;
 
-  Future<void> updateResto() async {
-    CollectionReference restos = firestore.collection("restos");
-    int table = int.tryParse(restoTable.text) ?? 0;
-    double taxes = double.tryParse(restoTaxes.text) ?? 0;
-    String namaResto = restoName.text;
-    String alamatResto = restoLocation.text;
+  final now = DateTime.now();
 
-    /// UPDATE TABLE
-    if (table != resto.value.tables!.length && table != 0) {
-      final List<TableModel> tables = resto.value.tables! as List<TableModel>;
+  Future<void> _initEmployes() async {
+    employes = resto.value.restoEmploye! as List<UsersModel>;
 
-      if (table < tables.length) {
-        print('REMOVE TABLE');
-
-        tables.removeRange(table, tables.length);
-
-        await restos.doc(user.value.restoID).update({
-          "tables": List<dynamic>.from(
-            tables.map(
-              (x) => x.toJson(),
-            ),
-          ),
-          "restoTable": table.toInt()
-        });
-      } else {
-        print('ADD TABLE');
-
-        int finalTable = table - tables.length;
-
-        final List<TableModel> tablesAdd = [];
-
-        for (int i = 0; i < finalTable; i++) {
-          tablesAdd.add(TableModel(
-              tableNumber: (tables.length + 1) + i, guessName: null));
-        }
-
-        tables.addAll(tablesAdd);
-
-        await restos.doc(user.value.restoID).update({
-          "tables": List<dynamic>.from(
-            tables.map(
-              (x) => x.toJson(),
-            ),
-          ),
-          "restoTable": table.toInt()
-        });
+    employes.forEach((data) {
+      print(data.name);
+      if (data.status == 'KITCHEN') {
+        kitchen.add(data);
       }
-    }
+      if (data.status == 'WAITERS') {
+        waiters.add(data);
+      }
+      if (data.status == 'CASHIER') {
+        cashier.add(data);
+      }
+    });
 
-    /// UPDATE NAMA RESTO
-    if (namaResto != resto.value.restoName && namaResto != '') {
-      await restos.doc(user.value.restoID).update({
-        "restoName": namaResto,
-      });
-    }
-
-    /// UPDATE LOKASI RESTO
-    if (alamatResto != resto.value.restoLocation && alamatResto != '') {
-      await restos.doc(user.value.restoID).update({
-        "restoLocation": alamatResto,
-      });
-    }
-
-    /// UPDATE TAXES RESTO
-    if (taxes != resto.value.restoTaxes) {
-      await restos.doc(user.value.restoID).update({
-        "restoTaxes": taxes,
-      });
-    }
-
-    final restoDoc = await restos.doc(user.value.restoID).get();
-    final restoData = restoDoc.data() as Map<String, dynamic>;
-    resto(RestosModel.fromJson(restoData));
-    resto.refresh();
-    auth.refresh();
-    update();
+    print(employes.length);
   }
 
-  Future<void> _deleteData() async {
+  Future<void> _deleteOrdersCollection() async {
     final collectionOrdersPaid = firestore
         .collection("restos")
         .doc(user.value.restoID)
@@ -112,8 +60,6 @@ class HomeController extends GetxController {
         .doc(user.value.restoID)
         .collection('orders');
 
-    final now = DateTime.now();
-
     QuerySnapshot queryOrders = await collectionOrdersPaid.get();
 
     await queryOrders.docs.map((doc) async {
@@ -124,44 +70,48 @@ class HomeController extends GetxController {
 
       if (now.day != dateData.day) {
         await collectionOrderHistories.doc(data.orderId).set(data.toJson());
-        await collectionOrders.doc(data.orderId).delete();
+        await collectionOrders.doc(doc.id).delete();
         print('data berhasil dihapus');
       } else {
         print('data belum bisa dihapus');
       }
     }).toList();
-
-    // orderDatas.forEach((data) {
-    //   var date = DateTime.tryParse(data.createAt!);
-    //   print("data date time = ${df.format(date!)}");
-    // });
   }
 
-  // Future<void> tesss() async {
-  //   final now = DateTime.now();
+  Future<void> _deleteTersajiCollection() async {
+    var collectionTersaji = await firestore
+        .collection("restos")
+        .doc(user.value.restoID)
+        .collection('tersaji');
 
-  //   String a = '2022-04-19T23:56:40.972353';
-  //   DateTime yesterday = DateTime.parse(a);
+    QuerySnapshot queryTersaji = await collectionTersaji.get();
 
-  //   var b = now.hour;
-  //   var c = yesterday.day;
+    queryTersaji.docs.map((doc) async {
+      var object = doc.data() as Map<String, dynamic>;
+      final data = Order.fromJson(object);
 
-  //   if (now.day != yesterday.day && now.hour == 2) {
-  //     print('HAPUS SEKARANG');
-  //   }
-  // }
+      DateTime dateData = DateTime.parse(data.createAt!);
+      if (now.day != dateData.day) {
+        await collectionTersaji.doc(doc.id).delete();
+      }
+    }).toList();
+  }
 
   @override
   void onInit() async {
     user = auth.user;
     resto = auth.resto;
+    await _initEmployes();
+
     super.onInit();
   }
 
   @override
   void onReady() async {
-    Future.delayed(Duration(seconds: 2));
-    await _deleteData();
+    Future.delayed(Duration(seconds: 1));
+    await _deleteOrdersCollection();
+    await _deleteTersajiCollection();
+
     super.onReady();
   }
 
@@ -174,4 +124,83 @@ class HomeController extends GetxController {
 
     super.onClose();
   }
+
+  // Future<void> updateResto() async {
+  //   CollectionReference restos = firestore.collection("restos");
+  //   int table = int.tryParse(restoTable.text) ?? 0;
+  //   double taxes = double.tryParse(restoTaxes.text) ?? 0;
+  //   String namaResto = restoName.text;
+  //   String alamatResto = restoLocation.text;
+
+  //   /// UPDATE TABLE
+  //   if (table != resto.value.tables!.length && table != 0) {
+  //     final List<TableModel> tables = resto.value.tables! as List<TableModel>;
+
+  //     if (table < tables.length) {
+  //       print('REMOVE TABLE');
+
+  //       tables.removeRange(table, tables.length);
+
+  //       await restos.doc(user.value.restoID).update({
+  //         "tables": List<dynamic>.from(
+  //           tables.map(
+  //             (x) => x.toJson(),
+  //           ),
+  //         ),
+  //         "restoTable": table.toInt()
+  //       });
+  //     } else {
+  //       print('ADD TABLE');
+
+  //       int finalTable = table - tables.length;
+
+  //       final List<TableModel> tablesAdd = [];
+
+  //       for (int i = 0; i < finalTable; i++) {
+  //         tablesAdd.add(TableModel(
+  //             tableNumber: (tables.length + 1) + i, guessName: null));
+  //       }
+
+  //       tables.addAll(tablesAdd);
+
+  //       await restos.doc(user.value.restoID).update({
+  //         "tables": List<dynamic>.from(
+  //           tables.map(
+  //             (x) => x.toJson(),
+  //           ),
+  //         ),
+  //         "restoTable": table.toInt()
+  //       });
+  //     }
+  //   }
+
+  //   /// UPDATE NAMA RESTO
+  //   if (namaResto != resto.value.restoName && namaResto != '') {
+  //     await restos.doc(user.value.restoID).update({
+  //       "restoName": namaResto,
+  //     });
+  //   }
+
+  //   /// UPDATE LOKASI RESTO
+  //   if (alamatResto != resto.value.restoLocation && alamatResto != '') {
+  //     await restos.doc(user.value.restoID).update({
+  //       "restoLocation": alamatResto,
+  //     });
+  //   }
+
+  //   /// UPDATE TAXES RESTO
+  //   if (taxes != resto.value.restoTaxes) {
+  //     await restos.doc(user.value.restoID).update({
+  //       "restoTaxes": taxes,
+  //     });
+  //   }
+
+  //   final restoDoc = await restos.doc(user.value.restoID).get();
+  //   final restoData = restoDoc.data() as Map<String, dynamic>;
+  //   resto(RestosModel.fromJson(restoData));
+  //   resto.refresh();
+  //   auth.refresh();
+  //   update();
+  // }
+
 }

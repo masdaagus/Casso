@@ -9,9 +9,11 @@ class Order {
     this.totalPrices,
     this.productsOrder,
     this.isPaid = false,
+    this.orderMonth,
   });
   final String? orderId;
   final int? orderNumber;
+  final int? orderMonth;
   final String? guessName;
   final String? waitersName;
   final int? tableNumber;
@@ -24,11 +26,11 @@ class Order {
   factory Order.fromJson(Map<String, dynamic> json) => Order(
         orderId: json["orderId"],
         orderNumber: json["orderNumber"],
+        orderMonth: json["orderMonth"],
         guessName: json["guessName"],
         waitersName: json["waitersName"],
         tableNumber: json["tableNumbers"],
         isPaid: json["isPaid"],
-        // totalItems: json["totalItems"],
         createAt: json["createAt"],
         totalPrices: json["totalPrices"],
         productsOrder: List<ProductOrder>.from(
@@ -38,11 +40,11 @@ class Order {
   Map<String, dynamic> toJson() => {
         "orderId": orderId,
         "orderNumber": orderNumber,
+        "orderMonth": orderMonth,
         "guessName": guessName,
         "waitersName": waitersName,
         "tableNumbers": tableNumber,
         "isPaid": isPaid,
-        // "totalItems": totalItems,
         "totalPrices": totalPrices,
         "createAt": createAt,
         "productsOrder":

@@ -1,51 +1,77 @@
-import 'package:casso/app/modules/home/views/tabs/empty/kosong.dart';
-
+import 'package:casso/app/modules/home/controllers/home_controller.dart';
+import 'package:casso/app/modules/home/views/news/news_view.dart';
+import 'package:casso/app/modules/home/views/notifications/notification_view.dart';
+import 'package:casso/app/modules/home/views/settings/settings_view.dart';
+import 'package:get/get.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:casso/app/utils/constant.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'tabs/home_tab/home_tab.dart';
-import 'tabs/profile_tab/profile_tab.dart';
+import 'home_view/home.dart';
 
 class HomeView extends StatefulWidget {
+  const HomeView({Key? key}) : super(key: key);
+
   @override
-  State<HomeView> createState() => _HomeViewState();
+  _HomeViewState createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
-  int _curentIndex = 1;
+  int _currentIndex = 0;
   final tabs = [
-    TabProfile(),
-    TabHome(),
-    ProfileTab(),
+    Home(),
+    NotificationView(),
+    NewsView(),
+    SettingsView(),
   ];
-
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: lightColor));
-    return WillPopScope(
-      onWillPop: () async {
-        return false;
-      },
-      child: Scaffold(
-        backgroundColor: lightColor,
-        bottomNavigationBar: CurvedNavigationBar(
-          animationDuration: const Duration(milliseconds: 300),
-          buttonBackgroundColor: darkColor.withOpacity(.15),
-          height: 65,
-          index: 1,
-          color: darkColor.withOpacity(.15),
-          backgroundColor: lightColor,
-          items: <Widget>[
-            Icon(Icons.desktop_mac_outlined, size: 30, color: darkColor),
-            Icon(Icons.home, size: 30, color: darkColor),
-            Icon(Icons.person, size: 30, color: darkColor),
-          ],
-          onTap: (value) => setState(() => _curentIndex = value),
-        ),
-        body: tabs[_curentIndex],
+    Get.put(() => HomeController());
+    final ctrl = Get.find<HomeController>();
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: lightColor,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarColor: darkColor,
+      statusBarIconBrightness: Brightness.light,
+    ));
+
+    List<SalomonBottomBarItem> navBarList = [
+      SalomonBottomBarItem(
+          icon: Icon(Icons.home),
+          title: Text("Home"),
+          selectedColor: darkColor),
+      SalomonBottomBarItem(
+          icon: Icon(Icons.notifications),
+          title: Text("Notifikasi"),
+          selectedColor: darkColor),
+      SalomonBottomBarItem(
+        icon: Icon(Icons.newspaper),
+        title: Text("News"),
+        selectedColor: darkColor,
+      ),
+      SalomonBottomBarItem(
+        icon: Icon(Icons.settings_outlined),
+        title: Text("Settings"),
+        selectedColor: darkColor,
+      ),
+    ];
+
+    return Scaffold(
+      backgroundColor: lightColor,
+      bottomNavigationBar: SalomonBottomBar(
+          selectedItemColor: merah,
+          currentIndex: _currentIndex,
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          itemPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+          onTap: (i) {
+            setState(() => _currentIndex = i);
+          },
+          items: navBarList),
+      body: WillPopScope(
+        onWillPop: () async {
+          return false;
+        },
+        child: tabs[_currentIndex],
       ),
     );
   }

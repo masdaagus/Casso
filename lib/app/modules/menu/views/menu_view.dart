@@ -6,6 +6,7 @@ import 'package:casso/app/modules/menu/views/category/food.dart';
 
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'bottom_sheet/bottom_sheet.dart';
@@ -28,6 +29,12 @@ class Menus extends GetView<MenuController> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: lightColor,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarColor: darkColor,
+      statusBarBrightness: Brightness.light,
+    ));
     return WillPopScope(
       onWillPop: () async {
         Get.defaultDialog(
@@ -48,12 +55,12 @@ class Menus extends GetView<MenuController> {
       child: Scaffold(
         backgroundColor: lightColor,
         appBar: AppBar(
-          backgroundColor: lightColor,
+          backgroundColor: darkColor,
           elevation: 0,
           title: Text(
             'MENU',
             style: TextStyle(
-              color: darkColor,
+              color: lightColor,
               fontFamily: "Ubuntu",
               fontWeight: FontWeight.w600,
               letterSpacing: 1,
@@ -64,7 +71,7 @@ class Menus extends GetView<MenuController> {
             icon: Icon(
               Icons.arrow_back_ios,
               size: 20,
-              color: darkColor,
+              color: lightColor,
             ),
             onPressed: Get.back,
           ),
@@ -75,14 +82,16 @@ class Menus extends GetView<MenuController> {
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 16),
-                height: 30,
+                // height: 30,
                 child: Container(
-                  padding: const EdgeInsets.all(2),
+                  padding:
+                      EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 16),
+                  color: darkColor,
+                  // padding: const EdgeInsets.all(2),
                   child: TabBar(
                     indicator: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: hitam.withOpacity(.2),
+                      color: putih.withOpacity(.2),
                     ),
                     tabs: [
                       textTab("Dessert"),
@@ -154,7 +163,7 @@ class Menus extends GetView<MenuController> {
         child: Text(
           text,
           style: TextStyle(
-            color: darkColor,
+            color: lightColor,
             fontSize: 12,
             fontFamily: "Ubuntu",
             fontWeight: FontWeight.w600,

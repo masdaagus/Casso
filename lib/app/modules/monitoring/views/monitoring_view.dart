@@ -4,6 +4,7 @@ import 'package:casso/app/modules/monitoring/views/siap/siap_view.dart';
 import 'package:casso/app/modules/monitoring/views/tersaji/tersaji_view.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 
@@ -13,6 +14,13 @@ import 'components/search_card.dart';
 class MonitoringView extends GetView<MonitoringController> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: lightColor,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarColor: darkColor,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.light,
+    ));
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -22,8 +30,9 @@ class MonitoringView extends GetView<MonitoringController> {
             'MONITORING',
             style: TextStyle(
               fontFamily: "Ubuntu",
-              fontWeight: FontWeight.bold,
-              color: darkColor,
+              fontWeight: FontWeight.w600,
+              color: lightColor,
+              fontSize: 20,
             ),
           ),
           centerTitle: true,
@@ -32,28 +41,24 @@ class MonitoringView extends GetView<MonitoringController> {
             icon: Icon(
               Icons.arrow_back_ios,
               size: 20,
-              color: darkColor,
+              color: lightColor,
             ),
             onPressed: Get.back,
           ),
-          backgroundColor: lightColor,
+          backgroundColor: darkColor,
         ),
         body: Column(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                color: abu,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              height: 32,
+              padding: EdgeInsets.all(8),
+              color: darkColor,
               child: Container(
                 padding: const EdgeInsets.all(4),
                 child: TabBar(
                   labelColor: putih,
                   indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6),
-                    color: putih,
+                    borderRadius: BorderRadius.circular(8),
+                    color: putih.withOpacity(.2),
                   ),
                   tabs: [
                     textTab("PESANAN"),
@@ -85,15 +90,18 @@ class MonitoringView extends GetView<MonitoringController> {
   }
 
   Widget textTab(String text) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 4),
-      child: Text(
-        text,
-        style: TextStyle(
-          color: darkColor,
-          fontSize: 11,
-          fontFamily: "Ubuntu",
-          fontWeight: FontWeight.bold,
+    return Container(
+      height: 24,
+      padding: const EdgeInsets.only(top: 2),
+      child: Center(
+        child: Text(
+          text,
+          style: TextStyle(
+            color: lightColor,
+            fontSize: 10,
+            fontFamily: "Ubuntu",
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );

@@ -18,8 +18,12 @@ import 'package:casso/app/modules/order/bindings/order_binding.dart';
 import 'package:casso/app/modules/order/views/order_view.dart';
 import 'package:casso/app/modules/pegawai/bindings/pegawai_binding.dart';
 import 'package:casso/app/modules/pegawai/views/pegawai_view.dart';
+import 'package:casso/app/modules/printer/bindings/printer_binding.dart';
+import 'package:casso/app/modules/printer/views/printer_view.dart';
 import 'package:casso/app/modules/product/bindings/product_binding.dart';
 import 'package:casso/app/modules/product/views/product_view.dart';
+import 'package:casso/app/modules/resto/bindings/resto_binding.dart';
+import 'package:casso/app/modules/resto/views/resto_view.dart';
 
 part 'app_routes.dart';
 
@@ -76,6 +80,16 @@ class AppPages {
       name: _Paths.DASHBOARD,
       page: () => DashboardView(),
       binding: DashboardBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRINTER,
+      page: () => PrinterView(),
+      binding: PrinterBinding(),
+    ),
+    GetPage(
+      name: _Paths.RESTO,
+      page: () => RestoView(),
+      binding: RestoBinding(),
     ),
   ];
 }

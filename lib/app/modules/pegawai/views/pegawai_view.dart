@@ -18,22 +18,25 @@ class PegawaiView extends GetView<PegawaiController> {
       ),
       backgroundColor: lightColor,
       appBar: AppBar(
-        title: Text(
-          'PEGAWAI',
-          style: TextStyle(
-            fontFamily: "Ubuntu",
-            letterSpacing: .5,
-            fontWeight: FontWeight.bold,
-            color: darkColor,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios, size: 20, color: lightColor),
+          onPressed: Get.back,
+        ),
+        backgroundColor: darkColor,
+        elevation: 0,
+        title: Padding(
+          padding: const EdgeInsets.only(top: 0),
+          child: Text(
+            'PEGAWAI',
+            style: TextStyle(
+              color: lightColor,
+              fontFamily: "Ubuntu",
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
+            ),
           ),
         ),
         centerTitle: true,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, size: 20, color: darkColor),
-          onPressed: Get.back,
-        ),
-        backgroundColor: lightColor,
       ),
       body: Container(
         margin: const EdgeInsets.only(top: 32),

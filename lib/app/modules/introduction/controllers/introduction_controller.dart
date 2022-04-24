@@ -59,6 +59,8 @@ class IntroductionController extends GetxController {
         email: user.value.email,
         status: "OWNER",
         restoID: user.value.uid,
+        password: '123456',
+        uid: null,
       ),
       UsersModel(
         name: "kitchen.$rndm",
@@ -66,6 +68,7 @@ class IntroductionController extends GetxController {
         status: "KITCHEN",
         restoID: user.value.uid,
         password: '123456',
+        uid: null,
       ),
       UsersModel(
         name: "cashier.$rndm",
@@ -73,6 +76,7 @@ class IntroductionController extends GetxController {
         status: "CASHIER",
         restoID: user.value.uid,
         password: '123456',
+        uid: null,
       ),
       UsersModel(
         name: "waiters.$rndm",
@@ -80,6 +84,7 @@ class IntroductionController extends GetxController {
         status: "WAITERS",
         restoID: user.value.uid,
         password: '123456',
+        uid: null,
       ),
     ];
 

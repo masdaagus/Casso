@@ -5,6 +5,7 @@ import 'package:casso/app/modules/product/add-product/add_product.dart';
 
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 
@@ -17,19 +18,26 @@ import 'category/food.dart';
 class ProductView extends GetView<ProductController> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: lightColor,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarColor: darkColor,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.light,
+    ));
     Get.put(() => ProductController());
     return Scaffold(
       backgroundColor: lightColor,
       appBar: AppBar(
-        backgroundColor: lightColor,
+        backgroundColor: darkColor,
         elevation: 0,
         title: Text(
           'PRODUCTS',
           style: TextStyle(
-            color: darkColor,
+            color: lightColor,
             fontFamily: "Ubuntu",
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1,
+            fontWeight: FontWeight.w600,
+            fontSize: 20,
           ),
         ),
         centerTitle: true,
@@ -37,7 +45,7 @@ class ProductView extends GetView<ProductController> {
           icon: Icon(
             Icons.arrow_back_ios,
             size: 20,
-            color: darkColor,
+            color: lightColor,
           ),
           onPressed: Get.back,
         ),
@@ -48,19 +56,22 @@ class ProductView extends GetView<ProductController> {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 16),
-              height: 30,
-              child: TabBar(
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: hitam.withOpacity(.2),
+              padding: EdgeInsets.all(8),
+              color: darkColor,
+              child: Container(
+                padding: const EdgeInsets.all(4),
+                child: TabBar(
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: putih.withOpacity(.2),
+                  ),
+                  tabs: [
+                    textTab("Dessert"),
+                    textTab("Drink"),
+                    textTab("Food"),
+                    textTab("ALL"),
+                  ],
                 ),
-                tabs: [
-                  textTab("Dessert"),
-                  textTab("Drink"),
-                  textTab("Food"),
-                  textTab("ALL"),
-                ],
               ),
             ),
             GetBuilder<ProductController>(
@@ -108,14 +119,13 @@ class ProductView extends GetView<ProductController> {
 
   Widget textTab(String text) {
     return Container(
-      height: 30,
-      padding: const EdgeInsets.all(2),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+      height: 24,
+      padding: const EdgeInsets.only(top: 2),
       child: Center(
         child: Text(
           text,
           style: TextStyle(
-            color: darkColor,
+            color: lightColor,
             fontSize: 10,
             fontFamily: "Ubuntu",
             fontWeight: FontWeight.w600,

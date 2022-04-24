@@ -6,7 +6,7 @@ import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class DessertMenu extends GetView<MenuController> {
+class DessertMenu extends StatelessWidget {
   const DessertMenu({Key? key}) : super(key: key);
 
   @override
@@ -41,10 +41,10 @@ class DessertMenu extends GetView<MenuController> {
                       data: data,
                       dataProduct: product,
                       addProduct: () async {
-                        controller.addProduct(data);
+                        c.addProduct(data);
                       },
                       minProduct: () async {
-                        controller.minProduct(data);
+                        c.minProduct(data);
                       },
                     );
                   }),

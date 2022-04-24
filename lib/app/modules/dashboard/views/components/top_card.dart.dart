@@ -1,3 +1,4 @@
+import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,8 +25,11 @@ class TopCard extends StatelessWidget {
           SizedBox(width: 16),
           GetBuilder<DashboardController>(
             builder: (c) {
+              ProductOrder data = c.bestNo1 ?? c.nullData;
               return CardDetail(
-                  tittle: 'Produk Terlaris', value: c.bestProductName);
+                tittle: 'Produk Terlaris',
+                value: data.productName ?? 'Belum ada produk',
+              );
             },
           ),
         ],
@@ -38,11 +42,11 @@ class CardDetail extends StatelessWidget {
   const CardDetail({
     Key? key,
     this.tittle = 'Total Penjualan',
-    this.value,
+    this.value = "Belum ada data",
   }) : super(key: key);
 
   final String tittle;
-  final String? value;
+  final String value;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +68,7 @@ class CardDetail extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "$tittle",
+              tittle,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontFamily: "Ubuntu",

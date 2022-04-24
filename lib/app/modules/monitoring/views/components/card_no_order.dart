@@ -37,10 +37,12 @@ class NoOrderWidget extends StatelessWidget {
           const Text(
             "PESANAN KOSONG",
             style: TextStyle(
-                color: hitam,
-                fontFamily: 'Ubuntu',
-                fontSize: 20,
-                fontWeight: FontWeight.bold),
+              color: hitam,
+              fontFamily: 'Ubuntu',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              letterSpacing: -.5,
+            ),
           ),
           const SizedBox(height: 8),
           Text(

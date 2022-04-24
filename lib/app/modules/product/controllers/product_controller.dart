@@ -19,6 +19,8 @@ class ProductController extends GetxController {
   var user = UsersModel().obs;
   var resto = RestosModel().obs;
 
+  bool isLoading = false;
+
   var data = ['FOOD', 'DRINK', 'DESSERT'].obs;
   var selected = 'FOOD'.obs;
 
@@ -69,8 +71,6 @@ class ProductController extends GetxController {
       outPath,
       format: CompressFormat.jpeg,
       quality: 10,
-      minHeight: 1000,
-      minWidth: 1000,
     );
 
     compressedImage = result;
@@ -79,24 +79,31 @@ class ProductController extends GetxController {
     return compressedImage!;
   }
 
-  void selectImage() async {
+  Future<bool> selectImage() async {
     final ImagePicker _picker = ImagePicker();
 
     try {
       final _image = await _picker.pickImage(
         source: ImageSource.gallery,
-        imageQuality: 35,
+        maxHeight: 600,
+        maxWidth: 600,
       );
 
-      if (_image != null) {
+      var file = File(_image!.path);
+      int sizeFile = file.lengthSync();
+      double size = sizeFile / (1024 * 1024);
+
+      if (size < .3) {
         pickedImage = _image;
         await _compressImage(pickedImage!.path);
 
         update();
       }
+      return true;
     } catch (e) {
       print(e);
       pickedImage = null;
+      return false;
     }
   }
 
@@ -118,6 +125,8 @@ class ProductController extends GetxController {
     List<Product> products = resto.value.products as List<Product>;
 
     try {
+      isLoading = true;
+      update();
       if (compressedImage != null) {
         await _uploadImage();
       }
@@ -149,6 +158,7 @@ class ProductController extends GetxController {
       resto(RestosModel.fromJson(restoData));
       resto.refresh();
       auth.refresh();
+      isLoading = false;
       update();
 
       Get.offAll(() => HomeView());
@@ -162,6 +172,9 @@ class ProductController extends GetxController {
 
     List<Product> products = resto.value.products as List<Product>;
     Product? produk;
+
+    isLoading = true;
+    update();
 
     products.forEach((data) {
       if (data.productName == dataProduct.productName &&
@@ -186,6 +199,7 @@ class ProductController extends GetxController {
       resto(RestosModel.fromJson(restoData));
       resto.refresh();
       auth.refresh();
+      isLoading = false;
       update();
 
       Get.offAll(() => HomeView());
@@ -193,6 +207,8 @@ class ProductController extends GetxController {
   }
 
   Future<void> editProduct(Product dataProduct) async {
+    isLoading = true;
+    update();
     CollectionReference restos = firestore.collection('restos');
 
     List<Product> products = resto.value.products as List<Product>;
@@ -236,6 +252,7 @@ class ProductController extends GetxController {
         resto(RestosModel.fromJson(restoData));
         resto.refresh();
         auth.refresh();
+        isLoading = false;
         update();
         Get.offAll(() => HomeView());
       } catch (e) {

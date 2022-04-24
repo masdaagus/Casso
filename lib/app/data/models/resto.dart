@@ -42,7 +42,7 @@ class RestosModel {
         restoName: json["restoName"],
         restoTable: json["restoTable"],
         restoTaxes: json["restoTaxes"],
-        restoEmploye: List<dynamic>.from(
+        restoEmploye: List<UsersModel>.from(
             json["restoEmploye"].map((x) => UsersModel.fromJson(x))),
         products: List<Product>.from(
             json["products"].map((x) => Product.fromJson(x))),
