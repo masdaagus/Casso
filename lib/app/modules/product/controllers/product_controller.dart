@@ -230,9 +230,9 @@ class ProductController extends GetxController {
           productName: namaProduk.text,
           productPrice: double.tryParse(hargaProduk.text) ?? 0,
           productCategory: selected.value,
-          productStock: int.tryParse(stokProduk.text) ?? 100,
+          productStock: int.tryParse(stokProduk.text),
           productDescription: deskripsiProduk.text,
-          productImage: imageUrl ?? null,
+          productImage: imageUrl ?? dataProduct.productImage,
         );
 
         products.remove(produk);

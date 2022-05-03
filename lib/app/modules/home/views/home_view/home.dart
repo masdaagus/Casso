@@ -5,8 +5,8 @@ import 'package:casso/app/modules/home/controllers/home_controller.dart';
 import 'package:casso/app/modules/monitoring/bindings/monitoring_binding.dart';
 import 'package:casso/app/modules/order/bindings/order_binding.dart';
 import 'package:casso/app/modules/order/views/order_view.dart';
-import 'package:casso/app/modules/pegawai/bindings/pegawai_binding.dart';
-import 'package:casso/app/modules/pegawai/views/pegawai_view.dart';
+import 'package:casso/app/modules/employe/bindings/pegawai_binding.dart';
+import 'package:casso/app/modules/employe/views/pegawai_view.dart';
 import 'package:casso/app/modules/product/bindings/product_binding.dart';
 import 'package:casso/app/modules/product/views/product_view.dart';
 import 'package:casso/app/utils/constant.dart';
@@ -33,14 +33,17 @@ class Home extends StatelessWidget {
         ),
         Align(
           alignment: Alignment.topCenter,
-          child: Text(
-            "CASSO",
-            style: TextStyle(
-              color: lightColor,
-              fontFamily: 'Ubuntu',
-              fontWeight: FontWeight.bold,
-              fontSize: 28,
-              letterSpacing: -.5,
+          child: Container(
+            margin: const EdgeInsets.only(top: 48),
+            child: Text(
+              "CASSO",
+              style: TextStyle(
+                color: lightColor,
+                fontFamily: 'Ubuntu',
+                fontWeight: FontWeight.bold,
+                fontSize: 32,
+                letterSpacing: -.5,
+              ),
             ),
           ),
         ),
@@ -65,6 +68,7 @@ class Home extends StatelessWidget {
             restoLocation: controller.resto.value.restoLocation,
             userName: controller.user.value.name,
             userStatus: controller.user.value.status,
+            expAt: controller.resto.value.expiredAt,
           ),
         ),
         Positioned(
@@ -108,8 +112,9 @@ class Home extends StatelessWidget {
                 tittle: 'MONITOR',
                 onTap: () => Get.to(
                   () => MonitoringView(),
-                  duration: Duration(milliseconds: 480),
+                  duration: Duration(milliseconds: 280),
                   binding: MonitoringBinding(),
+                  transition: Transition.fadeIn,
                 ),
               ),
               ButtonCard(
@@ -117,35 +122,48 @@ class Home extends StatelessWidget {
                 tittle: 'LIST ORDER',
                 onTap: () => Get.to(
                   () => CashierView(),
-                  duration: Duration(milliseconds: 500),
+                  duration: Duration(milliseconds: 280),
                   binding: CashierBinding(),
+                  transition: Transition.fadeIn,
                 ),
               ),
               ButtonCard(
                 icon: Icons.add_shopping_cart,
                 tittle: 'ORDER',
-                onTap: () => Get.to(
-                  () => OrderView(),
-                  duration: Duration(milliseconds: 500),
-                  binding: OrderBinding(),
-                ),
+                onTap: () {
+                  String date = controller.resto.value.expiredAt!;
+                  DateTime expDate = DateTime.parse(date);
+
+                  if (controller.now.isBefore(expDate)) {
+                    var expDate = Get.to(
+                      () => OrderView(),
+                      duration: Duration(milliseconds: 280),
+                      binding: OrderBinding(),
+                      transition: Transition.fadeIn,
+                    );
+                  } else {
+                    Get.defaultDialog();
+                  }
+                },
               ),
               ButtonCard(
                 icon: Icons.desktop_windows_outlined,
                 tittle: 'DASHBOARD',
                 onTap: () => Get.to(
                   () => DashboardView(),
-                  duration: Duration(milliseconds: 480),
+                  duration: Duration(milliseconds: 280),
                   binding: DashboardBinding(),
+                  transition: Transition.fadeIn,
                 ),
               ),
               ButtonCard(
                 icon: Icons.group_outlined,
                 tittle: 'PEGAWAI',
                 onTap: () => Get.to(
-                  () => PegawaiView(),
-                  duration: Duration(milliseconds: 480),
+                  () => EmployeView(),
+                  duration: Duration(milliseconds: 280),
                   binding: PegawaiBinding(),
+                  transition: Transition.fadeIn,
                 ),
               ),
               ButtonCard(
@@ -157,8 +175,9 @@ class Home extends StatelessWidget {
                 tittle: 'PRODUK',
                 onTap: () => Get.to(
                   () => ProductView(),
-                  duration: Duration(milliseconds: 480),
+                  duration: Duration(milliseconds: 280),
                   binding: ProductBinding(),
+                  transition: Transition.fadeIn,
                 ),
               ),
               // Container(

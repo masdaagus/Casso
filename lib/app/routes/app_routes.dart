@@ -13,7 +13,7 @@ abstract class Routes {
   static const MONITORING = _Paths.MONITORING;
   static const PRODUCT = _Paths.PRODUCT;
   static const INTRODUCTION = _Paths.INTRODUCTION;
-  static const PEGAWAI = _Paths.PEGAWAI;
+  static const EMPLOYE = _Paths.EMPLOYE;
   static const DASHBOARD = _Paths.DASHBOARD;
   static const PRINTER = _Paths.PRINTER;
   static const RESTO = _Paths.RESTO;
@@ -28,7 +28,7 @@ abstract class _Paths {
   static const MONITORING = '/monitoring';
   static const PRODUCT = '/product';
   static const INTRODUCTION = '/introduction';
-  static const PEGAWAI = '/pegawai';
+  static const EMPLOYE = '/employe';
   static const DASHBOARD = '/dashboard';
   static const PRINTER = '/printer';
   static const RESTO = '/resto';

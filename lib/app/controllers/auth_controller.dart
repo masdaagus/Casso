@@ -184,9 +184,8 @@ class AuthController extends GetxController {
     _googleSignIn.signOut();
     _googleSignIn.disconnect();
     isAuth.value = false;
-    // await Future.delayed(Duration(seconds: 2));
     Get.put(LoginController());
-    Get.off(() => LoginView());
+    Get.to(() => LoginView());
   }
 
   /// LOGIN WITH USERS EMPLOYE

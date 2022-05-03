@@ -8,15 +8,18 @@ class CardInfo extends StatelessWidget {
     this.restoLocation,
     this.userName,
     this.userStatus,
+    this.expAt,
   }) : super(key: key);
 
   final String? restoName;
   final String? restoLocation;
   final String? userName;
   final String? userStatus;
+  final String? expAt;
 
   @override
   Widget build(BuildContext context) {
+    final expDate = DateTime.parse(expAt!);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -43,9 +46,9 @@ class CardInfo extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 46),
+        SizedBox(height: 48),
         Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
           child: Row(
             children: [
               Text(
@@ -69,7 +72,19 @@ class CardInfo extends StatelessWidget {
               ),
             ],
           ),
-        )
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 12),
+          child: Text(
+            "Berlaku Sampai - ${df.format(expDate)}",
+            style: TextStyle(
+              color: darkColor,
+              fontFamily: 'Ubuntu',
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+          ),
+        ),
       ],
     );
   }

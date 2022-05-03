@@ -17,6 +17,8 @@ class IntroductionController extends GetxController {
   var user = UsersModel().obs;
   var resto = RestosModel().obs;
 
+  final now = DateTime.now();
+
   UserCredential? userCredential;
 
   late TextEditingController restoName;
@@ -32,26 +34,29 @@ class IntroductionController extends GetxController {
 
     final List<Product> products = [
       Product(
-        productName: 'Nasi Goreng',
-        productPrice: 5000,
-        productCategory: 'FOOD',
-        productDescription: null,
-        productStock: 100,
-      ),
+          productName: 'Nasi Goreng',
+          productPrice: 5000,
+          productCategory: 'FOOD',
+          productDescription: null,
+          productStock: 100,
+          productImage:
+              'https://www.foodforfitness.co.uk/wp-content/uploads/2018/05/IMG_7741-2000x1333.jpg'),
       Product(
-        productName: 'Teh Manis',
-        productPrice: 5000,
-        productCategory: 'DRINK',
-        productDescription: null,
-        productStock: 100,
-      ),
+          productName: 'Teh Manis',
+          productPrice: 5000,
+          productCategory: 'DRINK',
+          productDescription: null,
+          productStock: 100,
+          productImage:
+              'https://asset-a.grid.id/crop/0x0:0x0/700x465/photo/2020/10/13/1521986007.jpg'),
       Product(
-        productName: 'Kentang Goreng',
-        productPrice: 10000,
-        productCategory: 'DESSERT',
-        productDescription: null,
-        productStock: 100,
-      ),
+          productName: 'Kentang Goreng',
+          productPrice: 10000,
+          productCategory: 'DESSERT',
+          productDescription: null,
+          productStock: 100,
+          productImage:
+              'https://1.bp.blogspot.com/-szZPDTLOWDU/V7pftmWHq2I/AAAAAAAAB-8/fLvvL88OLvghYxNbDlMx0NrYQsTd1iTuACLcB/s1600/69.-Cara-Mudah-Membuat-Kentang-Goreng-Renyah-di-Rumah.jpg'),
     ];
     final List<UsersModel> employe = [
       UsersModel(
@@ -63,24 +68,24 @@ class IntroductionController extends GetxController {
         uid: null,
       ),
       UsersModel(
-        name: "kitchen.$rndm",
-        email: "kitchen.$rndm@gmail.com",
+        name: "Kitchen$rndm",
+        email: "kitchen$rndm",
         status: "KITCHEN",
         restoID: user.value.uid,
         password: '123456',
         uid: null,
       ),
       UsersModel(
-        name: "cashier.$rndm",
-        email: "cashier.$rndm@gmail.com",
+        name: "Cashier$rndm",
+        email: "cashier$rndm",
         status: "CASHIER",
         restoID: user.value.uid,
         password: '123456',
         uid: null,
       ),
       UsersModel(
-        name: "waiters.$rndm",
-        email: "waiters.$rndm@gmail.com",
+        name: "Waiter$rndm",
+        email: "waiters$rndm",
         status: "WAITERS",
         restoID: user.value.uid,
         password: '123456',
@@ -117,9 +122,13 @@ class IntroductionController extends GetxController {
         tables.add(TableModel(tableNumber: i + 1, guessName: null));
       }
 
+      DateTime expAt = now.add(Duration(days: 24));
+
       /// set resto dengan model
       await restos.doc(user.value.uid).set(
             RestosModel(
+              createAt: now.toIso8601String(),
+              expiredAt: expAt.toIso8601String(),
               ownerEmail: user.value.email,
               ownerName: user.value.name,
               restoName: restoName.text,

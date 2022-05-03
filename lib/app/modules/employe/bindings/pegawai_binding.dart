@@ -5,8 +5,8 @@ import '../controllers/pegawai_controller.dart';
 class PegawaiBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<PegawaiController>(
-      () => PegawaiController(),
+    Get.lazyPut<EmployeController>(
+      () => EmployeController(),
     );
   }
 }

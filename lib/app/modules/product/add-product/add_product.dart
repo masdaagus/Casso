@@ -36,12 +36,12 @@ class AddProductView extends StatelessWidget {
 
       /// APP BAR
       appBar: AppBar(
-        backgroundColor: lightColor,
+        backgroundColor: darkColor,
         elevation: 0,
         title: Text(
           appBarTittle,
           style: TextStyle(
-            color: darkColor,
+            color: lightColor,
             fontFamily: "Ubuntu",
             fontWeight: FontWeight.bold,
             fontSize: 18,
@@ -52,7 +52,7 @@ class AddProductView extends StatelessWidget {
           icon: Icon(
             Icons.arrow_back_ios,
             size: 20,
-            color: darkColor,
+            color: lightColor,
           ),
           onPressed: Get.back,
         ),
@@ -61,7 +61,7 @@ class AddProductView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: IconButton(
               onPressed: () => ctrl.deleteProduct(dataProduct!),
-              icon: Icon(Icons.delete, color: darkColor),
+              icon: Icon(Icons.delete, color: lightColor),
             ),
           )
         ],

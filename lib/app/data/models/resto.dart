@@ -13,6 +13,8 @@ import 'package:casso/app/data/models/users.dart';
 
 class RestosModel {
   const RestosModel({
+    this.createAt,
+    this.expiredAt,
     this.ownerEmail,
     this.ownerName,
     this.restoLocation,
@@ -24,6 +26,8 @@ class RestosModel {
     this.restoTaxes,
   });
 
+  final String? createAt;
+  final String? expiredAt;
   final int? restoTable;
   final String? ownerEmail;
   final String? ownerName;
@@ -36,6 +40,8 @@ class RestosModel {
 
   // final Products? products;
   factory RestosModel.fromJson(Map<String, dynamic> json) => RestosModel(
+        createAt: json["createAt"],
+        expiredAt: json["expiredAt"],
         ownerEmail: json["ownerEmail"],
         ownerName: json["ownerName"],
         restoLocation: json["restoLocation"],
@@ -51,6 +57,8 @@ class RestosModel {
       );
 
   Map<String, dynamic> toJson() => {
+        "createAt": createAt,
+        "expiredAt": expiredAt,
         "ownerEmail": ownerEmail,
         "ownerName": ownerName,
         "restoLocation": restoLocation,

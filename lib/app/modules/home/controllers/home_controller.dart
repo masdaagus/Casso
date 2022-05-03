@@ -15,34 +15,24 @@ class HomeController extends GetxController {
   bool isLoading = false;
 
   List<UsersModel> employes = [];
-  List<UsersModel> kitchen = [];
-  List<UsersModel> waiters = [];
-  List<UsersModel> cashier = [];
 
   late TextEditingController restoName;
   late TextEditingController restoTable;
   late TextEditingController restoLocation;
   late TextEditingController restoTaxes;
 
+  List<String> images = [
+    "assets/images/head_people.jpeg",
+    "assets/images/avatar-2.png",
+    "assets/images/avatar-3.png",
+    "assets/images/avatar-1.png",
+    "assets/images/avatar-4.png",
+  ];
+
   final now = DateTime.now();
 
   Future<void> _initEmployes() async {
     employes = resto.value.restoEmploye! as List<UsersModel>;
-
-    employes.forEach((data) {
-      print(data.name);
-      if (data.status == 'KITCHEN') {
-        kitchen.add(data);
-      }
-      if (data.status == 'WAITERS') {
-        waiters.add(data);
-      }
-      if (data.status == 'CASHIER') {
-        cashier.add(data);
-      }
-    });
-
-    print(employes.length);
   }
 
   Future<void> _deleteOrdersCollection() async {

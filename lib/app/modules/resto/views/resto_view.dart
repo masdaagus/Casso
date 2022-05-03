@@ -70,8 +70,8 @@ class RestoView extends GetView<RestoController> {
                     ),
                     SizedBox(height: 56),
                     ElevatedButton(
-                      onPressed: () {
-                        controller.updateResto();
+                      onPressed: () async {
+                        await controller.updateResto();
                         Get.back();
                       },
                       child: Text('SUBMIT'),
