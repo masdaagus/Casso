@@ -9,11 +9,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../controllers/notification_controller.dart';
+
 class ProsesMonitoring extends GetView<MonitoringController> {
   const ProsesMonitoring({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final notification = Get.put(NotificationController());
     return Scaffold(
       backgroundColor: lightColor,
       body: Container(
@@ -48,6 +51,9 @@ class ProsesMonitoring extends GetView<MonitoringController> {
                         String status = controller.user.value.status!;
                         bool getAcses;
 
+                        String table = data.tableNumber.toString();
+                        String guess = data.guessName!.toUpperCase();
+
                         switch (status) {
                           case 'OWNER':
                             getAcses = true;
@@ -71,6 +77,10 @@ class ProsesMonitoring extends GetView<MonitoringController> {
                             if (getAcses) {
                               controller.setProsesAll(
                                   data, id, 'proses', 'siap');
+                              notification.payloadNotification(
+                                  tittle: 'ORDER SELESAI',
+                                  body:
+                                      'Pesanan $guess meja $table siap diantar');
                             } else {
                               Get.snackbar(
                                 status,
@@ -98,6 +108,11 @@ class ProsesMonitoring extends GetView<MonitoringController> {
                                         'proses',
                                         'siap',
                                       );
+
+                                      notification.payloadNotification(
+                                          tittle: 'ORDER SELESAI',
+                                          body:
+                                              '${productOrder.productName} $guess meja $table siap diantar');
                                     } else {
                                       Get.snackbar(
                                         status,

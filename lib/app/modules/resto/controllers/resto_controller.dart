@@ -1,5 +1,4 @@
 import 'package:casso/app/controllers/auth_controller.dart';
-import 'package:casso/app/data/models/order.dart';
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/table.dart';
 import 'package:casso/app/data/models/users.dart';

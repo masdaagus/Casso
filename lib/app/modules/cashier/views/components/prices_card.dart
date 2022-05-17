@@ -47,7 +47,7 @@ class PricesCard extends GetView<CashierController> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 height: 32,
                 decoration: BoxDecoration(
-                  color: darkColor,
+                  color: lightColor,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -56,7 +56,7 @@ class PricesCard extends GetView<CashierController> {
                     Text(
                       "TABLE ${data!.tableNumber} - (${data!.guessName})",
                       style: TextStyle(
-                        color: lightColor,
+                        color: darkColor,
                         fontFamily: "Ubuntu",
                         fontWeight: FontWeight.bold,
                         // letterSpacing: .5,
@@ -66,7 +66,7 @@ class PricesCard extends GetView<CashierController> {
                     Text(
                       "By: ${data!.waitersName}",
                       style: TextStyle(
-                        color: lightColor,
+                        color: darkColor,
                         fontFamily: "Ubuntu",
                         fontWeight: FontWeight.bold,
                         fontSize: 12,

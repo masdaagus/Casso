@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/notification_controller.dart';
 import 'bottom_sheet/bottom_sheet.dart';
 import 'category/dessert.dart';
 import 'category/drink.dart';
@@ -35,6 +36,8 @@ class Menus extends GetView<MenuController> {
       statusBarColor: darkColor,
       statusBarBrightness: Brightness.light,
     ));
+
+    final notification = Get.put(NotificationController());
     return WillPopScope(
       onWillPop: () async {
         Get.defaultDialog(
@@ -137,6 +140,12 @@ class Menus extends GetView<MenuController> {
                                 controller.setOrder(
                                   guessName: guessName ?? data!.guessName,
                                   table: table ?? data!.tableNumber,
+                                );
+
+                                notification.payloadNotification(
+                                  tittle: 'ORDER',
+                                  body:
+                                      'Pesanan dari meja ${table ?? data!.tableNumber} by ${controller.user.value.name}',
                                 );
                               },
                             ),

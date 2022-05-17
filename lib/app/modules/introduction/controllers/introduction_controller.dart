@@ -8,6 +8,7 @@ import 'package:casso/app/data/models/table.dart';
 import 'package:casso/app/data/models/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -158,6 +159,8 @@ class IntroductionController extends GetxController {
 
       resto(RestosModel.fromJson(restoData));
       resto.refresh();
+
+      await FirebaseMessaging.instance.subscribeToTopic('masda');
 
       auth.isAuth.value = true;
 

@@ -51,10 +51,9 @@ class LoginGoogleButton extends StatelessWidget {
         Text(
           "Login with Google",
           style: TextStyle(
-            color: darkColor.withOpacity(.5),
+            color: darkColor.withOpacity(.7),
             fontFamily: "Ubuntu",
             fontSize: 12,
-            letterSpacing: .5,
           ),
         ),
       ],

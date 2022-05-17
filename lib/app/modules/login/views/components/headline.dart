@@ -9,7 +9,7 @@ class Headline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 24, bottom: 42),
+      padding: const EdgeInsets.only(top: 24, bottom: 32),
       child: Text(
         "Casso",
         style: TextStyle(

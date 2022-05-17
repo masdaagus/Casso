@@ -35,49 +35,40 @@ class CardTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         color: putih,
       ),
-      child: Row(
-        children: [
-          // Icon(
-          //   icon,
-          //   color: darkColor,
-          // ),
-          // SizedBox(width: 8),
-          Expanded(
-              child: TextFormField(
-            keyboardType: isNumtype ? TextInputType.number : null,
-            validator: validator,
-            maxLength: 30,
-            controller: controller,
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(0),
-              labelText: label,
-              isDense: true,
-              errorStyle: TextStyle(
-                color: merah,
-                fontFamily: "Ubuntu",
-                fontSize: 14,
-                letterSpacing: .5,
-              ),
-              counterText: "",
-              hintText: hintText,
-              hintStyle: TextStyle(
-                fontSize: 14,
-                fontFamily: "Ubuntu",
-                fontWeight: FontWeight.w500,
-                color: darkColor.withOpacity(.6),
-              ),
-              errorBorder: InputBorder.none,
-              border: InputBorder.none,
-            ),
-            style: TextStyle(
-              fontSize: 14,
-              fontFamily: "Ubuntu",
-              fontWeight: FontWeight.w500,
-              color: darkColor,
-            ),
-          )),
-        ],
-      ),
+      child: Expanded(
+          child: TextFormField(
+        keyboardType: isNumtype ? TextInputType.number : null,
+        validator: validator,
+        maxLength: 30,
+        controller: controller,
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.all(0),
+          labelText: label,
+          isDense: true,
+          errorStyle: TextStyle(
+            color: merah,
+            fontFamily: "Ubuntu",
+            fontSize: 14,
+            letterSpacing: .5,
+          ),
+          counterText: "",
+          hintText: hintText,
+          hintStyle: TextStyle(
+            fontSize: 14,
+            fontFamily: "Ubuntu",
+            fontWeight: FontWeight.w500,
+            color: darkColor.withOpacity(.6),
+          ),
+          errorBorder: InputBorder.none,
+          border: InputBorder.none,
+        ),
+        style: TextStyle(
+          fontSize: 14,
+          fontFamily: "Ubuntu",
+          fontWeight: FontWeight.w500,
+          color: darkColor,
+        ),
+      )),
     );
   }
 }

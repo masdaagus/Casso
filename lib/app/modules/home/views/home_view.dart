@@ -1,3 +1,4 @@
+import 'package:casso/app/controllers/notification_controller.dart';
 import 'package:casso/app/modules/home/controllers/home_controller.dart';
 import 'package:casso/app/modules/home/views/news/news_view.dart';
 import 'package:casso/app/modules/home/views/notifications/notification_view.dart';
@@ -7,6 +8,7 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../tes.dart';
 import 'home_view/home.dart';
 
 class HomeView extends StatefulWidget {
@@ -24,10 +26,10 @@ class _HomeViewState extends State<HomeView> {
     NewsView(),
     SettingsView(),
   ];
+
   @override
   Widget build(BuildContext context) {
     Get.put(() => HomeController());
-    final ctrl = Get.find<HomeController>();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       systemNavigationBarColor: lightColor,
       systemNavigationBarIconBrightness: Brightness.dark,
@@ -61,8 +63,8 @@ class _HomeViewState extends State<HomeView> {
       bottomNavigationBar: SalomonBottomBar(
           selectedItemColor: merah,
           currentIndex: _currentIndex,
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-          itemPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          itemPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           onTap: (i) {
             setState(() => _currentIndex = i);
           },
@@ -73,6 +75,11 @@ class _HomeViewState extends State<HomeView> {
         },
         child: tabs[_currentIndex],
       ),
+      // floatingActionButton: ElevatedButton(
+      //     onPressed: () {
+      //       Get.to(MasdaAgus());
+      //     },
+      //     child: Text("TES PRINTER")),
     );
   }
 }

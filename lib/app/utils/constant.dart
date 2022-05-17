@@ -42,3 +42,8 @@ const styl = TextStyle(
   fontSize: 14,
   fontWeight: FontWeight.w600,
 );
+
+const serverKey =
+    'AAAAAF10iMk:APA91bFGDodqhpbvmQjNyrNxY_PrIlgtM8_HoPkT6WIu-QRilf2JUDT-YhO6NkHpqHHC6pzmCDwWDVtsN_vDbMdK_A4xl4cFtead5qP7hgicSp_dg2JD0u-TCXlWPQYlLrlx7vU7jFoz';
+
+const googleFcm = 'https://fcm.googleapis.com/fcm/send';

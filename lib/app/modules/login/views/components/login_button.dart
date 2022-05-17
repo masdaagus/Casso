@@ -43,8 +43,7 @@ class LoginButton extends StatelessWidget {
             style: TextStyle(
               color: darkColor,
               fontFamily: "Ubuntu",
-              fontWeight: FontWeight.w800,
-              letterSpacing: 1,
+              fontWeight: FontWeight.bold,
               fontSize: 18,
             ),
           ),

@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import '../controllers/pegawai_controller.dart';
 import 'components/card_employe.dart';
 import 'components/search_bar.dart';
-import 'employe_edit_view.dart';
+import 'employe_detail.dart';
 
 class EmployeView extends GetView<EmployeController> {
   @override

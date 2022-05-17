@@ -17,15 +17,15 @@ class PaymentOrderView extends StatelessWidget {
       backgroundColor: lightColor,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, size: 20, color: darkColor),
+          icon: Icon(Icons.arrow_back_ios, size: 20, color: lightColor),
           onPressed: Get.back,
         ),
-        backgroundColor: lightColor,
+        backgroundColor: darkColor,
         elevation: 0,
         title: Text(
           'PEMBAYARAN',
           style: TextStyle(
-            color: darkColor,
+            color: lightColor,
             fontFamily: "Ubuntu",
             letterSpacing: 1,
             fontWeight: FontWeight.bold,
@@ -39,31 +39,12 @@ class PaymentOrderView extends StatelessWidget {
           physics: BouncingScrollPhysics(),
           child: Column(
             children: [
-              Text("data"),
               PaymentOrderWidget(
                 data: data,
                 onTap: () {
                   controller.setPaid(data);
                   Get.back();
                   Get.back();
-
-                  // Get.defaultDialog(
-                  // radius: 16,
-                  // actions: [
-                  //   Icon(Icons.add),
-                  //   Icon(Icons.add),
-                  //   Icon(Icons.add),
-                  // ],
-                  // backgroundColor: Colors.transparent,
-
-                  // confirm: Text("Widget Confirm"),
-                  // content: Container(
-                  //   height: 100,
-                  //   width: 100,
-                  //   color: darkColor,
-                  // ),
-                  // contentPadding: const EdgeInsets.all(16),
-                  // );
                 },
               ),
             ],

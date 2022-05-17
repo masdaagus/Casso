@@ -48,7 +48,6 @@ class CustomTextField extends StatelessWidget {
               style: TextStyle(
                 color: darkColor,
                 fontFamily: "Ubuntu",
-                letterSpacing: .5,
               ),
               decoration: InputDecoration(
                 hintText: hintText,
@@ -60,7 +59,6 @@ class CustomTextField extends StatelessWidget {
                 hintStyle: TextStyle(
                   color: darkColor.withOpacity(.7),
                   fontFamily: "Ubuntu",
-                  letterSpacing: .5,
                 ),
               ),
             ),
@@ -71,7 +69,7 @@ class CustomTextField extends StatelessWidget {
                   child: Container(
                     width: 48,
                     child: Icon(
-                      Icons.remove_red_eye,
+                      Icons.remove_red_eye_outlined,
                       color: darkColor.withOpacity(.7),
                     ),
                   ),

@@ -28,13 +28,13 @@ class Home extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 240,
+          height: 220,
           color: darkColor,
         ),
         Align(
-          alignment: Alignment.topCenter,
+          alignment: Alignment.topLeft,
           child: Container(
-            margin: const EdgeInsets.only(top: 48),
+            margin: const EdgeInsets.only(left: 16, top: 62),
             child: Text(
               "CASSO",
               style: TextStyle(
@@ -49,9 +49,9 @@ class Home extends StatelessWidget {
         ),
         Container(
           margin:
-              const EdgeInsets.only(left: 16, right: 16, top: 190, bottom: 32),
+              const EdgeInsets.only(left: 16, right: 16, top: 120, bottom: 52),
           width: double.infinity,
-          height: 190,
+          height: 180,
           decoration: BoxDecoration(
             color: putih,
             borderRadius: BorderRadius.circular(8),
@@ -73,7 +73,7 @@ class Home extends StatelessWidget {
         ),
         Positioned(
           right: -16,
-          top: 90,
+          top: 20,
           child: Container(
             height: 180,
             width: 180,
@@ -82,9 +82,9 @@ class Home extends StatelessWidget {
         ),
         Positioned(
           right: 32,
-          top: 330,
+          top: 250,
           child: Transform.rotate(
-            angle: -math.pi / 8,
+            angle: -math.pi / 7,
             child: Container(
               height: 100,
               width: 100,
@@ -92,98 +92,102 @@ class Home extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          margin: const EdgeInsets.only(top: 450),
-          // padding: const EdgeInsets.symmetric(horizontal: 32),
-          // color: orange.withOpacity(.2),
-          child: GridView.count(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 24,
-              vertical: 16,
-            ),
-            physics: BouncingScrollPhysics(),
-            crossAxisSpacing: 24,
-            // childAspectRatio: 1.1,
-            crossAxisCount: 3,
-            mainAxisSpacing: 24,
-            children: [
-              ButtonCard(
-                icon: Icons.computer,
-                tittle: 'MONITOR',
-                onTap: () => Get.to(
-                  () => MonitoringView(),
-                  duration: Duration(milliseconds: 280),
-                  binding: MonitoringBinding(),
-                  transition: Transition.fadeIn,
-                ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            margin: const EdgeInsets.only(top: 330),
+            // padding: const EdgeInsets.symmetric(horizontal: 32),
+            // color: orange.withOpacity(.2),
+            child: GridView.count(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 4,
               ),
-              ButtonCard(
-                icon: Icons.assignment_outlined,
-                tittle: 'LIST ORDER',
-                onTap: () => Get.to(
-                  () => CashierView(),
-                  duration: Duration(milliseconds: 280),
-                  binding: CashierBinding(),
-                  transition: Transition.fadeIn,
+              physics: BouncingScrollPhysics(),
+              crossAxisSpacing: 16,
+              childAspectRatio: .8,
+              crossAxisCount: 3,
+              mainAxisSpacing: 16,
+              shrinkWrap: true,
+              children: [
+                ButtonCard(
+                  icon: Icons.computer,
+                  tittle: 'MONITOR',
+                  onTap: () => Get.to(
+                    () => MonitoringView(),
+                    duration: Duration(milliseconds: 280),
+                    binding: MonitoringBinding(),
+                    transition: Transition.fadeIn,
+                  ),
                 ),
-              ),
-              ButtonCard(
-                icon: Icons.add_shopping_cart,
-                tittle: 'ORDER',
-                onTap: () {
-                  String date = controller.resto.value.expiredAt!;
-                  DateTime expDate = DateTime.parse(date);
+                ButtonCard(
+                  icon: Icons.assignment_outlined,
+                  tittle: 'LIST ORDER',
+                  onTap: () => Get.to(
+                    () => CashierView(),
+                    duration: Duration(milliseconds: 280),
+                    binding: CashierBinding(),
+                    transition: Transition.fadeIn,
+                  ),
+                ),
+                ButtonCard(
+                  icon: Icons.add_shopping_cart,
+                  tittle: 'ORDER',
+                  onTap: () {
+                    String date = controller.resto.value.expiredAt!;
+                    DateTime expDate = DateTime.parse(date);
 
-                  if (controller.now.isBefore(expDate)) {
-                    var expDate = Get.to(
-                      () => OrderView(),
-                      duration: Duration(milliseconds: 280),
-                      binding: OrderBinding(),
-                      transition: Transition.fadeIn,
-                    );
-                  } else {
-                    Get.defaultDialog();
-                  }
-                },
-              ),
-              ButtonCard(
-                icon: Icons.desktop_windows_outlined,
-                tittle: 'DASHBOARD',
-                onTap: () => Get.to(
-                  () => DashboardView(),
-                  duration: Duration(milliseconds: 280),
-                  binding: DashboardBinding(),
-                  transition: Transition.fadeIn,
+                    if (controller.now.isBefore(expDate)) {
+                      Get.to(
+                        () => OrderView(),
+                        duration: Duration(milliseconds: 280),
+                        binding: OrderBinding(),
+                        transition: Transition.fadeIn,
+                      );
+                    } else {
+                      Get.defaultDialog();
+                    }
+                  },
                 ),
-              ),
-              ButtonCard(
-                icon: Icons.group_outlined,
-                tittle: 'PEGAWAI',
-                onTap: () => Get.to(
-                  () => EmployeView(),
-                  duration: Duration(milliseconds: 280),
-                  binding: PegawaiBinding(),
-                  transition: Transition.fadeIn,
+                ButtonCard(
+                  icon: Icons.desktop_windows_outlined,
+                  tittle: 'DASHBOARD',
+                  onTap: () => Get.to(
+                    () => DashboardView(),
+                    duration: Duration(milliseconds: 280),
+                    binding: DashboardBinding(),
+                    transition: Transition.fadeIn,
+                  ),
                 ),
-              ),
-              ButtonCard(
-                noIcon: SvgPicture.asset(
-                  "assets/svg/burger.svg",
-                  color: darkColor.withOpacity(.8),
-                  width: 38,
+                ButtonCard(
+                  icon: Icons.group_outlined,
+                  tittle: 'PEGAWAI',
+                  onTap: () => Get.to(
+                    () => EmployeView(),
+                    duration: Duration(milliseconds: 280),
+                    binding: PegawaiBinding(),
+                    transition: Transition.fadeIn,
+                  ),
                 ),
-                tittle: 'PRODUK',
-                onTap: () => Get.to(
-                  () => ProductView(),
-                  duration: Duration(milliseconds: 280),
-                  binding: ProductBinding(),
-                  transition: Transition.fadeIn,
+                ButtonCard(
+                  noIcon: SvgPicture.asset(
+                    "assets/svg/burger.svg",
+                    color: darkColor.withOpacity(.8),
+                    width: 38,
+                  ),
+                  tittle: 'PRODUK',
+                  onTap: () => Get.to(
+                    () => ProductView(),
+                    duration: Duration(milliseconds: 280),
+                    binding: ProductBinding(),
+                    transition: Transition.fadeIn,
+                  ),
                 ),
-              ),
-              // Container(
-              //   color: merah,
-              // ),
-            ],
+                // Container(
+                //   color: merah,
+                // ),
+              ],
+            ),
           ),
         )
       ],

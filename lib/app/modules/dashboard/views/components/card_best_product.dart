@@ -18,7 +18,6 @@ class CardBestProduct extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     double? _total = (productQty) * (productPrice);
     return Container(
-      width: size.width * .68,
       margin: const EdgeInsets.only(right: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
@@ -51,7 +50,8 @@ class CardBestProduct extends StatelessWidget {
             )),
           ),
           Container(
-            padding: const EdgeInsets.all(8.0),
+            padding:
+                const EdgeInsets.only(top: 16, bottom: 16, left: 8, right: 8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

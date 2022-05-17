@@ -46,7 +46,7 @@ class CardInfo extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 48),
+        SizedBox(height: 40),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
           child: Row(
@@ -74,7 +74,7 @@ class CardInfo extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 12),
+          padding: const EdgeInsets.only(left: 12, bottom: 16),
           child: Text(
             "Berlaku Sampai - ${df.format(expDate)}",
             style: TextStyle(

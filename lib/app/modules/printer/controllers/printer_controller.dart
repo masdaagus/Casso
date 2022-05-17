@@ -1,20 +1,8 @@
 import 'package:get/get.dart';
 
 class PrinterController extends GetxController {
-  //TODO: Implement PrinterController
-
-  final count = 0.obs;
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
 }

@@ -6,6 +6,7 @@ import 'package:casso/app/utils/constant.dart';
 import 'package:casso/app/utils/splash_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -22,35 +23,35 @@ class AuthController extends GetxController {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  /// DELETE DATA JIKA SUDAH BEDA HARI
-
   /// AUTO LOGIN
   Future<bool> autoLogin() async {
     try {
+      /// LOGIN DENGAN ACCOUNT
+
       try {
-        /// LOGIN DENGAN ACCOUNT
         final box = GetStorage();
         String email = box.read(emailKey);
         String password = box.read(passwordKey);
+        if (email.isNotEmpty) {
+          CollectionReference users = firestore.collection("users");
+          final userDoc = await users.doc(email).get();
+          final userData = userDoc.data() as Map<String, dynamic>;
+          user(UsersModel.fromJson(userData));
+          user.refresh();
 
-        CollectionReference users = firestore.collection("users");
-        final userDoc = await users.doc(email).get();
-        final userData = userDoc.data() as Map<String, dynamic>;
-        user(UsersModel.fromJson(userData));
-        user.refresh();
+          if (email == user.value.email && password == user.value.password) {
+            CollectionReference restos = firestore.collection("restos");
+            final restoDoc = await restos.doc(user.value.restoID).get();
+            final restoData = restoDoc.data() as Map<String, dynamic>;
+            resto(RestosModel.fromJson(restoData));
+            resto.refresh();
 
-        if (email == user.value.email && password == user.value.password) {
-          CollectionReference restos = firestore.collection("restos");
-          final restoDoc = await restos.doc(user.value.restoID).get();
-          final restoData = restoDoc.data() as Map<String, dynamic>;
-          resto(RestosModel.fromJson(restoData));
-          resto.refresh();
+            isAuth.value = true;
 
-          isAuth.value = true;
+            Get.offAllNamed('/home');
 
-          Get.offAllNamed('/home');
-
-          print("BERHASIL AUTO LOGIN DENGAN EMPLOYE");
+            print("BERHASIL AUTO LOGIN DENGAN EMPLOYE");
+          }
         }
       } catch (e) {
         print(e);
@@ -96,13 +97,23 @@ class AuthController extends GetxController {
     }
   }
 
+  /// REGISTER WITH EMAIL AND PASSWORD
+  Future<bool> register() async {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: 'masdacoc@gmail.com', password: "123456");
+    } catch (e) {
+      print(e);
+    }
+    return true;
+  }
+
   /// LOGIN LOGIN WITH GOOGLE
   Future<bool> loginWithGoogle() async {
     try {
       await _googleSignIn.signOut();
       await _googleSignIn.signIn().then((value) {
         Get.to(() => SplashScreen());
-        print('LOGIN NIH LOGIN NIH LOGIN NIH LOGIN NIH ');
         _curentUser = value;
       });
 
@@ -119,8 +130,6 @@ class AuthController extends GetxController {
         await FirebaseAuth.instance
             .signInWithCredential(credential)
             .then((value) => userCredential = value);
-        print("USER CREDENTIAL DARI LOGIN = ");
-        print(userCredential);
 
         /// MEMASUKKAN DATA KE FIREBASE
         CollectionReference users = firestore.collection("users");
@@ -167,6 +176,7 @@ class AuthController extends GetxController {
 
         // kalo user sudah ke home otomatis user telah mengisi nama resto
       }
+
       return true;
     } catch (error) {
       print("error nih =  $error");
@@ -183,6 +193,7 @@ class AuthController extends GetxController {
     box.remove("password");
     _googleSignIn.signOut();
     _googleSignIn.disconnect();
+    await FirebaseMessaging.instance.unsubscribeFromTopic(user.value.restoID!);
     isAuth.value = false;
     Get.put(LoginController());
     Get.to(() => LoginView());
@@ -216,7 +227,6 @@ class AuthController extends GetxController {
         await box.write(passwordKey, password);
 
         isAuth.value = true;
-        await Future.delayed(Duration(seconds: 2));
         Get.offAllNamed('/home');
         print("BERHASIL LOGIN EMPLOYE");
       }

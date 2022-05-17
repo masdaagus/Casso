@@ -21,9 +21,22 @@ class SettingsView extends GetView<HomeController> {
       child: Stack(
         children: [
           Container(
+            padding: const EdgeInsets.only(top: 24),
             height: 160,
             width: double.infinity,
             color: darkColor,
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: Text(
+                "PENGATURAN",
+                style: TextStyle(
+                  color: lightColor,
+                  fontFamily: "Ubuntu",
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20,
+                ),
+              ),
+            ),
           ),
           CardInfoResto(
             ownerName: ctrl.resto.value.ownerName,

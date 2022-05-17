@@ -33,7 +33,8 @@ class DropDownCategory extends StatelessWidget {
                   isDense: true,
                   dropdownColor: putih,
                   items: ctrl.data
-                      .map((item) => DropdownMenuItem<String>(
+                      .map(
+                        (item) => DropdownMenuItem<String>(
                           value: item,
                           child: Container(
                             // color: abu,
@@ -46,7 +47,9 @@ class DropDownCategory extends StatelessWidget {
                                 color: darkColor,
                               ),
                             ),
-                          )))
+                          ),
+                        ),
+                      )
                       .toList(),
                   onChanged: (item) {
                     ctrl.selected.value = item!;

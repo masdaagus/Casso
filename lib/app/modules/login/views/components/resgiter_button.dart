@@ -5,13 +5,15 @@ class RegisterTextButton extends StatelessWidget {
   const RegisterTextButton({
     Key? key,
     this.onTap,
-    this.askText = "Don't have an account",
-    this.actionText = "Register!",
+    required this.isRegister,
+    // this.askText = "Don't have an account",
+    // this.actionText = "Register!",
   }) : super(key: key);
 
   final VoidCallback? onTap;
-  final String askText;
-  final String actionText;
+  final bool isRegister;
+  // final String askText;
+  // final String actionText;
 
   @override
   Widget build(BuildContext context) {
@@ -21,24 +23,23 @@ class RegisterTextButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            askText,
+            isRegister ? 'Already have an account' : "Don't have an account",
             style: TextStyle(
-              color: abu,
+              color: darkColor.withOpacity(.7),
               fontFamily: "Ubuntu",
               fontSize: 12,
-              letterSpacing: .5,
             ),
           ),
           SizedBox(width: 4),
           GestureDetector(
             onTap: onTap,
             child: Text(
-              actionText,
+              isRegister ? "LOGIN" : 'REGISTER',
               style: TextStyle(
                 color: Color(0XFFE19D0A),
                 fontFamily: "Ubuntu",
                 fontSize: 12,
-                letterSpacing: .5,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),

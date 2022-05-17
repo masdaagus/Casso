@@ -65,6 +65,7 @@ class OrderView extends GetView<OrderController> {
                         crossAxisSpacing: 20,
                         mainAxisSpacing: 20,
                         crossAxisCount: 3,
+                        childAspectRatio: .9,
                         physics: BouncingScrollPhysics(),
                         children: List.generate(
                           tables.length,

@@ -17,12 +17,18 @@ import 'components/login_button.dart';
 import 'components/login_google.dart';
 import 'components/resgiter_button.dart';
 
-class LoginView extends GetView<LoginController> {
+class LoginView extends StatefulWidget {
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
   final auth = Get.put(AuthController());
 
+  final controller = Get.put(LoginController());
+  late bool _isRegister = false;
   @override
   Widget build(BuildContext context) {
-    Get.put(() => LoginController());
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: lightColor,
@@ -31,13 +37,17 @@ class LoginView extends GetView<LoginController> {
         child: SafeArea(
           child: Stack(
             children: [
-              Container(
-                margin: const EdgeInsets.only(top: 64),
-                child: Image.asset(
-                  "assets/images/Saly-22.png",
-                  fit: BoxFit.cover,
-                  width: size.width,
-                  height: size.height * .4,
+              Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  margin: const EdgeInsets.only(top: 48),
+                  width: Get.width * .8,
+                  child: Image.asset(
+                    "assets/images/Saly-22.png",
+                    fit: BoxFit.cover,
+                    width: size.width,
+                    height: size.height * .4,
+                  ),
                 ),
               ),
               Positioned(
@@ -81,9 +91,12 @@ class LoginView extends GetView<LoginController> {
                       sigmaX: 45,
                       sigmaY: 45,
                     ),
-                    child: Container(
+                    child: AnimatedContainer(
+                      duration: Duration(milliseconds: 500),
+                      // curve: Curves.fastOutSlowIn,
                       width: Get.width,
-                      height: Get.height * .65,
+                      height: size.height * .65,
+                      // height: _isRegister ? size.height : size.height * .65,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
@@ -100,32 +113,52 @@ class LoginView extends GetView<LoginController> {
                           children: [
                             // HEADLINE TEXT CASSO
                             Headline(),
+                            _isRegister
+                                ? GetBuilder<LoginController>(
+                                    builder: (c) {
+                                      return CustomTextField(
+                                        hintText: "Name",
+                                        icon: Icons.person_outline_outlined,
+                                        controller:
+                                            controller.passwordController,
+                                      );
+                                    },
+                                  )
+                                : Container(),
 
                             // TEXTFIELD EMAIL
                             CustomTextField(
-                              hintText: "Email",
+                              hintText: _isRegister ? "Email" : 'Email or ID',
                               icon: Icons.person_outline_outlined,
                               controller: controller.emailController,
                             ),
+
                             // TEXTFIELD PASSWORD
-                            GetBuilder<LoginController>(
-                              builder: (c) {
-                                return CustomTextField(
-                                  hintText: "Password",
-                                  icon: Icons.lock_outline_rounded,
-                                  controller: controller.passwordController,
-                                  isObsecure: c.isHide,
-                                  isNumType: true,
-                                  isCanHide: true,
-                                  tapToHide: () => c.hide(),
-                                );
-                              },
-                            ),
+                            _isRegister
+                                ? Container()
+                                : GetBuilder<LoginController>(
+                                    builder: (c) {
+                                      return CustomTextField(
+                                        hintText: "Password",
+                                        icon: Icons.lock_outline_rounded,
+                                        controller:
+                                            controller.passwordController,
+                                        isObsecure: c.isHide,
+                                        isNumType: true,
+                                        isCanHide: true,
+                                        tapToHide: () => c.hide(),
+                                      );
+                                    },
+                                  ),
+
                             // BUTTON LOGIN
                             LoginButton(
-                              onTap: () => auth.loginEmploye(
-                                  controller.emailController.text,
-                                  controller.passwordController.text),
+                              tittle: _isRegister ? 'REGISTER' : 'LOGIN',
+                              onTap: () => _isRegister
+                                  ? auth.register()
+                                  : auth.loginEmploye(
+                                      controller.emailController.text,
+                                      controller.passwordController.text),
                             ),
                             // BUTTON LOGIN WITH GOOGLE
                             LoginGoogleButton(
@@ -133,8 +166,15 @@ class LoginView extends GetView<LoginController> {
                             ),
                             // REGISTER
                             RegisterTextButton(
-                              onTap: () => Get.to(() => RegisterView()),
-                            )
+                              // onTap: () => Get.to(() => RegisterView()),
+                              isRegister: _isRegister,
+                              onTap: () {
+                                print('object');
+                                _isRegister = !_isRegister;
+                                setState(() {});
+                              },
+                            ),
+                            SizedBox(height: 64)
                           ],
                         ),
                       ),

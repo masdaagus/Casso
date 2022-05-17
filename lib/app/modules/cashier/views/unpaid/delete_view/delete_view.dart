@@ -21,15 +21,15 @@ class DeleteOrderView extends StatelessWidget {
       backgroundColor: lightColor,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, size: 20, color: darkColor),
+          icon: Icon(Icons.arrow_back_ios, size: 20, color: lightColor),
           onPressed: Get.back,
         ),
-        backgroundColor: lightColor,
+        backgroundColor: darkColor,
         elevation: 0,
         title: Text(
           'HAPUS ORDER',
           style: TextStyle(
-            color: darkColor,
+            color: lightColor,
             fontFamily: "Ubuntu",
             letterSpacing: 1,
             fontWeight: FontWeight.bold,
