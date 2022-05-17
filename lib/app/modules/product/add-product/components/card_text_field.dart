@@ -35,8 +35,7 @@ class CardTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         color: putih,
       ),
-      child: Expanded(
-          child: TextFormField(
+      child: TextFormField(
         keyboardType: isNumtype ? TextInputType.number : null,
         validator: validator,
         maxLength: 30,
@@ -68,7 +67,7 @@ class CardTextField extends StatelessWidget {
           fontWeight: FontWeight.w500,
           color: darkColor,
         ),
-      )),
+      ),
     );
   }
 }

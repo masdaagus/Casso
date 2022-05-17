@@ -61,7 +61,6 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       backgroundColor: lightColor,
       bottomNavigationBar: SalomonBottomBar(
-          selectedItemColor: merah,
           currentIndex: _currentIndex,
           margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           itemPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

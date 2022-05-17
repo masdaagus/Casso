@@ -21,6 +21,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLength: numType ? 6 : 20,
       validator: validator,
       readOnly: readOnly,
       controller: conroller,
@@ -30,6 +31,7 @@ class CustomTextField extends StatelessWidget {
       ),
       keyboardType: numType ? TextInputType.number : null,
       decoration: InputDecoration(
+          counterText: numType ? null : '',
           labelText: '$tittle',
           labelStyle: TextStyle(
             fontFamily: 'Ubuntu',

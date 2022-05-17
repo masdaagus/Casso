@@ -34,7 +34,7 @@ class NotificationController extends GetxController {
 
       Get.snackbar(_tittle, _body,
           animationDuration: Duration(milliseconds: 600),
-          duration: Duration(seconds: 12),
+          duration: Duration(seconds: 5),
           borderRadius: 16,
           backgroundColor: lightColor.withOpacity(.7),
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),

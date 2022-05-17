@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:casso/app/data/models/product.dart';
@@ -124,6 +125,8 @@ class ProductController extends GetxController {
 
     List<Product> products = resto.value.products as List<Product>;
 
+    bool isSame = false;
+
     try {
       isLoading = true;
       update();
@@ -132,36 +135,48 @@ class ProductController extends GetxController {
       }
 
       Product product = Product(
-        productName: namaProduk.text,
-        productPrice: double.tryParse(hargaProduk.text),
+        productName: namaProduk.text.trim(),
+        productPrice: double.tryParse(hargaProduk.text.trim()),
         productCategory: selected.value,
-        productStock: int.tryParse(stokProduk.text) ?? 100,
-        productDescription: deskripsiProduk.text,
+        productStock: int.tryParse(stokProduk.text.trim()) ?? 100,
+        productDescription: deskripsiProduk.text.trim(),
         productImage: imageUrl ?? null,
       );
 
-      products.add(product);
-      await restos.doc(user.value.restoID).update({
-        "products": List<dynamic>.from(
-          products.map(
-            (x) => x.toJson(),
-          ),
-        ),
+      products.forEach((e) {
+        if (e.productName == product.productName) {
+          isSame = true;
+        }
       });
 
-      pickedImage = null;
+      if (!isSame) {
+        products.add(product);
+        await restos.doc(user.value.restoID).update({
+          "products": List<dynamic>.from(
+            products.map(
+              (x) => x.toJson(),
+            ),
+          ),
+        });
 
-      /// FUNGSI UNTUK MEREFRESH DATA
+        log('BERHASIL MENAMBAHKAN PRODUCT');
+        pickedImage = null;
 
-      final restoDoc = await restos.doc(user.value.restoID).get();
-      final restoData = restoDoc.data() as Map<String, dynamic>;
-      resto(RestosModel.fromJson(restoData));
-      resto.refresh();
-      auth.refresh();
-      isLoading = false;
-      update();
+        /// FUNGSI UNTUK MEREFRESH DATA
 
-      Get.offAll(() => HomeView());
+        final restoDoc = await restos.doc(user.value.restoID).get();
+        final restoData = restoDoc.data() as Map<String, dynamic>;
+        resto(RestosModel.fromJson(restoData));
+        resto.refresh();
+        auth.refresh();
+        isLoading = false;
+        update();
+
+        Get.offAll(() => HomeView());
+      } else {
+        isLoading = false;
+        log('TIDAK BISA MENAMBAHKAN PRODUCT');
+      }
     } catch (e) {
       print(e);
     }

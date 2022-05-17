@@ -18,10 +18,10 @@ class HomeController extends GetxController {
 
   List<UsersModel> employes = [];
 
-  late TextEditingController? restoName;
-  late TextEditingController? restoTable;
-  late TextEditingController? restoLocation;
-  late TextEditingController? restoTaxes;
+  TextEditingController? restoName;
+  TextEditingController? restoTable;
+  TextEditingController? restoLocation;
+  TextEditingController? restoTaxes;
 
   List<String> images = [
     "assets/images/head_people.jpeg",

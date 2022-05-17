@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/users.dart';
 import 'package:casso/app/modules/login/controllers/login_controller.dart';
@@ -63,16 +65,6 @@ class AuthController extends GetxController {
         await _googleSignIn
             .signInSilently()
             .then((value) => _curentUser = value);
-        final googleAuth = await _curentUser!.authentication;
-
-        final credential = GoogleAuthProvider.credential(
-          idToken: googleAuth.idToken,
-          accessToken: googleAuth.accessToken,
-        );
-
-        await FirebaseAuth.instance
-            .signInWithCredential(credential)
-            .then((value) => userCredential = value);
 
         CollectionReference users = firestore.collection('users');
         final userDoc = await users.doc(_curentUser!.email).get();

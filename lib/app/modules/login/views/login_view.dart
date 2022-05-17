@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:casso/app/controllers/auth_controller.dart';
-import 'package:casso/app/modules/login/views/register_view.dart';
+import 'dart:developer';
 
 import 'package:casso/app/utils/constant.dart';
 
@@ -29,6 +29,7 @@ class _LoginViewState extends State<LoginView> {
   late bool _isRegister = false;
   @override
   Widget build(BuildContext context) {
+    log('UPDATE');
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: lightColor,

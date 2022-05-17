@@ -118,7 +118,6 @@ class CashierController extends GetxController {
     } catch (e) {
       print(e);
     }
-    update();
   }
 
   Future<void> deleteOrder(Order data) async {

@@ -64,7 +64,7 @@ class CardEmploye extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    data.email!,
+                    data.name ?? '',
                     style: TextStyle(
                       color: darkColor,
                       fontFamily: 'Ubuntu',

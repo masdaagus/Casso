@@ -6,6 +6,7 @@ import 'package:casso/app/data/models/product.dart';
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/table.dart';
 import 'package:casso/app/data/models/users.dart';
+import 'package:casso/app/utils/splash_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -29,6 +30,8 @@ class IntroductionController extends GetxController {
   Future<void> setResto() async {
     CollectionReference restos = firestore.collection("restos");
     CollectionReference users = firestore.collection("users");
+
+    Get.to(SplashScreen());
 
     Random r = Random();
     String rndm = List.generate(4, (_) => r.nextInt(9)).join("").toString();

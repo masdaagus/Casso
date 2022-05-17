@@ -33,46 +33,46 @@ class DropDownStatus extends StatelessWidget {
               ),
             ),
           ),
-          // Obx(() => Container(
-          //       width: Get.width,
-          //       child: DropdownButton<String>(
-          //         underline: Container(
-          //           height: 1,
-          //           color: Colors.black45,
-          //         ),
-          //         borderRadius: BorderRadius.circular(16),
-          //         isDense: true,
-          //         hint: Text(
-          //           "SATATUS",
-          //           style: TextStyle(
-          //             color: darkColor,
-          //             fontFamily: 'Ubuntu',
-          //           ),
-          //         ),
-          //         icon: Icon(
-          //           Icons.abc_outlined,
-          //           color: Colors.transparent,
-          //         ),
-          //         items: ctrl.data
-          //             .map(
-          //               (item) => DropdownMenuItem<String>(
-          //                 child: Text(
-          //                   item,
-          //                   style: TextStyle(
-          //                     fontSize: 14,
-          //                     fontFamily: "Ubuntu",
-          //                     color: darkColor,
-          //                   ),
-          //                 ),
-          //               ),
-          //             )
-          //             .toList(),
-          //         onChanged: (val) {
-          //           ctrl.selected.value = val!;
-          //         },
-          //         value: 'ctrl.selected.value',
-          //       ),
-          //     ))
+          Obx(() => Container(
+                width: Get.width,
+                child: DropdownButton<String>(
+                  underline: Container(
+                    height: 1,
+                    color: Colors.black45,
+                  ),
+                  borderRadius: BorderRadius.circular(16),
+                  isDense: true,
+                  hint: Text(
+                    "SATATUS",
+                    style: TextStyle(
+                      color: darkColor,
+                      fontFamily: 'Ubuntu',
+                    ),
+                  ),
+                  icon: Icon(
+                    Icons.abc_outlined,
+                    color: Colors.transparent,
+                  ),
+                  items: ctrl.data
+                      .map(
+                        (item) => DropdownMenuItem<String>(
+                          child: Text(
+                            item,
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontFamily: "Ubuntu",
+                              color: darkColor,
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (val) {
+                    ctrl.selected.value = val!;
+                  },
+                  value: 'ctrl.selected.value',
+                ),
+              ))
         ],
       ),
     );
