@@ -4,6 +4,7 @@ import 'package:casso/app/controllers/auth_controller.dart';
 import 'dart:developer';
 
 import 'package:casso/app/utils/constant.dart';
+import 'package:casso/app/utils/spinner_widget.dart';
 
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class _LoginViewState extends State<LoginView> {
   final auth = Get.put(AuthController());
 
   final controller = Get.put(LoginController());
-  late bool _isRegister = false;
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     log('UPDATE');
@@ -110,79 +111,113 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       child: SingleChildScrollView(
                         physics: BouncingScrollPhysics(),
-                        child: Column(
-                          children: [
-                            // HEADLINE TEXT CASSO
-                            Headline(),
-                            _isRegister
-                                ? GetBuilder<LoginController>(
-                                    builder: (c) {
-                                      return CustomTextField(
-                                        hintText: "Name",
-                                        icon: Icons.person_outline_outlined,
-                                        controller:
-                                            controller.passwordController,
-                                      );
+                        child: Form(
+                          key: formKey,
+                          child: Column(
+                            children: [
+                              // HEADLINE TEXT CASSO
+                              Headline(),
+
+                              // TEXTFIELD EMAIL
+                              GetBuilder<LoginController>(
+                                builder: (c) {
+                                  return CustomTextField(
+                                    hintText: 'Email or ID',
+                                    icon: Icons.person_outline_outlined,
+                                    controller: controller.emailController,
+                                    stringValidation: c.emailValidation,
+                                    validator: (val) {
+                                      if (val!.isEmpty) {
+                                        return 'Email or ID tidak boleh kosong';
+                                      }
                                     },
-                                  )
-                                : Container(),
+                                  );
+                                },
+                              ),
 
-                            // TEXTFIELD EMAIL
-                            CustomTextField(
-                              hintText: _isRegister ? "Email" : 'Email or ID',
-                              icon: Icons.person_outline_outlined,
-                              controller: controller.emailController,
-                            ),
-
-                            // TEXTFIELD PASSWORD
-                            _isRegister
-                                ? Container()
-                                : GetBuilder<LoginController>(
-                                    builder: (c) {
-                                      return CustomTextField(
-                                        hintText: "Password",
-                                        icon: Icons.lock_outline_rounded,
-                                        controller:
-                                            controller.passwordController,
-                                        isObsecure: c.isHide,
-                                        isNumType: true,
-                                        isCanHide: true,
-                                        tapToHide: () => c.hide(),
-                                      );
+                              // TEXTFIELD PASSWORD
+                              GetBuilder<LoginController>(
+                                builder: (c) {
+                                  return CustomTextField(
+                                    hintText: "Password",
+                                    icon: Icons.lock_outline_rounded,
+                                    controller: controller.passwordController,
+                                    isObsecure: c.isHide,
+                                    isPassword: true,
+                                    tapToHide: () => c.hide(),
+                                    stringValidation: c.passwordValidation,
+                                    validator: (val) {
+                                      if (val!.isEmpty) {
+                                        return 'Password tidak boleh kosong';
+                                      }
                                     },
-                                  ),
+                                  );
+                                },
+                              ),
 
-                            // BUTTON LOGIN
-                            LoginButton(
-                              tittle: _isRegister ? 'REGISTER' : 'LOGIN',
-                              onTap: () => _isRegister
-                                  ? auth.register()
-                                  : auth.loginEmploye(
-                                      controller.emailController.text,
-                                      controller.passwordController.text),
-                            ),
-                            // BUTTON LOGIN WITH GOOGLE
-                            LoginGoogleButton(
-                              onTap: () => auth.loginWithGoogle(),
-                            ),
-                            // REGISTER
-                            RegisterTextButton(
-                              // onTap: () => Get.to(() => RegisterView()),
-                              isRegister: _isRegister,
-                              onTap: () {
-                                print('object');
-                                _isRegister = !_isRegister;
-                                setState(() {});
-                              },
-                            ),
-                            SizedBox(height: 64)
-                          ],
+                              // BUTTON LOGIN
+                              LoginButton(
+                                  tittle: 'LOGIN',
+                                  onTap: () async {
+                                    if (formKey.currentState!.validate()) {
+                                      if (await controller.login()) {
+                                        // BERHASIL LOGIN
+                                        print('BERHASIL LOGIN');
+                                        Get.offAllNamed('/home');
+                                      } else {
+                                        // GAGAL LOGIN
+                                        print('GAGAL LOGIN');
+                                      }
+                                    }
+
+                                    // auth.loginEmploye(
+                                    //     controller.emailController.text,
+                                    //     controller.passwordController.text);
+                                  }),
+                              // BUTTON LOGIN WITH GOOGLE
+                              LoginGoogleButton(
+                                onTap: () => auth.loginWithGoogle(),
+                              ),
+                              // REGISTER
+                              // RegisterTextButton(
+                              //   // onTap: () => Get.to(() => RegisterView()),
+                              //   isRegister: false,
+
+                              //   onTap: () {
+                              //     // setState(() {});
+                              //   },
+                              // ),
+                              SizedBox(height: 64)
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              )
+              ),
+              GetBuilder<LoginController>(builder: (c) {
+                return c.isLoading
+                    ? Center(
+                        child: Container(
+                          height: Get.height,
+                          width: Get.width,
+                          color: hitam.withOpacity(.54),
+                          child: Center(
+                            child: Container(
+                              height: 72,
+                              width: 72,
+                              decoration: BoxDecoration(
+                                color: lightColor,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: CustomSpinner(),
+                            ),
+                          ),
+                        ),
+                      )
+                    : Container();
+              })
             ],
           ),
         ),

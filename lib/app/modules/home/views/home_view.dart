@@ -1,4 +1,3 @@
-import 'package:casso/app/controllers/notification_controller.dart';
 import 'package:casso/app/modules/home/controllers/home_controller.dart';
 import 'package:casso/app/modules/home/views/news/news_view.dart';
 import 'package:casso/app/modules/home/views/notifications/notification_view.dart';
@@ -8,7 +7,6 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../tes.dart';
 import 'home_view/home.dart';
 
 class HomeView extends StatefulWidget {
