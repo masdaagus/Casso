@@ -12,4 +12,4 @@ Screenshot:
 
 
 ## Login Screen
-![login](https://github.com/andriawan/AndKasir/blob/development/screenshot/login.png "Panel Login")
+![login](https://github.com/masdaagus/Casso/blob/master/mock_up/login_screen.png "Panel Login")
