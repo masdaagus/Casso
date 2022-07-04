@@ -12,4 +12,8 @@ Screenshot:
 
 
 ## Login Screen
-![login](https://github.com/masdaagus/Casso/blob/master/mock_up/login_screen.png "Panel Login")
+<img src="https://github.com/masdaagus/Casso/blob/master/mock_up/login_screen.png" alt="drawing" style="width:200px;"/>
+## Home Screen
+<img src="https://github.com/masdaagus/Casso/blob/master/mock_up/home.png" alt="drawing" style="width:200px;"/>
+## Monitoring Screen
+<img src="https://github.com/masdaagus/Casso/blob/master/mock_up/monitoring.png" alt="drawing" style="width:200px;"/>
