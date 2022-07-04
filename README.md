@@ -13,7 +13,26 @@ Screenshot:
 
 ## Login Screen
 <img src="https://github.com/masdaagus/Casso/blob/master/mock_up/login_screen.png" alt="drawing" style="width:200px;"/>
+
 ## Home Screen
 <img src="https://github.com/masdaagus/Casso/blob/master/mock_up/home.png" alt="drawing" style="width:200px;"/>
+
+
 ## Monitoring Screen
 <img src="https://github.com/masdaagus/Casso/blob/master/mock_up/monitoring.png" alt="drawing" style="width:200px;"/>
+
+## List Order Screen
+<img src="https://github.com/masdaagus/Casso/blob/master/mock_up/kasir.png" alt="drawing" style="width:200px;"/>
+
+
+## Pick Table Screen
+<img src="https://github.com/masdaagus/Casso/blob/master/mock_up/table.png" alt="drawing" style="width:200px;"/>
+
+## Daashboard Screen
+<img src="https://github.com/masdaagus/Casso/blob/master/mock_up/dashboard.png" alt="drawing" style="width:200px;"/>
+
+## Employes Screen
+<img src="https://github.com/masdaagus/Casso/blob/master/mock_up/pegawai.png" alt="drawing" style="width:200px;"/>
+
+## Product Screen
+<img src="https://github.com/masdaagus/Casso/blob/master/mock_up/products.png" alt="drawing" style="width:200px;"/>
