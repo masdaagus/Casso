@@ -4,9 +4,18 @@ Casso adalah Aplikasi Kasir yang dibangun dengan [Flutter](https://flutter.dev/)
 
 Aplikasi ini masih dalam tahap pengembangan. Fitur-fitur yang dimiliki aplikasi ini mencakup
 
+- Mengurutkan Order sesuai urutan
+- Mengecek Meja available or not-available
+- Monitoring pesanan, apakah pesanan dalam proses
+    - Menunggu (Pesanan baru)
+    - Proses (Sedang dalam proses)
+    - Siap (Pesana siap di-antar)
+    - Tersaji (Pesanan telah di-hidangkan)
 - Cetak Struk menggunakan bluetooth printer
 - Rangkuman Penjualan Restaurant
-
+    - Rangkuman harian
+    - Rangkuman mingguan
+    - Rangkuman bulanan
 
 Screenshot:
 
