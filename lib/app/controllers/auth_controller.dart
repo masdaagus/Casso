@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:casso/app/data/models/resto.dart';
 import 'package:casso/app/data/models/users.dart';
+import 'package:casso/app/modules/login/bindings/login_binding.dart';
 import 'package:casso/app/modules/login/controllers/login_controller.dart';
 import 'package:casso/app/modules/login/views/login_view.dart';
 import 'package:casso/app/utils/constant.dart';
@@ -90,15 +91,15 @@ class AuthController extends GetxController {
   }
 
   /// REGISTER WITH EMAIL AND PASSWORD
-  Future<bool> register() async {
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: 'masdacoc@gmail.com', password: "123456");
-    } catch (e) {
-      print(e);
-    }
-    return true;
-  }
+  // Future<bool> register() async {
+  //   try {
+  //     await FirebaseAuth.instance.createUserWithEmailAndPassword(
+  //         email: 'masdacoc@gmail.com', password: "123456");
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  //   return true;
+  // }
 
   /// LOGIN LOGIN WITH GOOGLE
   Future<bool> loginWithGoogle() async {
@@ -148,9 +149,6 @@ class AuthController extends GetxController {
         user.refresh();
 
         /// CEK USER APAKAH SUDAH PUNYA ID RESTO ATAU BELUM
-        // await user.value.restoID == null
-        //     ? Get.offAllNamed('/introduction')
-        //     : Get.offAllNamed('/home');
 
         if (user.value.restoID == null) {
           Get.offAllNamed('/introduction');
@@ -165,13 +163,10 @@ class AuthController extends GetxController {
           isAuth.value = true;
           Get.offAllNamed('/home');
         }
-
-        // kalo user sudah ke home otomatis user telah mengisi nama resto
       }
 
       return true;
     } catch (error) {
-      print("error nih =  $error");
       print("error nih =  ${_curentUser!.email}");
       return false;
     }
@@ -187,8 +182,7 @@ class AuthController extends GetxController {
     _googleSignIn.disconnect();
     await FirebaseMessaging.instance.unsubscribeFromTopic(user.value.restoID!);
     isAuth.value = false;
-    Get.put(LoginController());
-    Get.to(() => LoginView());
+    Get.to(() => LoginView(), binding: LoginBinding());
   }
 
   /// LOGIN WITH USERS EMPLOYE

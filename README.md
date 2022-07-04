@@ -1,16 +1,15 @@
 # casso
 
-A new Flutter project.
+Casso adalah Aplikasi Kasir yang dibangun dengan [Flutter](https://flutter.dev/), Aplikasi ini berawal dari masalah orderan Restaurant yg kurang teratur, Contoh pengunjung A order ke waiters setelah itu pengunjung B order ke waiters, seharusnya pengunjung A terlebidahulu menerima Pesanan mereka, tapi terkadang Pesanan pengunjung B lebih dahulu di-hidangkan.
 
-## Getting Started
+Aplikasi ini masih dalam tahap pengembangan. Fitur-fitur yang dimiliki aplikasi ini mencakup
 
-This project is a starting point for a Flutter application.
+- Cetak Struk menggunakan bluetooth printer
+- Rangkuman Penjualan Restaurant
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Screenshot:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Login Screen
+![login](https://github.com/andriawan/AndKasir/blob/development/screenshot/login.png "Panel Login")

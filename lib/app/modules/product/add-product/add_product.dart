@@ -1,4 +1,6 @@
 import 'package:casso/app/data/models/product.dart';
+import 'package:casso/app/modules/home/bindings/home_binding.dart';
+import 'package:casso/app/modules/home/views/home_view.dart';
 import 'package:casso/app/modules/product/add-product/components/dropdown_kategori.dart';
 import 'package:casso/app/modules/product/controllers/product_controller.dart';
 import 'package:casso/app/utils/constant.dart';
@@ -131,7 +133,12 @@ class AddProductView extends StatelessWidget {
                           print('VALIDATED');
 
                           if (dataProduct!.productName == null) {
-                            ctrl.addProduct();
+                            ctrl.addProduct().then(
+                              (value) {
+                                Get.back();
+                                Get.back();
+                              },
+                            );
                           } else {
                             ctrl.editProduct(dataProduct!);
                           }

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:casso/app/data/models/product.dart';
 import 'package:casso/app/controllers/auth_controller.dart';
+import 'package:casso/app/modules/home/bindings/home_binding.dart';
 import 'package:casso/app/modules/home/views/home_view.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,10 +28,10 @@ class ProductController extends GetxController {
 
   List<Product> products = [];
 
-  late TextEditingController namaProduk;
-  late TextEditingController hargaProduk;
-  late TextEditingController stokProduk;
-  late TextEditingController deskripsiProduk;
+  TextEditingController namaProduk = TextEditingController();
+  TextEditingController hargaProduk = TextEditingController();
+  TextEditingController stokProduk = TextEditingController();
+  TextEditingController deskripsiProduk = TextEditingController();
 
   XFile? pickedImage = null;
   String? imageUrl = null;
@@ -120,7 +121,7 @@ class ProductController extends GetxController {
   }
 
   /// ADD PRIDUCT
-  Future<void> addProduct() async {
+  Future<bool> addProduct() async {
     CollectionReference restos = firestore.collection('restos');
 
     List<Product> products = resto.value.products as List<Product>;
@@ -172,13 +173,14 @@ class ProductController extends GetxController {
         isLoading = false;
         update();
 
-        Get.offAll(() => HomeView());
+        return true;
       } else {
         isLoading = false;
-        log('TIDAK BISA MENAMBAHKAN PRODUCT');
+        return false;
       }
     } catch (e) {
       print(e);
+      return false;
     }
   }
 
@@ -217,7 +219,7 @@ class ProductController extends GetxController {
       isLoading = false;
       update();
 
-      Get.offAll(() => HomeView());
+      Get.off(() => HomeView(), binding: HomeBinding());
     }
   }
 
@@ -269,7 +271,7 @@ class ProductController extends GetxController {
         auth.refresh();
         isLoading = false;
         update();
-        Get.offAll(() => HomeView());
+        Get.off(() => HomeView(), binding: HomeBinding());
       } catch (e) {
         print(e);
       }
@@ -298,11 +300,6 @@ class ProductController extends GetxController {
     user = auth.user;
     resto = auth.resto;
     await _productsInit();
-
-    namaProduk = TextEditingController();
-    hargaProduk = TextEditingController();
-    stokProduk = TextEditingController();
-    deskripsiProduk = TextEditingController();
     super.onInit();
   }
 
