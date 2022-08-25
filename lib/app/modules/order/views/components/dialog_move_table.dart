@@ -54,7 +54,7 @@ class DialogMoveTable extends GetView<OrderController> {
                 icon: Icons.clear,
                 size: 22,
                 onTap: () {
-                  controller.emptyTable(tableNumber);
+                  // controller.emptyTable(tableNumber);
                   Get.back();
                 },
               ),
@@ -65,7 +65,7 @@ class DialogMoveTable extends GetView<OrderController> {
                 onTap: () {
                   // controller.getData();
 
-                  controller.updateOrder(tableNumber);
+                  // controller.updateOrder(tableNumber);
                 },
               ),
               Divider(thickness: 1, color: putih.withOpacity(.6)),

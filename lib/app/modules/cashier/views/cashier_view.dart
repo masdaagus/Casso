@@ -23,14 +23,10 @@ class CashierView extends StatelessWidget {
       child: Scaffold(
         backgroundColor: lightColor,
         appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios, size: 20, color: lightColor),
-            onPressed: Get.back,
-          ),
           backgroundColor: darkColor,
           elevation: 0,
           title: Text(
-            'KASIR',
+            'TRANSACTIONS',
             style: TextStyle(
               color: lightColor,
               fontFamily: "Ubuntu",
@@ -39,26 +35,6 @@ class CashierView extends StatelessWidget {
             ),
           ),
           centerTitle: true,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: GestureDetector(
-                onTap: () {
-                  Get.off(
-                    () => MonitoringView(),
-                    binding: MonitoringBinding(),
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Icon(
-                    Icons.assignment_outlined,
-                    color: lightColor,
-                  ),
-                ),
-              ),
-            ),
-          ],
         ),
         body: GestureDetector(
           onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
@@ -88,9 +64,12 @@ class CashierView extends StatelessWidget {
                   child: TabBarView(
                     children: [
                       // tables view
-                      Unpaid(),
-                      Paid(),
-                      OrdersDeleted(),
+                      // Unpaid(),
+                      // Paid(),
+                      // OrdersDeleted(),
+                      Container(),
+                      Container(),
+                      Container(),
                     ],
                   ),
                 ),

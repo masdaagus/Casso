@@ -29,27 +29,27 @@ class _DateFilterState extends State<DateFilter> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            ChoiceChip(
-              label: Text(
-                "Bulan ini",
-                style: TextStyle(
-                  color: lightColor,
-                  fontFamily: 'Ubuntu',
-                ),
-              ),
-              selected: _monthly,
-              selectedColor: darkColor,
-              backgroundColor: darkColor.withOpacity(.3),
-              onSelected: (val) async {
-                await controller.getMonthlyHistories();
+            // ChoiceChip(
+            //   label: Text(
+            //     "Bulan ini",
+            //     style: TextStyle(
+            //       color: lightColor,
+            //       fontFamily: 'Ubuntu',
+            //     ),
+            //   ),
+            //   selected: _monthly,
+            //   selectedColor: darkColor,
+            //   backgroundColor: darkColor.withOpacity(.3),
+            //   onSelected: (val) async {
+            //     await controller.getMonthlyHistories();
 
-                setState(() {
-                  _today = false;
-                  _weekly = false;
-                  _monthly = true;
-                });
-              },
-            ),
+            //     setState(() {
+            //       _today = false;
+            //       _weekly = false;
+            //       _monthly = true;
+            //     });
+            //   },
+            // ),
             SizedBox(width: 8),
             ChoiceChip(
               label: Text(
@@ -65,7 +65,7 @@ class _DateFilterState extends State<DateFilter> {
               onSelected: (val) async {
                 // controller.isLoading = true;
                 // controller.update();
-                await controller.getWeeklyHistories();
+                // await controller.getWeeklyHistories();
                 // controller.isLoading = false;
                 // controller.update();
                 setState(() {
@@ -88,7 +88,7 @@ class _DateFilterState extends State<DateFilter> {
               selectedColor: darkColor,
               backgroundColor: darkColor.withOpacity(.3),
               onSelected: (val) async {
-                await controller.getTodayHistories();
+                // await controller.getTodayHistories();
 
                 setState(() {
                   _today = true;

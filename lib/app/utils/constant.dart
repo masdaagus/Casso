@@ -30,6 +30,7 @@ NumberFormat nf = NumberFormat.simpleCurrency(
 
 DateFormat dateFormat = DateFormat("dd-MM-yyyy HH:mm");
 DateFormat df = DateFormat("dd-MM-yyyy");
+DateFormat hf = DateFormat("HH:mm");
 
 const mySystemTheme = SystemUiOverlayStyle(
   systemNavigationBarColor: lightColor,

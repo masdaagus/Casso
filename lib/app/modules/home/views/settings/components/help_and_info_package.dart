@@ -14,18 +14,18 @@ class PackageHelpAndInformation extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            "Pusat Bantuan & Informasi",
-            style: TextStyle(
-              color: darkColor,
-              fontFamily: 'Ubuntu',
-              fontWeight: FontWeight.w700,
-              fontSize: 18,
-            ),
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.all(16),
+        //   child: Text(
+        //     "Pusat Bantuan & Informasi",
+        //     style: TextStyle(
+        //       color: darkColor,
+        //       fontFamily: 'Ubuntu',
+        //       fontWeight: FontWeight.w700,
+        //       fontSize: 18,
+        //     ),
+        //   ),
+        // ),
         Container(
           // margin: const EdgeInsets.only(top: 300),
           width: double.infinity,

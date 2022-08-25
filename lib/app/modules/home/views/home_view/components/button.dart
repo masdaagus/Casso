@@ -76,7 +76,7 @@ class ButtonCard extends StatelessWidget {
                 fontFamily: 'Ubuntu',
                 fontWeight: FontWeight.bold,
                 letterSpacing: .3,
-                fontSize: 12,
+                fontSize: 11,
               ),
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:casso/app/data/model/product_model.dart';
 import 'package:casso/app/data/models/product.dart';
 import 'package:casso/app/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class BottomSheetProduct extends StatelessWidget {
 
   // final String? productImage;
   // final ProductOrder? data;
-  final Product? dataProduct;
+  final ProductModel? dataProduct;
 
   @override
   Widget build(BuildContext context) {
@@ -74,40 +75,40 @@ class BottomSheetProduct extends StatelessWidget {
                       letterSpacing: 1,
                     ),
                   ),
-                  Text(
-                    // nf.format(data!.productPrice ?? dataProduct!.productStock),
-                    "Stock = ${dataProduct!.productStock}",
-                    maxLines: 7,
-                    style: TextStyle(
-                      color: darkColor.withOpacity(.7),
-                      fontFamily: "Ubuntu",
-                      fontSize: 16,
-                      letterSpacing: 1,
-                    ),
-                  ),
+                  // Text(
+                  // nf.format(data!.productPrice ?? dataProduct!.productStock),
+                  //   "Stock = ${dataProduct!.productStock}",
+                  //   maxLines: 7,
+                  //   style: TextStyle(
+                  //     color: darkColor.withOpacity(.7),
+                  //     fontFamily: "Ubuntu",
+                  //     fontSize: 16,
+                  //     letterSpacing: 1,
+                  //   ),
+                  // ),
                 ],
               ),
             ),
             SizedBox(height: 24),
-            Container(
-              padding: const EdgeInsets.all(8),
-              width: size.width,
-              height: 100,
-              decoration: BoxDecoration(
-                border: Border.all(color: darkColor.withOpacity(.2)),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Text(
-                dataProduct!.productDescription ?? 'Description...',
-                maxLines: 7,
-                style: TextStyle(
-                  color: darkColor.withOpacity(.5),
-                  fontFamily: "Ubuntu",
-                  fontSize: 12,
-                  letterSpacing: 1,
-                ),
-              ),
-            ),
+            // Container(
+            //   padding: const EdgeInsets.all(8),
+            //   width: size.width,
+            //   height: 100,
+            //   decoration: BoxDecoration(
+            //     border: Border.all(color: darkColor.withOpacity(.2)),
+            //     borderRadius: BorderRadius.circular(16),
+            //   ),
+            //   child: Text(
+            //     dataProduct!.productDescription ?? 'Description...',
+            //     maxLines: 7,
+            //     style: TextStyle(
+            //       color: darkColor.withOpacity(.5),
+            //       fontFamily: "Ubuntu",
+            //       fontSize: 12,
+            //       letterSpacing: 1,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

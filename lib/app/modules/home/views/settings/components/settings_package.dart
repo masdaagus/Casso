@@ -17,18 +17,18 @@ class PackageSettings extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            "Pengaturan",
-            style: TextStyle(
-              color: darkColor,
-              fontFamily: 'Ubuntu',
-              fontWeight: FontWeight.w700,
-              fontSize: 18,
-            ),
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.all(16),
+        //   child: Text(
+        //     "Pengaturan",
+        //     style: TextStyle(
+        //       color: darkColor,
+        //       fontFamily: 'Ubuntu',
+        //       fontWeight: FontWeight.w700,
+        //       fontSize: 18,
+        //     ),
+        //   ),
+        // ),
         Container(
           // margin: const EdgeInsets.only(top: 300),
           width: double.infinity,
@@ -47,18 +47,18 @@ class PackageSettings extends StatelessWidget {
                   );
                 },
               ),
-              SettingItem(
-                icon: Icons.print_outlined,
-                tittle: 'Pengaturan Printer Bloetooth',
-                onTap: () {
-                  Get.to(
-                    () => PrinterView(),
-                    binding: PrinterBinding(),
-                    duration: Duration(milliseconds: 300),
-                    transition: Transition.fadeIn,
-                  );
-                },
-              ),
+              // SettingItem(
+              //   icon: Icons.print_outlined,
+              //   tittle: 'Pengaturan Printer Bloetooth',
+              //   onTap: () {
+              //     Get.to(
+              //       () => PrinterView(),
+              //       binding: PrinterBinding(),
+              //       duration: Duration(milliseconds: 300),
+              //       transition: Transition.fadeIn,
+              //     );
+              //   },
+              // ),
               SettingItem(
                 icon: Icons.settings_outlined,
                 tittle: 'Pengaturan Fitur',

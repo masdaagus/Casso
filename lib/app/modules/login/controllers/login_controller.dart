@@ -6,15 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../../data/model/user_model.dart';
 import '../../../data/models/resto.dart';
 import '../../../data/models/users.dart';
 import '../../../utils/constant.dart';
 
 class LoginController extends GetxController {
   final auth = Get.find<AuthController>();
-
-  var user = UsersModel().obs;
-  var resto = RestosModel().obs;
+  var user = UserModel().obs;
 
   FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -46,22 +45,14 @@ class LoginController extends GetxController {
     try {
       final userDoc = await users.doc(_email).get();
       final userData = userDoc.data() as Map<String, dynamic>;
-      await user(UsersModel.fromJson(userData));
+      await user(UserModel.fromJson(userData));
       user.refresh();
-
-      print(user.value.password);
-      print(_password);
-      print(user.value.password!.length);
-      print(_password.length);
-
-      bool x = user.value.password == _password;
-      log("sama gak ${x.toString()}");
 
       if (user.value.email == null) {
         return false;
       } else {
         emailValidation = null;
-        if (_email == user.value.email && _password == user.value.password) {
+        if (_email == user.value.email) {
           final box = GetStorage();
           if (box.read(emailKey) != null && box.read(passwordKey) != null) {
             box.remove(emailKey);
@@ -70,10 +61,6 @@ class LoginController extends GetxController {
           await box.write(emailKey, _email);
           await box.write(passwordKey, _password);
 
-          final restoDoc = await restos.doc(user.value.restoID).get();
-          final restoData = restoDoc.data() as Map<String, dynamic>;
-          resto(RestosModel.fromJson(restoData));
-          resto.refresh();
           auth.isAuth.value = true;
           auth.update();
           return true;
@@ -94,10 +81,18 @@ class LoginController extends GetxController {
     }
   }
 
+  // Future<UserModel> registerController() async {
+  //   final usr = await auth.register(email: '', password: '');
+  //   if (usr != null) {
+  //     return user.value = usr;
+  //   } else {
+  //     return UserModel();
+  //   }
+  // }
+
   @override
   void onInit() {
     user = auth.user;
-    resto = auth.resto;
     emailController = TextEditingController();
     passwordController = TextEditingController();
     confirmPasswordController = TextEditingController();

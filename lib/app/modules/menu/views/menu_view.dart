@@ -19,12 +19,12 @@ import 'components/dialog_cancel.dart';
 class Menus extends GetView<MenuController> {
   const Menus({
     Key? key,
-    this.data,
+    // this.data,
     this.guessName,
     this.table,
   }) : super(key: key);
 
-  final Order? data;
+  // final Order? data;
   final String? guessName;
   final int? table;
 
@@ -37,22 +37,11 @@ class Menus extends GetView<MenuController> {
       statusBarBrightness: Brightness.light,
     ));
 
-    final notification = Get.put(NotificationController());
     return WillPopScope(
       onWillPop: () async {
-        Get.defaultDialog(
-          content: DialogCancel(
-            onConfirm: () {
-              if (guessName != null) {
-                controller.deleteTable(table);
-              }
+        if (guessName != null) {}
+        Get.back();
 
-              Get.offAllNamed('/home');
-            },
-          ),
-          backgroundColor: Colors.transparent,
-          titleStyle: TextStyle(color: Colors.transparent),
-        );
         return false;
       },
       child: Scaffold(
@@ -110,7 +99,7 @@ class Menus extends GetView<MenuController> {
                   return SearchBar(
                     hint: 'Cari nama produk',
                     onChange: (val) {
-                      c.filterProducts(val);
+                      // c.filterProducts(val);
                     },
                   );
                 },
@@ -121,40 +110,44 @@ class Menus extends GetView<MenuController> {
                     TabBarView(
                       physics: NeverScrollableScrollPhysics(),
                       children: [
-                        DessertMenu(),
-                        DrinkMenu(),
-                        FoodMenu(),
-                        AllMenu(),
+                        // DessertMenu(),
+                        // DrinkMenu(),
+                        // FoodMenu(),
+                        // AllMenu(),
+                        Container(),
+                        Container(),
+                        Container(),
+                        Container(),
                       ],
                     ),
-                    ButtonChart(
-                        guessName: guessName ?? data!.guessName,
-                        table: table ?? data!.tableNumber,
-                        onTap: () {
-                          final dur = Duration(milliseconds: 420);
-                          Get.bottomSheet(
-                            CustomBottomSheet(
-                              guessName: guessName ?? data!.guessName,
-                              tableNumber: table ?? data!.tableNumber,
-                              onTap: () {
-                                controller.setOrder(
-                                  guessName: guessName ?? data!.guessName,
-                                  table: table ?? data!.tableNumber,
-                                );
+                    // ButtonChart(
+                    //     guessName: '',
+                    //     table: 0,
+                    //     onTap: () {
+                    //       final dur = Duration(milliseconds: 420);
+                    //       Get.bottomSheet(
+                    //         CustomBottomSheet(
+                    //           guessName: guessName ?? data!.guessName,
+                    //           tableNumber: table ?? data!.tableNumber,
+                    //           onTap: () {
+                    //             controller.setOrder(
+                    //               guessName: guessName ?? data!.guessName,
+                    //               table: table ?? data!.tableNumber,
+                    //             );
 
-                                notification.payloadNotification(
-                                  tittle: 'ORDER',
-                                  body:
-                                      'Pesanan dari meja ${table ?? data!.tableNumber} by ${controller.user.value.name}',
-                                );
-                              },
-                            ),
-                            isScrollControlled: true,
-                            enterBottomSheetDuration: dur,
-                            exitBottomSheetDuration: dur,
-                          );
-                          // Get.to(ConfirmOrderView());
-                        })
+                    //             notification.payloadNotification(
+                    //               tittle: 'ORDER',
+                    //               body:
+                    //                   'Pesanan dari meja ${table ?? data!.tableNumber} by ${controller.user.value.name}',
+                    //             );
+                    //           },
+                    //         ),
+                    //         isScrollControlled: true,
+                    //         enterBottomSheetDuration: dur,
+                    //         exitBottomSheetDuration: dur,
+                    //       );
+                    //       // Get.to(ConfirmOrderView());
+                    //     })
                   ],
                 ),
               )

@@ -1,5 +1,7 @@
 import 'package:casso/app/modules/home/controllers/home_controller.dart';
 import 'package:casso/app/modules/home/views/settings/components/card_info.dart';
+import 'package:casso/app/modules/login/bindings/login_binding.dart';
+import 'package:casso/app/modules/login/views/login_view.dart';
 import 'package:casso/app/modules/resto/bindings/resto_binding.dart';
 import 'package:casso/app/modules/resto/views/resto_view.dart';
 import 'package:casso/app/utils/constant.dart';
@@ -18,49 +20,26 @@ class SettingsView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     final ctrl = Get.find<HomeController>();
     return SafeArea(
-      child: Stack(
+      child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.only(top: 24),
-            height: 160,
+            height: 56,
             width: double.infinity,
-            color: darkColor,
-            child: Align(
-              alignment: Alignment.topCenter,
+            color: putih,
+            child: Center(
               child: Text(
                 "PENGATURAN",
                 style: TextStyle(
-                  color: lightColor,
+                  color: darkColor,
                   fontFamily: "Ubuntu",
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.bold,
                   fontSize: 20,
                 ),
               ),
             ),
           ),
-          CardInfoResto(
-            ownerName: ctrl.resto.value.ownerName,
-            restoLocation: ctrl.resto.value.restoLocation,
-            restoName: ctrl.resto.value.restoName,
-            onTap: () {
-              if (ctrl.user.value.status == 'OWNER') {
-                Get.to(
-                  () => RestoView(),
-                  binding: RestoBinding(),
-                  duration: Duration(milliseconds: 300),
-                  transition: Transition.fadeIn,
-                );
-              } else {
-                Get.snackbar(
-                  ctrl.user.value.status!,
-                  "Hanya owner cafe yang bisa merubah profile resto",
-                  backgroundColor: lightColor,
-                );
-              }
-            },
-          ),
           Container(
-            margin: const EdgeInsets.only(top: 270),
+            // margin: const EdgeInsets.only(top: 56),
             child: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               child: Column(
@@ -70,35 +49,18 @@ class SettingsView extends GetView<HomeController> {
                   PackageHelpAndInformation(),
                   SizedBox(height: 72),
                   ButtonLogout(onTap: () {
-                    ctrl.auth.logout();
+                    ctrl.auth.logout().then(
+                          (value) => Get.offAll(
+                            LoginView(),
+                            binding: LoginBinding(),
+                          ),
+                        );
                   }),
                   SizedBox(height: 72),
                 ],
               ),
             ),
           ),
-          GetBuilder<HomeController>(builder: (c) {
-            return c.isLoading
-                ? Center(
-                    child: Container(
-                      height: Get.height,
-                      width: Get.width,
-                      color: hitam.withOpacity(.54),
-                      child: Center(
-                        child: Container(
-                          height: 72,
-                          width: 72,
-                          decoration: BoxDecoration(
-                            color: lightColor,
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: CustomSpinner(),
-                        ),
-                      ),
-                    ),
-                  )
-                : Container();
-          })
         ],
       ),
     );

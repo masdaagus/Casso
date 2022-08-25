@@ -1,4 +1,6 @@
 import 'package:casso/app/data/models/product.dart';
+import 'package:casso/app/modules/home/bindings/home_binding.dart';
+import 'package:casso/app/modules/home/views/home_view.dart';
 import 'package:casso/app/modules/product/add-product/components/dropdown_kategori.dart';
 import 'package:casso/app/modules/product/controllers/product_controller.dart';
 import 'package:casso/app/utils/constant.dart';
@@ -14,11 +16,11 @@ import 'components/card_text_field.dart';
 class AddProductView extends StatelessWidget {
   AddProductView({
     Key? key,
-    this.dataProduct,
+    // this.dataProduct,
     // this.image,
   }) : super(key: key);
 
-  final Product? dataProduct;
+  // final Product? dataProduct;
   // final String? image;
 
   final formKey = GlobalKey<FormState>();
@@ -28,9 +30,9 @@ class AddProductView extends StatelessWidget {
     final ctrl = Get.put(ProductController());
 
     String appBarTittle = 'ADD PRODUK';
-    if (dataProduct!.productName != null) {
-      appBarTittle = 'EDIT PRODUK';
-    }
+    // if (dataProduct!.productName != null) {
+    //   appBarTittle = 'EDIT PRODUK';
+    // }
     return Scaffold(
       backgroundColor: lightColor,
 
@@ -59,10 +61,10 @@ class AddProductView extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: IconButton(
-              onPressed: () => ctrl.deleteProduct(dataProduct!),
-              icon: Icon(Icons.delete, color: lightColor),
-            ),
+            // child: IconButton(
+            //   onPressed: () => ctrl.deleteProduct(dataProduct!),
+            //   icon: Icon(Icons.delete, color: lightColor),
+            // ),
           )
         ],
       ),
@@ -77,94 +79,99 @@ class AddProductView extends StatelessWidget {
                 child: Column(
                   children: [
                     /// IMAGE PRODUK
-                    ImageCard(
-                      image: dataProduct!.productImage,
-                      onTap: () {
-                        ctrl.selectImage();
-                      },
-                      onCancel: () => ctrl.removeImage(),
-                    ),
+                    // ImageCard(
+                    //   image: dataProduct!.productImage,
+                    //   onTap: () {
+                    //     ctrl.selectImage();
+                    //   },
+                    //   onCancel: () => ctrl.removeImage(),
+                    // ),
 
-                    CardTextField(
-                      isNumtype: false,
-                      label: 'Nama Produk',
-                      controller: ctrl.namaProduk =
-                          TextEditingController(text: dataProduct!.productName),
-                      hintText: 'Nama Produk',
-                      validator: (value) {
-                        if (value!.isEmpty)
-                          return "Nama produk tidak boleh kosong";
-                      },
-                    ),
-                    CardTextField(
-                      label: 'Harga Produk',
-                      controller: ctrl.hargaProduk = TextEditingController(
-                        text: dataProduct!.productPrice!.toStringAsFixed(0),
-                      ),
-                      hintText: 'Harga Produk',
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Harga produk tidak boleh kosong';
-                        }
-                      },
-                    ),
-                    CardTextField(
-                      label: 'Stok Produk',
-                      controller: ctrl.stokProduk = TextEditingController(
-                        text: dataProduct!.productStock.toString(),
-                      ),
-                      hintText: 'Stok Produk',
-                      validator: (value) {
-                        if (value!.isEmpty)
-                          return "Stok produk tidak boleh kosong";
-                      },
-                    ),
-                    DropDownCategory(),
-                    CradDeskripsi(
-                      textController: ctrl.deskripsiProduk =
-                          TextEditingController(
-                              text: dataProduct!.productDescription),
-                    ),
-                    ButtonAdd(
-                      onTap: () {
-                        if (formKey.currentState!.validate()) {
-                          print('VALIDATED');
+                    // CardTextField(
+                    //   isNumtype: false,
+                    //   label: 'Nama Produk',
+                    //   controller: ctrl.namaProduk =
+                    //       TextEditingController(text: dataProduct!.productName),
+                    //   hintText: 'Nama Produk',
+                    //   validator: (value) {
+                    //     if (value!.isEmpty)
+                    //       return "Nama produk tidak boleh kosong";
+                    //   },
+                    // ),
+                    // CardTextField(
+                    //   label: 'Harga Produk',
+                    //   controller: ctrl.hargaProduk = TextEditingController(
+                    //     text: dataProduct!.productPrice!.toStringAsFixed(0),
+                    //   ),
+                    //   hintText: 'Harga Produk',
+                    //   validator: (value) {
+                    //     if (value!.isEmpty) {
+                    //       return 'Harga produk tidak boleh kosong';
+                    //     }
+                    //   },
+                    // ),
+                    // CardTextField(
+                    //   label: 'Stok Produk',
+                    //   controller: ctrl.stokProduk = TextEditingController(
+                    //     text: dataProduct!.productStock.toString(),
+                    //   ),
+                    //   hintText: 'Stok Produk',
+                    //   validator: (value) {
+                    //     if (value!.isEmpty)
+                    //       return "Stok produk tidak boleh kosong";
+                    //   },
+                    // ),
+                    // DropDownCategory(),
+                    // CradDeskripsi(
+                    //   textController: ctrl.deskripsiProduk =
+                    //       TextEditingController(
+                    //           text: dataProduct!.productDescription),
+                    // ),
+                    // ButtonAdd(
+                    //   onTap: () {
+                    //     if (formKey.currentState!.validate()) {
+                    //       print('VALIDATED');
 
-                          if (dataProduct!.productName == null) {
-                            ctrl.addProduct();
-                          } else {
-                            ctrl.editProduct(dataProduct!);
-                          }
-                        }
-                      },
-                    ),
+                    //       if (dataProduct!.productName == null) {
+                    //         ctrl.addProduct().then(
+                    //           (value) {
+                    //             Get.back();
+                    //             Get.back();
+                    //           },
+                    //         );
+                    //       } else {
+                    //         ctrl.editProduct(dataProduct!);
+                    //       }
+                    //     }
+                    //   },
+                    // ),
                   ],
                 ),
               ),
             ),
           ),
-          GetBuilder<ProductController>(builder: (c) {
-            return c.isLoading
-                ? Center(
-                    child: Container(
-                      height: Get.height,
-                      width: Get.width,
-                      color: hitam.withOpacity(.54),
-                      child: Center(
-                        child: Container(
-                          height: 72,
-                          width: 72,
-                          decoration: BoxDecoration(
-                            color: lightColor,
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: CustomSpinner(),
-                        ),
-                      ),
-                    ),
-                  )
-                : Container();
-          })
+          // GetBuilder<ProductController>(builder: (c) {
+          //   return c.isLoading
+          //       ? Center(
+          //           child: Container(
+          //             height: Get.height,
+          //             width: Get.width,
+          //             color: hitam.withOpacity(.54),
+          //             child: Center(
+          //               child: Container(
+          //                 height: 72,
+          //                 width: 72,
+          //                 decoration: BoxDecoration(
+          //                   color: lightColor,
+          //                   borderRadius: BorderRadius.circular(16),
+          //                 ),
+          //                 child: CustomSpinner(),
+          //               ),
+          //             ),
+          //           ),
+          //         )
+          //       : Container();
+          // })
         ],
       ),
     );

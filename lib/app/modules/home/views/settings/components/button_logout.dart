@@ -22,7 +22,7 @@ class ButtonLogout extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            "KELUAR",
+            "LOG OUT",
             style: TextStyle(
               color: lightColor,
               fontFamily: "Ubuntu",

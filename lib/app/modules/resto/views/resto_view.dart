@@ -30,43 +30,41 @@ class RestoView extends GetView<RestoController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    RestoInfo(
-                      ownerName: controller.resto.value.ownerName,
-                      restoLocation: controller.resto.value.restoLocation,
-                      restoName: controller.resto.value.restoName,
-                    ),
+                    // RestoInfo(
+                    //   ownerName: controller.resto.value.ownerName,
+                    //   restoLocation: controller.resto.value.restoLocation,
+                    //   restoName: controller.resto.value.restoName,
+                    // ),
                     SizedBox(height: 48),
                     TextFieldHome(
                       label: 'Nama Resto',
                       isTextTypeNumber: false,
-                      controller: controller.restoName = TextEditingController(
-                          text: controller.resto.value.restoName),
+                      controller: controller.restoName =
+                          TextEditingController(),
                     ),
                     TextFieldHome(
                       label: 'Nama Owner',
                       isTextTypeNumber: false,
-                      controller: controller.ownerName = TextEditingController(
-                          text: controller.resto.value.ownerName),
+                      controller: controller.ownerName =
+                          TextEditingController(),
                     ),
                     TextFieldHome(
                       label: 'Alamat Resto',
                       isTextTypeNumber: false,
                       controller: controller.restoLocation =
-                          TextEditingController(
-                              text: controller.resto.value.restoLocation),
+                          TextEditingController(),
                     ),
                     TextFieldHome(
                       label: 'Jumlah Table',
-                      controller: controller.restoTable = TextEditingController(
-                          text:
-                              controller.resto.value.tables!.length.toString()),
+                      controller: controller.restoTable =
+                          TextEditingController(),
                     ),
                     TextFieldHome(
                       label: 'Pajak %',
                       controller: controller.restoTaxes = TextEditingController(
-                        text: controller.resto.value.restoTaxes!
-                            .toStringAsFixed(0),
-                      ),
+                          // text: controller.resto.value.restoTaxes!
+                          //     .toStringAsFixed(0),
+                          ),
                     ),
                     SizedBox(height: 56),
                     ElevatedButton(

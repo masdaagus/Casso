@@ -78,7 +78,7 @@ class ProductView extends GetView<ProductController> {
               builder: (c) {
                 return SearchBar(
                   onChange: (val) {
-                    c.filterAllProducts(val);
+                    // c.filterAllProducts(val);
                   },
                 );
               },
@@ -89,22 +89,26 @@ class ProductView extends GetView<ProductController> {
                   TabBarView(
                     physics: NeverScrollableScrollPhysics(),
                     children: [
-                      DessertProduct(),
-                      DrinkProduct(),
-                      FoodProduct(),
-                      ProductsView(),
+                      // DessertProduct(),
+                      // DrinkProduct(),
+                      // FoodProduct(),
+                      // ProductsView(),
+                      Container(),
+                      Container(),
+                      Container(),
+                      Container(),
                     ],
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: FloatingButton(
                       onTap: () {
-                        Product kosong = Product(productPrice: 0);
-                        Get.to(
-                          () => AddProductView(dataProduct: kosong),
-                          transition: Transition.cupertinoDialog,
-                          duration: Duration(milliseconds: 500),
-                        );
+                        // Product kosong = Product(productPrice: 0);
+                        // Get.to(
+                        //   () => AddProductView(dataProduct: kosong),
+                        //   transition: Transition.cupertinoDialog,
+                        //   duration: Duration(milliseconds: 500),
+                        // );
                       },
                     ),
                   )

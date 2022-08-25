@@ -10,14 +10,13 @@ import '../../components/dialog_cancel.dart';
 class NotesDialog extends GetView<MenuController> {
   NotesDialog({
     Key? key,
-    required this.data,
+    // required this.data,
   }) : super(key: key);
 
-  final ProductOrder data;
+  // final ProductOrder data;
 
   @override
   Widget build(BuildContext context) {
-    print(data.productNote);
     return ClipRRect(
       child: BackdropFilter(
         filter: ImageFilter.blur(
@@ -34,54 +33,54 @@ class NotesDialog extends GetView<MenuController> {
           ),
           child: Column(
             children: [
-              Text(
-                data.productName!,
-                style: TextStyle(
-                  color: darkColor,
-                  fontFamily: "Ubuntu",
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(
-                    top: 16, left: 24, right: 24, bottom: 24),
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                width: Get.width,
-                decoration: BoxDecoration(),
-                child: TextField(
-                  onChanged: (val) {
-                    if (val.isNotEmpty && val != '') {
-                      data.productNote = val;
-                    }
-                  },
-                  controller: TextEditingController(text: data.productNote),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: "Ubuntu",
-                    color: darkColor,
-                    fontSize: 16,
-                    letterSpacing: -.5,
-                  ),
-                  decoration: InputDecoration(
-                    errorStyle: TextStyle(
-                      color: merah,
-                      fontFamily: "Ubuntu",
-                      fontSize: 14,
-                      letterSpacing: 1,
-                    ),
-                    counterText: "",
-                    hintStyle: TextStyle(
-                      fontFamily: "Ubuntu",
-                      color: darkColor.withOpacity(.8),
-                      fontSize: 14,
-                      letterSpacing: 1,
-                    ),
-                    hintText: "Catatan order",
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                  ),
-                ),
-              ),
+              // Text(
+              //   data.productName!,
+              //   style: TextStyle(
+              //     color: darkColor,
+              //     fontFamily: "Ubuntu",
+              //     fontWeight: FontWeight.bold,
+              //     fontSize: 24,
+              //   ),
+              // ),
+              // Container(
+              //   margin: const EdgeInsets.only(
+              //       top: 16, left: 24, right: 24, bottom: 24),
+              //   padding: const EdgeInsets.symmetric(vertical: 10),
+              //   width: Get.width,
+              //   decoration: BoxDecoration(),
+              //   child: TextField(
+              //     onChanged: (val) {
+              //       if (val.isNotEmpty && val != '') {
+              //         data.productNote = val;
+              //       }
+              //     },
+              //     controller: TextEditingController(text: data.productNote),
+              //     textAlign: TextAlign.center,
+              //     style: TextStyle(
+              //       fontFamily: "Ubuntu",
+              //       color: darkColor,
+              //       fontSize: 16,
+              //       letterSpacing: -.5,
+              //     ),
+              //     decoration: InputDecoration(
+              //       errorStyle: TextStyle(
+              //         color: merah,
+              //         fontFamily: "Ubuntu",
+              //         fontSize: 14,
+              //         letterSpacing: 1,
+              //       ),
+              //       counterText: "",
+              //       hintStyle: TextStyle(
+              //         fontFamily: "Ubuntu",
+              //         color: darkColor.withOpacity(.8),
+              //         fontSize: 14,
+              //         letterSpacing: 1,
+              //       ),
+              //       hintText: "Catatan order",
+              //       contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+              //     ),
+              //   ),
+              // ),
               // Divider(thickness: 1, color: darkColor.withOpacity(.6)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

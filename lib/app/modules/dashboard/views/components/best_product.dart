@@ -43,43 +43,43 @@ class BestProduct extends StatelessWidget {
           SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                GetBuilder<DashboardController>(
-                  builder: (c) {
-                    ProductOrder data = c.bestNo1 ?? c.nullData;
-                    return CardBestProduct(
-                      productName: data.productName ?? 'Belum ada produk',
-                      productPrice: data.productPrice ?? 0,
-                      productQty: data.productQty,
-                    );
-                  },
-                ),
-                GetBuilder<DashboardController>(
-                  builder: (c) {
-                    // ProductOrder data = c.bestProduct[1];
-                    ProductOrder data = c.bestNo2 ?? c.nullData;
-                    return CardBestProduct(
-                      productName: data.productName ?? 'Belum ada produk',
-                      productPrice: data.productPrice ?? 0,
-                      productQty: data.productQty,
-                    );
-                  },
-                ),
-                GetBuilder<DashboardController>(
-                  builder: (c) {
-                    ProductOrder data = c.bestNo3 ?? c.nullData;
-                    return CardBestProduct(
-                      productName: data.productName ?? 'Belum ada produk',
-                      productPrice: data.productPrice ?? 0,
-                      productQty: data.productQty,
-                    );
-                  },
-                ),
-                // CardBestProduct(),
-                // CardBestProduct(),
-              ],
-            ),
+            // child: Row(
+            //   children: [
+            //     GetBuilder<DashboardController>(
+            //       builder: (c) {
+            //         ProductOrder data = c.bestNo1 ?? c.nullData;
+            //         return CardBestProduct(
+            //           productName: data.productName ?? 'Belum ada produk',
+            //           productPrice: data.productPrice ?? 0,
+            //           productQty: data.productQty,
+            //         );
+            //       },
+            //     ),
+            //     GetBuilder<DashboardController>(
+            //       builder: (c) {
+            //         // ProductOrder data = c.bestProduct[1];
+            //         ProductOrder data = c.bestNo2 ?? c.nullData;
+            //         return CardBestProduct(
+            //           productName: data.productName ?? 'Belum ada produk',
+            //           productPrice: data.productPrice ?? 0,
+            //           productQty: data.productQty,
+            //         );
+            //       },
+            //     ),
+            //     GetBuilder<DashboardController>(
+            //       builder: (c) {
+            //         ProductOrder data = c.bestNo3 ?? c.nullData;
+            //         return CardBestProduct(
+            //           productName: data.productName ?? 'Belum ada produk',
+            //           productPrice: data.productPrice ?? 0,
+            //           productQty: data.productQty,
+            //         );
+            //       },
+            //     ),
+            //     // CardBestProduct(),
+            //     // CardBestProduct(),
+            //   ],
+            // ),
           )
         ],
       ),

@@ -19,7 +19,7 @@ class OrderView extends GetView<OrderController> {
       statusBarColor: darkColor,
       statusBarBrightness: Brightness.light,
     ));
-    Get.put(() => MenuController());
+    Get.put(MenuController());
     return Scaffold(
       backgroundColor: lightColor,
       appBar: AppBar(
@@ -48,67 +48,67 @@ class OrderView extends GetView<OrderController> {
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(
-            children: [
-              StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-                stream: controller.initStream(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.active) {
-                    Map<String, dynamic> data =
-                        snapshot.data!.data() as Map<String, dynamic>;
+              // children: [
+              //   StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+              //     stream: controller.initStream(),
+              //     builder: (context, snapshot) {
+              //       if (snapshot.connectionState == ConnectionState.active) {
+              //         Map<String, dynamic> data =
+              //             snapshot.data!.data() as Map<String, dynamic>;
 
-                    List<TableModel> tables = List<TableModel>.from(
-                        data["tables"].map((x) => TableModel.fromJson(x)));
+              //         List<TableModel> tables = List<TableModel>.from(
+              //             data["tables"].map((x) => TableModel.fromJson(x)));
 
-                    return Container(
-                      child: GridView.count(
-                        shrinkWrap: true,
-                        crossAxisSpacing: 20,
-                        mainAxisSpacing: 20,
-                        crossAxisCount: 3,
-                        childAspectRatio: .9,
-                        physics: BouncingScrollPhysics(),
-                        children: List.generate(
-                          tables.length,
-                          (index) {
-                            TableModel table = tables[index];
-                            return TableCard(
-                              tableNumber: table.tableNumber!,
-                              guessName: table.guessName,
-                              onTap: () {
-                                if (table.guessName == null) {
-                                  controller.guessNameController.clear();
-                                  Get.defaultDialog(
-                                    content: GetDialog(
-                                      tableNumber: table.tableNumber!,
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    titleStyle:
-                                        TextStyle(color: Colors.transparent),
-                                    barrierDismissible: false,
-                                  );
-                                } else {
-                                  Get.defaultDialog(
-                                    content: DialogMoveTable(
-                                      tableNumber: table.tableNumber!,
-                                    ),
-                                    backgroundColor: Colors.transparent,
-                                    titleStyle:
-                                        TextStyle(color: Colors.transparent),
-                                  );
-                                }
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                    );
-                  }
-                  return Container();
-                },
+              //         return Container(
+              //           child: GridView.count(
+              //             shrinkWrap: true,
+              //             crossAxisSpacing: 20,
+              //             mainAxisSpacing: 20,
+              //             crossAxisCount: 3,
+              //             childAspectRatio: .9,
+              //             physics: BouncingScrollPhysics(),
+              //             children: List.generate(
+              //               tables.length,
+              //               (index) {
+              //                 TableModel table = tables[index];
+              //                 return TableCard(
+              //                   tableNumber: table.tableNumber!,
+              //                   guessName: table.guessName,
+              //                   onTap: () {
+              //                     if (table.guessName == null) {
+              //                       controller.guessNameController.clear();
+              //                       Get.defaultDialog(
+              //                         content: GetDialog(
+              //                           tableNumber: table.tableNumber!,
+              //                         ),
+              //                         backgroundColor: Colors.transparent,
+              //                         titleStyle:
+              //                             TextStyle(color: Colors.transparent),
+              //                         barrierDismissible: false,
+              //                       );
+              //                     } else {
+              //                       Get.defaultDialog(
+              //                         content: DialogMoveTable(
+              //                           tableNumber: table.tableNumber!,
+              //                         ),
+              //                         backgroundColor: Colors.transparent,
+              //                         titleStyle:
+              //                             TextStyle(color: Colors.transparent),
+              //                       );
+              //                     }
+              //                   },
+              //                 );
+              //               },
+              //             ),
+              //           ),
+              //         );
+              //       }
+              //       return Container();
+              //     },
+              //   ),
+              //   SizedBox(height: 20),
+              // ],
               ),
-              SizedBox(height: 20),
-            ],
-          ),
         ),
       ),
     );

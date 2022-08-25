@@ -10,7 +10,7 @@ import 'button_semua.dart';
 class MonitorCard extends GetView<MonitoringController> {
   const MonitorCard({
     Key? key,
-    required this.data,
+    // required this.data,
     this.orderButton = 'PROSES',
     this.isOrder = false,
     this.isWaiters = false,
@@ -20,7 +20,7 @@ class MonitorCard extends GetView<MonitoringController> {
     this.isTersaji = false,
   }) : super(key: key);
 
-  final Order data;
+  // final Order data;
   final String orderButton;
   final bool isOrder;
   final bool isWaiters;
@@ -54,26 +54,26 @@ class MonitorCard extends GetView<MonitoringController> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "TABLE ${data.tableNumber} - (${data.guessName})",
-                      style: TextStyle(
-                        fontFamily: "Ubuntu",
-                        color: darkColor,
-                        fontSize: 12,
-                        letterSpacing: .5,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      "By:${data.waitersName}",
-                      style: TextStyle(
-                        fontFamily: "Ubuntu",
-                        color: darkColor,
-                        fontSize: 12,
-                        letterSpacing: .5,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    // Text(
+                    //   "TABLE ${data.tableNumber} - (${data.guessName})",
+                    //   style: TextStyle(
+                    //     fontFamily: "Ubuntu",
+                    //     color: darkColor,
+                    //     fontSize: 12,
+                    //     letterSpacing: .5,
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
+                    // Text(
+                    //   "By:${data.waitersName}",
+                    //   style: TextStyle(
+                    //     fontFamily: "Ubuntu",
+                    //     color: darkColor,
+                    //     fontSize: 12,
+                    //     letterSpacing: .5,
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -111,16 +111,16 @@ class MonitorCard extends GetView<MonitoringController> {
                               letterSpacing: .5,
                             ),
                           ),
-                          Text(
-                            nf.format(data.totalPrices),
-                            style: TextStyle(
-                              color: putih,
-                              fontFamily: "Ubuntu",
-                              fontWeight: FontWeight.bold,
-                              fontSize: 13,
-                              letterSpacing: .5,
-                            ),
-                          ),
+                          // Text(
+                          //   nf.format(data.totalPrices),
+                          //   style: TextStyle(
+                          //     color: putih,
+                          //     fontFamily: "Ubuntu",
+                          //     fontWeight: FontWeight.bold,
+                          //     fontSize: 13,
+                          //     letterSpacing: .5,
+                          //   ),
+                          // ),
                         ],
                       ),
                     )
@@ -162,15 +162,15 @@ class MonitorCard extends GetView<MonitoringController> {
                 right: 32,
                 child: Container(
                   padding: const EdgeInsets.all(4),
-                  child: Text(
-                    "#${data.orderNumber}",
-                    style: TextStyle(
-                      color: darkColor,
-                      fontFamily: 'Ubuntu',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
+                  // child: Text(
+                  //   "#${data.orderNumber}",
+                  //   style: TextStyle(
+                  //     color: darkColor,
+                  //     fontFamily: 'Ubuntu',
+                  //     fontWeight: FontWeight.bold,
+                  //     fontSize: 16,
+                  //   ),
+                  // ),
                   decoration: BoxDecoration(
                     color: lightColor.withOpacity(.2),
                     borderRadius: BorderRadius.circular(16),

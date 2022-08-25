@@ -11,12 +11,12 @@ class Headline extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 24, bottom: 32),
       child: Text(
-        "Casso",
+        "POS MALAY",
         style: TextStyle(
           fontFamily: 'Ubuntu',
           color: darkColor,
           fontWeight: FontWeight.bold,
-          fontSize: 64,
+          fontSize: 48,
         ),
       ),
     );

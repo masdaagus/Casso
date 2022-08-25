@@ -17,21 +17,21 @@ class TopCard extends StatelessWidget {
       height: 90,
       child: Row(
         children: [
-          GetBuilder<DashboardController>(
-            builder: (c) {
-              return CardDetail(value: nf.format(c.totalPenjualan.value));
-            },
-          ),
+          // GetBuilder<DashboardController>(
+          //   builder: (c) {
+          //     return CardDetail(value: nf.format(c.totalPenjualan.value));
+          //   },
+          // ),
           SizedBox(width: 16),
-          GetBuilder<DashboardController>(
-            builder: (c) {
-              ProductOrder data = c.bestNo1 ?? c.nullData;
-              return CardDetail(
-                tittle: 'Produk Terlaris',
-                value: data.productName ?? 'Belum ada produk',
-              );
-            },
-          ),
+          // GetBuilder<DashboardController>(
+          //   builder: (c) {
+          //     ProductOrder data = c.bestNo1 ?? c.nullData;
+          //     return CardDetail(
+          //       tittle: 'Produk Terlaris',
+          //       value: data.productName ?? 'Belum ada produk',
+          //     );
+          //   },
+          // ),
         ],
       ),
     );

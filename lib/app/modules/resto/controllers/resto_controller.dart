@@ -6,11 +6,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../data/model/user_model.dart';
+
 class RestoController extends GetxController {
   final auth = Get.put(AuthController());
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  var user = UsersModel().obs;
-  var resto = RestosModel().obs;
+  var user = UserModel().obs;
 
   bool isLoading = false;
 
@@ -34,80 +35,80 @@ class RestoController extends GetxController {
     update();
 
     /// UPDATE TABLE
-    if (table != resto.value.tables!.length && table != 0) {
-      final List<TableModel> tables = resto.value.tables! as List<TableModel>;
+    // if (table != resto.value.tables!.length && table != 0) {
+    //   final List<TableModel> tables = resto.value.tables! as List<TableModel>;
 
-      if (table < tables.length) {
-        print('REMOVE TABLE');
+    //   if (table < tables.length) {
+    //     print('REMOVE TABLE');
 
-        tables.removeRange(table, tables.length);
+    //     tables.removeRange(table, tables.length);
 
-        await restos.doc(user.value.restoID).update({
-          "tables": List<dynamic>.from(
-            tables.map(
-              (x) => x.toJson(),
-            ),
-          ),
-          "restoTable": table.toInt()
-        });
-      } else {
-        print('ADD TABLE');
+    //     await restos.doc(user.value.restoID).update({
+    //       "tables": List<dynamic>.from(
+    //         tables.map(
+    //           (x) => x.toJson(),
+    //         ),
+    //       ),
+    //       "restoTable": table.toInt()
+    //     });
+    //   } else {
+    //     print('ADD TABLE');
 
-        int finalTable = table - tables.length;
+    //     int finalTable = table - tables.length;
 
-        final List<TableModel> tablesAdd = [];
+    //     final List<TableModel> tablesAdd = [];
 
-        for (int i = 0; i < finalTable; i++) {
-          tablesAdd.add(TableModel(
-              tableNumber: (tables.length + 1) + i, guessName: null));
-        }
+    //     for (int i = 0; i < finalTable; i++) {
+    //       tablesAdd.add(TableModel(
+    //           tableNumber: (tables.length + 1) + i, guessName: null));
+    //     }
 
-        tables.addAll(tablesAdd);
+    //     tables.addAll(tablesAdd);
 
-        await restos.doc(user.value.restoID).update({
-          "tables": List<dynamic>.from(
-            tables.map(
-              (x) => x.toJson(),
-            ),
-          ),
-          "restoTable": table.toInt()
-        });
-      }
-    }
+    //     await restos.doc(user.value.restoID).update({
+    //       "tables": List<dynamic>.from(
+    //         tables.map(
+    //           (x) => x.toJson(),
+    //         ),
+    //       ),
+    //       "restoTable": table.toInt()
+    //     });
+    //   }
+    // }
 
     /// UPDATE NAMA RESTO
-    if (namaResto != resto.value.restoName && namaResto != '') {
-      await restos.doc(user.value.restoID).update({
-        "restoName": namaResto,
-      });
-    }
+    // if (namaResto != resto.value.restoName && namaResto != '') {
+    //   await restos.doc(user.value.restoID).update({
+    //     "restoName": namaResto,
+    //   });
+    // }
 
-    /// UPDATE NAMA OWNER RESTO
-    if (ownerName != resto.value.ownerName && ownerName != '') {
-      await restos.doc(user.value.restoID).update({
-        "ownerName": namaOwner,
-      });
-    }
+    // /// UPDATE NAMA OWNER RESTO
+    // if (ownerName != resto.value.ownerName && ownerName != '') {
+    //   await restos.doc(user.value.restoID).update({
+    //     "ownerName": namaOwner,
+    //   });
+    // }
 
-    /// UPDATE LOKASI RESTO
-    if (alamatResto != resto.value.restoLocation && alamatResto != '') {
-      await restos.doc(user.value.restoID).update({
-        "restoLocation": alamatResto,
-      });
-    }
+    // /// UPDATE LOKASI RESTO
+    // if (alamatResto != resto.value.restoLocation && alamatResto != '') {
+    //   await restos.doc(user.value.restoID).update({
+    //     "restoLocation": alamatResto,
+    //   });
+    // }
 
-    /// UPDATE TAXES RESTO
-    if (taxes != resto.value.restoTaxes) {
-      await restos.doc(user.value.restoID).update({
-        "restoTaxes": taxes,
-      });
-    }
+    // /// UPDATE TAXES RESTO
+    // if (taxes != resto.value.restoTaxes) {
+    //   await restos.doc(user.value.restoID).update({
+    //     "restoTaxes": taxes,
+    //   });
+    // }
 
-    final restoDoc = await restos.doc(user.value.restoID).get();
-    final restoData = restoDoc.data() as Map<String, dynamic>;
-    resto(RestosModel.fromJson(restoData));
-    resto.refresh();
-    auth.refresh();
+    // final restoDoc = await restos.doc(user.value.restoID).get();
+    // final restoData = restoDoc.data() as Map<String, dynamic>;
+    // resto(RestosModel.fromJson(restoData));
+    // resto.refresh();
+    // auth.refresh();
 
     isLoading = false;
     update();
@@ -116,7 +117,7 @@ class RestoController extends GetxController {
   @override
   void onInit() async {
     user = auth.user;
-    resto = auth.resto;
+
     super.onInit();
   }
 

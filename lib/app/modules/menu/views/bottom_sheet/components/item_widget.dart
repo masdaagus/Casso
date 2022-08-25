@@ -9,10 +9,10 @@ class ListItemOrder extends GetView<MenuController> {
   const ListItemOrder({
     Key? key,
     this.onTap,
-    required this.data,
+    // required this.data,
   }) : super(key: key);
 
-  final ProductOrder data;
+  // final ProductOrder data;
   final VoidCallback? onTap;
 
   @override
@@ -87,68 +87,68 @@ class ListItemOrder extends GetView<MenuController> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      GetBuilder<MenuController>(
-                        builder: (_) {
-                          return Text(
-                            data.productName!,
-                            style: TextStyle(
-                              color: darkColor,
-                              fontFamily: 'Ubuntu',
-                              fontSize: 14,
-                            ),
-                          );
-                        },
-                      ),
-                      SizedBox(height: 6),
-                      GetBuilder<MenuController>(
-                        builder: (_) {
-                          return Text(
-                            nf.format(data.productPrice),
-                            style: TextStyle(
-                              color: darkColor.withOpacity(.8),
-                              fontFamily: 'Ubuntu',
-                              fontSize: 13,
-                            ),
-                          );
-                        },
-                      ),
+                      // GetBuilder<MenuController>(
+                      //   builder: (_) {
+                      //     return Text(
+                      //       data.productName!,
+                      //       style: TextStyle(
+                      //         color: darkColor,
+                      //         fontFamily: 'Ubuntu',
+                      //         fontSize: 14,
+                      //       ),
+                      //     );
+                      //   },
+                      // ),
+                      // SizedBox(height: 6),
+                      // GetBuilder<MenuController>(
+                      //   builder: (_) {
+                      //     return Text(
+                      //       nf.format(data.productPrice),
+                      //       style: TextStyle(
+                      //         color: darkColor.withOpacity(.8),
+                      //         fontFamily: 'Ubuntu',
+                      //         fontSize: 13,
+                      //       ),
+                      //     );
+                      //   },
+                      // ),
                     ],
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(),
-                    child: Row(
-                      children: [
-                        ButtonControl(
-                          icon: Icons.remove,
-                          onTap: () async {
-                            await controller.minProduct(data);
-                          },
-                        ),
-                        SizedBox(width: 16),
-                        GetBuilder<MenuController>(
-                          builder: (c) {
-                            int qty = data.productQty;
-                            if (qty < 0) qty = 0;
-                            return Text(
-                              '$qty',
-                              style: TextStyle(
-                                color: darkColor,
-                                fontFamily: 'Ubuntu',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            );
-                          },
-                        ),
-                        ButtonControl(
-                          icon: Icons.add,
-                          onTap: () async {
-                            await controller.addProduct(data);
-                          },
-                        ),
-                      ],
-                    ),
-                  )
+                  // Container(
+                  //   padding: const EdgeInsets.symmetric(),
+                  //   child: Row(
+                  //     children: [
+                  //       ButtonControl(
+                  //         icon: Icons.remove,
+                  //         onTap: () async {
+                  //           await controller.minProduct(data);
+                  //         },
+                  //       ),
+                  //       SizedBox(width: 16),
+                  //       GetBuilder<MenuController>(
+                  //         builder: (c) {
+                  //           int qty = data.productQty;
+                  //           if (qty < 0) qty = 0;
+                  //           return Text(
+                  //             '$qty',
+                  //             style: TextStyle(
+                  //               color: darkColor,
+                  //               fontFamily: 'Ubuntu',
+                  //               fontWeight: FontWeight.bold,
+                  //               fontSize: 16,
+                  //             ),
+                  //           );
+                  //         },
+                  //       ),
+                  //       ButtonControl(
+                  //         icon: Icons.add,
+                  //         onTap: () async {
+                  //           await controller.addProduct(data);
+                  //         },
+                  //       ),
+                  //     ],
+                  //   ),
+                  // )
                 ],
               ),
             )

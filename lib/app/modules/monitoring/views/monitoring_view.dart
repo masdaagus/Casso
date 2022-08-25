@@ -75,10 +75,14 @@ class MonitoringView extends GetView<MonitoringController> {
                 child: TabBarView(
                   children: [
                     // tables view
-                    PesananMonitoring(),
-                    ProsesMonitoring(),
-                    SiapMonitoring(),
-                    TersajiMonitoring(),
+                    // PesananMonitoring(),
+                    // ProsesMonitoring(),
+                    // SiapMonitoring(),
+                    // TersajiMonitoring(),
+                    Container(),
+                    Container(),
+                    Container(),
+                    Container(),
                   ],
                 ),
               ),

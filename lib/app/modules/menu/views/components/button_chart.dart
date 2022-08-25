@@ -18,9 +18,6 @@ class ButtonChart extends GetView<MenuController> {
 
   @override
   Widget build(BuildContext context) {
-    // List<ProductOrder>? productsOrder =
-    //     controller.order.value.productsOrder as List<ProductOrder>;
-
     return GestureDetector(
       onTap: onTap,
       child: Align(
@@ -75,68 +72,54 @@ class ButtonChart extends GetView<MenuController> {
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GetBuilder<MenuController>(
-                        builder: (c) {
-                          var a = c.productsOrder
-                              .where((e) => e.productQty != 0)
-                              .toList();
-                          int items = 0;
+                  // GetBuilder<MenuController>(
+                  //   builder: (c) {
+                  //     var a = c.productsOrder
+                  //         .where((e) => e.productQty != 0)
+                  //         .toList();
+                  //     int items = 0;
 
-                          a.forEach((data) {
-                            items += data.productQty;
-                          });
+                  //     a.forEach((data) {
+                  //       items += data.productQty;
+                  //     });
 
-                          // var items = c.order.value.productsOrder!.length;
+                  //     // var items = c.order.value.productsOrder!.length;
 
-                          if (items < 0) {
-                            items = 0;
-                          }
+                  //     if (items < 0) {
+                  //       items = 0;
+                  //     }
 
-                          return Text(
-                            "${items} Items",
-                            style: TextStyle(
-                              color: darkColor,
-                              fontFamily: "Ubuntu",
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          );
-                        },
-                      ),
-                      SizedBox(height: 3),
-                      Text(
-                        "Table ${table} - (${guessName})",
-                        style: TextStyle(
-                          color: darkColor,
-                          fontFamily: "Ubuntu",
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Obx(() => Text(
-                            nf.format(controller.order.value.totalPrices),
-                            style: TextStyle(
-                              color: darkColor,
-                              fontFamily: "Ubuntu",
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )),
-                      SizedBox(width: 6),
-                      Icon(
-                        Icons.shopping_cart_sharp,
-                        color: darkColor,
-                        size: 20,
-                      )
-                    ],
-                  )
+                  //     return Text(
+                  //       "${items} Items",
+                  //       style: TextStyle(
+                  //         color: darkColor,
+                  //         fontFamily: "Ubuntu",
+                  //         fontSize: 13,
+                  //         fontWeight: FontWeight.bold,
+                  //       ),
+                  //     );
+                  //   },
+                  // ),
+                  // Row(
+                  //   children: [
+                  //     Obx(() => Text(
+                  //           nf.format(controller.order.value.totalPrices),
+                  //           style: TextStyle(
+                  //             color: darkColor,
+                  //             fontFamily: "Ubuntu",
+                  //             fontWeight: FontWeight.bold,
+                  //           ),
+                  //         )),
+                  //     SizedBox(width: 6),
+                  //     Icon(
+                  //       Icons.shopping_cart_sharp,
+                  //       color: darkColor,
+                  //       size: 20,
+                  //     )
+                  //   ],
+                  // )
                 ],
               ),
             ),

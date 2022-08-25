@@ -17,6 +17,8 @@ abstract class Routes {
   static const DASHBOARD = _Paths.DASHBOARD;
   static const PRINTER = _Paths.PRINTER;
   static const RESTO = _Paths.RESTO;
+  static const EDIT_PRODUCT = _Paths.EDIT_PRODUCT;
+  static const TRANSACTION = _Paths.TRANSACTION;
 }
 
 abstract class _Paths {
@@ -32,4 +34,6 @@ abstract class _Paths {
   static const DASHBOARD = '/dashboard';
   static const PRINTER = '/printer';
   static const RESTO = '/resto';
+  static const EDIT_PRODUCT = '/edit-product';
+  static const TRANSACTION = '/transaction';
 }

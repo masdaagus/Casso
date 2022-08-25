@@ -1,6 +1,9 @@
 import 'dart:ui';
 
 import 'package:casso/app/controllers/auth_controller.dart';
+import 'package:casso/app/modules/home/bindings/home_binding.dart';
+import 'package:casso/app/modules/home/views/home_view.dart';
+
 import 'dart:developer';
 
 import 'package:casso/app/utils/constant.dart';
@@ -28,8 +31,10 @@ class _LoginViewState extends State<LoginView> {
 
   final controller = Get.put(LoginController());
   final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
+    bool isRegister = false;
     log('UPDATE');
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -95,10 +100,8 @@ class _LoginViewState extends State<LoginView> {
                     ),
                     child: AnimatedContainer(
                       duration: Duration(milliseconds: 500),
-                      // curve: Curves.fastOutSlowIn,
                       width: Get.width,
                       height: size.height * .65,
-                      // height: _isRegister ? size.height : size.height * .65,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
@@ -176,17 +179,30 @@ class _LoginViewState extends State<LoginView> {
                                   }),
                               // BUTTON LOGIN WITH GOOGLE
                               LoginGoogleButton(
-                                onTap: () => auth.loginWithGoogle(),
-                              ),
+                                  // onTap: () => auth.loginWithGoogle(),
+                                  onTap: () async {
+                                final user = await auth.loginWithGoogle();
+                                if (user.uid != null) {
+                                  Get.offAll(
+                                    HomeView(),
+                                    binding: HomeBinding(),
+                                  );
+                                } else {
+                                  Get.snackbar(
+                                    "ERROR",
+                                    "something wrong in server",
+                                  );
+                                }
+                              }),
                               // REGISTER
-                              // RegisterTextButton(
-                              //   // onTap: () => Get.to(() => RegisterView()),
-                              //   isRegister: false,
-
-                              //   onTap: () {
-                              //     // setState(() {});
-                              //   },
-                              // ),
+                              RegisterTextButton(
+                                isRegister: isRegister,
+                                onTap: () {
+                                  setState(() {
+                                    isRegister = !isRegister;
+                                  });
+                                },
+                              ),
                               SizedBox(height: 64)
                             ],
                           ),
